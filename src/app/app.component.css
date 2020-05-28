@@ -1,0 +1,34 @@
+#main-area{
+  background: red;
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+
+#left-sidebar {
+  display: block;
+  box-sizing: border-box;
+  background: lightgrey;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+
+  position: absolute;
+  height: 100%;
+  width:200px;
+}
+
+#workspace{
+  display: block;
+  box-sizing: border-box;
+  background: green;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 200px;
+
+}
+
