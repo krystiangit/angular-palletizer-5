@@ -11,22 +11,22 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 
 
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { NavigationBarComponent } from './navigation-bar/navigation-bar.component'
+import { LeftSideNav } from './left-navbar/left-navbar.component';
 
 
-
+import { DemoMaterialModule } from "./left-navbar/material-module"
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
-    NavbarComponent,
-    NavigationBarComponent
+    LeftSideNav
+
 
   ],
   imports: [
@@ -41,9 +41,18 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
     LayoutModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    DemoMaterialModule
+
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },],
+  bootstrap: [AppComponent, LeftSideNav],
+
+  entryComponents: [LeftSideNav],
+
+
+
+
+
 })
 export class AppModule { }
