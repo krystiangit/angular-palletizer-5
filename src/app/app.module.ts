@@ -17,6 +17,7 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { LeftSideNav } from './left-navbar/left-navbar.component';
+import { AddPalletComponent } from './add-pallet/add-pallet.component';
 
 
 import { DemoMaterialModule } from "./left-navbar/material-module"
@@ -25,7 +26,8 @@ import { DemoMaterialModule } from "./left-navbar/material-module"
   declarations: [
     AppComponent,
     ToolbarComponent,
-    LeftSideNav
+    LeftSideNav,
+    AddPalletComponent
 
 
   ],

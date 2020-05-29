@@ -6,3 +6,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .sie-theme{
   background: rgb(44, 28, 100);
 }
+
+
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+
+.basic-container {
+  padding: 30px;
+}
