@@ -21,6 +21,10 @@
           </button>
         </a>
 
+
+        <button (click)="clickAddPalletFunc()">Open a draggable dialog</button>
+
+
         <a mat-list-item>Add Pallet</a>
         <a mat-list-item>Add Picking place</a>
         <a mat-list-item>Add Box</a>
@@ -32,7 +36,7 @@
 
     <mat-sidenav-content>
       <h1 style="text-align:center; justify-content: center;">Workspace</h1>
-      <app-add-pallet></app-add-pallet>
+      <app-add-pallet [clickAddPallet] = "clickAddPallet" ></app-add-pallet>
      </mat-sidenav-content>
 
   </mat-sidenav-container>

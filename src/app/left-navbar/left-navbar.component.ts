@@ -1,5 +1,7 @@
 import {MediaMatcher} from '@angular/cdk/layout';
-import {ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, ViewContainerRef, ViewChild, AfterViewInit} from '@angular/core';
+import { AddPalletComponent } from '../add-pallet/add-pallet.component';
+import {Overlay, OverlayRef} from '@angular/cdk/overlay';
 
 /** @title Responsive sidenav */
 @Component({
@@ -8,6 +10,20 @@ import {ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
   styleUrls: ['left-navbar.component.css'],
 })
 export class LeftSideNav implements OnDestroy {
+
+
+  @ViewChild('AddPalletComponent') child: AddPalletComponent;
+
+  public clickAddPallet
+  clickAddPalletFunc(){
+    this.clickAddPallet = 'true';
+    //this.child.openDialog();
+  }
+
+
+
+
+
   mobileQuery: MediaQueryList;
 
   fillerNav = Array.from({length: 10}, (_, i) => `Nav Item ${i + 1}`);
@@ -21,10 +37,15 @@ export class LeftSideNav implements OnDestroy {
 
   private _mobileQueryListener: () => void;
 
+  private _overlay: Overlay;
+  private _viewContainerRef: ViewContainerRef;
+
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+
+
   }
 
   ngOnDestroy(): void {
