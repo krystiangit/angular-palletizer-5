@@ -22,10 +22,6 @@ export class AddPalletComponent implements AfterViewInit, OnDestroy {
 
   @Input('clickAddPallet') clickAddPallet: boolean;
 
- public bleble;
-  aaa = this.clickAddPallet
-
-
 
   @ViewChild(TemplateRef) _dialogTemplate: TemplateRef<any>;
   private _overlayRef: OverlayRef;
@@ -40,11 +36,6 @@ export class AddPalletComponent implements AfterViewInit, OnDestroy {
       hasBackdrop: true
     });
     this._overlayRef.backdropClick().subscribe(() => this._overlayRef.detach());
-
-    if (this.clickAddPallet) {
-      this.bleble=true;
-      this.openDialog();
-}
 
   }
 

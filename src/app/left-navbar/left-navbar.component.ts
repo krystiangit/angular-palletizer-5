@@ -12,16 +12,6 @@ import {Overlay, OverlayRef} from '@angular/cdk/overlay';
 export class LeftSideNav implements OnDestroy {
 
 
-  @ViewChild('AddPalletComponent') child: AddPalletComponent;
-
-  public clickAddPallet
-  clickAddPalletFunc(){
-    this.clickAddPallet = 'true';
-    //this.child.openDialog();
-  }
-
-
-
 
 
   mobileQuery: MediaQueryList;
@@ -37,8 +27,6 @@ export class LeftSideNav implements OnDestroy {
 
   private _mobileQueryListener: () => void;
 
-  private _overlay: Overlay;
-  private _viewContainerRef: ViewContainerRef;
 
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
