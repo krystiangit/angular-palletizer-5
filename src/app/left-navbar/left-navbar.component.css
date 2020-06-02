@@ -9,13 +9,29 @@
 
 }
 
+.toolbar{
+  color: whitesmoke;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+}
+.separator{
+  width:100%;
+}
+
+.toolbar-menu{
+  justify-content:right;
+}
+
 .example-is-mobile .toolbar {
   position: fixed;
   /* Make sure the toolbar will stay on top of the content as it scrolls past. */
   z-index: 2;
 }
 
-h1.example-app-name {
+h1.app-toolbar {
   margin-left: 8px;
 }
 
@@ -31,9 +47,7 @@ h1.example-app-name {
   flex: 1 0 auto;
 }
 
-.toolbar{
-  color: whitesmoke;
-}
+
 
 mat-sidenav {
   width: 200px;

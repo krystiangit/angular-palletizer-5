@@ -10,6 +10,13 @@ import { Component,
 
 import {Overlay, OverlayRef} from '@angular/cdk/overlay';
 import {TemplatePortal} from '@angular/cdk/portal';
+import {FormControl, Validators} from '@angular/forms';
+
+interface Animal {
+  name: string;
+  sound: string;
+}
+
 
 @Component({
   selector: 'app-add-pallet',
@@ -17,6 +24,10 @@ import {TemplatePortal} from '@angular/cdk/portal';
   styleUrls: ['./add-pallet.component.css']
 
 })
+
+
+
+
 
 export class AddPalletComponent implements AfterViewInit, OnDestroy {
 
@@ -48,5 +59,15 @@ export class AddPalletComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnInit (){}
+
+
+  animalControl = new FormControl('', Validators.required);
+  selectFormControl = new FormControl('', Validators.required);
+  animals: Animal[] = [
+    {name: 'Dog', sound: 'Woof!'},
+    {name: 'Cat', sound: 'Meow!'},
+    {name: 'Cow', sound: 'Moo!'},
+    {name: 'Fox', sound: 'Wa-pa-pa-pa-pa-pa-pow!'},
+  ];
 
 }
