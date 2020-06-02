@@ -22,9 +22,9 @@
   <mat-sidenav-container class="sidenav-container" mode="over">
     <mat-sidenav #snav>
       <mat-nav-list>
-        <a mat-list-item>Set Workspace</a>
+        <a mat-list-item type="button" (click)="appChildSetWorkspace.openDialog()">Set Workspace</a>
         <a mat-list-item>Set WCS</a>
-        <a mat-list-item type="button" (click)="appChild.openDialog()">Add Pallet</a>
+        <a mat-list-item type="button" (click)="appChildAddPallet.openDialog()">Add Pallet</a>
         <a mat-list-item>Add Picking place</a>
         <a mat-list-item>Add Box</a>
       </mat-nav-list>
@@ -32,7 +32,9 @@
 
     <mat-sidenav-content>
       <h1 style="text-align: center; justify-content: center;">Workspace</h1>
-      <app-add-pallet #appChild></app-add-pallet>
+      <app-add-pallet #appChildAddPallet></app-add-pallet>
+      <app-set-workspace #appChildSetWorkspace></app-set-workspace>
+
 
     </mat-sidenav-content>
   </mat-sidenav-container>

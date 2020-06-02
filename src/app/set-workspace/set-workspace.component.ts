@@ -4,7 +4,6 @@ import { Component,
   AfterViewInit,
   ViewContainerRef,
   OnDestroy,
-
    } from "@angular/core";
 import {FormControl, Validators} from '@angular/forms';
 import {Overlay, OverlayRef} from '@angular/cdk/overlay';
@@ -17,15 +16,15 @@ interface Pallet {
 }
 
 @Component({
-  selector: 'app-add-pallet',
-  templateUrl: './add-pallet.component.html',
-  styleUrls: ['./add-pallet.component.css']
+  selector: 'app-set-workspace',
+  templateUrl: './set-workspace.component.html',
+  styleUrls: ['./set-workspace.component.css']
 
 })
 
 
 
-export class AddPalletComponent implements AfterViewInit, OnDestroy {
+export class SetWorkspaceComponent implements AfterViewInit, OnDestroy {
 
 
 

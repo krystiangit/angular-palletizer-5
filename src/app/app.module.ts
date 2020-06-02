@@ -19,6 +19,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { LeftSideNav } from './left-navbar/left-navbar.component';
 import { AddPalletComponent } from './add-pallet/add-pallet.component';
 import { DemoMaterialModule } from "./left-navbar/material-module";
+import { SetWorkspaceComponent } from "./set-workspace/set-workspace.component"
 
 
 
@@ -29,6 +30,7 @@ import { DemoMaterialModule } from "./left-navbar/material-module";
     ToolbarComponent,
     LeftSideNav,
     AddPalletComponent,
+    SetWorkspaceComponent,
 
 
 
@@ -49,12 +51,13 @@ import { DemoMaterialModule } from "./left-navbar/material-module";
     DemoMaterialModule,
 
 
+
     ReactiveFormsModule
 
 
   ],
   providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },],
-  bootstrap: [AppComponent, LeftSideNav, AddPalletComponent],
+  bootstrap: [AppComponent, LeftSideNav, AddPalletComponent, SetWorkspaceComponent],
 
   entryComponents: [LeftSideNav],
 
