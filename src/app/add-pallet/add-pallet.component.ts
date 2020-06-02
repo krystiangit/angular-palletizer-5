@@ -5,17 +5,18 @@ import { Component,
   ViewContainerRef,
   OnDestroy,
   Input,
-  OnInit
    } from "@angular/core";
-
+import {FormControl, Validators} from '@angular/forms';
 import {Overlay, OverlayRef} from '@angular/cdk/overlay';
 import {TemplatePortal} from '@angular/cdk/portal';
-import {FormControl, Validators} from '@angular/forms';
 
-interface Animal {
+
+
+interface Pallet {
   name: string;
-  sound: string;
 }
+
+/** @title Select with form field features */
 
 
 @Component({
@@ -27,9 +28,8 @@ interface Animal {
 
 
 
-
-
 export class AddPalletComponent implements AfterViewInit, OnDestroy {
+
 
   @Input('clickAddPallet') clickAddPallet: boolean;
 
@@ -61,13 +61,14 @@ export class AddPalletComponent implements AfterViewInit, OnDestroy {
   ngOnInit (){}
 
 
-  animalControl = new FormControl('', Validators.required);
+  palletControl = new FormControl('', Validators.required);
   selectFormControl = new FormControl('', Validators.required);
-  animals: Animal[] = [
-    {name: 'Dog', sound: 'Woof!'},
-    {name: 'Cat', sound: 'Meow!'},
-    {name: 'Cow', sound: 'Moo!'},
-    {name: 'Fox', sound: 'Wa-pa-pa-pa-pa-pa-pow!'},
+  pallets: Pallet[] = [
+    {name: 'Pallet1'},
+    {name: 'Pallet1'},
+    {name: 'Pallet1'},
+    {name: 'Pallet1'},
+    {name: 'Pallet1'},
   ];
 
 }

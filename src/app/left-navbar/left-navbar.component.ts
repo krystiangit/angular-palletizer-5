@@ -2,6 +2,7 @@ import {MediaMatcher} from '@angular/cdk/layout';
 import {ChangeDetectorRef, Component, OnDestroy, ViewContainerRef, ViewChild, AfterViewInit} from '@angular/core';
 import { AddPalletComponent } from '../add-pallet/add-pallet.component';
 import {Overlay, OverlayRef} from '@angular/cdk/overlay';
+//import {SetWorkspaceComponent} from "../set-workspace/set-workspace.component"
 
 /** @title Responsive sidenav */
 @Component({

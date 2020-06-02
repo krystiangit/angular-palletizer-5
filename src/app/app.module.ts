@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule, } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,16 +18,18 @@ import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { LeftSideNav } from './left-navbar/left-navbar.component';
 import { AddPalletComponent } from './add-pallet/add-pallet.component';
+import { DemoMaterialModule } from "./left-navbar/material-module";
 
 
-import { DemoMaterialModule } from "./left-navbar/material-module"
+
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
     LeftSideNav,
-    AddPalletComponent
+    AddPalletComponent,
+
 
 
   ],
@@ -44,11 +46,15 @@ import { DemoMaterialModule } from "./left-navbar/material-module"
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    DemoMaterialModule
+    DemoMaterialModule,
+
+
+    ReactiveFormsModule
+
 
   ],
   providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },],
-  bootstrap: [AppComponent, LeftSideNav],
+  bootstrap: [AppComponent, LeftSideNav, AddPalletComponent],
 
   entryComponents: [LeftSideNav],
 
@@ -58,3 +64,4 @@ import { DemoMaterialModule } from "./left-navbar/material-module"
 
 })
 export class AppModule { }
+
