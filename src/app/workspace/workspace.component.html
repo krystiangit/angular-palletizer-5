@@ -1,0 +1,40 @@
+
+<div id="workspace" class="workspace">
+  <h1 style="text-align: center; justify-content: center;">Workspace</h1>
+
+
+
+
+  <div class="workspace-box" cdkDrag style="position: relative; flex-direction: column;">
+    Dragable workspace
+
+
+  <button (click)="setPos()" id="btn2"> set Position</button>
+  <button  id="btn3" style="position: absolute;"> move me </button>
+  <textarea id="area1">{{getPosValY}}</textarea>
+  <textarea id="area2">{{getPosValX}}</textarea>
+
+
+  <mat-form-field>
+    <mat-label>Position Top</mat-label>
+    <input matInput type="text" [(ngModel)]="setPosValY">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Position Left</mat-label>
+    <input matInput type="text" [(ngModel)]="setPosValX">
+  </mat-form-field>
+
+  <div id="contentInside" *ngFor="let container of containers"  (click)="getPos(id)"></div>
+  <button (click)="add()">Add</button>
+
+
+
+
+  </div>
+
+</div>
+
+
+
+
+

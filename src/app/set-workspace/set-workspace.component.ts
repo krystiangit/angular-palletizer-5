@@ -5,15 +5,13 @@ import { Component,
   ViewContainerRef,
   OnDestroy,
    } from "@angular/core";
-import {FormControl, Validators} from '@angular/forms';
+
 import {Overlay, OverlayRef} from '@angular/cdk/overlay';
 import {TemplatePortal} from '@angular/cdk/portal';
 
 
 
-interface Pallet {
-  name: string;
-}
+
 
 @Component({
   selector: 'app-set-workspace',
@@ -57,14 +55,6 @@ export class SetWorkspaceComponent implements AfterViewInit, OnDestroy {
   ngOnInit (){}
 
 
-  palletControl = new FormControl('', Validators.required);
-  selectFormControl = new FormControl('', Validators.required);
-  pallets: Pallet[] = [
-    {name: 'Pallet1'},
-    {name: 'Pallet1'},
-    {name: 'Pallet1'},
-    {name: 'Pallet1'},
-    {name: 'Pallet1'},
-  ];
+
 
 }

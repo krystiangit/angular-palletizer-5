@@ -20,6 +20,7 @@ import { LeftSideNav } from './left-navbar/left-navbar.component';
 import { AddPalletComponent } from './add-pallet/add-pallet.component';
 import { DemoMaterialModule } from "./left-navbar/material-module";
 import { SetWorkspaceComponent } from "./set-workspace/set-workspace.component"
+import { WorkspaceComponent } from "./workspace/workspace.component"
 
 
 
@@ -31,6 +32,7 @@ import { SetWorkspaceComponent } from "./set-workspace/set-workspace.component"
     LeftSideNav,
     AddPalletComponent,
     SetWorkspaceComponent,
+    WorkspaceComponent,
 
 
 
@@ -57,7 +59,7 @@ import { SetWorkspaceComponent } from "./set-workspace/set-workspace.component"
 
   ],
   providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },],
-  bootstrap: [AppComponent, LeftSideNav, AddPalletComponent, SetWorkspaceComponent],
+  bootstrap: [AppComponent, LeftSideNav, AddPalletComponent, SetWorkspaceComponent, WorkspaceComponent],
 
   entryComponents: [LeftSideNav],
 
