@@ -27,6 +27,12 @@
         <a mat-list-item type="button" (click)="appChildAddPallet.openDialog()">Add Pallet</a>
         <a mat-list-item>Add Picking place</a>
         <a mat-list-item>Add Box</a>
+        <a mat-list-item type="button" (click)="appChildWorkspace.push()">Add test</a>
+<!--
+<a mat-list-item type="button" (click)="appChildWorkspace.addPallet1()">Add test</a>
+-->
+
+
       </mat-nav-list>
     </mat-sidenav>
 
@@ -34,7 +40,7 @@
 
       <app-add-pallet #appChildAddPallet></app-add-pallet>
       <app-set-workspace #appChildSetWorkspace></app-set-workspace>
-      <app-workspace></app-workspace>
+      <app-workspace #appChildWorkspace></app-workspace>
 
 
     </mat-sidenav-content>

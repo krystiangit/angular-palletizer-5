@@ -9,6 +9,8 @@ OnInit
 import { getMatTooltipInvalidPositionError } from '@angular/material/tooltip';
 import { transition } from '@angular/animations';
 import { Pallet } from '../pallet.model';
+import { PalletsService } from '../pallets.service'
+import { Observable, of } from 'rxjs';
 
 
 
@@ -25,8 +27,9 @@ export class WorkspaceComponent  {
   setPosValY="400px";
   setPosValX="400px";
   containers = [];
+  pallets: Pallet[] = [];
 
-  constructor() { };
+  constructor(public palletsService: PalletsService) {  };
 
   _width = "300px";
 
@@ -46,6 +49,53 @@ setPos(){
   //this.getPos(this.id);
 }
 
+deletePallet(id: string){
+  this.pallets.splice(this.pallets.findIndex( (pallet)  =>  pallet.id === id ), 1 );
+}
+push(){
+  this.pallets = this.palletsService.addPallet();
+}
+
+//private palletsUpdated  = new Observable<Pallet[]>()
+
+check(){
+  console.log(this.pallets.length);
+
+}
+
+ngOnInit(){
+
+console.log(this.pallets.length);
+//this.palletsService.updatePallets();
+}
+
+addPallet1(){
+
+  let temp = new Pallet();
+  temp.palletName = 'Pallet'+(this.pallets.length+1);
+  temp.id=(this.pallets.length+1).toString();
+  temp.width = "500";
+  this.pallets.push(temp);
+
+
+
+  //console.log(this.pallets.length)
+  //console.log(document);
+  console.log(temp);
+  //console.dir(temp)
+  //_pallet.style.width = width;
+  //_pallet.style.height = height;
+
+}
+
+}
+
+/*
+addPallet(){
+  this.pallets = this.palletsService.addPallet();
+
+}
+*/
 /*
 add() {
   this.containers.push(this.containers.length);
@@ -57,8 +107,8 @@ add() {
   //this.setPos(_id);
 
 }
-*/
 
+*/
 /*
 add1(){
   let newElement = document.createElement('input');
@@ -70,37 +120,23 @@ add1(){
 
 
 
-
-
-pallets: Pallet[] = [];
-
+/*
 addPallet(){
-  //this.pallets.push(new Pallet());
 
-  //var width = "200px";
-  //var height = "100px";
   let temp = new Pallet();
   temp.palletName = 'Pallet'+(this.pallets.length+1);
   temp.id=(this.pallets.length+1).toString();
   temp.width = "500";
   this.pallets.push(temp);
-  var _pallet = document.getElementById((this.pallets.length).toString())
+
 
 
   console.log(this.pallets.length)
-  console.log(_pallet);
+  console.log(document);
   console.log(temp);
   //_pallet.style.width = width;
   //_pallet.style.height = height;
 }
+*/
 
-deletePallet(id: string){
-  this.pallets.splice(this.pallets.findIndex( (pallet)  =>  pallet.id === id ), 1 );
-}
-
-
-ngOnInit(){}
-
-
-}
 

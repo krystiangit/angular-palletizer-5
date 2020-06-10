@@ -9,10 +9,11 @@ import { Component,
 import {FormControl, Validators} from '@angular/forms';
 import {Overlay, OverlayRef} from '@angular/cdk/overlay';
 import {TemplatePortal} from '@angular/cdk/portal';
+import {PalletsService} from '../pallets.service'
 
 
 
-interface Pallet {
+interface PredefinedPallet {
   name: string;
 }
 
@@ -35,7 +36,7 @@ export class AddPalletComponent implements AfterViewInit, OnDestroy {
   private _overlayRef: OverlayRef;
   private _portal: TemplatePortal;
 
-  constructor(private _overlay: Overlay, private _viewContainerRef: ViewContainerRef) {}
+  constructor(private _overlay: Overlay, private _viewContainerRef: ViewContainerRef, public palletsService: PalletsService) {}
 
   ngAfterViewInit() {
     this._portal = new TemplatePortal(this._dialogTemplate, this._viewContainerRef);
@@ -60,12 +61,14 @@ export class AddPalletComponent implements AfterViewInit, OnDestroy {
 
   palletControl = new FormControl('', Validators.required);
   selectFormControl = new FormControl('', Validators.required);
-  pallets: Pallet[] = [
+  pallets: PredefinedPallet[] = [
     {name: 'Pallet1'},
     {name: 'Pallet1'},
     {name: 'Pallet1'},
     {name: 'Pallet1'},
     {name: 'Pallet1'},
   ];
+
+
 
 }

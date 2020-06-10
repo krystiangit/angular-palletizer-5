@@ -1,5 +1,9 @@
 import {MediaMatcher} from '@angular/cdk/layout';
-import {ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, ViewChild} from '@angular/core';
+import { WorkspaceComponent} from '../workspace/workspace.component'
+
+import { Pallet } from '../pallet.model';
+import { PalletsService } from '../pallets.service'
 
 
 /** @title Responsive sidenav */
@@ -8,6 +12,7 @@ import {ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
   templateUrl: 'left-navbar.component.html',
   styleUrls: ['left-navbar.component.css'],
 })
+
 export class LeftSideNav implements OnDestroy {
 
 
@@ -27,7 +32,7 @@ export class LeftSideNav implements OnDestroy {
   private _mobileQueryListener: () => void;
 
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, public palletsService: PalletsService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -40,6 +45,13 @@ export class LeftSideNav implements OnDestroy {
   }
 
 
+
+
+
+ pallets: Pallet[] = [];
+add(){
+  this.palletsService.addPallet();
+}
 }
 
 

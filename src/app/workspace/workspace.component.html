@@ -13,9 +13,11 @@
         <path d="M36.4062 12.625L39.957 4.9375H43.8008L38.1992 15.8125V22H34.625V15.8125L29.0234 4.9375H32.8789L36.4062 12.625Z" fill="#27AE60"/>
         </svg>
     </div>
+<!-- <button (click) = "addPallet1()">Add Pallet1</button> -->
 
 
-    <button (click)="addPallet()">Add Pallet</button>
+    <button (click) = "push()">Add Pallet service</button>
+    <!---<button (click) = "check()">check</button> -->
 
     <div class="pallet" *ngFor="let pallet of pallets; let index=index" cdkDrag [ngStyle]="{'width.px': pallet.width }">
 <!--
@@ -34,8 +36,8 @@
       <button type="button" (click)="deletePallet(pallet.id)"> delete </button>
     </div>
 
-
-    <div id="editPlace" cdkDrag>
+<!--
+<div id="editPlace" cdkDrag>
       <button (click)="setPos()" id="btn2"> set Position</button>
     <button  id="btn3" style="position: absolute;"> move me </button>
       <textarea id="area1">{{getPosValY}}</textarea>
@@ -49,6 +51,8 @@
         <input matInput type="text" [(ngModel)]="setPosValX">
       </mat-form-field>
     </div>
+-->
+
 
 
   <div>

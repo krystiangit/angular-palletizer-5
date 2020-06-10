@@ -19,8 +19,9 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { LeftSideNav } from './left-navbar/left-navbar.component';
 import { AddPalletComponent } from './add-pallet/add-pallet.component';
 import { DemoMaterialModule } from "./left-navbar/material-module";
-import { SetWorkspaceComponent } from "./set-workspace/set-workspace.component"
-import { WorkspaceComponent } from "./workspace/workspace.component"
+import { SetWorkspaceComponent } from "./set-workspace/set-workspace.component";
+import { WorkspaceComponent } from "./workspace/workspace.component";
+
 
 
 
@@ -33,6 +34,7 @@ import { WorkspaceComponent } from "./workspace/workspace.component"
     AddPalletComponent,
     SetWorkspaceComponent,
     WorkspaceComponent,
+
 
 
 
