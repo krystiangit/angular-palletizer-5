@@ -21,15 +21,15 @@
           <form class="form">
             <mat-form-field class="form-full-width">
               <mat-label>Width [mm]</mat-label>
-              <input matInput placeholder="100" value="800">
+              <input matInput placeholder="100" [(ngModel)]="pallet.width" value="pallet.width" name="inputWidth">
             </mat-form-field>
             <mat-form-field class="form-full-width">
               <mat-label>Length [mm]</mat-label>
-              <input matInput placeholder="100" value="1200">
+              <input matInput placeholder="100" [(ngModel)]="pallet.length" value="pallet.length" name="inputLength">
             </mat-form-field>
             <mat-form-field class="form-full-width">
               <mat-label>Height [mm]</mat-label>
-              <input matInput placeholder="100" value="150">
+              <input matInput placeholder="100" [(ngModel)]="pallet.height" value="pallet.height" name="inputHeight">
             </mat-form-field>
             <mat-form-field>
               <mat-label >Select predefined size</mat-label>
@@ -63,15 +63,15 @@
             <form class="form">
               <mat-form-field class="form-full-width">
                 <mat-label>Position X [mm]</mat-label>
-                <input matInput placeholder="100" value="500">
+                <input matInput placeholder="100" [(ngModel)]="pallet.posX" value="pallet.posX" name="inputPosX">
               </mat-form-field>
               <mat-form-field class="form-full-width">
                 <mat-label>Position Y [mm]</mat-label>
-                <input matInput placeholder="100" value="500">
+                <input matInput placeholder="100" [(ngModel)]="pallet.posY" value="pallet.posY" name="inputPosY">
               </mat-form-field>
               <mat-form-field class="form-full-width">
                 <mat-label>Position Z [mm]</mat-label>
-                <input matInput placeholder="100" value="0">
+                <input matInput placeholder="100" [(ngModel)]="pallet.posZ" value="pallet.posZ" name="inputPosZ">
               </mat-form-field>
 
             </form>
@@ -102,6 +102,7 @@
       </mat-tab>
     </mat-tab-group>
     <button class="mat-raised-button" (click)="addPalletButton.emit($event)">Add</button>
+    <!--<button class="mat-raised-button" (click)="console()">Add</button>-->
   </div>
   </ng-template>
 

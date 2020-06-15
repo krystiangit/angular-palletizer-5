@@ -26,17 +26,13 @@ import { PalletsService } from '../pallets.service'
 
 export class WorkspaceComponent {
   @Input() parentsValue:boolean;
-  //getPosValY="";
-  //getPosValX="";
-  //setPosValY="400px";
-  //setPosValX="400px";
-  //containers = [];
+
   pallets: Pallet[] = [];
 
 
   //constructor() {};
 
-  _width = "300px";
+
 
   ngOnInit(){
 
@@ -44,14 +40,6 @@ export class WorkspaceComponent {
 
   addPallet(){
 
-    /*
-    let temp = new Pallet();
-    temp.palletName = 'Pallet'+(this.pallets.length+1);
-    temp.id=(this.pallets.length+1).toString();
-    //temp.width = "500";
-    this.pallets.push(temp);
-    console.log(temp);
-*/
      this.pallets = this.palletsService.addPallet();
   }
 
@@ -62,6 +50,28 @@ export class WorkspaceComponent {
 
 
      constructor(public palletsService: PalletsService) {};
+
+/*
+     addPallet(){
+
+
+      let temp = new Pallet();
+      temp.palletName = 'Pallet'+(this.pallets.length+1);
+      temp.id=(this.pallets.length+1).toString();
+      //temp.width = "500";
+      this.pallets.push(temp);
+      console.log(temp);
+
+
+    }
+*/
+
+  //getPosValY="";
+  //getPosValX="";
+  //setPosValY="400px";
+  //setPosValX="400px";
+  //containers = [];
+
 /*
   ngOnChanges() {
 

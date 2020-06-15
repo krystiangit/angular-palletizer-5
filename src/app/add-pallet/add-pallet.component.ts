@@ -31,10 +31,17 @@ export class AddPalletComponent implements AfterViewInit, OnDestroy {
   private _overlayRef: OverlayRef;
   private _portal: TemplatePortal;
 
-  constructor(private _overlay: Overlay, private _viewContainerRef: ViewContainerRef, public palletsService: PalletsService) {}
+  constructor(private _overlay: Overlay, private _viewContainerRef: ViewContainerRef, public palletsService: PalletsService) {
+    this.palletsService.pallets[0] = this.pallet;
+  }
 
 
-  pallets: Pallet[] = [];
+
+   public pallet: Pallet =
+    {palletName: 'Pallet1', id:'1', width: '800', length:'1200', height:'150', posX:'500', posY:'500', posZ:'0' }
+
+  ;
+
 
   ngAfterViewInit() {
     this._portal = new TemplatePortal(this._dialogTemplate, this._viewContainerRef);
@@ -70,5 +77,10 @@ export class AddPalletComponent implements AfterViewInit, OnDestroy {
   @Output() addPalletButton: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
 
+/*
+console(){
+  console.log(this.pallet.width);
+}
+*/
 
 }

@@ -6,7 +6,7 @@ export class Pallet{
   height: string;
   posX: string;
   posY: string;
-  pozZ:string;
+  posZ:string;
 
 }
 

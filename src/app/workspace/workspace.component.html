@@ -26,7 +26,13 @@
      -->
     <!---<button (click) = "check()">check</button> -->
 
-    <div class="pallet" *ngFor="let pallet of pallets; let index=index" cdkDrag [ngStyle]="{'width.px': pallet.width }">
+    <div class="pallet" *ngFor="let pallet of pallets; let index=index" cdkDrag [ngStyle]="{
+      'width.px': pallet.width,
+      'height.px':pallet.length,
+      'left.px':pallet.posX,
+      'top.px':pallet.posY
+
+    }">
 <!--
     <div class="pallet" *ngFor="let pallet of pallets; let index=index" cdkDrag   [ngStyle]="{'width.px': '#pallet.width' }" >#{{pallet.width}}
      <div class="pallet" *ngFor="let pallet of pallets; let index=index" cdkDrag [ngStyle]="{'width.px': '400' }"> -->
