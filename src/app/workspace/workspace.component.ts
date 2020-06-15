@@ -26,15 +26,42 @@ import { PalletsService } from '../pallets.service'
 
 export class WorkspaceComponent {
   @Input() parentsValue:boolean;
-  getPosValY="";
-  getPosValX="";
-  setPosValY="400px";
-  setPosValX="400px";
-  containers = [];
+  //getPosValY="";
+  //getPosValX="";
+  //setPosValY="400px";
+  //setPosValX="400px";
+  //containers = [];
   pallets: Pallet[] = [];
 
 
-  constructor(public palletsService: PalletsService) {};
+  //constructor() {};
+
+  _width = "300px";
+
+  ngOnInit(){
+
+    }
+
+  addPallet(){
+
+    /*
+    let temp = new Pallet();
+    temp.palletName = 'Pallet'+(this.pallets.length+1);
+    temp.id=(this.pallets.length+1).toString();
+    //temp.width = "500";
+    this.pallets.push(temp);
+    console.log(temp);
+*/
+     this.pallets = this.palletsService.addPallet();
+  }
+
+  deletePallet(id: string){
+    this.pallets.splice(this.pallets.findIndex( (pallet)  =>  pallet.id === id ), 1 );
+  }
+
+
+
+     constructor(public palletsService: PalletsService) {};
 /*
   ngOnChanges() {
 
@@ -42,39 +69,16 @@ export class WorkspaceComponent {
     this.push();
   }
 */
-  _width = "300px";
 
-  ngOnInit(){
-
-    console.log(this.pallets.length);
-    this.palletsService.addPallet();
-    }
-/*
+  /*
   push(){
     console.log("before" + this.pallets)
     this.pallets = this.palletsService.addPallet();
     console.log("after" +this.pallets)
   }
 */
-  addPallet(){
 
-    let temp = new Pallet();
-    temp.palletName = 'Pallet'+(this.pallets.length+1);
-    temp.id=(this.pallets.length+1).toString();
-    temp.width = "500";
-    this.pallets.push(temp);
-
-
-
-    //console.log(this.pallets.length)
-    //console.log(document);
-    console.log(temp);
-    //console.dir(temp)
-    //_pallet.style.width = width;
-    //_pallet.style.height = height;
-
-  }
-
+/*
  getPos(_id){
 
   var _btn3=document.getElementById("btn3");
@@ -89,23 +93,17 @@ setPos(){
   _btn3.style.left = this.setPosValX;
   //this.getPos(this.id);
 }
+*/
 
-deletePallet(id: string){
-  this.pallets.splice(this.pallets.findIndex( (pallet)  =>  pallet.id === id ), 1 );
-}
 
 
 //private palletsUpdated  = new Observable<Pallet[]>()
-
+/*
 check(){
   console.log(this.pallets.length);
 
 }
-
-
-
-
-
+*/
 }
 
 /*

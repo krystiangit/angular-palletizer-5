@@ -35,16 +35,25 @@
               <mat-label >Select predefined size</mat-label>
               <mat-select [formControl]="palletControl" required >
                 <mat-option>--</mat-option>
-                <mat-option *ngFor="let pallet of pallets" [value]="pallet">
+                <mat-option *ngFor="let pallet of predefinedPallets" [value]="pallet">
                   {{pallet.name}}
                 </mat-option>
               </mat-select>
               <mat-hint>{{palletControl.value?.name}}</mat-hint>
             </mat-form-field>
           </form>
+
         </div>
-        <button (click) ="palletsService.addPallet()" ngDefaultControl>Add</button>
-        <button (click)="buttonClick.emit($event)">Click</button>
+        <!--
+ <mat-nav-list>
+          <a mat-list-item (click)="addPalletButton.emit($event)">Set Workspace</a>
+        </mat-nav-list>
+        -->
+
+
+
+
+
 
       </mat-tab>
 
@@ -54,15 +63,15 @@
             <form class="form">
               <mat-form-field class="form-full-width">
                 <mat-label>Position X [mm]</mat-label>
-                <input matInput placeholder="100" value="800">
+                <input matInput placeholder="100" value="500">
               </mat-form-field>
               <mat-form-field class="form-full-width">
                 <mat-label>Position Y [mm]</mat-label>
-                <input matInput placeholder="100" value="1200">
+                <input matInput placeholder="100" value="500">
               </mat-form-field>
               <mat-form-field class="form-full-width">
                 <mat-label>Position Z [mm]</mat-label>
-                <input matInput placeholder="100" value="150">
+                <input matInput placeholder="100" value="0">
               </mat-form-field>
 
             </form>
@@ -92,6 +101,7 @@
 
       </mat-tab>
     </mat-tab-group>
+    <button class="mat-raised-button" (click)="addPalletButton.emit($event)">Add</button>
   </div>
   </ng-template>
 

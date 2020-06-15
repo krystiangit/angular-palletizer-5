@@ -12,7 +12,7 @@ import { PalletsService } from './pallets.service'
 })
 export class AppComponent implements OnDestroy{
   title = 'angular-palletizer2';
-  @ViewChild(WorkspaceComponent) child: WorkspaceComponent;
+  @ViewChild(WorkspaceComponent) childWorkspaceComponent: WorkspaceComponent;
 
 
 
@@ -35,9 +35,9 @@ export class AppComponent implements OnDestroy{
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
-  public onButtonClick(event: MouseEvent): void {
+  public addPalletButton(event: MouseEvent): void {
 
-    this.child.addPallet();
+    this.childWorkspaceComponent.addPallet();
 
      }
 

@@ -24,12 +24,12 @@
     <mat-sidenav-container class="sidenav-container" mode="over">
       <mat-sidenav #snav>
         <mat-nav-list>
-          <a mat-list-item type="button" (click)="appChildSetWorkspace.openDialog()">Set Workspace</a>
+          <a mat-list-item (click)="appChildSetWorkspace.openDialog()">Set Workspace</a>
           <a mat-list-item>Set KCS</a>
-          <a mat-list-item type="button" (click)="appChildAddPallet.openDialog()">Add Pallet</a>
+          <a mat-list-item (click)="appChildAddPallet.openDialog()">Add Pallet</a>
           <a mat-list-item>Add Picking place</a>
           <a mat-list-item>Add Box</a>
-          <a mat-list-item type="button" (click)="appChildWorkspace.addPallet()">Add test</a>
+          <a mat-list-item (click)="appChildWorkspace.addPallet()">Add test</a>
 
   <!--
   <a mat-list-item type="button" (click)="appChildWorkspace.addPallet1()">Add test</a>
@@ -41,7 +41,7 @@
 
       <mat-sidenav-content>
 
-        <app-add-pallet #appChildAddPallet (buttonClick)="onButtonClick($event)"></app-add-pallet>
+        <app-add-pallet #appChildAddPallet (addPalletButton)="addPalletButton($event)"></app-add-pallet>
         <app-set-workspace #appChildSetWorkspace></app-set-workspace>
         <app-workspace #appChildWorkspace [parentsValue] = "parentsValue"></app-workspace>
 
