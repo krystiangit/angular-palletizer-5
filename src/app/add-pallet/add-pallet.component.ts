@@ -4,6 +4,8 @@ import { Component,
   AfterViewInit,
   ViewContainerRef,
   OnDestroy,
+  Output,
+  EventEmitter
 
    } from "@angular/core";
 import {FormControl, Validators} from '@angular/forms';
@@ -61,6 +63,7 @@ export class AddPalletComponent implements AfterViewInit, OnDestroy {
     {name: 'Pallet1'},
   ];
 
+  @Output() buttonClick: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
 
 }

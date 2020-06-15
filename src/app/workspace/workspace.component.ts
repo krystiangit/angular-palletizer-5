@@ -6,6 +6,7 @@ import { Component,
   OnDestroy,
   OnChanges,
   Input,
+
 OnInit
    } from "@angular/core";
 //import { getMatTooltipInvalidPositionError } from '@angular/material/tooltip';
@@ -46,7 +47,7 @@ export class WorkspaceComponent {
   ngOnInit(){
 
     console.log(this.pallets.length);
-    //this.palletsService.updatePallets();
+    this.palletsService.addPallet();
     }
 /*
   push(){
@@ -63,7 +64,7 @@ export class WorkspaceComponent {
     temp.width = "500";
     this.pallets.push(temp);
 
-  return this.pallets
+
 
     //console.log(this.pallets.length)
     //console.log(document);

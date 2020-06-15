@@ -19,7 +19,7 @@ export class PalletsService{
 
     //console.log(document);
     //console.log(this.pallets.length)
-    //console.log(_pallet);
+    console.log(this.pallets);
 
     return this.pallets
   }

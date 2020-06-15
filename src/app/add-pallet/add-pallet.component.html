@@ -44,6 +44,8 @@
           </form>
         </div>
         <button (click) ="palletsService.addPallet()" ngDefaultControl>Add</button>
+        <button (click)="buttonClick.emit($event)">Click</button>
+
       </mat-tab>
 
       <mat-tab label="Position" class="tab" >
