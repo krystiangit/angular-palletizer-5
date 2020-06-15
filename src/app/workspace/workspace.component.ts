@@ -32,8 +32,6 @@ export class WorkspaceComponent {
 
   //constructor() {};
 
-
-
   ngOnInit(){
 
     }
@@ -41,15 +39,15 @@ export class WorkspaceComponent {
   addPallet(){
 
      this.pallets = this.palletsService.addPallet();
+     console.log("workspace" + this.pallets)
+     console.log("workspace pallet width" + this.pallets[0].width +"length" + this.pallets[0].length)
   }
 
   deletePallet(id: string){
     this.pallets.splice(this.pallets.findIndex( (pallet)  =>  pallet.id === id ), 1 );
   }
 
-
-
-     constructor(public palletsService: PalletsService) {};
+  constructor(public palletsService: PalletsService) {};
 
 /*
      addPallet(){

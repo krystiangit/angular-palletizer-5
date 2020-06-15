@@ -14,24 +14,18 @@
         </svg>
     </div>
     <!--
-
-
 <button (click) = "addPallet()">Add Pallet1</button>
-
-
-
     <p *ngIf="parentsValue">Parents value is true </p>
     <p *ngIf="!parentsValue">Parents value is false</p>
     <textarea>{{parentsValue}}</textarea>
      -->
     <!---<button (click) = "check()">check</button> -->
-
-    <div class="pallet" *ngFor="let pallet of pallets; let index=index" cdkDrag [ngStyle]="{
+    <div class="pallet" *ngFor="let pallet of pallets; let index=index" cdkDrag
+    [ngStyle]="{
       'width.px': pallet.width,
       'height.px':pallet.length,
       'left.px':pallet.posX,
       'top.px':pallet.posY
-
     }">
 <!--
     <div class="pallet" *ngFor="let pallet of pallets; let index=index" cdkDrag   [ngStyle]="{'width.px': '#pallet.width' }" >#{{pallet.width}}
@@ -48,6 +42,7 @@
       </div>
       <button type="button" (click)="deletePallet(pallet.id)"> delete </button>
     </div>
+
 
 <!--
 <div id="editPlace" cdkDrag>
@@ -68,8 +63,7 @@
 
 
 
-  <div>
-</div>
+
 
     <!--
 <button (click)="addPallet()">Add Pallet</button>

@@ -1,5 +1,5 @@
 export class Pallet{
-  palletName: string;
+  palletName: string = "Pallet1";
   id: string;
   width: string;
   length:string;
@@ -9,4 +9,19 @@ export class Pallet{
   posZ:string;
 
 }
+
+/*
+export class Pallet{
+  palletName: string = "Pallet1";
+  id: string = "1";
+  width: string = "800";
+  length:string = "1200";
+  height: string = "150";
+  posX: string = "500";
+  posY: string = "500";
+  posZ:string = "0";
+
+}
+*/
+
 
