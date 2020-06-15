@@ -16,11 +16,11 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import { LeftSideNav } from './left-navbar/left-navbar.component';
 import { AddPalletComponent } from './add-pallet/add-pallet.component';
 import { DemoMaterialModule } from "./left-navbar/material-module";
 import { SetWorkspaceComponent } from "./set-workspace/set-workspace.component";
 import { WorkspaceComponent } from "./workspace/workspace.component";
+import { TestChildComponent } from './test-child/test-child.component';
 
 
 
@@ -30,10 +30,11 @@ import { WorkspaceComponent } from "./workspace/workspace.component";
   declarations: [
     AppComponent,
     ToolbarComponent,
-    LeftSideNav,
+
     AddPalletComponent,
     SetWorkspaceComponent,
     WorkspaceComponent,
+    TestChildComponent,
 
 
 
@@ -61,9 +62,9 @@ import { WorkspaceComponent } from "./workspace/workspace.component";
 
   ],
   providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },],
-  bootstrap: [AppComponent, LeftSideNav, AddPalletComponent, SetWorkspaceComponent, WorkspaceComponent],
+  bootstrap: [AppComponent],
 
-  entryComponents: [LeftSideNav],
+  entryComponents: [AppComponent],
 
 
 

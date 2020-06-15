@@ -20,8 +20,7 @@ export class PalletsService{
     //console.log(document);
     //console.log(this.pallets.length)
     //console.log(_pallet);
-    console.log(temp);
-    console.log("service" + this.pallets)
+
     return this.pallets
   }
  // updatePallets(){

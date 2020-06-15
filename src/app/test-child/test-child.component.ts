@@ -1,3 +1,6 @@
+
+
+
 import { Component,
   ViewChild,
   TemplateRef,
@@ -17,13 +20,13 @@ import { PalletsService } from '../pallets.service'
 
 
 @Component({
-  selector: 'app-workspace',
-  templateUrl: './workspace.component.html',
-  styleUrls: ['./workspace.component.css']
+  selector: 'app-test-child',
+  templateUrl: './test-child.component.html',
+  styleUrls: ['./test-child.component.css']
 
 })
 
-export class WorkspaceComponent {
+export class TestChildComponent implements OnInit{
   @Input() parentsValue:boolean;
   getPosValY="";
   getPosValX="";
@@ -34,6 +37,7 @@ export class WorkspaceComponent {
 
 
   constructor(public palletsService: PalletsService) {};
+
 /*
   ngOnChanges() {
 
@@ -48,14 +52,14 @@ export class WorkspaceComponent {
     console.log(this.pallets.length);
     //this.palletsService.updatePallets();
     }
-/*
+
   push(){
     console.log("before" + this.pallets)
     this.pallets = this.palletsService.addPallet();
     console.log("after" +this.pallets)
   }
-*/
-  addPallet(){
+
+  addPallet1(){
 
     let temp = new Pallet();
     temp.palletName = 'Pallet'+(this.pallets.length+1);
@@ -155,5 +159,6 @@ addPallet(){
   //_pallet.style.height = height;
 }
 */
+
 
 

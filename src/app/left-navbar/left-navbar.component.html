@@ -9,8 +9,8 @@
       <mat-menu #appMenu="matMenu">
         <button mat-menu-item>Log in</button>
         <button mat-menu-item>Settings</button>
-        <button mat-menu-item>Help</button>
-        <button mat-menu-item>About</button>
+        <button mat-menu-item type = button (click)="appChildWorkspace.addPallet1()" >Add pallet1</button> <!---Help-->
+        <button mat-menu-item type = button (click)="appChildWorkspace.push()">push</button> <!---About-->
       </mat-menu>
 
       <button mat-icon-button [matMenuTriggerFor]="appMenu">

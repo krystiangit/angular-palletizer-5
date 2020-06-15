@@ -11,8 +11,6 @@ import {Overlay, OverlayRef} from '@angular/cdk/overlay';
 import {TemplatePortal} from '@angular/cdk/portal';
 import {PalletsService} from '../pallets.service'
 
-
-
 interface PredefinedPallet {
   name: string;
 }
@@ -24,13 +22,7 @@ interface PredefinedPallet {
 
 })
 
-
-
 export class AddPalletComponent implements AfterViewInit, OnDestroy {
-
-
-
-
 
   @ViewChild(TemplateRef) _dialogTemplate: TemplateRef<any>;
   private _overlayRef: OverlayRef;

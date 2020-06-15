@@ -1,0 +1,113 @@
+
+<div id="workspace" class="workspace">
+  <div class="workspace-box" cdkDrag >
+
+
+   <div id="WCS" cdkDrag>
+     <svg width="139" height="149" viewBox="0 0 139 149" fill="none" xmlns="http://www.w3.org/2000/svg">
+       <path d="M117.414 114.414C118.195 113.633 118.195 112.367 117.414 111.586L104.686 98.8579C103.905 98.0768 102.639 98.0768 101.858 98.8579C101.077 99.6389 101.077 100.905 101.858 101.686L113.172 113L101.858 124.314C101.077 125.095 101.077 126.361 101.858 127.142C102.639 127.923 103.905 127.923 104.686 127.142L117.414 114.414ZM36 115H116V111H36V115Z" fill="#EB5757"/>
+       <path d="M37.4142 31.5858C36.6332 30.8047 35.3668 30.8047 34.5858 31.5858L21.8579 44.3137C21.0768 45.0948 21.0768 46.3611 21.8579 47.1421C22.6389 47.9232 23.9052 47.9232 24.6863 47.1421L36 35.8284L47.3137 47.1421C48.0948 47.9232 49.3611 47.9232 50.1421 47.1421C50.9232 46.3611 50.9232 45.0948 50.1421 44.3137L37.4142 31.5858ZM38 113L38 33H34L34 113H38Z" fill="#27AE60"/>
+       <circle cx="36" cy="113" r="15" fill="#2D9CDB"/>
+       <path d="M130.629 109.82L133.828 103.938H137.871L132.902 112.398L138 121H133.91L130.629 115.023L127.348 121H123.258L128.355 112.398L123.387 103.938H127.43L130.629 109.82Z" fill="#EB5757"/>
+       <path d="M5.25 140.176H13.8516V143H0.855469V140.938L9.29297 128.785H0.867188V125.938H13.6641V127.953L5.25 140.176Z" fill="#2D9CDB"/>
+       <path d="M36.4062 12.625L39.957 4.9375H43.8008L38.1992 15.8125V22H34.625V15.8125L29.0234 4.9375H32.8789L36.4062 12.625Z" fill="#27AE60"/>
+       </svg>
+   </div>
+<button (click) = "addPallet1()">Add Pallet1</button>
+
+
+   <button (click) = "push()">push</button>
+   <p *ngIf="parentsValue">Parents value is true </p>
+   <p *ngIf="!parentsValue">Parents value is false</p>
+   <textarea>{{parentsValue}}</textarea>
+   <!---<button (click) = "check()">check</button> -->
+
+   <div class="pallet" *ngFor="let pallet of pallets; let index=index" cdkDrag [ngStyle]="{'width.px': pallet.width }">
+<!--
+   <div class="pallet" *ngFor="let pallet of pallets; let index=index" cdkDrag   [ngStyle]="{'width.px': '#pallet.width' }" >#{{pallet.width}}
+    <div class="pallet" *ngFor="let pallet of pallets; let index=index" cdkDrag [ngStyle]="{'width.px': '400' }"> -->
+     <div
+     [(ngModel)]="pallet.palletName"
+     name="{{pallet.palletName}}"
+     id="{{pallet.id}}"
+     ngDefaultControl>
+       <label>{{pallet.palletName}}</label>
+       <!--
+       <label>{{pallet.id}}</label>
+       -->
+     </div>
+     <button type="button" (click)="deletePallet(pallet.id)"> delete </button>
+   </div>
+
+<!--
+<div id="editPlace" cdkDrag>
+     <button (click)="setPos()" id="btn2"> set Position</button>
+   <button  id="btn3" style="position: absolute;"> move me </button>
+     <textarea id="area1">{{getPosValY}}</textarea>
+     <textarea id="area2">{{getPosValX}}</textarea>
+     <mat-form-field>
+       <mat-label>Position Top</mat-label>
+       <input matInput type="text" [(ngModel)]="setPosValY">
+     </mat-form-field>
+     <mat-form-field>
+       <mat-label>Position Left</mat-label>
+       <input matInput type="text" [(ngModel)]="setPosValX">
+     </mat-form-field>
+   </div>
+-->
+
+
+
+ <div>
+</div>
+
+   <!--
+<button (click)="addPallet()">Add Pallet</button>
+   <div class="pallet" *ngFor="let pallet of pallets; let index=index" cdkDrag>
+     <div [(ngModel)]="pallet.palletName" name="{{pallet.palletName}}" id="palletId{{index}}" ngDefaultControl>
+       <label>{{pallet.palletName}}</label>
+       <label>{{pallet.id}}</label>
+     </div>
+     <button type="button" (click)="deletePallet(pallet.id)"> delete </button>
+
+
+       </div>
+   -->
+
+
+
+<!--
+<button (click)="add()">Add</button>
+<button (click)="add1()">Add1</button>
+ <div id="contentInside" *ngFor="let container of containers"  (click)="getPos(id)" cdkDrag>
+     <h1>item</h1>
+     {{id}}
+
+   </div>
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
