@@ -6,7 +6,7 @@ import { Component,
   OnDestroy,
   OnChanges,
   Input,
-
+  ElementRef,
 OnInit
    } from "@angular/core";
 //import { getMatTooltipInvalidPositionError } from '@angular/material/tooltip';
@@ -14,6 +14,7 @@ OnInit
 import { Pallet } from '../pallet.model';
 import { PalletsService } from '../pallets.service'
 //import { Observable, of } from 'rxjs';
+import panzoom from "panzoom";
 
 
 
@@ -24,30 +25,35 @@ import { PalletsService } from '../pallets.service'
 
 })
 
-export class WorkspaceComponent {
+export class WorkspaceComponent implements AfterViewInit{
   @Input() parentsValue:boolean;
 
   pallets: Pallet[] = [];
+  constructor(public palletsService: PalletsService) {};
 
 
-  //constructor() {};
+
 
   ngOnInit(){
-
     }
 
   addPallet(){
-
      this.pallets = this.palletsService.addPallet();
-     console.log("workspace" + this.pallets)
-     console.log("workspace pallet width" + this.pallets[0].width +"length" + this.pallets[0].length)
   }
 
   deletePallet(id: string){
     this.pallets.splice(this.pallets.findIndex( (pallet)  =>  pallet.id === id ), 1 );
   }
 
-  constructor(public palletsService: PalletsService) {};
+
+
+  ngAfterViewInit() {
+    panzoom(document.querySelector('.workspace-box'));
+    console.log(panzoom)
+  }
+
+  //@ViewChild('scene', { static: false }) scene: ElementRef;
+
 
 /*
      addPallet(){

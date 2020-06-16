@@ -35,7 +35,7 @@ export class AddPalletComponent implements AfterViewInit, OnDestroy {
     this.palletsService.palletSets = this.pallet;
   }
 
-public pallets: Pallet[] = []
+  public pallets: Pallet[] = []
 
   public pallet: Pallet = {
     palletName: 'Pallet1',
