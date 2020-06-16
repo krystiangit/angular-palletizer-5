@@ -48,9 +48,18 @@ export class WorkspaceComponent implements AfterViewInit{
 
 
   ngAfterViewInit() {
-    panzoom(document.querySelector('.workspace-box'));
-    console.log(panzoom)
+    this.panFunc();
   }
+
+  panFunc(){
+    var workspaceElement:HTMLElement = document.querySelector('.workspace-box');
+    let instance = panzoom(workspaceElement, {
+       zoomSpeed: 0.1, pinchSpeed: 2
+    });
+    console.log(instance);
+    console.log(instance.getTransform());
+  }
+
 
   //@ViewChild('scene', { static: false }) scene: ElementRef;
 
