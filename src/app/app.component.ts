@@ -3,7 +3,8 @@ import {ChangeDetectorRef, Component, OnDestroy, ViewChild} from '@angular/core'
 import { WorkspaceComponent} from './workspace/workspace.component'
 
 import { Pallet } from './pallet.model';
-import { PalletsService } from './pallets.service'
+import { PalletsService } from './pallets.service';
+import { SetWorkspaceService } from './set-workspace.service';
 
 @Component({
   selector: 'app-root',
@@ -14,10 +15,7 @@ export class AppComponent implements OnDestroy{
   title = 'angular-palletizer2';
   @ViewChild(WorkspaceComponent) childWorkspaceComponent: WorkspaceComponent;
 
-
-
   parentsValue = true;
-
   mobileQuery: MediaQueryList;
 
 
@@ -25,7 +23,9 @@ export class AppComponent implements OnDestroy{
 
   constructor(changeDetectorRef: ChangeDetectorRef,
      media: MediaMatcher,
-      public palletsService: PalletsService) {
+      public palletsService: PalletsService,
+      public setWorkspaceService: SetWorkspaceService,
+      ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -36,12 +36,13 @@ export class AppComponent implements OnDestroy{
   }
 
   public addPalletButton(event: MouseEvent): void {
-
     this.childWorkspaceComponent.addPallet();
-
      }
 
- pallets: Pallet[] = [];
+  public setWorkspaceButton(event: MouseEvent):void {
+    this.childWorkspaceComponent.setWorkspaceFunc();
+    console.log("save settings clicked");
+  }
 
  /*
 add(){

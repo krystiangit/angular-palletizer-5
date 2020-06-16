@@ -42,7 +42,7 @@
       <mat-sidenav-content>
 
         <app-add-pallet #appChildAddPallet (addPalletButton)="addPalletButton($event)"></app-add-pallet>
-        <app-set-workspace #appChildSetWorkspace></app-set-workspace>
+        <app-set-workspace #appChildSetWorkspace (saveSettingsButton)="setWorkspaceButton($event)"></app-set-workspace>
         <app-workspace #appChildWorkspace [parentsValue] = "parentsValue"></app-workspace>
 
         <!--

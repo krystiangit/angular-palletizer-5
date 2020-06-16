@@ -1,6 +1,11 @@
 
-<div id="workspace" class="workspace">
-   <div class="workspace-box"  >
+<div id="workspace" class="workspace" >
+   <div class="workspace-box"
+   [ngStyle]="{
+    'width.px': setWorkspace.width,
+    'height.px': setWorkspace.height
+  }"
+   >
 
 
     <div id="WCS" cdkDrag>
@@ -41,6 +46,11 @@
         -->
       </div>
       <button type="button" (click)="deletePallet(pallet.id)"> delete </button>
+    </div>
+
+    <div id="testDiv" *ngIf="setWorkspace !=null">
+<textarea>{{setWorkspace.height}} height</textarea>
+<textarea>{{setWorkspace.width}} width</textarea>
     </div>
 
 

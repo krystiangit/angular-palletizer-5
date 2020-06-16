@@ -84,9 +84,7 @@ export class AddPalletComponent implements AfterViewInit, OnDestroy {
     { name: 'Pallet1' },
   ];
 
-  @Output() addPalletButton: EventEmitter<MouseEvent> = new EventEmitter<
-    MouseEvent
-  >();
+  @Output() addPalletButton: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
   /*
 console(){

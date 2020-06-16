@@ -15,56 +15,67 @@ import { Pallet } from '../pallet.model';
 import { PalletsService } from '../pallets.service'
 //import { Observable, of } from 'rxjs';
 import panzoom from "panzoom";
+import {SetWorkspaceService} from '../set-workspace.service';
+import { Workspace } from '../workspace.model';
 
 
 
 @Component({
   selector: 'app-workspace',
   templateUrl: './workspace.component.html',
-  styleUrls: ['./workspace.component.css']
-
+  styleUrls: ['./workspace.component.css'],
 })
+export class WorkspaceComponent implements AfterViewInit {
+  @Input() parentsValue: boolean;
 
-export class WorkspaceComponent implements AfterViewInit{
-  @Input() parentsValue:boolean;
+pallets: Pallet[] = [];
+setWorkspace:Workspace = {width:'1000', height:'1000'}; // wymiary pola roboczego przed zmiana
+constructor(public palletsService: PalletsService,
+    public setWorkspaceService: SetWorkspaceService,
+    ) {
 
-  pallets: Pallet[] = [];
-  constructor(public palletsService: PalletsService) {};
-
-
-
-
-  ngOnInit(){
     }
 
-  addPallet(){
-     this.pallets = this.palletsService.addPallet();
+
+setWorkspaceFunc(){
+  this.setWorkspace = this.setWorkspaceService.setWorkspace();
+}
+
+
+  ngOnInit() {
+
   }
-
-  deletePallet(id: string){
-    this.pallets.splice(this.pallets.findIndex( (pallet)  =>  pallet.id === id ), 1 );
-  }
-
-
-
   ngAfterViewInit() {
+
     this.panFunc();
   }
+  addPallet() {
+    this.pallets = this.palletsService.addPallet();
+  }
 
-  panFunc(){
-    var workspaceElement:HTMLElement = document.querySelector('.workspace-box');
+  deletePallet(id: string) {
+    this.pallets.splice(
+      this.pallets.findIndex((pallet) => pallet.id === id),
+      1
+    );
+  }
+
+  panFunc() {
+    var workspaceElement: HTMLElement = document.querySelector(
+      '.workspace-box'
+    );
+
     let instance = panzoom(workspaceElement, {
-       zoomSpeed: 0.1, pinchSpeed: 2
+      zoomSpeed: 0.1,
+      pinchSpeed: 2,
     });
     console.log(instance);
     console.log(instance.getTransform());
   }
 
-
   //@ViewChild('scene', { static: false }) scene: ElementRef;
 
-
-/*
+  /*
      addPallet(){
 
 
@@ -85,7 +96,7 @@ export class WorkspaceComponent implements AfterViewInit{
   //setPosValX="400px";
   //containers = [];
 
-/*
+  /*
   ngOnChanges() {
 
     this.pallets = this.palletsService.addPallet();
@@ -101,7 +112,7 @@ export class WorkspaceComponent implements AfterViewInit{
   }
 */
 
-/*
+  /*
  getPos(_id){
 
   var _btn3=document.getElementById("btn3");
@@ -118,10 +129,8 @@ setPos(){
 }
 */
 
-
-
-//private palletsUpdated  = new Observable<Pallet[]>()
-/*
+  //private palletsUpdated  = new Observable<Pallet[]>()
+  /*
 check(){
   console.log(this.pallets.length);
 
