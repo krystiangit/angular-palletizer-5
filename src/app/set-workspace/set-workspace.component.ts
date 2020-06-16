@@ -28,7 +28,7 @@ import  {SetWorkspaceService} from '../set-workspace.service'
 export class SetWorkspaceComponent implements AfterViewInit, OnDestroy {
 
   public workspace: Workspace = {
-    width: 5,
+    width: 8,
     height: 5,
   };
 

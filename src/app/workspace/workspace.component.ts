@@ -30,7 +30,7 @@ export class WorkspaceComponent implements AfterViewInit {
   @Input() parentsValue: boolean;
 
 pallets: Pallet[] = [];
-setWorkspace:Workspace = {width:this.setWorkspaceService.workspaceSets.width*100, height:this.setWorkspaceService.workspaceSets.height*100}; // wymiary pola roboczego przed zmiana
+setWorkspace:Workspace = {width:this.setWorkspaceService.workspaceSets.width*200, height:this.setWorkspaceService.workspaceSets.height*200}; // wymiary pola roboczego przed zmiana
 constructor(public palletsService: PalletsService,
     public setWorkspaceService: SetWorkspaceService,
     ) {

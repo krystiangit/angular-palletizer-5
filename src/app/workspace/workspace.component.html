@@ -84,29 +84,68 @@
 <!--
     <div class="pallet" *ngFor="let pallet of pallets; let index=index" cdkDrag   [ngStyle]="{'width.px': '#pallet.width' }" >#{{pallet.width}}
      <div class="pallet" *ngFor="let pallet of pallets; let index=index" cdkDrag [ngStyle]="{'width.px': '400' }"> -->
-      <div
+      <!--
+
+<div
       [(ngModel)]="pallet.palletName"
       name="{{pallet.palletName}}"
       id="{{pallet.id}}"
       ngDefaultControl>
         <label>{{pallet.palletName}}</label>
+        </div>
+      -->
+
+
         <!--
         <label>{{pallet.id}}</label>
         -->
-
-
-
-      </div>
-      <button type="button" (click)="deletePallet(pallet.id)"> delete </button>
-
-
+<!--
+<button type="button" (click)="deletePallet(pallet.id)"> delete </button>
+-->
 
       <svg >
         <g>
-          <rect x="10" y="20" height="50" width="50"
-              style="stroke: #006600; fill: #006600"/>
+          <rect x="10" y="20" height="240" width="160" rx="5" ry="5"
+              style="stroke: #5eb8f58a; fill: #5eb9f53b"
+              stroke-width="0.5"/>
         </g>
       </svg>
+    </div>
+
+
+<!-----------------------------------test---------------------->
+
+<div class="pallet"  cdkDrag
+    [ngStyle]="{
+      'width.px': (palletsService.palletSets.width/5).toString(),
+      'height.px':(palletsService.palletSets.length/5).toString(),
+      'left.px':(palletsService.palletSets.posX).toString(),
+      'top.px':(palletsService.palletSets.posY).toString()
+    }">
+      <svg width="160" height="240" viewBox="10 20 160 240"
+      preserveAspectRatio="xMinYMin meet">
+
+          <rect
+          x="10"
+          y="20"
+          attr.height="{{(palletsService.palletSets.length)/5}}"
+          attr.width="{{(palletsService.palletSets.width)/5}}"
+          rx="10"
+          ry="10"
+          style="stroke: #0b5ef8bb; fill: #5eb9f525"
+          stroke-width="2"/>
+
+      </svg>
+    </div>
+<!------------------------------------koniec testu------------->
+
+
+
+
+
+
+
+
 
       <!--
 <div>
@@ -134,7 +173,7 @@
 
 
 
-    </div>
+
 </div>
 </div>
 <!--

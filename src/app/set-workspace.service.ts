@@ -12,8 +12,8 @@ export class SetWorkspaceService{
 
   setWorkspace(){
     var temp = new Workspace()
-    temp.width = this.workspaceSets.width*100;
-    temp.height = this.workspaceSets.height*100;
+    temp.width = this.workspaceSets.width*200;
+    temp.height = this.workspaceSets.height*200;
     //this.workspace.width= this.workspaceSets.width;
     //this.workspace.height= this.workspaceSets.height;
     return this.workspace = temp;

@@ -18,9 +18,9 @@ export class PalletsService{
     let temp = new Pallet();
     temp.palletName = 'Pallet'+(this.pallets.length+1);
     temp.id=(this.pallets.length+1).toString();
-    temp.width = this.palletSets.width/10;
-    temp.length = this.palletSets.length/10;
-    temp.height = this.palletSets.height/10;
+    temp.width = this.palletSets.width/5;
+    temp.length = this.palletSets.length/5;
+    temp.height = this.palletSets.height/5;
     temp.posX = this.palletSets.posX;
     temp.posY = this.palletSets.posY;
     temp.posZ = this.palletSets.posZ;
