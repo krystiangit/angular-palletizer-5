@@ -40,12 +40,12 @@ export class AddPalletComponent implements AfterViewInit, OnDestroy {
   public pallet: Pallet = {
     palletName: 'Pallet1',
     id: '1',
-    width: '800',
-    length: '1200',
-    height: '150',
-    posX: '500',
-    posY: '500',
-    posZ: '0',
+    width: 800,
+    length: 1200,
+    height: 150,
+    posX: 500,
+    posY: 500,
+    posZ: 0,
   };
 
   ngAfterViewInit() {

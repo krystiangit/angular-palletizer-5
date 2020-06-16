@@ -1,12 +1,12 @@
 export class Pallet{
   palletName: string = "Pallet1";
   id: string;
-  width: string;
-  length:string;
-  height: string;
-  posX: string;
-  posY: string;
-  posZ:string;
+  width: number;
+  length:number;
+  height: number;
+  posX: number;
+  posY: number;
+  posZ:number;
 
 }
 

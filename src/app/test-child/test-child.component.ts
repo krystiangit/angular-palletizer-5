@@ -30,8 +30,8 @@ export class TestChildComponent implements OnInit{
   @Input() parentsValue:boolean;
   getPosValY="";
   getPosValX="";
-  setPosValY="400px";
-  setPosValX="400px";
+  setPosValY=400;
+  setPosValX=400;
   containers = [];
   pallets: Pallet[] = [];
 
@@ -64,7 +64,7 @@ export class TestChildComponent implements OnInit{
     let temp = new Pallet();
     temp.palletName = 'Pallet'+(this.pallets.length+1);
     temp.id=(this.pallets.length+1).toString();
-    temp.width = "500";
+    temp.width = 500;
     this.pallets.push(temp);
 
   return this.pallets
@@ -85,14 +85,14 @@ export class TestChildComponent implements OnInit{
   this.getPosValX = `position Left = ${_btn3.style.left}`;
   console.log(_id);
 }
-
+/*
 setPos(){
   var _btn3=document.getElementById("btn3");
   _btn3.style.top = this.setPosValY;
   _btn3.style.left = this.setPosValX;
   //this.getPos(this.id);
 }
-
+*/
 deletePallet(id: string){
   this.pallets.splice(this.pallets.findIndex( (pallet)  =>  pallet.id === id ), 1 );
 }

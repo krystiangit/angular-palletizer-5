@@ -1,4 +1,4 @@
 export class Workspace{
-  width: string;
-  height: string;
+  width: number;
+  height: number;
 }

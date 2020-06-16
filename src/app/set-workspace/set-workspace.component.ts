@@ -28,8 +28,8 @@ import  {SetWorkspaceService} from '../set-workspace.service'
 export class SetWorkspaceComponent implements AfterViewInit, OnDestroy {
 
   public workspace: Workspace = {
-    width: '500',
-    height: '500',
+    width: 5,
+    height: 5,
   };
 
 
@@ -42,7 +42,7 @@ export class SetWorkspaceComponent implements AfterViewInit, OnDestroy {
      private _viewContainerRef: ViewContainerRef,
      setWorkspaceService: SetWorkspaceService
      ) {
-       setWorkspaceService.workspace = this.workspace;
+       setWorkspaceService.workspaceSets = this.workspace;
      }
 
   @Output() saveSettingsButton: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
