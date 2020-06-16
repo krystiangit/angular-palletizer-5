@@ -19,35 +19,8 @@
         </svg>
     </div>
 
-
-  <div cdkDrag>
-    <svg
-
-        width="500"
-        height="500"
-        viewBox=" 0 0 500 500"
-        #svgGrid
-    >
-    <g>
-        <rect
-          id="svgRect"
-          x="100"
-          y="100"
-          width="100"
-          height="100"
-          rx="10"
-          ry="10"
-          style="stroke: black; fill: white"
-
-          stroke-width="0.5"
-
-          attr.filter= "url(#shadow)"
-          >
-        </rect>
-      </g>
-  </svg>
-   </div>
- <div cdkDrag>
+<!--
+<div cdkDrag>
   <svg >
 
   <g>
@@ -63,6 +36,9 @@
 
 </svg>
  </div>
+-->
+
+
 
 
     <!--
@@ -79,6 +55,19 @@
       'left.px':pallet.posX.toString(),
       'top.px':pallet.posY.toString()
     }">
+    <svg width="pallet.width" height="pallet.length" viewBox="0 0 pallet.width pallet.length"
+      preserveAspectRatio="xMinYMin meet">
+
+          <rect
+          attr.width="{{pallet.width}}"
+          attr.height="{{pallet.length}}"
+
+          rx="10"
+          ry="10"
+          style="stroke: #0b5ef8bb; fill: #5eb9f525"
+          stroke-width="2"/>
+
+      </svg>
 
 
 <!--
@@ -103,18 +92,12 @@
 <button type="button" (click)="deletePallet(pallet.id)"> delete </button>
 -->
 
-      <svg >
-        <g>
-          <rect x="10" y="20" height="240" width="160" rx="5" ry="5"
-              style="stroke: #5eb8f58a; fill: #5eb9f53b"
-              stroke-width="0.5"/>
-        </g>
-      </svg>
+
     </div>
 
 
 <!-----------------------------------test---------------------->
-
+<!--
 <div class="pallet"  cdkDrag
     [ngStyle]="{
       'width.px': (palletsService.palletSets.width/5).toString(),
@@ -137,6 +120,8 @@
 
       </svg>
     </div>
+-->
+
 <!------------------------------------koniec testu------------->
 
 

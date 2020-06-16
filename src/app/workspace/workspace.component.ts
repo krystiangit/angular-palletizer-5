@@ -68,7 +68,7 @@ setWorkspaceFunc(){
 
     let instance = panzoom(workspaceElement, {
       zoomSpeed: 0.1,
-      pinchSpeed: 2,
+      pinchSpeed: 1,
       transformOrigin: {x: 0.5, y: 0.5}
     });
     console.log(instance);
