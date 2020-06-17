@@ -59,22 +59,19 @@
       'width.px': pallet.width.toString(),
       'height.px':pallet.length.toString(),
       'left.px':pallet.posX.toString(),
-      'top.px':pallet.posY.toString()
+      'bottom.px':pallet.posY.toString()
     }">
 
     <!--viewBox="0 0 pallet.width pallet.length"-->
     <svg attr.width="{{pallet.width}}" attr.height="{{pallet.length}}"
       preserveAspectRatio="xMinYMin meet">
-
           <rect
           attr.width="{{pallet.width}}"
           attr.height="{{pallet.length}}"
-
           rx="10"
           ry="10"
           style="stroke: #0b5ef8bb; fill: #5eb9f525"
           stroke-width="2"/>
-
       </svg>
 
 
@@ -130,6 +127,8 @@
     </div>
 -->
 
+
+
 <!------------------------------------koniec testu------------->
 
       <!--
@@ -176,6 +175,7 @@
     <button  id="btn3" style="position: absolute;"> move me </button>-->
       <textarea id="area1">{{getPosValY}}</textarea>
       <textarea id="area2">{{getPosValX}}</textarea>
+      <textarea id="area3">{{translateX}}</textarea>
       <button (click)="getPos('Pallet1')" id="btn2"> get Position</button>
 
 

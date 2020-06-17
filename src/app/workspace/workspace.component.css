@@ -97,11 +97,11 @@
 .pallet{
   width:100px;
   height:70px;
-  margin:7px;
+
+  margin:0;
   /*border:1px dotted black;*/
 
 
   position: absolute;
-  top: 100px;
-  left: 100px;
+
 }

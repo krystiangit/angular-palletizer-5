@@ -17,6 +17,7 @@ import { PalletsService } from '../pallets.service'
 import panzoom from "panzoom";
 import {SetWorkspaceService} from '../set-workspace.service';
 import { Workspace } from '../workspace.model';
+import { element } from 'protractor';
 
 
 
@@ -52,8 +53,9 @@ constructor(public palletsService: PalletsService,
     }
     console.log(event)
     console.log(event.srcElement.offsetLeft , event.srcElement.offsetTop)
+    console.log(this.elRef.nativeElement.offsetLeft);
     return { offsetTop:offsetTop , offsetLeft:offsetLeft }
-      console.log(this.elRef.nativeElement.offsetLeft);
+
     }
 
 setWorkspaceFunc(){
@@ -133,17 +135,30 @@ setWorkspaceFunc(){
   }
 */
 
-  getPosValY="";
-  getPosValX="";
- getPos(_id){
+
+@ViewChild('palletHash', { read: ElementRef }) palletHash: ElementRef<HTMLDivElement>;
+
+getPosValY="";
+getPosValX="";
+translateX="";
+translateY="";
+getPos(_id){
+
+var _element = this.palletHash.nativeElement;
+//console.log("child PalletHash"+ this.palletHash)
+//console.log("child PalletHash.nativeElement"+ this.palletHash.nativeElement)
+//console.log("child PalletHash.nativeElement.innerWidth"+ this.palletHash.nativeElement.style.top)
+
 
   var _el=document.getElementById(_id);
-  this.getPosValY = `position Top = ${_el.style.top}`;
-  this.getPosValX = `position Left = ${_el.style.left}`;
-  console.log(_id);
-  console.log(_el)
-  console.log(_el.className)
+  this.getPosValY = `position Y = ${_element.style.bottom}`;
+  this.getPosValX = `position X = ${_element.style.left}`;
+
+
 }
+
+
+
 /*
 setPos(){
   var _btn3=document.getElementById("btn3");
