@@ -33,10 +33,28 @@ pallets: Pallet[] = [];
 setWorkspace:Workspace = {width:this.setWorkspaceService.workspaceSets.width*200, height:this.setWorkspaceService.workspaceSets.height*200}; // wymiary pola roboczego przed zmiana
 constructor(public palletsService: PalletsService,
     public setWorkspaceService: SetWorkspaceService,
+    public elRef:ElementRef,
     ) {
 
     }
 
+    move(event) {
+
+      let offsetLeft = 0;
+    let offsetTop = 0;
+
+    let el = event.srcElement;
+
+    while(el){
+        offsetLeft += el.offsetLeft;
+        offsetTop += el.offsetTop;
+        el = el.parentElement;
+    }
+    console.log(event)
+    console.log(event.srcElement.offsetLeft , event.srcElement.offsetTop)
+    return { offsetTop:offsetTop , offsetLeft:offsetLeft }
+      console.log(this.elRef.nativeElement.offsetLeft);
+    }
 
 setWorkspaceFunc(){
   this.setWorkspace = this.setWorkspaceService.setWorkspace();
@@ -51,7 +69,9 @@ setWorkspaceFunc(){
     this.panFunc();
   }
   addPallet() {
+    console.log("before" + this.pallets)
     this.pallets = this.palletsService.addPallet();
+    console.log("after" + this.pallets)
   }
 
   deletePallet(id: string) {
@@ -92,8 +112,7 @@ setWorkspaceFunc(){
     }
 */
 
-  //getPosValY="";
-  //getPosValX="";
+
   //setPosValY="400px";
   //setPosValX="400px";
   //containers = [];
@@ -114,15 +133,18 @@ setWorkspaceFunc(){
   }
 */
 
-  /*
+  getPosValY="";
+  getPosValX="";
  getPos(_id){
 
-  var _btn3=document.getElementById("btn3");
-  this.getPosValY = `position Top = ${_btn3.style.top}`;
-  this.getPosValX = `position Left = ${_btn3.style.left}`;
+  var _el=document.getElementById(_id);
+  this.getPosValY = `position Top = ${_el.style.top}`;
+  this.getPosValX = `position Left = ${_el.style.left}`;
   console.log(_id);
+  console.log(_el)
+  console.log(_el.className)
 }
-
+/*
 setPos(){
   var _btn3=document.getElementById("btn3");
   _btn3.style.top = this.setPosValY;

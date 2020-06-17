@@ -16,6 +16,7 @@ export class PalletsService{
 
 
     let temp = new Pallet();
+    //let temp:Pallet
     temp.palletName = 'Pallet'+(this.pallets.length+1);
     temp.id=(this.pallets.length+1).toString();
     temp.width = this.palletSets.width/5;
@@ -25,7 +26,11 @@ export class PalletsService{
     temp.posY = this.palletSets.posY;
     temp.posZ = this.palletSets.posZ;
     this.pallets.push(temp);
+    console.log("from service pallets" +this.pallets)
+    console.log("from service palletSets" +this.palletSets)
+    console.log("from service temp" + temp)
     return this.pallets;
+
 
   }
  // updatePallets(){

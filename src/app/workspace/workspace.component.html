@@ -48,14 +48,22 @@
     <textarea>{{parentsValue}}</textarea>
      -->
     <!---<button (click) = "check()">check</button> -->
-    <div class="pallet" *ngFor="let pallet of pallets; let index=index" cdkDrag
+    <div class="pallet "  id={{pallet.palletName}}
+    *ngFor="let pallet of pallets;
+    let index=index"
+    cdkDrag
+    #palletHash
+
+    (click)="move($event)"
     [ngStyle]="{
       'width.px': pallet.width.toString(),
       'height.px':pallet.length.toString(),
       'left.px':pallet.posX.toString(),
       'top.px':pallet.posY.toString()
     }">
-    <svg width="pallet.width" height="pallet.length" viewBox="0 0 pallet.width pallet.length"
+
+    <!--viewBox="0 0 pallet.width pallet.length"-->
+    <svg attr.width="{{pallet.width}}" attr.height="{{pallet.length}}"
       preserveAspectRatio="xMinYMin meet">
 
           <rect
@@ -124,14 +132,6 @@
 
 <!------------------------------------koniec testu------------->
 
-
-
-
-
-
-
-
-
       <!--
 <div>
         <svg>
@@ -170,13 +170,21 @@
 
 
 
-<!--
-<div id="editPlace" cdkDrag>
-      <button (click)="setPos()" id="btn2"> set Position</button>
-    <button  id="btn3" style="position: absolute;"> move me </button>
+
+<div id="editPlace" cdkDrag style="z-index: 2;" #getHeight>
+      <!--<button (click)="setPos()" id="btn2"> set Position</button>
+    <button  id="btn3" style="position: absolute;"> move me </button>-->
       <textarea id="area1">{{getPosValY}}</textarea>
       <textarea id="area2">{{getPosValX}}</textarea>
-      <mat-form-field>
+      <button (click)="getPos('Pallet1')" id="btn2"> get Position</button>
+
+
+
+        Height of above tag : {{ getHeight.offsetHeight }}
+
+
+      <!--
+ <mat-form-field>
         <mat-label>Position Top</mat-label>
         <input matInput type="text" [(ngModel)]="setPosValY">
       </mat-form-field>
@@ -184,8 +192,10 @@
         <mat-label>Position Left</mat-label>
         <input matInput type="text" [(ngModel)]="setPosValX">
       </mat-form-field>
+      -->
+
     </div>
--->
+
 
 
 
