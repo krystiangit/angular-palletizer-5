@@ -38,7 +38,7 @@ export class AddPalletComponent implements AfterViewInit, OnDestroy {
   //public pallets: Pallet[] = []
 
   public pallet: Pallet = {
-    palletName: 'Pallet1',
+    name: 'Pallet1',
     id: '1',
     width: 800,
     length: 1200,
@@ -46,6 +46,7 @@ export class AddPalletComponent implements AfterViewInit, OnDestroy {
     posX: 500,
     posY: 500,
     posZ: 0,
+    orientation:0
   };
 
   ngAfterViewInit() {

@@ -17,7 +17,7 @@ export class PalletsService{
 
     let temp = new Pallet();
     //let temp:Pallet
-    temp.palletName = 'Pallet'+(this.pallets.length+1);
+    temp.name = 'Pallet'+(this.pallets.length+1);
     temp.id=(this.pallets.length+1).toString();
     temp.width = this.palletSets.width/5;
     temp.length = this.palletSets.length/5;
