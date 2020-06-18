@@ -39,11 +39,15 @@ export class AppComponent implements OnDestroy{
     this.childWorkspaceComponent.addPallet();
      }
 
-  public setWorkspaceButton(event: MouseEvent):void {
+  public saveSettingsWorkspaceButton(event: MouseEvent):void {
     this.childWorkspaceComponent.setWorkspaceFunc();
-    console.log("save settings clicked");
+    console.log("save settings workspace clicked");
   }
 
+  public saveSettingsKcsButton(event: MouseEvent):void {
+    this.childWorkspaceComponent.setKcsFunc();
+    console.log("save settings Kcs clicked");
+  }
  /*
 add(){
   this.palletsService.addPallet();

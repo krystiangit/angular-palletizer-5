@@ -20,6 +20,7 @@ import { AddPalletComponent } from './add-pallet/add-pallet.component';
 import { DemoMaterialModule } from "./left-navbar/material-module";
 import { SetWorkspaceComponent } from "./set-workspace/set-workspace.component";
 import { WorkspaceComponent } from "./workspace/workspace.component";
+import { SetKcsComponent } from './set-kcs/set-kcs.component';
 
 
 
@@ -34,6 +35,7 @@ import { WorkspaceComponent } from "./workspace/workspace.component";
     AddPalletComponent,
     SetWorkspaceComponent,
     WorkspaceComponent,
+    SetKcsComponent,
 
 
 

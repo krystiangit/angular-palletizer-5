@@ -17,7 +17,8 @@ import { PalletsService } from '../pallets.service'
 import panzoom from "panzoom";
 import {SetWorkspaceService} from '../set-workspace.service';
 import { Workspace } from '../workspace.model';
-import { element } from 'protractor';
+import { SetKcsService } from '../set-kcs.service';
+import { Kcs } from '../kcs.model';
 
 
 
@@ -32,8 +33,11 @@ export class WorkspaceComponent implements AfterViewInit {
 
 pallets: Pallet[] = [];
 setWorkspace:Workspace = {width:this.setWorkspaceService.workspaceSets.width*200, height:this.setWorkspaceService.workspaceSets.height*200}; // wymiary pola roboczego przed zmiana
+setKcs:Kcs = {posX: this.setKcsService.kcsSets.posX, posY: this.setKcsService.kcsSets.posY};
+
 constructor(public palletsService: PalletsService,
     public setWorkspaceService: SetWorkspaceService,
+    public setKcsService: SetKcsService,
     public elRef:ElementRef,
     ) {
 
@@ -41,7 +45,7 @@ constructor(public palletsService: PalletsService,
 
     move(event) {
 
-      let offsetLeft = 0;
+    let offsetLeft = 0;
     let offsetTop = 0;
 
     let el = event.srcElement;
@@ -60,6 +64,10 @@ constructor(public palletsService: PalletsService,
 
 setWorkspaceFunc(){
   this.setWorkspace = this.setWorkspaceService.setWorkspace();
+}
+
+setKcsFunc(){
+  this.setKcs = this.setKcsService.setKcs();
 }
 
 
