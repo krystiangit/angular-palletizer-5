@@ -112,7 +112,7 @@
   height:70px;
   margin:0;
   position: absolute;
-
+  /*transform: rotate(90deg) translateX(8px) translateY(-8px)*/
 }
 
 .Kcs{
