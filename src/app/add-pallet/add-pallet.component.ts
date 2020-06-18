@@ -11,8 +11,8 @@ import { Component,
 import {FormControl, Validators} from '@angular/forms';
 import {Overlay, OverlayRef} from '@angular/cdk/overlay';
 import {TemplatePortal} from '@angular/cdk/portal';
-import {PalletsService} from '../pallets.service'
-import { Pallet } from '../pallet.model';
+import {PalletsService} from '../services/pallets.service'
+import { Pallet } from '../models/pallet.model';
 
 interface PredefinedPallet {
   name: string;

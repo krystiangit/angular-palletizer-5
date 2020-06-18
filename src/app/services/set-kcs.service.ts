@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Kcs } from './kcs.model';
+import { Kcs } from '../models/kcs.model';
 
 @Injectable({
   providedIn: 'root'

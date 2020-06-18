@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 
-import {Workspace} from './workspace.model';
+import {Workspace} from '../models/workspace.model';
 import {ConfigService} from './config.service'
 
 @Injectable({providedIn: 'root'})

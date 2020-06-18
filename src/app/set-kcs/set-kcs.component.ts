@@ -12,8 +12,8 @@ import { Component,
 import {Overlay, OverlayRef} from '@angular/cdk/overlay';
 import {TemplatePortal} from '@angular/cdk/portal';
 
-import { Kcs } from '../kcs.model';
-import { SetKcsService } from '../set-kcs.service';
+import { Kcs } from '../models/kcs.model';
+import { SetKcsService } from '../services/set-kcs.service';
 
 
 

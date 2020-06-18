@@ -11,14 +11,14 @@ OnInit
    } from "@angular/core";
 //import { getMatTooltipInvalidPositionError } from '@angular/material/tooltip';
 //import { transition } from '@angular/animations';
-import { Pallet } from '../pallet.model';
-import { PalletsService } from '../pallets.service'
+import { Pallet } from '../models/pallet.model';
+import { PalletsService } from '../services/pallets.service'
 //import { Observable, of } from 'rxjs';
 import panzoom from "panzoom";
-import {SetWorkspaceService} from '../set-workspace.service';
-import { Workspace } from '../workspace.model';
-import { SetKcsService } from '../set-kcs.service';
-import { Kcs } from '../kcs.model';
+import {SetWorkspaceService} from '../services/set-workspace.service';
+import { Workspace } from '../models/workspace.model';
+import { SetKcsService } from '../services/set-kcs.service';
+import { Kcs } from '../models/kcs.model';
 
 
 

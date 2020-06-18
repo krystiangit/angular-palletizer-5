@@ -2,9 +2,9 @@ import {MediaMatcher} from '@angular/cdk/layout';
 import {ChangeDetectorRef, Component, OnDestroy, ViewChild} from '@angular/core';
 import { WorkspaceComponent} from './workspace/workspace.component'
 
-import { Pallet } from './pallet.model';
-import { PalletsService } from './pallets.service';
-import { SetWorkspaceService } from './set-workspace.service';
+import { Pallet } from './models/pallet.model';
+import { PalletsService } from './services/pallets.service';
+import { SetWorkspaceService } from './services/set-workspace.service';
 
 @Component({
   selector: 'app-root',

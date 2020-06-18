@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 //import { Subject } from 'rxjs';
 
-import {Pallet} from './pallet.model';
+import {Pallet} from '../models/pallet.model';
 
 @Injectable({providedIn: 'root'})
 export class PalletsService{

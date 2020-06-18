@@ -10,8 +10,8 @@ import { Component,
 
 import {Overlay, OverlayRef} from '@angular/cdk/overlay';
 import {TemplatePortal} from '@angular/cdk/portal';
-import {Workspace} from '../workspace.model';
-import  {SetWorkspaceService} from '../set-workspace.service'
+import {Workspace} from '../models/workspace.model';
+import  {SetWorkspaceService} from '../services/set-workspace.service'
 
 
 
