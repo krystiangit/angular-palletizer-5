@@ -22,9 +22,9 @@ export class PalletsService{
     temp.width = this.palletSets.width/5;
     temp.length = this.palletSets.length/5;
     temp.height = this.palletSets.height/5;
-    temp.posX = this.palletSets.posX;
-    temp.posY = this.palletSets.posY;
-    temp.posZ = this.palletSets.posZ;
+    temp.posX = this.palletSets.posX/5;
+    temp.posY = this.palletSets.posY/5;
+    temp.posZ = this.palletSets.posZ/5;
     this.pallets.push(temp);
     console.log("from service pallets" +this.pallets)
     console.log("from service palletSets" +this.palletSets)

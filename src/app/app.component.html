@@ -21,7 +21,8 @@
       </div>
     </mat-toolbar>
 
-    <mat-sidenav-container class="sidenav-container" mode="over">
+    <mat-sidenav-container class="sidenav-container" mode="over" [hasBackdrop]="false">
+      <!--[hasBackdrop]="false"  put in parameters of sidenav container to get off backdrop-->
       <mat-sidenav #snav>
         <mat-nav-list>
           <a mat-list-item (click)="appChildSetWorkspace.openDialog()">Set Workspace</a>

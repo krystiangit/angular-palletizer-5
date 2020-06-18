@@ -42,8 +42,8 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
     width: 160,
     length: 240,
     height: 100,
-    posX: 700,
-    posY: 400,
+    posX: 3500,
+    posY: 2000,
     posZ: 0,
     orientation:0
   };

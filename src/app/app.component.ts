@@ -2,9 +2,6 @@ import {MediaMatcher} from '@angular/cdk/layout';
 import {ChangeDetectorRef, Component, OnDestroy, ViewChild} from '@angular/core';
 import { WorkspaceComponent} from './workspace/workspace.component'
 
-import { Pallet } from './models/pallet.model';
-import { PalletsService } from './services/pallets.service';
-import { SetWorkspaceService } from './services/set-workspace.service';
 
 @Component({
   selector: 'app-root',
@@ -23,8 +20,7 @@ export class AppComponent implements OnDestroy{
 
   constructor(changeDetectorRef: ChangeDetectorRef,
      media: MediaMatcher,
-      public palletsService: PalletsService,
-      public setWorkspaceService: SetWorkspaceService,
+
       ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
