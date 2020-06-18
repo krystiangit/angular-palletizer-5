@@ -117,38 +117,35 @@
 
 
     </div>
-    <div class="pallet "  id={{pallet.name}}
-    *ngFor="let pallet of pallets;
+    <div class="box "  id={{box.name}}
+    *ngFor="let box of boxes;
     let index=index"
     cdkDrag
-    #palletHash
+    #boxHash
     (click)="move($event)"
     [ngStyle]="{
-      'width.px': pallet.width.toString(),
-      'height.px':pallet.length.toString(),
-      'left.px':pallet.posX.toString(),
-      'bottom.px':pallet.posY.toString()
+      'width.px': box.width.toString(),
+      'height.px':box.length.toString(),
+      'left.px':box.posX.toString(),
+      'bottom.px':box.posY.toString()
     }">
-    <svg attr.width="{{pallet.width}}" attr.height="{{pallet.length}}"
+    <svg attr.width="{{box.width}}" attr.height="{{box.length}}"
       preserveAspectRatio="xMinYMin meet">
-
-
         <rect
-        attr.width="{{pallet.width}}"
-        attr.height="{{pallet.length}}"
+        attr.width="{{box.width}}"
+        attr.height="{{box.length}}"
         rx="10"
         ry="10"
-        style="stroke: #0b5ef8bb; fill: #5eb9f525"
+        style="stroke: #f50101bb; fill: #f55e5e31"
         stroke-width="2"/>
         <line x1="0" y1="0" x2="-20" y2="0"
         style="stroke: #130066;"/>
-
 
         <rect
         width="10"
         height="10"
         x="0"
-        attr.y="{{pallet.length-10}}"
+        attr.y="{{box.length-10}}"
         style=" fill: #000000"
         stroke-width="2"/>
 

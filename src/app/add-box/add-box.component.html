@@ -4,7 +4,7 @@
   <div id="add-pallet" class="drag-box"  cdkDrag cdkDragRootElement=".cdk-overlay-pane">
 
 
-      <h3 class="pallet-header">Pallet editor</h3>
+      <h3 class="pallet-header">Box editor</h3>
 
     <div class="drag-handle"  cdkDragHandle>
       <svg width="30px" fill="currentColor" viewBox="0 0 24 24">
@@ -21,26 +21,17 @@
           <form class="form">
             <mat-form-field class="form-full-width">
               <mat-label>Width [mm]</mat-label>
-              <input matInput placeholder="100" [(ngModel)]="pallet.width" value="pallet.width" name="inputWidth">
+              <input matInput placeholder="100" [(ngModel)]="box.width" value="pallet.width" name="inputWidth">
             </mat-form-field>
             <mat-form-field class="form-full-width">
               <mat-label>Length [mm]</mat-label>
-              <input matInput placeholder="100" [(ngModel)]="pallet.length" value="pallet.length" name="inputLength">
+              <input matInput placeholder="100" [(ngModel)]="box.length" value="pallet.length" name="inputLength">
             </mat-form-field>
             <mat-form-field class="form-full-width">
               <mat-label>Height [mm]</mat-label>
-              <input matInput placeholder="100" [(ngModel)]="pallet.height" value="pallet.height" name="inputHeight">
+              <input matInput placeholder="100" [(ngModel)]="box.height" value="pallet.height" name="inputHeight">
             </mat-form-field>
-            <mat-form-field>
-              <mat-label >Select predefined size</mat-label>
-              <mat-select [formControl]="palletControl" required >
-                <mat-option>--</mat-option>
-                <mat-option *ngFor="let pallet of predefinedPallets" [value]="pallet">
-                  {{pallet.name}}
-                </mat-option>
-              </mat-select>
-              <mat-hint>{{palletControl.value?.name}}</mat-hint>
-            </mat-form-field>
+
           </form>
 
         </div>
@@ -63,15 +54,15 @@
             <form class="form">
               <mat-form-field class="form-full-width">
                 <mat-label>Position X [mm]</mat-label>
-                <input matInput placeholder="100" [(ngModel)]="pallet.posX" value="pallet.posX" name="inputPosX">
+                <input matInput placeholder="100" [(ngModel)]="box.posX" value="pallet.posX" name="inputPosX">
               </mat-form-field>
               <mat-form-field class="form-full-width">
                 <mat-label>Position Y [mm]</mat-label>
-                <input matInput placeholder="100" [(ngModel)]="pallet.posY" value="pallet.posY" name="inputPosY">
+                <input matInput placeholder="100" [(ngModel)]="box.posY" value="pallet.posY" name="inputPosY">
               </mat-form-field>
               <mat-form-field class="form-full-width">
                 <mat-label>Position Z [mm]</mat-label>
-                <input matInput placeholder="100" [(ngModel)]="pallet.posZ" value="pallet.posZ" name="inputPosZ">
+                <input matInput placeholder="100" [(ngModel)]="box.posZ" value="pallet.posZ" name="inputPosZ">
               </mat-form-field>
 
             </form>

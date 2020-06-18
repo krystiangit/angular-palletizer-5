@@ -107,6 +107,14 @@
 
 }
 
+.box{
+  width:100px;
+  height:70px;
+  margin:0;
+  position: absolute;
+
+}
+
 .Kcs{
   position: absolute;
   display: flex;

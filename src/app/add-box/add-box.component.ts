@@ -12,8 +12,8 @@ import { Component,
 import {FormControl, Validators} from '@angular/forms';
 import {Overlay, OverlayRef} from '@angular/cdk/overlay';
 import {TemplatePortal} from '@angular/cdk/portal';
-import {PalletsService} from '../services/pallets.service'
-import { Pallet } from '../models/pallet.model';
+import { Box } from '../models/box.model';
+import { AddBoxService } from '../services/add-box.service';
 
 interface PredefinedPallet {
   name: string;
@@ -32,18 +32,16 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
   constructor(
     private _overlay: Overlay,
     private _viewContainerRef: ViewContainerRef,
-    public palletsService: PalletsService) {
-    this.palletsService.palletSets = this.pallet;
+    public addBoxervice: AddBoxService) {
+    this.addBoxervice.boxSets = this.box;
   }
 
-  //public pallets: Pallet[] = []
-
-  public pallet: Pallet = {
-    name: 'Pallet1',
+  public box: Box = {
+    name: 'Box1',
     id: '1',
-    width: 800,
-    length: 1200,
-    height: 150,
+    width: 160,
+    length: 240,
+    height: 100,
     posX: 700,
     posY: 400,
     posZ: 0,
@@ -51,7 +49,7 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
   };
 
   ngAfterViewInit() {
-console.log(this.pallet)
+console.log(this.box)
 
 
     this._portal = new TemplatePortal(
@@ -79,6 +77,8 @@ console.log(this.pallet)
 
   ngOnInit() {}
 
+  @Output() addBoxButton: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
+  /*
   palletControl = new FormControl('', Validators.required);
   selectFormControl = new FormControl('', Validators.required);
   predefinedPallets: PredefinedPallet[] = [
@@ -88,8 +88,8 @@ console.log(this.pallet)
     { name: 'Pallet1' },
     { name: 'Pallet1' },
   ];
+*/
 
-  @Output() addBoxButton: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
   /*
 console(){

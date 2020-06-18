@@ -19,6 +19,8 @@ import {SetWorkspaceService} from '../services/set-workspace.service';
 import { Workspace } from '../models/workspace.model';
 import { SetKcsService } from '../services/set-kcs.service';
 import { Kcs } from '../models/kcs.model';
+import { AddBoxService } from '../services/add-box.service';
+import { Box } from '../models/box.model';
 
 
 
@@ -32,10 +34,12 @@ export class WorkspaceComponent implements AfterViewInit {
   @Input() parentsValue: boolean;
 
 pallets: Pallet[] = [];
+boxes: Box[] = [];
 setWorkspace:Workspace = {width:this.setWorkspaceService.workspaceSets.width*200, height:this.setWorkspaceService.workspaceSets.height*200}; // wymiary pola roboczego przed zmiana
 setKcs:Kcs = {posX: this.setKcsService.kcsSets.posX, posY: this.setKcsService.kcsSets.posY};
 
 constructor(public palletsService: PalletsService,
+    public boxService: AddBoxService,
     public setWorkspaceService: SetWorkspaceService,
     public setKcsService: SetKcsService,
     public elRef:ElementRef,
@@ -90,6 +94,11 @@ setKcsFunc(){
       1
     );
   }
+
+  addBox(){
+this.boxes = this.boxService.addBox();
+  }
+
 
   panFunc() {
     var workspaceElement: HTMLElement = document.querySelector(
