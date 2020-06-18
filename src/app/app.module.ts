@@ -21,6 +21,7 @@ import { DemoMaterialModule } from "./left-navbar/material-module";
 import { SetWorkspaceComponent } from "./set-workspace/set-workspace.component";
 import { WorkspaceComponent } from "./workspace/workspace.component";
 import { SetKcsComponent } from './set-kcs/set-kcs.component';
+import { AddBoxComponent } from './add-box/add-box.component';
 
 
 
@@ -36,6 +37,7 @@ import { SetKcsComponent } from './set-kcs/set-kcs.component';
     SetWorkspaceComponent,
     WorkspaceComponent,
     SetKcsComponent,
+    AddBoxComponent,
 
 
 

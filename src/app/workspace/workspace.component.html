@@ -117,6 +117,54 @@
 
 
     </div>
+    <div class="pallet "  id={{pallet.name}}
+    *ngFor="let pallet of pallets;
+    let index=index"
+    cdkDrag
+    #palletHash
+    (click)="move($event)"
+    [ngStyle]="{
+      'width.px': pallet.width.toString(),
+      'height.px':pallet.length.toString(),
+      'left.px':pallet.posX.toString(),
+      'bottom.px':pallet.posY.toString()
+    }">
+    <svg attr.width="{{pallet.width}}" attr.height="{{pallet.length}}"
+      preserveAspectRatio="xMinYMin meet">
+
+
+        <rect
+        attr.width="{{pallet.width}}"
+        attr.height="{{pallet.length}}"
+        rx="10"
+        ry="10"
+        style="stroke: #0b5ef8bb; fill: #5eb9f525"
+        stroke-width="2"/>
+        <line x1="0" y1="0" x2="-20" y2="0"
+        style="stroke: #130066;"/>
+
+
+        <rect
+        width="10"
+        height="10"
+        x="0"
+        attr.y="{{pallet.length-10}}"
+        style=" fill: #000000"
+        stroke-width="2"/>
+
+
+      </svg>
+
+
+    </div>
+
+
+
+
+
+
+
+
 
 
 
@@ -198,9 +246,6 @@
 <textarea>{{setWorkspace.width}} width</textarea>
     </div>
 -->
-
-
-
 
 <div id="editPlace" cdkDrag style="z-index: 2;" #getHeight>
       <!--<button (click)="setPos()" id="btn2"> set Position</button>

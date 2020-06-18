@@ -28,7 +28,7 @@
           <a mat-list-item (click)="appChildSetKcs.openDialog()">Set KCS</a>
           <a mat-list-item (click)="appChildAddPallet.openDialog()">Add Pallet</a>
           <a mat-list-item>Add Picking place</a>
-          <a mat-list-item>Add Box</a>
+          <a mat-list-item (click)="appChildAddBox.openDialog()">Add Box</a>
           <a mat-list-item (click)="appChildWorkspace.addPallet()">Add test</a>
 
   <!--
@@ -42,6 +42,7 @@
       <mat-sidenav-content>
 
         <app-add-pallet #appChildAddPallet (addPalletButton)="addPalletButton($event)"></app-add-pallet>
+        <app-add-box #appChildAddBox (addBoxButton)="addBoxButton($event)"></app-add-box>
         <app-set-workspace #appChildSetWorkspace (saveSettingsButton)="saveSettingsWorkspaceButton($event)"></app-set-workspace>
         <app-set-kcs #appChildSetKcs (saveSettingsButton)="saveSettingsKcsButton($event)"></app-set-kcs>
         <app-workspace #appChildWorkspace [parentsValue] = "parentsValue"></app-workspace>
