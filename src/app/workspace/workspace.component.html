@@ -124,9 +124,15 @@
     [ngStyle]="{
      'left.px': setKcs.posX.toString(),
      'bottom.px': setKcs.posY.toString()
-   }"
-    >
-  Kcs</div>
+   }">
+  <svg width="60" height="60" viewBox="0 0 200 200" fill="none" >
+    <circle cx="100" cy="100" r="47.5" stroke="black" stroke-width="5"/>
+    <line x1="102.5" x2="102.5" y2="200" stroke="black" stroke-width="5"/>
+    <line y1="97.5" x2="200" y2="97.5" stroke="black" stroke-width="5"/>
+    <text x="0" y="200" style="stroke: #000000; fill: #000000; font-size: 50" >
+      KCS</text>
+    </svg>
+  </div>
 <!-----------------------------------test---------------------->
 <!--
 <div class="pallet"  cdkDrag
@@ -205,8 +211,10 @@
       <button (click)="getPos('Pallet1')" id="btn2"> get Position</button>
 
 
+<!--
+Height of above tag : {{ getHeight.offsetHeight }}
+-->
 
-        Height of above tag : {{ getHeight.offsetHeight }}
 
 
       <!--

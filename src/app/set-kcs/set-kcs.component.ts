@@ -30,8 +30,8 @@ import { SetKcsService } from '../set-kcs.service';
 export class SetKcsComponent implements AfterViewInit, OnDestroy {
 
   public kcs: Kcs = {
-    posX: 500,
-    posY: 500,
+    posX: 700,
+    posY: 150,
   };
 
 

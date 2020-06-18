@@ -109,4 +109,8 @@
 
 .Kcs{
   position: absolute;
+  display: flex;
+  box-sizing: border-box;
+  align-content: stretch;
+  margin:0;
 }
