@@ -36,6 +36,13 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
     this.addBoxervice.boxSets = this.box;
   }
 
+  orientations= [
+    {value: 0, viewValue: '0deg'},
+    {value: 90, viewValue: '90deg'},
+    {value: 180, viewValue: '180deg'},
+    {value: 270, viewValue: '270deg'}
+  ];
+
   public box: Box = {
     name: 'Box1',
     id: '1',
@@ -45,8 +52,12 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
     posX: 3500,
     posY: 2000,
     posZ: 0,
-    orientation:0
+    orientation: 0
   };
+
+
+
+
 
   ngAfterViewInit() {
 console.log(this.box)

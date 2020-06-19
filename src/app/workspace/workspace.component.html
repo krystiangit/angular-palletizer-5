@@ -128,10 +128,12 @@
       'height.px':box.length.toString(),
       'left.px':box.posX.toString(),
       'bottom.px':box.posY.toString(),
-      'transform': 'translateX(' + 8 + 'px) translateY(' + 8 + 'px) rotate(90deg)'
+      'transform': 'rotate(' + box.orientation + 'deg)'
 
 
     }" >
+
+<!-- 'transform': 'translateX(8px) translateY(' + 8 + 'px) rotate(' + box.orientation + 'deg)' -->
 
     <!--
       [ngStyle]="{'transform': 'translateX(' + $value + 'px)'}"
