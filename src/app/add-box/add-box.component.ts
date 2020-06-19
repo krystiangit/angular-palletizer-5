@@ -15,9 +15,7 @@ import {TemplatePortal} from '@angular/cdk/portal';
 import { Box } from '../models/box.model';
 import { AddBoxService } from '../services/add-box.service';
 
-interface PredefinedPallet {
-  name: string;
-}
+
 
 @Component({
   selector: 'app-add-box',
@@ -36,12 +34,6 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
     this.addBoxervice.boxSets = this.box;
   }
 
-  orientations= [
-    {value: 0, viewValue: '0deg'},
-    {value: 90, viewValue: '90deg'},
-    {value: 180, viewValue: '180deg'},
-    {value: 270, viewValue: '270deg'}
-  ];
 
   public box: Box = {
     name: 'Box1',

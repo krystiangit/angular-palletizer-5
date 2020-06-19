@@ -117,6 +117,8 @@
 
 
     </div>
+
+
     <div class="box "  id={{box.name}}
     *ngFor="let box of boxes;
     let index=index"
@@ -129,8 +131,6 @@
       'left.px':box.posX.toString(),
       'bottom.px':box.posY.toString(),
       'transform': 'rotate(' + box.orientation + 'deg)'
-
-
     }" >
 
 <!-- 'transform': 'translateX(8px) translateY(' + 8 + 'px) rotate(' + box.orientation + 'deg)' -->
@@ -188,6 +188,37 @@
       KCS</text>
     </svg>
   </div>
+
+
+
+  <div class="pickingPlace "  id={{pickingPlace.name}}
+  *ngFor="let pickingPlace of pickingPlaces;
+  let index=index"
+  cdkDrag
+  #ppHash
+
+  [ngStyle]="{
+
+    'left.px':pickingPlace.posX.toString(),
+    'bottom.px':pickingPlace.posY.toString()
+
+  }" >
+
+  <svg width="60" height="60" viewBox="0 0 200 200" fill="none" >
+    <circle cx="100" cy="100" r="47.5" stroke="black" stroke-width="5"/>
+    <line x1="102.5" x2="102.5" y2="200" stroke="black" stroke-width="5"/>
+    <line y1="97.5" x2="200" y2="97.5" stroke="black" stroke-width="5"/>
+    <text x="0" y="200" style="stroke: #000000; fill: #000000; font-size: 50" >
+      PP</text>
+    </svg>
+
+
+  </div>
+
+
+
+
+
 <!-----------------------------------test---------------------->
 <!--
 <div class="pallet"  cdkDrag

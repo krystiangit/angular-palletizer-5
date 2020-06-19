@@ -14,7 +14,7 @@ import {TemplatePortal} from '@angular/cdk/portal';
 import {PalletsService} from '../services/pallets.service'
 import { Pallet } from '../models/pallet.model';
 
-interface PredefinedPallet {
+interface PredefinedPallets {
   name: string;
 }
 
@@ -80,7 +80,7 @@ console.log(this.pallet)
 
   palletControl = new FormControl('', Validators.required);
   selectFormControl = new FormControl('', Validators.required);
-  predefinedPallets: PredefinedPallet[] = [
+  predefinedPallets: PredefinedPallets[] = [
     { name: 'Pallet1' },
     { name: 'Pallet1' },
     { name: 'Pallet1' },

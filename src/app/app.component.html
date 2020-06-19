@@ -11,10 +11,9 @@
         <mat-menu #appMenu="matMenu">
           <button mat-menu-item>Log in</button>
           <button mat-menu-item>Settings</button>
-          <button mat-menu-item type = button (click)="appChildWorkspace.addPallet()" >Add pallet</button> <!---Help-->
-          <button mat-menu-item >About</button> <!---About-->
+          <button mat-menu-item type = button (click)="appChildWorkspace.addPallet()" >Help</button>
+          <button mat-menu-item >About</button>
         </mat-menu>
-
         <button mat-icon-button [matMenuTriggerFor]="appMenu">
           <mat-icon>more_vert</mat-icon>
         </button>
@@ -28,37 +27,19 @@
           <a mat-list-item (click)="appChildSetWorkspace.openDialog()">Set Workspace</a>
           <a mat-list-item (click)="appChildSetKcs.openDialog()">Set KCS</a>
           <a mat-list-item (click)="appChildAddPallet.openDialog()">Add Pallet</a>
-          <a mat-list-item>Add Picking place</a>
+          <a mat-list-item (click)="appChildAddPickingPlace.openDialog()">Add Picking place</a>
           <a mat-list-item (click)="appChildAddBox.openDialog()">Add Box</a>
           <a mat-list-item (click)="appChildWorkspace.addPallet()">Add test</a>
-
-  <!--
-  <a mat-list-item type="button" (click)="appChildWorkspace.addPallet1()">Add test</a>
-  -->
-
-
         </mat-nav-list>
       </mat-sidenav>
 
       <mat-sidenav-content>
-
         <app-add-pallet #appChildAddPallet (addPalletButton)="addPalletButton($event)"></app-add-pallet>
         <app-add-box #appChildAddBox (addBoxButton)="addBoxButton($event)"></app-add-box>
         <app-set-workspace #appChildSetWorkspace (saveSettingsButton)="saveSettingsWorkspaceButton($event)"></app-set-workspace>
         <app-set-kcs #appChildSetKcs (saveSettingsButton)="saveSettingsKcsButton($event)"></app-set-kcs>
+        <app-add-picking-place #appChildAddPickingPlace (addPickingPlaceButton)="addPickingPlaceButton($event)"></app-add-picking-place>
         <app-workspace #appChildWorkspace [parentsValue] = "parentsValue"></app-workspace>
-
-        <!--
-<app-test-child #appTest
-        style="position: absolute;
-        top:100px;
-        z-index: 1;"
-        [parentsValue] = "parentsValue"
-        ></app-test-child>
-        -->
-
-
-
       </mat-sidenav-content>
     </mat-sidenav-container>
   </div>

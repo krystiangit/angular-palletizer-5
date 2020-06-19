@@ -35,7 +35,7 @@ export class AppComponent implements OnDestroy{
     this.childWorkspaceComponent.addPallet();
   }
   public addBoxButton(event: MouseEvent): void {
-  this.childWorkspaceComponent.addBox();
+  this.childWorkspaceComponent.addBoxFunc();
   console.log("add box clicked on parent func")
   }
 
@@ -47,6 +47,10 @@ export class AppComponent implements OnDestroy{
   public saveSettingsKcsButton(event: MouseEvent):void {
     this.childWorkspaceComponent.setKcsFunc();
     console.log("save settings Kcs clicked");
+  }
+  public addPickingPlaceButton(event: MouseEvent):void {
+    this.childWorkspaceComponent.addPickingPlaceFunc();
+    console.log("add picking place clicked");
   }
  /*
 add(){
