@@ -15,6 +15,8 @@ import {TemplatePortal} from '@angular/cdk/portal';
 import { Box } from '../models/box.model';
 import { AddBoxService } from '../services/add-box.service';
 import { AddPickingPlaceService } from '../services/add-picking-place.service';
+import { PalletsService } from '../services/pallets.service';
+
 
 
 @Component({
@@ -35,6 +37,7 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
     private _viewContainerRef: ViewContainerRef,
     public addBoxervice: AddBoxService,
     public addPickingPlaceService:AddPickingPlaceService,
+    public palletService:PalletsService,
     //public pickingPlace:PickingPlace
     ) {
     this.addBoxervice.boxSets = this.box;
@@ -54,27 +57,32 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
     orientation: 0
   };
 
-  public ppNames = [
+  public parentsNames = [
 
   ];
 
-
-
-readPickingPlaces(){
-  console.log("aaaa" +this.addPickingPlaceService.pickingPlaces)
+readNames(){
+  var _ppNames = []
+  var _palletsNames = []
+  //console.log("aaaa" +this.addPickingPlaceService.pickingPlaces)
   if (this.addPickingPlaceService.pickingPlaces != null){
-    console.log(this.addPickingPlaceService.pickingPlaces)
-    this.addBoxervice.pps = this.addPickingPlaceService.pickingPlaces;
     for (let index = 0; index < this.addPickingPlaceService.pickingPlaces.length; index++) {
-    this.ppNames[index] = this.addPickingPlaceService.pickingPlaces[index].name;
+    _ppNames[index] = this.addPickingPlaceService.pickingPlaces[index].name;
     }
   }
-
+  if (this.palletService.pallets != null){
+    for (let index = 0; index < this.palletService.pallets.length; index++) {
+    _palletsNames[index] = this.palletService.pallets[index].name
+    }
+  }
+ var tempLength=this.addPickingPlaceService.pickingPlaces.length
+  for (let index = (tempLength); index < tempLength+_palletsNames.length; index++) {
+    _ppNames[index] = _palletsNames[index-_ppNames.length]
+    console.log("index=" + index)
+  }
+this.parentsNames = _ppNames
 }
-
-  //public pp: PickingPlace [] = []
-
-  selectedParent = this.ppNames[2];
+  selectedParent = this.parentsNames[2];
 
   @Output() addBoxButton: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
@@ -106,7 +114,7 @@ readPickingPlaces(){
 
   openDialog() {
     this._overlayRef.attach(this._portal);
-    this.readPickingPlaces();
+    this.readNames();
   }
 
   ngOnInit() {
