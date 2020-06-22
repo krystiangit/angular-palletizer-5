@@ -14,7 +14,7 @@ import {Overlay, OverlayRef} from '@angular/cdk/overlay';
 import {TemplatePortal} from '@angular/cdk/portal';
 import { Box } from '../models/box.model';
 import { AddBoxService } from '../services/add-box.service';
-
+import { AddPickingPlaceService } from '../services/add-picking-place.service';
 
 
 @Component({
@@ -22,6 +22,9 @@ import { AddBoxService } from '../services/add-box.service';
   templateUrl: './add-box.component.html',
   styleUrls: ['./add-box.component.css']
 })
+
+
+
 export class AddBoxComponent implements AfterViewInit, OnDestroy {
   @ViewChild(TemplateRef) _dialogTemplate: TemplateRef<any>;
   private _overlayRef: OverlayRef;
@@ -30,14 +33,18 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
   constructor(
     private _overlay: Overlay,
     private _viewContainerRef: ViewContainerRef,
-    public addBoxervice: AddBoxService) {
+    public addBoxervice: AddBoxService,
+    public addPickingPlaceService:AddPickingPlaceService,
+    //public pickingPlace:PickingPlace
+    ) {
     this.addBoxervice.boxSets = this.box;
-  }
 
+  }
 
   public box: Box = {
     name: 'Box1',
     id: '1',
+    membership: 'PP1',
     width: 160,
     length: 240,
     height: 100,
@@ -47,12 +54,33 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
     orientation: 0
   };
 
+  public ppNames = [
+
+  ];
 
 
+
+readPickingPlaces(){
+  console.log("aaaa" +this.addPickingPlaceService.pickingPlaces)
+  if (this.addPickingPlaceService.pickingPlaces != null){
+    console.log(this.addPickingPlaceService.pickingPlaces)
+    this.addBoxervice.pps = this.addPickingPlaceService.pickingPlaces;
+    for (let index = 0; index < this.addPickingPlaceService.pickingPlaces.length; index++) {
+    this.ppNames[index] = this.addPickingPlaceService.pickingPlaces[index].name;
+    }
+  }
+
+}
+
+  //public pp: PickingPlace [] = []
+
+  selectedParent = this.ppNames[2];
+
+  @Output() addBoxButton: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
 
   ngAfterViewInit() {
-console.log(this.box)
+//console.log(this.box)
 
 
     this._portal = new TemplatePortal(
@@ -68,6 +96,8 @@ console.log(this.box)
       hasBackdrop: true,
     });
     this._overlayRef.backdropClick().subscribe(() => this._overlayRef.detach());
+
+
   }
 
   ngOnDestroy() {
@@ -76,11 +106,14 @@ console.log(this.box)
 
   openDialog() {
     this._overlayRef.attach(this._portal);
+    this.readPickingPlaces();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
 
-  @Output() addBoxButton: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
+  }
+
+
   /*
   palletControl = new FormControl('', Validators.required);
   selectFormControl = new FormControl('', Validators.required);

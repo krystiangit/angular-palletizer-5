@@ -1,6 +1,7 @@
 export class Box{
-  name: string = "Box1";
+  name: string;
   id: string;
+  membership: string;
   width: number;
   length:number;
   height: number;

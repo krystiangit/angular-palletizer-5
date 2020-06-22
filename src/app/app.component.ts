@@ -34,10 +34,13 @@ export class AppComponent implements OnDestroy{
   public addPalletButton(event: MouseEvent): void {
     this.childWorkspaceComponent.addPallet();
   }
+
   public addBoxButton(event: MouseEvent): void {
-  this.childWorkspaceComponent.addBoxFunc();
+  this.childWorkspaceComponent.addBoxToPalletFunc();
+  this.childWorkspaceComponent.addBoxToPpFunc();
   console.log("add box clicked on parent func")
   }
+
 
   public saveSettingsWorkspaceButton(event: MouseEvent):void {
     this.childWorkspaceComponent.setWorkspaceFunc();

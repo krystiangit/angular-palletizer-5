@@ -34,7 +34,8 @@ export class WorkspaceComponent implements AfterViewInit {
   @Input() parentsValue: boolean;
 
   pallets: Pallet[] = [];
-  boxes: Box[] = [];
+  boxesOfPallet: Box[] = [];
+  boxesOfPp: Box[] = [];
   pickingPlaces: PickingPlace[] = [];
   setWorkspace: Workspace = {
     width: this.setWorkspaceService.workspaceSets.width * 200,
@@ -70,8 +71,12 @@ export class WorkspaceComponent implements AfterViewInit {
     this.pickingPlaces = this.addPickingPlaceService.addPickingPlace();
     console.log("add picking place clicked in workspace")
   }
-  addBoxFunc() {
-    this.boxes = this.boxService.addBox();
+  addBoxToPalletFunc() {
+    this.boxesOfPallet = this.boxService.addBox();
+  }
+
+  addBoxToPpFunc() {
+    this.boxesOfPp = this.boxService.addBox();
   }
 
   addPallet() {

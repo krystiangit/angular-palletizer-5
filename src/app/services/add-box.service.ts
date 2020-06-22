@@ -1,12 +1,15 @@
 
 import { Injectable } from '@angular/core';
 import { Box } from '../models/box.model';
+import { AddPickingPlaceService } from './add-picking-place.service';
+import { PickingPlace } from '../models/pickingPlace.model';
 
 @Injectable({providedIn: 'root'})
 export class AddBoxService{
 
   public boxes: Box[] = [];
   public boxSets : Box;
+  public pps: PickingPlace[] =[];
 
   private scale:number =5;
   private addPosX:number =0;
@@ -50,9 +53,10 @@ export class AddBoxService{
     temp.posZ = (this.boxSets.posZ/5);
     temp.orientation = this.boxSets.orientation;
     this.boxes.push(temp);
-    console.log("from service pallets" +this.boxes)
-    console.log("from service palletSets" +this.boxSets)
-    console.log("from service temp" + temp)
+    //console.log("from service pallets" +this.boxes)
+    //console.log("from service palletSets" +this.boxSets)
+    //console.log("from service temp" + temp)
+    //console.log("picking places from add box service " + this.pps[1].name)
     return this.boxes;
 
 
