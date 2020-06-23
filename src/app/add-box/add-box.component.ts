@@ -14,6 +14,7 @@ import { Box } from '../models/box.model';
 import { AddBoxService } from '../services/add-box.service';
 import { AddPickingPlaceService } from '../services/add-picking-place.service';
 import { PalletsService } from '../services/pallets.service';
+import { AppComponent } from '../app.component'
 
 @Component({
   selector: 'app-add-box',
@@ -31,7 +32,8 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
     private _viewContainerRef: ViewContainerRef,
     public addBoxervice: AddBoxService,
     public addPickingPlaceService:AddPickingPlaceService,
-    public palletService:PalletsService) {
+    public palletService:PalletsService,
+    public appComponent: AppComponent) {
     this.addBoxervice.boxSets = this.box;
   }
   public parentsNames = [];
@@ -59,8 +61,21 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
     }
   this.parentsNames = _ppNames
   }
-check(){
-  console.log(this.box.membership)
+AddBox(){
+
+console.log("AddBox membership" +this.box.membership)
+
+if(this.box.membership.search("Pallet")==0){
+  this.appComponent.addBoxOfPallet()
+}
+if(this.box.membership.search("Picking")==0){
+  this.appComponent.addBoxOfPp()
+}
+
+
+
+
+  //console.log(this.box.membership)
 }
   public box: Box = {
     name: 'Box1',
@@ -74,10 +89,6 @@ check(){
     posZ: 0,
     orientation: 0
   };
-
-
-
-
 
 
 @Output() addBoxButton: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();

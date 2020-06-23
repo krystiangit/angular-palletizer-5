@@ -1,6 +1,7 @@
 import {MediaMatcher} from '@angular/cdk/layout';
 import {ChangeDetectorRef, Component, OnDestroy, ViewChild} from '@angular/core';
 import { WorkspaceComponent} from './workspace/workspace.component'
+import { AddBoxService } from './services/add-box.service'
 
 
 @Component({
@@ -20,7 +21,7 @@ export class AppComponent implements OnDestroy{
 
   constructor(changeDetectorRef: ChangeDetectorRef,
      media: MediaMatcher,
-
+     public addBoxSerive: AddBoxService
       ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -34,11 +35,24 @@ export class AppComponent implements OnDestroy{
   public addPalletButton(event: MouseEvent): void {
     this.childWorkspaceComponent.addPallet();
   }
-
+/*
   public addBoxButton(event: MouseEvent): void {
-  this.childWorkspaceComponent.addBoxFunc();
+  //this.childWorkspaceComponent.addBoxFunc();
+  this.addBoxSerive.addBox();
   console.log("add box clicked on parent func")
   }
+*/
+  public addBoxOfPallet(){
+    this.childWorkspaceComponent.addBoxOfPalletFunc();
+
+    console.log("add box of Pallet clicked on parent func")
+    }
+
+    public addBoxOfPp(){
+      this.childWorkspaceComponent.addBoxOfPpFunc();
+
+      console.log("add box of PP clicked on parent func")
+      }
 
 
   public saveSettingsWorkspaceButton(event: MouseEvent):void {

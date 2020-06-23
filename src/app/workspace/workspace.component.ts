@@ -71,18 +71,18 @@ export class WorkspaceComponent implements AfterViewInit {
     this.pickingPlaces = this.addPickingPlaceService.addPickingPlace();
     console.log("add picking place clicked in workspace")
   }
-  addBoxToPalletFunc() {
+  addBoxOfPalletFunc() {
     this.boxesOfPallet = this.boxService.addBox();
   }
 
-  addBoxToPpFunc() {
+  addBoxOfPpFunc() {
     this.boxesOfPp = this.boxService.addBox();
   }
-
+/*
   addBoxFunc(){
     this.boxesOfPallet = this.boxService.addBox();
   }
-
+*/
   addPallet() {
     console.log('before' + this.pallets);
     this.pallets = this.palletsService.addPallet();

@@ -166,6 +166,64 @@
     </div>
 
 
+
+
+
+
+
+
+
+    <div class="box "  id={{box.name}}
+    *ngFor="let box of boxesOfPp;
+    let index=index"
+    cdkDrag
+    #boxHash
+    (click)="move($event)"
+    [ngStyle]="{
+      'width.px': box.width.toString(),
+      'height.px':box.length.toString(),
+      'left.px':box.posX.toString(),
+      'bottom.px':box.posY.toString(),
+      'transform': 'rotate(' + box.orientation + 'deg)'
+    }" >
+
+    <svg attr.width="{{box.width}}" attr.height="{{box.length}}"
+      preserveAspectRatio="xMinYMin meet">
+        <rect
+        attr.width="{{box.width}}"
+        attr.height="{{box.length}}"
+        rx="10"
+        ry="10"
+        style="stroke: #f50101bb; fill: #f55e5e31"
+        stroke-width="2"/>
+        <line x1="0" y1="0" x2="-20" y2="0"
+        style="stroke: #130066;"/>
+
+        <rect
+        width="10"
+        height="10"
+        x="0"
+        attr.y="{{box.length-10}}"
+        style=" fill: #000000"
+        stroke-width="2"/>
+
+
+      </svg>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="Kcs" id="Kcs"
     [ngStyle]="{
      'left.px': setKcs.posX.toString(),

@@ -1,8 +1,9 @@
 
 import { Injectable } from '@angular/core';
 import { Box } from '../models/box.model';
-import { AddPickingPlaceService } from './add-picking-place.service';
 import { PickingPlace } from '../models/pickingPlace.model';
+
+
 
 @Injectable({providedIn: 'root'})
 export class AddBoxService{
@@ -11,10 +12,11 @@ export class AddBoxService{
   public boxesOfPickingPlace: Box[] = [];
   public boxSets : Box;
   public pps: PickingPlace[] =[];
-
   private scale:number =5;
   private addPosX:number =0;
   private addPosY:number =0;
+
+
 
 
   addBox(){
@@ -22,10 +24,11 @@ export class AddBoxService{
     //changing position of the box when orientation is different than 0deg
     var orientationFactorX =this.boxSets.length/this.scale/2 - this.boxSets.width/2/this.scale//this.boxSets.width/this.scale;
     var orientationFactorY = this.boxSets.length/this.scale/2 - this.boxSets.width/2/this.scale
-    console.log("width" + this.boxSets.width/this.scale)
-    console.log("width /4" +this.boxSets.width/4/this.scale)
-    console.log("length" + this.boxSets.length/this.scale)
-    console.log("length /4" +this.boxSets.length/4/this.scale)
+    //console.log("width" + this.boxSets.width/this.scale)
+    //console.log("width /4" +this.boxSets.width/4/this.scale)
+    //console.log("length" + this.boxSets.length/this.scale)
+    //console.log("length /4" +this.boxSets.length/4/this.scale)
+    console.log("add box clicked in service")
     if(this.boxSets.orientation==0){
       this.addPosX=0;
       this.addPosY=0;
@@ -55,13 +58,13 @@ export class AddBoxService{
 
     //checking if box belongs to parent or Picking place
     if (this.boxSets.membership.search("Pallet")==0){
-      temp.name = 'Box'+(this.boxesOfPallet.length+1);
+      temp.name = 'BoxOfPallet'+(this.boxesOfPallet.length+1);
       temp.id=(this.boxesOfPallet.length+1).toString();
       this.boxesOfPallet.push(temp);
       return this.boxesOfPallet;
     }
     if (this.boxSets.membership.search("Picking")==0){
-      temp.name = 'Box'+(this.boxesOfPickingPlace.length+1);
+      temp.name = 'BoxOfPp'+(this.boxesOfPickingPlace.length+1);
       temp.id=(this.boxesOfPickingPlace.length+1).toString();
       this.boxesOfPickingPlace.push(temp);
       return this.boxesOfPickingPlace;
