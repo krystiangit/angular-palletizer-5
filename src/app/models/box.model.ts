@@ -8,6 +8,9 @@ export class Box{
   posX: number;
   posY: number;
   posZ:number;
+  posXParent: number;
+  posYParent: number;
+  posZParent:number;
   orientation:number;
 
 }

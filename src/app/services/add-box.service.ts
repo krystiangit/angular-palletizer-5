@@ -16,9 +16,6 @@ export class AddBoxService{
   private addPosX:number =0;
   private addPosY:number =0;
 
-
-
-
   addBox(){
 
     //changing position of the box when orientation is different than 0deg
@@ -28,7 +25,7 @@ export class AddBoxService{
     //console.log("width /4" +this.boxSets.width/4/this.scale)
     //console.log("length" + this.boxSets.length/this.scale)
     //console.log("length /4" +this.boxSets.length/4/this.scale)
-    console.log("add box clicked in service")
+    //console.log("add box clicked in service")
     if(this.boxSets.orientation==0){
       this.addPosX=0;
       this.addPosY=0;
@@ -50,9 +47,9 @@ export class AddBoxService{
     temp.width = this.boxSets.width/this.scale;
     temp.length = this.boxSets.length/this.scale;
     temp.height = this.boxSets.height/this.scale;
-    temp.posX = (this.boxSets.posX/this.scale)+this.addPosX;
-    temp.posY = (this.boxSets.posY/this.scale)+this.addPosY;
-    temp.posZ = (this.boxSets.posZ/this.scale);
+    temp.posX = (this.boxSets.posX/this.scale)+this.boxSets.posXParent+this.addPosX;
+    temp.posY = (this.boxSets.posY/this.scale)+this.boxSets.posYParent+this.addPosY;
+    temp.posZ = (this.boxSets.posZ/this.scale)+this.boxSets.posZParent;
     temp.orientation = this.boxSets.orientation;
 
 
