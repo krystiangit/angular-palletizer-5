@@ -62,7 +62,7 @@
 
         <mat-form-field *ngIf="this.parentsNames!=null">
           <mat-label >{{parentsNames[0]}}</mat-label>
-          <mat-select [(value)]="selectedParent">
+          <mat-select [(value)]="this.box.membership">
             <mat-option></mat-option>
             <mat-option [value]="name" *ngFor="let name of parentsNames">{{ name }}</mat-option>
           </mat-select>
@@ -70,8 +70,11 @@
         </div>
       </mat-tab>
     </mat-tab-group>
+<div style="display: flex; flex-direction: row;">
+  <button class="mat-raised-button" (click)="addBoxButton.emit($event)">Add</button>
+  <button class="mat-raised-button" (click)="check()">check</button>
+</div>
 
-    <button class="mat-raised-button" (click)="addBoxButton.emit($event)">Add</button>
     <!--<button class="mat-raised-button" (click)="console()">Add</button>-->
   </div>
 

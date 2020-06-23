@@ -79,6 +79,10 @@ export class WorkspaceComponent implements AfterViewInit {
     this.boxesOfPp = this.boxService.addBox();
   }
 
+  addBoxFunc(){
+    this.boxesOfPallet = this.boxService.addBox();
+  }
+
   addPallet() {
     console.log('before' + this.pallets);
     this.pallets = this.palletsService.addPallet();
