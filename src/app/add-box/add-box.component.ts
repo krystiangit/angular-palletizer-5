@@ -5,6 +5,7 @@ import {
   AfterViewInit,
   ViewContainerRef,
   OnDestroy,
+  OnChanges,
   Output,
   EventEmitter,
 } from '@angular/core';
@@ -123,10 +124,14 @@ console.log("parent is: " + this.box.membership)
     */
   }
 
-
-
+  tabChange($event){
+    console.log($event.index)
+    if($event.index ==1)
+    this.takeParentPos();
+}
 
   AddBox() {
+    this.takeParentPos();
     //console.log("AddBox membership" +this.box.membership)
     if (this.box.membership.search('Pallet') == 0) {
       this.appComponent.addBoxOfPallet();
@@ -165,6 +170,7 @@ console.log("parent is: " + this.box.membership)
   openDialog() {
     this._overlayRef.attach(this._portal);
     this.readNames();
+
   }
 
   ngOnInit() {}
