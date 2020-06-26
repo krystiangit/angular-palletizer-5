@@ -140,6 +140,8 @@
         attr.y="{{box.length-10}}"
         style=" fill: #000000"
         stroke-width="2"/>
+        <text attr.x="{{box.width/2}}" attr.y="{{box.length/2}}" style="stroke: #000000; fill: #000000; font-size: 12;" >
+          {{box.id}}</text>
       </svg>
     </div>
 
@@ -168,8 +170,7 @@
         ry="5"
         style="stroke: #f50101bb; fill: #f55e5e31"
         stroke-width="2"/>
-        <line x1="0" y1="0" x2="-20" y2="0"
-        style="stroke: #130066;"/>
+
         <rect
         width="10"
         height="10"
@@ -177,7 +178,8 @@
         attr.y="{{box.length-10}}"
         style=" fill: #000000"
         stroke-width="2"/>
-
+        <text attr.x="{{box.width/2}}" attr.y="{{box.length/2}}" style="stroke: #000000; fill: #000000; font-size: 12;" >
+          {{box.id}}</text>
 
       </svg>
 
@@ -229,7 +231,7 @@
     <line x1="102.5" x2="102.5" y2="200" stroke="black" stroke-width="5"/>
     <line y1="97.5" x2="200" y2="97.5" stroke="black" stroke-width="5"/>
     <text x="0" y="200" style="stroke: #000000; fill: #000000; font-size: 50" >
-      PP</text>
+      PP{{pickingPlace.id}}</text>
     </svg>
 
 

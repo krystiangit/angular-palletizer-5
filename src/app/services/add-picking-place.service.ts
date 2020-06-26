@@ -16,8 +16,10 @@ export class AddPickingPlaceService {
   addPickingPlace(){
     var temp = new PickingPlace()
     temp.name = 'Picking Place '+(this.pickingPlaces.length+1);
+    temp.id = (this.pickingPlaces.length+1).toString();
     temp.posX = this.pickingPlaceSets.posX/5;
     temp.posY = this.pickingPlaceSets.posY/5;
+
 
     //this.workspace.width= this.workspaceSets.width;
     //this.workspace.height= this.workspaceSets.height;

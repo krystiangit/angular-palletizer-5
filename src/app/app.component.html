@@ -28,7 +28,8 @@
           <a mat-list-item (click)="appChildSetKcs.openDialog()">Set KCS</a>
           <a mat-list-item (click)="appChildAddPallet.openDialog()">Add Pallet</a>
           <a mat-list-item (click)="appChildAddPickingPlace.openDialog()">Add Picking place</a>
-          <a mat-list-item (click)="appChildAddBox.openDialog()">Add Box</a>
+          <a mat-list-item (click)="appChildAddBox.openDialog('define')">Define element</a>
+          <a mat-list-item (click)="appChildAddBox.openDialog('add')">Add Box</a>
           <a mat-list-item (click)="appChildWorkspace.addPallet()">Add test</a>
         </mat-nav-list>
       </mat-sidenav>

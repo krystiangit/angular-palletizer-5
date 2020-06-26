@@ -139,6 +139,7 @@ selectionChange($event){
   AddBox() {
     //this.takeParentPos();
     //console.log("AddBox membership" +this.box.membership)
+
     if (this.box.membership.search('Pallet') == 0) {
       this.appComponent.addBoxOfPallet();
     }
@@ -176,9 +177,13 @@ selectionChange($event){
     this._overlayRef.dispose();
   }
 
-  openDialog() {
+  openDialog(mode:string) {
     this._overlayRef.attach(this._portal);
     this.readNames();
+    if(mode=="add")
+    console.log("type is add")
+    if(mode=="define")
+    console.log("type is define")
 
   }
 
