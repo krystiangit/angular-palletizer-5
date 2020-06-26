@@ -10,7 +10,7 @@
       </svg>
 
     </div>
-    <mat-tab-group color="accent" class="tabs-container" (selectedTabChange)="tabChange($event)">
+    <mat-tab-group color="accent" class="tabs-container" > <!--(selectedTabChange)="tabChange($event)"-->
       <mat-tab label="Dimension" class="tab">
         <div class="tab-box mat-elevation-z4">
           <form class="form">
@@ -65,7 +65,7 @@
 
         <mat-form-field *ngIf="this.parentsNames!=null">
           <mat-label >choose parent</mat-label>
-          <mat-select [(value)]="this.box.membership">
+          <mat-select [(value)]="this.box.membership" (selectionChange)="selectionChange($event)">
             <mat-option></mat-option>
             <mat-option [value]="name" *ngFor="let name of parentsNames">{{ name }}</mat-option>
           </mat-select>

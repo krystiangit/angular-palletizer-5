@@ -124,14 +124,20 @@ console.log("parent is: " + this.box.membership)
     */
   }
 //calling takeParentPos when tab is changed to tab Position
-  tabChange($event){
+
+/*tabChange($event){
     console.log($event.index)
     if($event.index ==1)
     this.takeParentPos();
+}*/
+
+selectionChange($event){
+  console.log("selection change" + $event)
+  this.takeParentPos();
 }
 
   AddBox() {
-    this.takeParentPos();
+    //this.takeParentPos();
     //console.log("AddBox membership" +this.box.membership)
     if (this.box.membership.search('Pallet') == 0) {
       this.appComponent.addBoxOfPallet();
