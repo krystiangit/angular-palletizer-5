@@ -8,7 +8,7 @@
    >
 
 
-    <div id="WCS" cdkDrag>
+    <div id="WCS">
       <svg width="139" height="149" viewBox="0 0 139 149" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M117.414 114.414C118.195 113.633 118.195 112.367 117.414 111.586L104.686 98.8579C103.905 98.0768 102.639 98.0768 101.858 98.8579C101.077 99.6389 101.077 100.905 101.858 101.686L113.172 113L101.858 124.314C101.077 125.095 101.077 126.361 101.858 127.142C102.639 127.923 103.905 127.923 104.686 127.142L117.414 114.414ZM36 115H116V111H36V115Z" fill="#EB5757"/>
         <path d="M37.4142 31.5858C36.6332 30.8047 35.3668 30.8047 34.5858 31.5858L21.8579 44.3137C21.0768 45.0948 21.0768 46.3611 21.8579 47.1421C22.6389 47.9232 23.9052 47.9232 24.6863 47.1421L36 35.8284L47.3137 47.1421C48.0948 47.9232 49.3611 47.9232 50.1421 47.1421C50.9232 46.3611 50.9232 45.0948 50.1421 44.3137L37.4142 31.5858ZM38 113L38 33H34L34 113H38Z" fill="#27AE60"/>
@@ -51,7 +51,6 @@
     <div class="pallet "  id={{pallet.name}}
     *ngFor="let pallet of pallets;
     let index=index"
-    cdkDrag
     #palletHash
 
     (click)="move($event)"
@@ -60,27 +59,18 @@
       'height.px':pallet.length.toString(),
       'left.px':pallet.posX.toString(),
       'bottom.px':pallet.posY.toString()
-
-
-
     }">
 
     <!--viewBox="0 0 pallet.width pallet.length"-->
     <svg attr.width="{{pallet.width}}" attr.height="{{pallet.length}}"
       preserveAspectRatio="xMinYMin meet">
-
-
         <rect
         attr.width="{{pallet.width}}"
         attr.height="{{pallet.length}}"
-        rx="10"
-        ry="10"
+        rx="5"
+        ry="5"
         style="stroke: #0b5ef8bb; fill: #5eb9f525"
         stroke-width="2"/>
-        <line x1="0" y1="0" x2="-20" y2="0"
-        style="stroke: #130066;"/>
-
-
         <rect
         width="10"
         height="10"
@@ -88,8 +78,6 @@
         attr.y="{{pallet.length-10}}"
         style=" fill: #000000"
         stroke-width="2"/>
-
-
       </svg>
 
 
@@ -117,12 +105,9 @@
 
 
     </div>
-
-
     <div class="box "  id={{box.name}}
     *ngFor="let box of boxesOfPallet;
     let index=index"
-    cdkDrag
     #boxHash
     (click)="move($event)"
     [ngStyle]="{
@@ -144,13 +129,10 @@
         <rect
         attr.width="{{box.width}}"
         attr.height="{{box.length}}"
-        rx="10"
-        ry="10"
+        rx="5"
+        ry="5"
         style="stroke: #f50101bb; fill: #f55e5e31"
         stroke-width="2"/>
-        <line x1="0" y1="0" x2="-20" y2="0"
-        style="stroke: #130066;"/>
-
         <rect
         width="10"
         height="10"
@@ -158,17 +140,8 @@
         attr.y="{{box.length-10}}"
         style=" fill: #000000"
         stroke-width="2"/>
-
-
       </svg>
-
-
     </div>
-
-
-
-
-
 
 
 
@@ -176,7 +149,6 @@
     <div class="box "  id={{box.name}}
     *ngFor="let box of boxesOfPp;
     let index=index"
-    cdkDrag
     #boxHash
     (click)="move($event)"
     [ngStyle]="{
@@ -192,13 +164,12 @@
         <rect
         attr.width="{{box.width}}"
         attr.height="{{box.length}}"
-        rx="10"
-        ry="10"
+        rx="5"
+        ry="5"
         style="stroke: #f50101bb; fill: #f55e5e31"
         stroke-width="2"/>
         <line x1="0" y1="0" x2="-20" y2="0"
         style="stroke: #130066;"/>
-
         <rect
         width="10"
         height="10"
@@ -249,8 +220,8 @@
   [ngStyle]="{
 
     'left.px':pickingPlace.posX.toString(),
-    'bottom.px':pickingPlace.posY.toString()
-
+    'bottom.px':pickingPlace.posY.toString(),
+    'transform' : 'translateX(-30px) translateY(30px)'
   }" >
 
   <svg width="60" height="60" viewBox="0 0 200 200" fill="none" >

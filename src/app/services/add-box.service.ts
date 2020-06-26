@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { Box } from '../models/box.model';
-import { PickingPlace } from '../models/pickingPlace.model';
+//import { PickingPlace } from '../models/pickingPlace.model';
 
 
 
@@ -11,12 +11,27 @@ export class AddBoxService{
   public boxesOfPallet: Box[] = [];
   public boxesOfPickingPlace: Box[] = [];
   public boxSets : Box;
-  public pps: PickingPlace[] =[];
-  private scale:number =5;
-  private addPosX:number =0;
-  private addPosY:number =0;
+  //public pps: PickingPlace[] =[];
+  private scale:number = 5;
+  private addPosX:number = 0;
+  private addPosY:number = 0;
+  private centerPosX:number = 0;
+  private centerPosY:number = 0;
 
   addBox(){
+
+
+    //place box in center of Pixking place
+    if (this.boxSets.membership.search("Picking")==0){
+      this.centerPosX = (this.boxSets.width/this.scale)/2;
+      this.centerPosY = (this.boxSets.length/this.scale)/2;
+    }
+    if (this.boxSets.membership.search("Pallet")==0){
+      this.centerPosX = 0;
+      this.centerPosY = 0;
+    }
+
+
 
     //changing position of the box when orientation is different than 0deg
     var orientationFactorX =this.boxSets.length/this.scale/2 - this.boxSets.width/2/this.scale//this.boxSets.width/this.scale;
@@ -26,6 +41,7 @@ export class AddBoxService{
     //console.log("length" + this.boxSets.length/this.scale)
     //console.log("length /4" +this.boxSets.length/4/this.scale)
     //console.log("add box clicked in service")
+    if (this.boxSets.membership.search("Pallet")==0){
     if(this.boxSets.orientation==0){
       this.addPosX=0;
       this.addPosY=0;
@@ -42,13 +58,15 @@ export class AddBoxService{
       this.addPosX=orientationFactorX;
       this.addPosY=-orientationFactorX;
     }
+  }
+
 
     let temp = new Box();
     temp.width = this.boxSets.width/this.scale;
     temp.length = this.boxSets.length/this.scale;
     temp.height = this.boxSets.height/this.scale;
-    temp.posX = (this.boxSets.posX/this.scale)+this.boxSets.posXParent+this.addPosX;
-    temp.posY = (this.boxSets.posY/this.scale)+this.boxSets.posYParent+this.addPosY;
+    temp.posX = (this.boxSets.posX/this.scale)+this.boxSets.posXParent+this.addPosX-this.centerPosX;
+    temp.posY = (this.boxSets.posY/this.scale)+this.boxSets.posYParent+this.addPosY-this.centerPosY;
     temp.posZ = (this.boxSets.posZ/this.scale)+this.boxSets.posZParent;
     temp.orientation = this.boxSets.orientation;
 
@@ -66,8 +84,7 @@ export class AddBoxService{
       this.boxesOfPickingPlace.push(temp);
       return this.boxesOfPickingPlace;
     }
-    else
-    alert("please choose a membership for Box")
+
 
 
 

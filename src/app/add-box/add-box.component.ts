@@ -123,7 +123,7 @@ console.log("parent is: " + this.box.membership)
     }
     */
   }
-
+//calling takeParentPos when tab is changed to tab Position
   tabChange($event){
     console.log($event.index)
     if($event.index ==1)
@@ -136,9 +136,12 @@ console.log("parent is: " + this.box.membership)
     if (this.box.membership.search('Pallet') == 0) {
       this.appComponent.addBoxOfPallet();
     }
+    else
     if (this.box.membership.search('Picking') == 0) {
       this.appComponent.addBoxOfPp();
     }
+    else
+    alert("Plase choose a Parent in membership tab")
   }
 
   @Output() addBoxButton: EventEmitter<MouseEvent> = new EventEmitter<
