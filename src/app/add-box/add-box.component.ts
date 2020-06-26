@@ -37,7 +37,7 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
   ) {
     this.addBoxervice.boxSets = this.box;
   }
-
+  public mode: string
   public parentsNames = [];
   //selectedParent = this.parentsNames[2];
   public box: Box = {
@@ -179,14 +179,10 @@ selectionChange($event){
     this._overlayRef.dispose();
   }
 
-  openDialog(mode:string) {
+  openDialog(_mode:string) {
     this._overlayRef.attach(this._portal);
     this.readNames();
-    if(mode=="add")
-    console.log("type is add")
-    if(mode=="define")
-    console.log("type is define")
-
+    this.mode=_mode
   }
 
   ngOnInit() {}

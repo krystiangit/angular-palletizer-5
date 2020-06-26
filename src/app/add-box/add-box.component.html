@@ -70,14 +70,14 @@
             <mat-option [value]="name" *ngFor="let name of parentsNames">{{ name }}</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field *ngIf="this.parentsNames!=null">
+        <mat-form-field *ngIf="this.mode==='define'">
           <mat-label >defined in</mat-label>
           <mat-select [(value)]="this.box.defnedIn" >
             <mat-option></mat-option>
             <mat-option [value]="name" *ngFor="let name of parentsNames">{{ name }}</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field *ngIf="this.parentsNames!=null">
+        <mat-form-field *ngIf="this.mode==='add'">
           <mat-label >source</mat-label>
           <mat-select [(value)]="this.box.source" >
             <mat-option></mat-option>
