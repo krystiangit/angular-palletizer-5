@@ -61,11 +61,25 @@
           </div>
       </mat-tab>
       <mat-tab label="Membership" class="tab" >
-        <div class="tab-box mat-elevation-z4">
+        <div class="tab-box mat-elevation-z4" style="display: flex; flex-direction: column;">
 
         <mat-form-field *ngIf="this.parentsNames!=null">
           <mat-label >choose parent</mat-label>
           <mat-select [(value)]="this.box.membership" (selectionChange)="selectionChange($event)">
+            <mat-option></mat-option>
+            <mat-option [value]="name" *ngFor="let name of parentsNames">{{ name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field *ngIf="this.parentsNames!=null">
+          <mat-label >defined in</mat-label>
+          <mat-select [(value)]="this.box.defnedIn" >
+            <mat-option></mat-option>
+            <mat-option [value]="name" *ngFor="let name of parentsNames">{{ name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field *ngIf="this.parentsNames!=null">
+          <mat-label >source</mat-label>
+          <mat-select [(value)]="this.box.source" >
             <mat-option></mat-option>
             <mat-option [value]="name" *ngFor="let name of parentsNames">{{ name }}</mat-option>
           </mat-select>

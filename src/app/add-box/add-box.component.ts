@@ -44,6 +44,8 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
     name: 'Box1',
     id: '1',
     membership: 'membership',
+    defnedIn:'',
+    source:'',
     width: 160,
     length: 240,
     height: 100,
