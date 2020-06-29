@@ -211,6 +211,7 @@
     </svg>
   </div>
 
+  <button (click)= "check()">check</button>
 
 
   <div class="pickingPlace "  id={{pickingPlace.name}}
@@ -307,13 +308,21 @@
     </div>
 -->
 
+
+<!--
 <div id="editPlace" cdkDrag style="z-index: 2;" #getHeight>
-      <!--<button (click)="setPos()" id="btn2"> set Position</button>
-    <button  id="btn3" style="position: absolute;"> move me </button>-->
-      <textarea id="area1">{{getPosValY}}</textarea>
-      <textarea id="area2">{{getPosValX}}</textarea>
-      <textarea id="area3">{{translateX}}</textarea>
-      <button (click)="getPos('Pallet1')" id="btn2"> get Position</button>
+
+
+    <textarea id="area1">{{getPosValY}}</textarea>
+    <textarea id="area2">{{getPosValX}}</textarea>
+    <textarea id="area3">{{translateX}}</textarea>
+    <button (click)="getPos('Pallet1')" id="btn2"> get Position</button>
+
+  </div>
+-->
+
+
+
 
 
 <!--
@@ -333,7 +342,7 @@ Height of above tag : {{ getHeight.offsetHeight }}
       </mat-form-field>
       -->
 
-    </div>
+
 
 
 

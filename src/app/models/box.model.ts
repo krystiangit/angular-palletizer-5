@@ -2,7 +2,6 @@ export class Box{
   name: string;
   id: string;
   membership: string;
-  defnedIn:string;
   source:string;
   width: number;
   length:number;

@@ -69,6 +69,9 @@ export class AddBoxService{
     temp.posY = (this.boxSets.posY/this.scale)+this.boxSets.posYParent+this.addPosY-this.centerPosY;
     temp.posZ = (this.boxSets.posZ/this.scale)+this.boxSets.posZParent;
     temp.orientation = this.boxSets.orientation;
+    temp.membership = this.boxSets.membership;
+    temp.source = this.boxSets.source;
+
 
 
     //checking if box belongs to parent or Picking place

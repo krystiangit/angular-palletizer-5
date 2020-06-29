@@ -39,13 +39,15 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
   }
   public mode: string
   public parentsNames = [];
+  public palletsNames = [];
+  public ppNames = [];
+  public readOnly:boolean;
   //selectedParent = this.parentsNames[2];
   public box: Box = {
     name: 'Box1',
     id: '1',
     membership: 'membership',
-    defnedIn:'',
-    source:'',
+    source:'source',
     width: 160,
     length: 240,
     height: 100,
@@ -66,7 +68,7 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
         this.box.posXParent = this.addPickingPlaceService.pickingPlaces[index].posX
         this.box.posYParent = this.addPickingPlaceService.pickingPlaces[index].posY
         this.box.posZParent = this.addPickingPlaceService.pickingPlaces[index].posZ
-        console.log("parent is picking place")
+        //console.log("parent is picking place")
       }
 
     }
@@ -75,7 +77,7 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
         this.box.posXParent = this.palletService.pallets[index].posX
         this.box.posYParent = this.palletService.pallets[index].posY
         this.box.posZParent = this.palletService.pallets[index].posZ
-        console.log("parent is Pallet")
+        //console.log("parent is Pallet")
       }
 console.log("parent is: " + this.box.membership)
       //console.log(this.addPickingPlaceService.pickingPlaces[index].posX)
@@ -84,9 +86,25 @@ console.log("parent is: " + this.box.membership)
 
   }
 
+  takeParentDim(){
+    for (let index = 0; index < this.addBoxervice.boxesOfPickingPlace.length; index++) {
+      if(this.addBoxervice.boxesOfPickingPlace[index].membership===this.box.source){
+        this.box.width = this.addBoxervice.boxesOfPickingPlace[index].width*5;
+        this.box.length = this.addBoxervice.boxesOfPickingPlace[index].length*5;
+        this.box.height = this.addBoxervice.boxesOfPickingPlace[index].height*5;
+console.log("finded")
+      }
+      console.log("addbox service source: " + this.box.source)
+      console.log("addbox service membership: " + this.box.membership)
+
+  }
+  console.log("parent is picking place")
+}
+
   readNames() {
     var _ppNames = [];
     var _palletsNames = [];
+
     if (this.addPickingPlaceService.pickingPlaces != null) {
       for (
         let index = 0;
@@ -97,6 +115,8 @@ console.log("parent is: " + this.box.membership)
       }
     }
 
+    this.ppNames = _ppNames;
+
     if (this.palletService.pallets != null) {
       for (let index = 0; index < this.palletService.pallets.length; index++) {
         _palletsNames[index] = this.palletService.pallets[index].name;
@@ -104,6 +124,8 @@ console.log("parent is: " + this.box.membership)
       }
     }
 
+    this.palletsNames = _palletsNames;
+/*
     var tempLength = this.addPickingPlaceService.pickingPlaces.length;
     for (
       let index = tempLength;
@@ -114,8 +136,11 @@ console.log("parent is: " + this.box.membership)
       console.log('index=' +( index - this.addPickingPlaceService.pickingPlaces.length));
       //console.log(this.palletService.pallets[index - _ppNames.length].name)
     }
-    this.parentsNames = _ppNames;
-    console.log("names: " + _ppNames)
+    */
+    //this.parentsNames = _ppNames;
+    console.log("pallet names: " + this.palletsNames);
+    console.log("ppnames: " + this.ppNames);
+    console.log("all names: " + this.parentsNames)
     //console.log("pallets: " + this.palletService.pallets)
     //console.log("picking places: " + this.addPickingPlaceService.pickingPlaces)
 /*
@@ -133,8 +158,16 @@ console.log("parent is: " + this.box.membership)
     this.takeParentPos();
 }*/
 
-selectionChange($event){
-  console.log("selection change" + $event)
+parentChange($event){
+  //console.log("selection change" + $event)
+  this.takeParentPos();
+}
+
+sourceChange($event){
+  this.takeParentDim()
+}
+
+definedInChange($event){
   this.takeParentPos();
 }
 
@@ -180,9 +213,14 @@ selectionChange($event){
   }
 
   openDialog(_mode:string) {
-    this._overlayRef.attach(this._portal);
+
     this.readNames();
     this.mode=_mode
+    if (_mode==="add"){this.readOnly=true}
+    else this.readOnly=false;
+    console.log("readOnly: " + this.readOnly)
+
+    this._overlayRef.attach(this._portal);
   }
 
   ngOnInit() {}

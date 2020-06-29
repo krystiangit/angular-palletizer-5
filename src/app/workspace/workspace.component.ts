@@ -59,6 +59,23 @@ export class WorkspaceComponent implements AfterViewInit {
     this.panFunc();
   }
 
+
+  check (){
+    for (let index = 0; index < this.boxesOfPallet.length; index++) {
+      console.log("boxes of pallet membership: " + this.boxesOfPallet[index].membership)
+      console.log("boxes of pallet source: " + this.boxesOfPallet[index].source)
+
+
+
+    }
+for (let index = 0; index < this.boxesOfPp.length; index++) {
+  console.log("boxes of pp membership: " + this.boxesOfPp[index].membership)
+  console.log("boxes of pp source: " + this.boxesOfPp[index].source)
+
+
+}
+
+  }
   setWorkspaceFunc() {
     this.setWorkspace = this.setWorkspaceService.setWorkspace();
   }
