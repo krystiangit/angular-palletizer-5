@@ -23,6 +23,7 @@ import { WorkspaceComponent } from "./workspace/workspace.component";
 import { SetKcsComponent } from './set-kcs/set-kcs.component';
 import { AddBoxComponent } from './add-box/add-box.component';
 import { AddPickingPlaceComponent } from './add-picking-place/add-picking-place.component';
+import { MeshComponent } from './mesh/mesh.component';
 
 
 
@@ -40,6 +41,7 @@ import { AddPickingPlaceComponent } from './add-picking-place/add-picking-place.
     SetKcsComponent,
     AddBoxComponent,
     AddPickingPlaceComponent,
+    MeshComponent,
 
 
 

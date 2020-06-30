@@ -2,6 +2,7 @@ import {MediaMatcher} from '@angular/cdk/layout';
 import {ChangeDetectorRef, Component, OnDestroy, ViewChild} from '@angular/core';
 import { WorkspaceComponent} from './workspace/workspace.component'
 import { AddBoxService } from './services/add-box.service'
+import { MeshComponent } from './mesh/mesh.component';
 
 
 @Component({
@@ -12,6 +13,7 @@ import { AddBoxService } from './services/add-box.service'
 export class AppComponent implements OnDestroy{
   title = 'angular-palletizer2';
   @ViewChild(WorkspaceComponent) childWorkspaceComponent: WorkspaceComponent;
+  @ViewChild(MeshComponent) childMeshComponent: MeshComponent;
 
   parentsValue = true;
   mobileQuery: MediaQueryList;
@@ -57,6 +59,7 @@ export class AppComponent implements OnDestroy{
 
   public saveSettingsWorkspaceButton(event: MouseEvent):void {
     this.childWorkspaceComponent.setWorkspaceFunc();
+    this.childMeshComponent.setWorkspaceFunc();
     console.log("save settings workspace clicked");
   }
 
