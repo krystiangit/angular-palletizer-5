@@ -9,7 +9,9 @@ import { PickingPlace } from '../models/pickingPlace.model';
 import { AddPickingPlaceService } from '../services/add-picking-place.service';
 import { PalletsService } from '../services/pallets.service';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
+import { KMZLoader } from "three/examples/jsm/loaders/KMZLoader"
 import * as THREE from 'three';
+import { Scene } from 'three';
 
 
 //declare const THREE: any;
@@ -35,10 +37,14 @@ export class MeshComponent implements OnInit {
 
 
   scene = null;
+  light = null;
   camera = null;
-  mesh = null;
+  cube1 = null;
+  cube2 = null;
   controls = null;
   renderer = null;
+  windowWidth = window.innerWidth-30;
+  windowheight = window.innerHeight-80;
 
   constructor(
     public palletsService: PalletsService,
@@ -50,8 +56,8 @@ export class MeshComponent implements OnInit {
 
   ) {
     this.scene = new THREE.Scene(),
-    this.camera = new THREE.PerspectiveCamera(45, this.setWorkspace.width / this.setWorkspace.height, 1, 1000)
-    this.renderer = new THREE.WebGLRenderer();
+    this.camera = new THREE.PerspectiveCamera(75, this.windowWidth / this.windowheight, 1, 1000)
+    this.renderer = new THREE.WebGLRenderer({antialias:true});
     //this.renderer = new THREE.WebGLRenderer({ alpha: true });
   }
 
@@ -71,37 +77,64 @@ ngAfterViewInit(){
   this.configControls();
 
   this.createMesh();
+  this.configLight();
   this.renderer.render(this.scene, this.camera)
   this.animate();
 
 }
 
 configCamera() {
-  this.camera.position.set(300, 300, 300);
+  this.camera.position.z=100
+  this.camera.position.y=100
 }
 
 configRenderer() {
   this.renderer.setPixelRatio(window.devicePixelRatio);
   this.renderer.setClearColor(new THREE.Color("hsl(0, 0%, 10%)"));
-  this.renderer.setSize(this.setWorkspace.width, this.setWorkspace.height);
+  this.renderer.setSize(this.windowWidth, this.windowheight);
   this.renderer.domElement.style.display = "block";
   this.renderer.domElement.style.margin = "auto";
   this.meshIdRef.nativeElement.append(this.renderer.domElement);
 }
 
 configControls() {
-  this.controls.autoRotate = true;
-  this.controls.enableZoom = false;
-  this.controls.enablePan  = false;
+  this.controls.autoRotate = false;
+  this.controls.enableZoom = true;
+  this.controls.enablePan  = true;
   this.controls.update();
 }
 
 createMesh() {
-  const geometry = new THREE.BoxGeometry(200, 200, 200);
-  const material = new THREE.MeshBasicMaterial({ color: 0xff7f50 });
-  this.mesh = new THREE.Mesh(geometry, material);
 
-  this.scene.add(this.mesh);
+  const geometry = new THREE.BoxGeometry(50, 50, 50);
+  const material = new THREE.MeshPhongMaterial({ color: 0xff7f50 });
+  this.cube1 = new THREE.Mesh(geometry, material);
+  this.cube2 = new THREE.Mesh(geometry, material);
+  var grid = new THREE.GridHelper(1000,50, 0xffffff, 0x555555)
+
+  /*
+  var loader = new KMZLoader();
+  loader.load('./models/kmz/Box.kmz', function (kmz){
+    kmz.scene.position.y=0.5;
+
+  });
+  */
+ this.scene.add(grid)
+  this.scene.add(this.cube1);
+  this.scene.add(this.cube2);
+  this.cube1.position.y=25;
+  this.cube2.position.y=25;
+  this.cube2.position.z=50.05;
+}
+
+configLight(){
+  {
+    const color = 0xFFFFFF;
+    const intensity = 1;
+    const light = new THREE.DirectionalLight(color, intensity);
+    light.position.set(-1, 2, 4);
+    this.scene.add(light);
+  }
 }
 
 animate() {
