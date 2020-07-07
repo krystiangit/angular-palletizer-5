@@ -17,10 +17,6 @@ export class AddBoxService {
   public centerPosY: number = 0;
   public centerPosZ: number = 0;
 
-
-
-
-
   //materialofPp = new THREE.PointsMaterial({ color: "hsl(0, 100%, 35%, 0.208)" , size:0.02});
 
   boxesOfPallet3D = [];
@@ -43,8 +39,6 @@ export class AddBoxService {
         this.boxSets.lengthParent / 2 - this.boxSets.length / 2;
       this.centerPosZ = this.boxSets.heightParent;
     }
-
-
 
     //changing position of the box when orientation is different than 0deg
     var orientationFactorX =
@@ -85,9 +79,6 @@ export class AddBoxService {
     temp.source = this.boxSets.source;
     temp.color = this.boxSets.color
 
-
-
-
     //checking if box belongs to parent or Picking place
     if (this.boxSets.membership.search('Pallet') == 0) {
       temp.name = 'BoxOfPallet' + (this.boxesOfPallet.length + 1);
@@ -101,7 +92,6 @@ export class AddBoxService {
       this.boxesOfPickingPlace.push(temp);
       return this.boxesOfPickingPlace;
     }
-
   }
 
   addBox3D() {
@@ -115,22 +105,14 @@ export class AddBoxService {
         10,10,10
       );
       let tempBox3D = new THREE.Mesh(tempGeometry, material);
-
-console.log("w, h, l" + this.boxSets.width + " " + this.boxSets.height + " " + this.boxSets.length)
-
       if (this.boxSets.membership.search('Pallet') == 0) {
       this.boxesOfPallet3D.push(tempBox3D);
       return this.boxesOfPallet3D;
     }
     if (this.boxSets.membership.search('Picking') == 0) {
-
       this.boxesOfPp3D.push(tempBox3D);
       return this.boxesOfPp3D;
     }
-
-
-
-
   }
 
   addPosition3D() {
@@ -154,10 +136,6 @@ console.log("w, h, l" + this.boxSets.width + " " + this.boxSets.height + " " + t
         this.centerPosZ;
       tempPosition3D.orientation = this.boxSets.orientation;
       this.posOfPallet3D.push(tempPosition3D);
-
-
-
-
       return this.posOfPallet3D;
     }
     if (this.boxSets.membership.search('Picking') == 0) {

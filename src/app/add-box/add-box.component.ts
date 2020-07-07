@@ -8,6 +8,7 @@ import {
   OnChanges,
   Output,
   EventEmitter,
+  ElementRef
 } from '@angular/core';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
@@ -16,8 +17,9 @@ import { AddBoxService } from '../services/add-box.service';
 import { AddPickingPlaceService } from '../services/add-picking-place.service';
 import { PalletsService } from '../services/pallets.service';
 import { AppComponent } from '../app.component';
-
-
+import * as THREE from 'three';
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
+import { MatTabChangeEvent } from '@angular/material/tabs';
 interface Color {
   name:string;
   value:number;
@@ -30,6 +32,7 @@ interface Color {
 })
 export class AddBoxComponent implements AfterViewInit, OnDestroy {
   @ViewChild(TemplateRef) _dialogTemplate: TemplateRef<any>;
+  @ViewChild('preview') private previewRef: ElementRef;
   private _overlayRef: OverlayRef;
   private _portal: TemplatePortal;
 
@@ -42,6 +45,11 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
     public appComponent: AppComponent
   ) {
     this.addBoxervice.boxSets = this.box;
+    this.scene = new THREE.Scene(),
+    this.camera = new THREE.PerspectiveCamera(75, this.windowWidth / this.windowheight, 1, 10000)
+    this.renderer = new THREE.WebGLRenderer({antialias:true});
+    this.renderer.outputEncoding = THREE.sRGBEncoding;
+    console.log("previewRef" + this.previewRef)
   }
   public mode: string
   public parentsNames = [];
@@ -79,8 +87,65 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
     {name:"dark blue", value:0x0400ff}
   ]
 
+  scene = null;
+  camera = null;
+  controls = null;
+  renderer = null;
+  windowWidth = 290;
+  windowheight = 290;
 
 
+  configCamera() {
+    this.camera.position.z=300
+    this.camera.position.y=400
+    this.camera.position.x=300
+  }
+
+  configRenderer() {
+    this.renderer.setPixelRatio(window.devicePixelRatio);
+    this.renderer.setClearColor(new THREE.Color("hsl(0, 0%, 49%)"));
+    this.renderer.setSize(this.windowWidth, this.windowheight);
+    this.renderer.domElement.style.display = "block";
+    this.renderer.domElement.style.margin = "auto";
+    this.previewRef.nativeElement.append(this.renderer.domElement);
+  }
+
+  configControls() {
+    this.controls.autoRotate = false;
+    this.controls.enableZoom = true;
+    this.controls.enablePan  = true;
+    this.controls.update();
+  }
+
+  createGrid() {
+    var grid = new THREE.GridHelper(5000,20, 0xffffff, 0x555555)
+    this.scene.add(grid)
+  }
+
+  configLight(){
+    {
+      const color1 = 0xFFFFFF;
+      const intensity1 = 1.0;
+      const light1 = new THREE.DirectionalLight(color1, intensity1);
+      light1.position.set(-1, 1, 1);
+      this.scene.add(light1);
+      const color2 = 0xFFFFFF;
+      const intensity2 = 0.4;
+      const light2 = new THREE.DirectionalLight(color2, intensity2);
+      light2.position.set(1, 1, -1);
+      this.scene.add(light2);
+    }
+  }
+
+  animate() {
+    window.requestAnimationFrame(() => this.animate());
+    this.controls.update();
+    if(this.renderer!=null){
+      this.renderer.render(this.scene, this.camera);
+    }
+    else
+    console.log("renderer is not defined for animate")
+  }
 
   takeParentPos(){
     for (let index = 0; index < this.addPickingPlaceService.pickingPlaces.length; index++) {
@@ -91,12 +156,7 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
         this.box.widthParent = 0
         this.box.lengthParent = 0
         this.box.heightParent = 0
-        console.log("take parent posX pp: " +this.addPickingPlaceService.pickingPlaces[index].posX)
-        console.log("take parent posY pp: " +this.addPickingPlaceService.pickingPlaces[index].posY)
-        console.log("take parent posZ pp: " +this.addPickingPlaceService.pickingPlaces[index].posZ)
-        //console.log("parent is picking place")
       }
-
     }
     for (let index = 0; index < this.palletService.pallets.length; index++) {
       if(this.palletService.pallets[index].name===this.box.membership){
@@ -106,14 +166,11 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
         this.box.widthParent = this.palletService.pallets[index].width
         this.box.lengthParent = this.palletService.pallets[index].length
         this.box.heightParent = this.palletService.pallets[index].height
-
         //console.log("parent is Pallet")
       }
 //console.log("parent is: " + this.box.membership)
       //console.log(this.addPickingPlaceService.pickingPlaces[index].posX)
-
     }
-
   }
 
   takeParentDim(){
@@ -205,8 +262,7 @@ definedInChange($event){
 }
 
 colorChange($event){
-  //console.log("selection change" + $event)
-
+  //console.log("color change" + $event)
 }
 
   AddBox() {
@@ -224,13 +280,68 @@ colorChange($event){
     alert("Plase choose a Parent in membership tab")
   }
 
+  /*
   @Output() addBoxButton: EventEmitter<MouseEvent> = new EventEmitter<
     MouseEvent
   >();
+*/
+
+
+
+addBox3D() {
+  //this.scene.dispose();
+  while(this.scene.children.length > 0){
+    this.scene.remove(this.scene.children[0]);
+}
+  const material = new THREE.MeshPhongMaterial({
+    color: this.box.color,
+  });
+    let tempGeometry = new THREE.BoxGeometry(
+      this.box.width,
+      this.box.height,
+      this.box.length,
+      10,10,10
+    );
+    let tempBox3D = new THREE.Mesh(tempGeometry, material);
+    this.scene.add(tempBox3D)
+    tempBox3D.position.x=this.box.posX;
+    tempBox3D.position.y=this.box.posZ;
+    tempBox3D.position.z=-this.box.posY;
+    tempBox3D.rotation.y = (Math.PI/180)*this.box.orientation;
+
+}
+
+
+
+
+  tabChange($event){
+    console.log("native element: " + this.previewRef.nativeElement + $event)
+    this.controls = new OrbitControls(this.camera, this.previewRef.nativeElement)
+    this.addBox3D()
+    this.configCamera();
+    this.configRenderer();
+    this.configControls();
+    this.createGrid();
+    this.configLight();
+    this.renderer.render(this.scene, this.camera)
+
+    this.animate();
+    }
+
+  openDialog(_mode:string) {
+    this.readNames();
+    this.mode=_mode
+    if (_mode==="add"){this.readOnly=true}
+    else this.readOnly=false;
+    console.log("readOnly: " + this.readOnly)
+
+    this._overlayRef.attach(this._portal);
+  }
+
+  ngOnInit() {}
 
   ngAfterViewInit() {
     //console.log(this.box)
-
     this._portal = new TemplatePortal(
       this._dialogTemplate,
       this._viewContainerRef
@@ -249,19 +360,6 @@ colorChange($event){
   ngOnDestroy() {
     this._overlayRef.dispose();
   }
-
-  openDialog(_mode:string) {
-
-    this.readNames();
-    this.mode=_mode
-    if (_mode==="add"){this.readOnly=true}
-    else this.readOnly=false;
-    console.log("readOnly: " + this.readOnly)
-
-    this._overlayRef.attach(this._portal);
-  }
-
-  ngOnInit() {}
 
   /*
   palletControl = new FormControl('', Validators.required);

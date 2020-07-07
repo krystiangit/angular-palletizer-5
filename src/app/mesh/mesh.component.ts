@@ -41,8 +41,6 @@ export class MeshComponent implements OnInit {
 
   scene = null;
   camera = null;
-  cube1 = null;
-  cube2 = null;
   controls = null;
   renderer = null;
   windowWidth = window.innerWidth-30;
