@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, ɵSWITCH_CHANGE_DETECTOR_REF_FACTORY__POST_R3__ } from '@angular/core';
 import { SetWorkspaceService } from '../services/set-workspace.service';
 import { Workspace } from '../models/workspace.model';
 import { SetKcsService } from '../services/set-kcs.service';
@@ -9,9 +9,15 @@ import { PickingPlace } from '../models/pickingPlace.model';
 import { AddPickingPlaceService } from '../services/add-picking-place.service';
 import { PalletsService } from '../services/pallets.service';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
-import { KMZLoader } from "three/examples/jsm/loaders/KMZLoader"
+import { GLTFLoader, GLTF, GLTFParser, GLTFReference } from 'three/examples/jsm/loaders/GLTFLoader';
 import * as THREE from 'three';
-import { Scene } from 'three';
+
+
+
+
+
+
+
 
 
 //declare const THREE: any;
@@ -26,10 +32,7 @@ export class MeshComponent implements OnInit {
   boxesOfPallet: Box[] = [];
   boxesOfPp: Box[] = [];
   pickingPlaces: PickingPlace[] = [];
-  setWorkspace: Workspace = {
-    width: this.setWorkspaceService.workspaceSets.width * 200,
-    height: this.setWorkspaceService.workspaceSets.height * 200,
-  }; // wymiary pola roboczego przed zmiana
+
     setKcs: Kcs = {
     posX: this.setKcsService.kcsSets.posX,
     posY: this.setKcsService.kcsSets.posY,
@@ -37,7 +40,6 @@ export class MeshComponent implements OnInit {
 
 
   scene = null;
-  light = null;
   camera = null;
   cube1 = null;
   cube2 = null;
@@ -45,6 +47,18 @@ export class MeshComponent implements OnInit {
   renderer = null;
   windowWidth = window.innerWidth-30;
   windowheight = window.innerHeight-80;
+  pallets3D = null;
+  palletPos3D = null;
+  boxesofPallet3D = null;
+  boxOfPalletPos3D = null;
+  boxesofPp3D = null;
+  boxOfPpPos3D = null;
+  pps3D = null;
+  ppPos3D = null;
+
+
+  loader = new GLTFLoader();
+  //gui.add(text, 'explode');
 
   constructor(
     public palletsService: PalletsService,
@@ -53,44 +67,39 @@ export class MeshComponent implements OnInit {
     public setKcsService: SetKcsService,
     public addPickingPlaceService: AddPickingPlaceService,
     public elRef: ElementRef,
-
   ) {
     this.scene = new THREE.Scene(),
-    this.camera = new THREE.PerspectiveCamera(75, this.windowWidth / this.windowheight, 1, 1000)
+    this.camera = new THREE.PerspectiveCamera(75, this.windowWidth / this.windowheight, 1, 10000)
     this.renderer = new THREE.WebGLRenderer({antialias:true});
-    //this.renderer = new THREE.WebGLRenderer({ alpha: true });
+    this.renderer.outputEncoding = THREE.sRGBEncoding;
   }
-
 
   ngOnInit(): void {
-
-
   }
-
-
 
 ngAfterViewInit(){
   this.controls = new OrbitControls(this.camera, this.meshIdRef.nativeElement)
-  //this.generateMesh();
   this.configCamera();
   this.configRenderer();
   this.configControls();
-
-  this.createMesh();
+  this.createGrid();
   this.configLight();
   this.renderer.render(this.scene, this.camera)
   this.animate();
 
 }
 
+
+
 configCamera() {
-  this.camera.position.z=100
-  this.camera.position.y=100
+  this.camera.position.z=300
+  this.camera.position.y=400
+  this.camera.position.x=300
 }
 
 configRenderer() {
   this.renderer.setPixelRatio(window.devicePixelRatio);
-  this.renderer.setClearColor(new THREE.Color("hsl(0, 0%, 10%)"));
+  this.renderer.setClearColor(new THREE.Color("hsl(0, 0%, 49%)"));
   this.renderer.setSize(this.windowWidth, this.windowheight);
   this.renderer.domElement.style.display = "block";
   this.renderer.domElement.style.margin = "auto";
@@ -104,44 +113,134 @@ configControls() {
   this.controls.update();
 }
 
-createMesh() {
+createGrid() {
+  var grid = new THREE.GridHelper(5000,20, 0xffffff, 0x555555)
+  this.scene.add(grid)
+}
+addPallet3D(){
+  const address = '../../assets/euroPalletTexture.glb'
+  this.pallets3D = this.palletsService.addPallet3D()
+  this.palletPos3D = this.palletsService.addPosition3D()
+  for (let index = 0; index < this.pallets3D.length; index++) {
+/*
+  this.scene.add(this.pallets3D[index]);
+  this.pallets3D[index].position.x=this.palletPos3D[index].posX;
+  this.pallets3D[index].position.y=this.palletPos3D[index].posZ+this.palletsService.pallets[index].height/2;
+  this.pallets3D[index].position.z=-this.palletPos3D[index].posY;
 
-  const geometry = new THREE.BoxGeometry(50, 50, 50);
-  const material = new THREE.MeshPhongMaterial({ color: 0xff7f50 });
-  this.cube1 = new THREE.Mesh(geometry, material);
-  this.cube2 = new THREE.Mesh(geometry, material);
-  var grid = new THREE.GridHelper(1000,50, 0xffffff, 0x555555)
+*/
 
+  this.loader.load(
+  address,
+  ( gltf ) => {
+  // called when the resource is loaded
+  this.scene.add( gltf.scene );
+  gltf.scene.scale.x=1000;
+  gltf.scene.scale.y=1000;
+  gltf.scene.scale.z=1000;
+  gltf.scene.position.x=this.palletPos3D[index].posX
+  gltf.scene.position.y=this.palletPos3D[index].posZ;
+  gltf.scene.position.z=-this.palletPos3D[index].posY;
+
+  },
+  ( xhr ) => {
+  // called while loading is progressing
+  console.log( `${( xhr.loaded / xhr.total * 100 )}% loaded` );
+  },
+  ( error ) => {
+  // called when loading has errors
+  console.error( 'An error happened', error );
+  },
+
+  );
+  }
+
+  }
+
+addBoxOfPallet3D(){
+  this.boxesofPallet3D = this.boxService.addBox3D()
+  this.boxOfPalletPos3D = this.boxService.addPosition3D()
+  for (let index = 0; index < this.boxesofPallet3D.length; index++) {
+    this.scene.add(this.boxesofPallet3D[index]);
+    this.boxesofPallet3D[index].position.x=this.boxOfPalletPos3D[index].posX;
+    this.boxesofPallet3D[index].position.y=this.boxOfPalletPos3D[index].posZ;
+    this.boxesofPallet3D[index].position.z=-this.boxOfPalletPos3D[index].posY;
+    this.boxesofPallet3D[index].rotation.y = (Math.PI/180)*this.boxOfPalletPos3D[index].orientation;
+    //console.log("boxes of pallet x: " +this.boxOfPalletPos3D[index].posX)
+    //console.log("boxes of pallet y: " +this.boxOfPalletPos3D[index].posZ)
+    //console.log("boxes of pallet z: " +this.boxOfPalletPos3D[index].posY)
+
+  }
+  //console.log("addBox of pallet3d: " +this.boxesofPallet3D)
+}
+
+addBoxOfPp3D(){
+  this.boxesofPp3D = this.boxService.addBox3D()
+  this.boxOfPpPos3D = this.boxService.addPosition3D()
+  for (let index = 0; index < this.boxesofPp3D.length; index++) {
+    this.scene.add(this.boxesofPp3D[index]);
+    this.boxesofPp3D[index].position.x=this.boxOfPpPos3D[index].posX;
+    this.boxesofPp3D[index].position.y=this.boxOfPpPos3D[index].posZ;
+    this.boxesofPp3D[index].position.z=-this.boxOfPpPos3D[index].posY;
+    this.boxesofPp3D[index].rotation.y = (Math.PI/180)*this.boxOfPpPos3D[index].orientation;
+
+    //console.log("boxes of pp pos x: " + this.boxOfPpPos3D[index].posX)
+    //console.log("boxes of pp pos y: " + this.boxOfPpPos3D[index].posZ)
+    //console.log("boxes of pp pos z: " + this.boxOfPpPos3D[index].posY)
+  }
   /*
-  var loader = new KMZLoader();
-  loader.load('./models/kmz/Box.kmz', function (kmz){
-    kmz.scene.position.y=0.5;
+  for (let index = 0; index < this.boxesofPp3D.length; index++) {
+    this.scene.add(this.boxesofPp3D[index]);
+    this.boxesofPp3D[index].position.x=this.boxOfPpPos3D[index].posX;
+    this.boxesofPp3D[index].position.y=this.boxOfPpPos3D[index].posZ;
+    this.boxesofPp3D[index].position.z=-this.boxOfPpPos3D[index].posY;
+  }*/
 
-  });
-  */
- this.scene.add(grid)
-  this.scene.add(this.cube1);
-  this.scene.add(this.cube2);
-  this.cube1.position.y=25;
-  this.cube2.position.y=25;
-  this.cube2.position.z=50.05;
+
+}
+
+
+
+
+
+addPp3D(){
+  this.pps3D = this.addPickingPlaceService.addPp3D()
+  this.ppPos3D = this.addPickingPlaceService.addPosition3D()
+  for (let index = 0; index < this.pps3D.length; index++) {
+    this.scene.add(this.pps3D[index]);
+    this.pps3D[index].position.x=this.ppPos3D[index].posX;
+    this.pps3D[index].position.y=this.ppPos3D[index].posZ;
+    this.pps3D[index].position.z=-this.ppPos3D[index].posY;
+  }
 }
 
 configLight(){
   {
-    const color = 0xFFFFFF;
-    const intensity = 1;
-    const light = new THREE.DirectionalLight(color, intensity);
-    light.position.set(-1, 2, 4);
-    this.scene.add(light);
+    const color1 = 0xFFFFFF;
+    const intensity1 = 1.0;
+    const light1 = new THREE.DirectionalLight(color1, intensity1);
+
+    light1.position.set(-1, 1, 1);
+    this.scene.add(light1);
+    const color2 = 0xFFFFFF;
+    const intensity2 = 0.4;
+    const light2 = new THREE.DirectionalLight(color2, intensity2);
+    light2.position.set(1, 1, -1);
+
+
+    this.scene.add(light2);
   }
 }
+
+
+
 
 animate() {
   window.requestAnimationFrame(() => this.animate());
   this.controls.update();
   if(this.renderer!=null){
     this.renderer.render(this.scene, this.camera);
+
   }
   else
   console.log("renderer is not defined for animate")
@@ -152,26 +251,27 @@ animate() {
 
 
 setWorkspaceFunc() {
-  this.setWorkspace = this.setWorkspaceService.setWorkspace();
-  this.renderer.setSize(this.setWorkspace.width, this.setWorkspace.height);
 
-  console.log("setWorkspace of Mesh" + this.setWorkspaceService.setWorkspace().width)
 }
 
 setKcsFunc() {
   this.setKcs = this.setKcsService.setKcs();
 }
 
-addPickingPlaceFunc() {
-  this.pickingPlaces = this.addPickingPlaceService.addPickingPlace();
-}
+
 addBoxOfPalletFunc() {
-  this.boxesOfPallet = this.boxService.addBox();
+  //this.boxesOfPallet = this.boxService.addBox();
 }
 
 addBoxOfPpFunc() {
-  this.boxesOfPp = this.boxService.addBox();
+  //this.boxesOfPp = this.boxService.addBox();
 }
+
+
+
+
+
+
 
 
 

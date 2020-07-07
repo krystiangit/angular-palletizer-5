@@ -17,6 +17,12 @@ import { AddPickingPlaceService } from '../services/add-picking-place.service';
 import { PalletsService } from '../services/pallets.service';
 import { AppComponent } from '../app.component';
 
+
+interface Color {
+  name:string;
+  value:number;
+}
+
 @Component({
   selector: 'app-add-box',
   templateUrl: './add-box.component.html',
@@ -57,8 +63,22 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
     posXParent: 0,
     posYParent: 0,
     posZParent: 0,
+    widthParent:0,
+    lengthParent:0,
+    heightParent:0,
     orientation: 0,
+    color:0xff0000
   };
+  public colors:Color[] = [
+    {name:"red", value: 0xff0000},
+    {name:"light green", value:0x00ff00},
+    {name:"dark green", value:0x206600},
+    {name:"yellow", value:0xffff00},
+    {name:"orange", value:0xff6600},
+    {name:"light blue", value:0x00a2ff},
+    {name:"dark blue", value:0x0400ff}
+  ]
+
 
 
 
@@ -68,6 +88,12 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
         this.box.posXParent = this.addPickingPlaceService.pickingPlaces[index].posX
         this.box.posYParent = this.addPickingPlaceService.pickingPlaces[index].posY
         this.box.posZParent = this.addPickingPlaceService.pickingPlaces[index].posZ
+        this.box.widthParent = 0
+        this.box.lengthParent = 0
+        this.box.heightParent = 0
+        console.log("take parent posX pp: " +this.addPickingPlaceService.pickingPlaces[index].posX)
+        console.log("take parent posY pp: " +this.addPickingPlaceService.pickingPlaces[index].posY)
+        console.log("take parent posZ pp: " +this.addPickingPlaceService.pickingPlaces[index].posZ)
         //console.log("parent is picking place")
       }
 
@@ -77,9 +103,13 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
         this.box.posXParent = this.palletService.pallets[index].posX
         this.box.posYParent = this.palletService.pallets[index].posY
         this.box.posZParent = this.palletService.pallets[index].posZ
+        this.box.widthParent = this.palletService.pallets[index].width
+        this.box.lengthParent = this.palletService.pallets[index].length
+        this.box.heightParent = this.palletService.pallets[index].height
+
         //console.log("parent is Pallet")
       }
-console.log("parent is: " + this.box.membership)
+//console.log("parent is: " + this.box.membership)
       //console.log(this.addPickingPlaceService.pickingPlaces[index].posX)
 
     }
@@ -89,16 +119,19 @@ console.log("parent is: " + this.box.membership)
   takeParentDim(){
     for (let index = 0; index < this.addBoxervice.boxesOfPickingPlace.length; index++) {
       if(this.addBoxervice.boxesOfPickingPlace[index].membership===this.box.source){
-        this.box.width = this.addBoxervice.boxesOfPickingPlace[index].width*5;
-        this.box.length = this.addBoxervice.boxesOfPickingPlace[index].length*5;
-        this.box.height = this.addBoxervice.boxesOfPickingPlace[index].height*5;
-console.log("finded")
+        this.box.width = this.addBoxervice.boxesOfPickingPlace[index].width;
+        this.box.length = this.addBoxervice.boxesOfPickingPlace[index].length;
+        this.box.height = this.addBoxervice.boxesOfPickingPlace[index].height;
+        this.box.color = this.addBoxervice.boxesOfPickingPlace[index].color;
+        console.log("colors of boxes: " + this.addBoxervice.boxesOfPickingPlace[index].color)
+//console.log("finded")
       }
-      console.log("addbox service source: " + this.box.source)
-      console.log("addbox service membership: " + this.box.membership)
+
+      //console.log("addbox service source: " + this.box.source)
+      //console.log("addbox service membership: " + this.box.membership)
 
   }
-  console.log("parent is picking place")
+  //console.log("parent is picking place")
 }
 
   readNames() {
@@ -169,6 +202,11 @@ sourceChange($event){
 
 definedInChange($event){
   this.takeParentPos();
+}
+
+colorChange($event){
+  //console.log("selection change" + $event)
+
 }
 
   AddBox() {

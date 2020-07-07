@@ -21,15 +21,15 @@
           <form class="form">
             <mat-form-field class="form-full-width">
               <mat-label>Position X [mm]</mat-label>
-              <input matInput placeholder="100" [(ngModel)]="pickingPlace.posX" value="kcs.posX" name="inputKcsPosX">
+              <input type="number" matInput placeholder="100" [(ngModel)]="pickingPlace.posX" value="kcs.posX" name="inputKcsPosX">
             </mat-form-field>
             <mat-form-field class="form-full-width">
               <mat-label>Position Y [mm]</mat-label>
-              <input matInput placeholder="100" [(ngModel)]="pickingPlace.posY" value="kcs.posY" name="inputKcsPosY">
+              <input type="number" matInput placeholder="100" [(ngModel)]="pickingPlace.posY" value="kcs.posY" name="inputKcsPosY">
             </mat-form-field>
             <mat-form-field class="form-full-width">
               <mat-label>Position Z [mm]</mat-label>
-              <input matInput placeholder="100" [(ngModel)]="pickingPlace.posZ" value="kcs.posZ" name="inputKcsPosz">
+              <input type="number" matInput placeholder="100" [(ngModel)]="pickingPlace.posZ" value="kcs.posZ" name="inputKcsPosz">
             </mat-form-field>
             <button class="mat-raised-button" (click)="addPickingPlaceButton.emit($event)">Add</button>
           </form>

@@ -27,7 +27,7 @@ export class AddPickingPlaceComponent implements AfterViewInit, OnDestroy {
   public pickingPlace: PickingPlace = {
     name: "picking place 1",
     id: "",
-    posX: 1000,
+    posX: -1000,
     posY: 1000,
     posZ: 0
   };

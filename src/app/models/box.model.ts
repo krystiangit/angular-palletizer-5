@@ -12,6 +12,10 @@ export class Box{
   posXParent: number;
   posYParent: number;
   posZParent:number;
+  widthParent:number;
+  lengthParent:number;
+  heightParent:number;
   orientation:number;
+  color:number;
 
 }

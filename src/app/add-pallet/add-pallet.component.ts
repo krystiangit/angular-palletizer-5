@@ -42,9 +42,9 @@ export class AddPalletComponent implements AfterViewInit, OnDestroy {
     id: '1',
     width: 800,
     length: 1200,
-    height: 150,
-    posX: 3500,
-    posY: 2000,
+    height: 144,
+    posX: 1000,
+    posY: 1000,
     posZ: 0,
     orientation:0
   };
