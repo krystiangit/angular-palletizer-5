@@ -139,7 +139,6 @@ addPallet3D(){
   gltf.scene.position.x=this.palletPos3D[index].posX
   gltf.scene.position.y=this.palletPos3D[index].posZ;
   gltf.scene.position.z=-this.palletPos3D[index].posY;
-
   },
   ( xhr ) => {
   // called while loading is progressing
@@ -224,9 +223,10 @@ configLight(){
     const intensity2 = 0.4;
     const light2 = new THREE.DirectionalLight(color2, intensity2);
     light2.position.set(1, 1, -1);
-
-
-    this.scene.add(light2);
+    //this.scene.add(light2);
+    const light3= new THREE.AmbientLight(color1);
+    light3.intensity = 0.2;
+    this.scene.add(light3);
   }
 }
 

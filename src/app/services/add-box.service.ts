@@ -24,6 +24,27 @@ export class AddBoxService {
   posOfPallet3D: Position3D[] = [];
   posOfPp3D: Position3D[] = [];
 
+  materials = [
+    new THREE.MeshLambertMaterial({
+        map: new THREE.TextureLoader().load('../../assets/Fabric_09_1K_Opacity.png') //right
+    }),
+    new THREE.MeshLambertMaterial({
+      map: new THREE.TextureLoader().load('../../assets/Fabric_09_1K_Opacity.png') //left
+    }),
+    new THREE.MeshLambertMaterial({
+      map: new THREE.TextureLoader().load('../../assets/cargill.jpg') //top
+    }),
+    new THREE.MeshLambertMaterial({
+      map: new THREE.TextureLoader().load('../../assets/Fabric_09_1K_Opacity.png') //bottom
+    }),
+    new THREE.MeshLambertMaterial({
+      map: new THREE.TextureLoader().load('../../assets/Fabric_09_1K_Opacity.png') //front
+    }),
+    new THREE.MeshLambertMaterial({
+      map: new THREE.TextureLoader().load('../../assets/Fabric_09_1K_Opacity.png') //back
+    })
+];
+
   addBox() {
     //place box in center of Picking place or in left bottom corner of Pallet
 
@@ -98,13 +119,16 @@ export class AddBoxService {
     const material = new THREE.MeshPhongMaterial({
       color: this.boxSets.color,
     });
+
+
       let tempGeometry = new THREE.BoxBufferGeometry(
         this.boxSets.width,
         this.boxSets.height,
         this.boxSets.length,
         10,10,10
       );
-      let tempBox3D = new THREE.Mesh(tempGeometry, material);
+      //let tempBox3D = new THREE.Mesh(tempGeometry, material);
+      let tempBox3D = new THREE.Mesh(tempGeometry, this.materials);
       if (this.boxSets.membership.search('Pallet') == 0) {
       this.boxesOfPallet3D.push(tempBox3D);
       return this.boxesOfPallet3D;
