@@ -20,6 +20,8 @@ import { AppComponent } from '../app.component';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+
+
 interface Color {
   name: string;
   value: number;
@@ -42,7 +44,7 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
     public addBoxervice: AddBoxService,
     public addPickingPlaceService: AddPickingPlaceService,
     public palletService: PalletsService,
-    public appComponent: AppComponent
+    public appComponent: AppComponent,
   ) {
     this.addBoxervice.boxSets = this.box;
     (this.scene = new THREE.Scene()),
@@ -68,8 +70,8 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
     id: '1',
     membership: 'membership',
     source: 'source',
-    width: 300,
-    length: 460,
+    width: 400,
+    length: 600,
     height: 130,
     posX: 0,
     posY: 0,
@@ -339,6 +341,25 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
 ];
 
 
+/*     description
+RoundedBoxGeometry( width , height , depth , radius , radiusSegments )
+width = Float           //size of box in x axis, default 1
+height = Float          //size of box in y axis, default 1
+depth = Float           //size of box in z axis, default 1
+radius = Float          //radius of the fillet,  default 0.15
+radiusSegments = Int    //segments along the fillet, default 1
+
+
+var RoundedBoxGeometry = require('three-rounded-box')(THREE); //pass your instance of three
+
+var myBox = new THREE.Mesh( new RoundedBoxGeometry( 10 , 10 , 10 , 2 , 5 ) );
+
+myScene.add(myBox);
+*/
+
+//var RoundedBoxGeometry = require('three-rounded-box')(THREE);
+
+
     let tempGeometry = new THREE.BoxBufferGeometry(
       this.box.width,
       this.box.height,
@@ -348,13 +369,23 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
       10
     );
 
+
+
+
     let tempBox3D = new THREE.Mesh(tempGeometry, this.materials);
+    //let tempBox3D = new THREE.Mesh( geometry, this.materials );
     //let tempBox3D = new THREE.Mesh(tempGeometry, material);
     this.scene.add(tempBox3D);
+
+
+
     tempBox3D.position.x = this.box.posX;
     tempBox3D.position.y = this.box.posZ + this.box.height/2;
     tempBox3D.position.z = -this.box.posY;
     tempBox3D.rotation.y = (Math.PI / 180) * this.box.orientation;
+    var helper = new THREE.BoxHelper(tempBox3D, 0x000000)
+    this.scene.add(helper);
+
   }
 
   refresh() {
@@ -385,6 +416,11 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
 
     this._overlayRef.attach(this._portal);
   }
+
+
+
+
+
 
   ngOnInit() {}
 

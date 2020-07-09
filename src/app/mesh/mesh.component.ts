@@ -12,14 +12,6 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 import { GLTFLoader, GLTF, GLTFParser, GLTFReference } from 'three/examples/jsm/loaders/GLTFLoader';
 import * as THREE from 'three';
 
-
-
-
-
-
-
-
-
 //declare const THREE: any;
 @Component({
   selector: 'app-mesh',
@@ -53,6 +45,7 @@ export class MeshComponent implements OnInit {
   boxOfPpPos3D = null;
   pps3D = null;
   ppPos3D = null;
+  workspace:Workspace;
 
 
   loader = new GLTFLoader();
@@ -70,6 +63,8 @@ export class MeshComponent implements OnInit {
     this.camera = new THREE.PerspectiveCamera(75, this.windowWidth / this.windowheight, 1, 10000)
     this.renderer = new THREE.WebGLRenderer({antialias:true});
     this.renderer.outputEncoding = THREE.sRGBEncoding;
+    this.workspace = setWorkspaceService.workspaceSets
+
   }
 
   ngOnInit(): void {
@@ -83,6 +78,7 @@ ngAfterViewInit(){
   this.createGrid();
   this.configLight();
   this.renderer.render(this.scene, this.camera)
+  this.configFloor()
   this.animate();
 
 }
@@ -97,7 +93,7 @@ configCamera() {
 
 configRenderer() {
   this.renderer.setPixelRatio(window.devicePixelRatio);
-  this.renderer.setClearColor(new THREE.Color("hsl(0, 0%, 49%)"));
+  this.renderer.setClearColor(new THREE.Color("hsl(0, 0%, 0%)"));
   this.renderer.setSize(this.windowWidth, this.windowheight);
   this.renderer.domElement.style.display = "block";
   this.renderer.domElement.style.margin = "auto";
@@ -111,10 +107,7 @@ configControls() {
   this.controls.update();
 }
 
-createGrid() {
-  var grid = new THREE.GridHelper(5000,20, 0xffffff, 0x555555)
-  this.scene.add(grid)
-}
+
 addPallet3D(){
   const address = '../../assets/euroPalletTexture.glb'
   this.pallets3D = this.palletsService.addPallet3D()
@@ -163,6 +156,8 @@ addBoxOfPallet3D(){
     this.boxesofPallet3D[index].position.y=this.boxOfPalletPos3D[index].posZ;
     this.boxesofPallet3D[index].position.z=-this.boxOfPalletPos3D[index].posY;
     this.boxesofPallet3D[index].rotation.y = (Math.PI/180)*this.boxOfPalletPos3D[index].orientation;
+    var helper = new THREE.BoxHelper(this.boxesofPallet3D[index], 0x000000)
+    this.scene.add(helper);
     //console.log("boxes of pallet x: " +this.boxOfPalletPos3D[index].posX)
     //console.log("boxes of pallet y: " +this.boxOfPalletPos3D[index].posZ)
     //console.log("boxes of pallet z: " +this.boxOfPalletPos3D[index].posY)
@@ -180,7 +175,8 @@ addBoxOfPp3D(){
     this.boxesofPp3D[index].position.y=this.boxOfPpPos3D[index].posZ;
     this.boxesofPp3D[index].position.z=-this.boxOfPpPos3D[index].posY;
     this.boxesofPp3D[index].rotation.y = (Math.PI/180)*this.boxOfPpPos3D[index].orientation;
-
+    var helper = new THREE.BoxHelper(this.boxesofPp3D[index], 0x000000)
+    this.scene.add(helper);
     //console.log("boxes of pp pos x: " + this.boxOfPpPos3D[index].posX)
     //console.log("boxes of pp pos y: " + this.boxOfPpPos3D[index].posZ)
     //console.log("boxes of pp pos z: " + this.boxOfPpPos3D[index].posY)
@@ -229,9 +225,34 @@ configLight(){
     this.scene.add(light3);
   }
 }
+createGrid() {
+  this.workspace = this.setWorkspaceService.setWorkspace();
+  var grid = new THREE.GridHelper(this.workspace.width,20, 0xffffff, 0x555555)
+  this.scene.add(grid)
+}
+configFloor(){
+
+  var material =
+    new THREE.MeshLambertMaterial({
+        map: new THREE.TextureLoader().load('../../assets/Asphalt_01_1K_Base_Color.png') //right
+    })
 
 
+  var geometry = new THREE.PlaneGeometry( this.workspace.width, this.workspace.height, 1, 1 );
+	//var material = new THREE.MeshBasicMaterial( { color: 0x0000ff } );
+	var floor = new THREE.Mesh( geometry, material );
+	floor.material.side = THREE.DoubleSide;
+	floor.rotation.x = (Math.PI/180)*90;
+  this.scene.add( floor );
+  console.log(this.workspace.width)
+}
 
+setWorkspaceFunc() {
+
+  this.workspace = this.setWorkspaceService.setWorkspace();
+  this.createGrid()
+  this.configFloor();
+  }
 
 animate() {
   window.requestAnimationFrame(() => this.animate());
@@ -248,9 +269,7 @@ animate() {
 
 
 
-setWorkspaceFunc() {
 
-}
 
 setKcsFunc() {
   this.setKcs = this.setKcsService.setKcs();

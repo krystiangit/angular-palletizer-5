@@ -11,13 +11,14 @@
   align-items: center;
   justify-content: center;
   display: flex;
+
 }
 
 
 .mesh{
   width: 98vw;
   height: 90vh;
-  border: solid 1px #ccc;
+  border: solid 1px #000000;
   color: rgba(0, 0, 0, 0.87);
   cursor: move;
   display: flex;
