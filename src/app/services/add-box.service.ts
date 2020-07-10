@@ -24,26 +24,7 @@ export class AddBoxService {
   posOfPallet3D: Position3D[] = [];
   posOfPp3D: Position3D[] = [];
 
-  materials = [
-    new THREE.MeshLambertMaterial({
-        map: new THREE.TextureLoader().load('../../assets/Fabric_09_1K_Opacity.png') //right
-    }),
-    new THREE.MeshLambertMaterial({
-      map: new THREE.TextureLoader().load('../../assets/Fabric_09_1K_Opacity.png') //left
-    }),
-    new THREE.MeshLambertMaterial({
-      map: new THREE.TextureLoader().load('../../assets/cargill.jpg') //top
-    }),
-    new THREE.MeshLambertMaterial({
-      map: new THREE.TextureLoader().load('../../assets/Fabric_09_1K_Opacity.png') //bottom
-    }),
-    new THREE.MeshLambertMaterial({
-      map: new THREE.TextureLoader().load('../../assets/Fabric_09_1K_Opacity.png') //front
-    }),
-    new THREE.MeshLambertMaterial({
-      map: new THREE.TextureLoader().load('../../assets/Fabric_09_1K_Opacity.png') //back
-    })
-];
+
 
   addBox() {
     //place box in center of Picking place or in left bottom corner of Pallet
@@ -98,6 +79,8 @@ export class AddBoxService {
     temp.orientation = this.boxSets.orientation;
     temp.membership = this.boxSets.membership;
     temp.source = this.boxSets.source;
+    temp.layer = this.boxSets.layer;
+    temp.isTexture = this.boxSets.isTexture;
     temp.color = this.boxSets.color
 
     //checking if box belongs to parent or Picking place
@@ -120,6 +103,27 @@ export class AddBoxService {
       color: this.boxSets.color,
     });
 
+    const materials = [
+      new THREE.MeshLambertMaterial({
+          map: new THREE.TextureLoader().load('../../assets/Fabric_09_1K_Opacity.png') //right
+      }),
+      new THREE.MeshLambertMaterial({
+        map: new THREE.TextureLoader().load('../../assets/Fabric_09_1K_Opacity.png') //left
+      }),
+      new THREE.MeshLambertMaterial({
+        map: new THREE.TextureLoader().load('../../assets/cargill.jpg') //top
+      }),
+      new THREE.MeshLambertMaterial({
+        map: new THREE.TextureLoader().load('../../assets/Fabric_09_1K_Opacity.png') //bottom
+      }),
+      new THREE.MeshLambertMaterial({
+        map: new THREE.TextureLoader().load('../../assets/Fabric_09_1K_Opacity.png') //front
+      }),
+      new THREE.MeshLambertMaterial({
+        map: new THREE.TextureLoader().load('../../assets/Fabric_09_1K_Opacity.png') //back
+      })
+  ];
+
 
       let tempGeometry = new THREE.BoxBufferGeometry(
         this.boxSets.width,
@@ -127,8 +131,18 @@ export class AddBoxService {
         this.boxSets.length,
         10,10,10
       );
+
       //let tempBox3D = new THREE.Mesh(tempGeometry, material);
-      let tempBox3D = new THREE.Mesh(tempGeometry, this.materials);
+
+
+      let tempBox3D = null
+      if (this.boxSets.isTexture===true){
+        tempBox3D = new THREE.Mesh(tempGeometry, materials);
+      }
+      else
+      tempBox3D = new THREE.Mesh(tempGeometry, material);
+
+
       if (this.boxSets.membership.search('Pallet') == 0) {
       this.boxesOfPallet3D.push(tempBox3D);
       return this.boxesOfPallet3D;

@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, ɵSWITCH_CHANGE_DETECTOR_REF_FACTORY__POST_R3__ } from '@angular/core';
 import { SetWorkspaceService } from '../services/set-workspace.service';
 import { Workspace } from '../models/workspace.model';
-import { SetKcsService } from '../services/set-kcs.service';
+//import { SetKcsService } from '../services/set-kcs.service';
 import { Kcs } from '../models/kcs.model';
 import { AddBoxService } from '../services/add-box.service';
 import { Box } from '../models/box.model';
@@ -11,6 +11,7 @@ import { PalletsService } from '../services/pallets.service';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 import { GLTFLoader, GLTF, GLTFParser, GLTFReference } from 'three/examples/jsm/loaders/GLTFLoader';
 import * as THREE from 'three';
+import { Pallet } from '../models/pallet.model';
 
 //declare const THREE: any;
 @Component({
@@ -24,12 +25,13 @@ export class MeshComponent implements OnInit {
   boxesOfPallet: Box[] = [];
   boxesOfPp: Box[] = [];
   pickingPlaces: PickingPlace[] = [];
-
+  pallets: Pallet[] = [];
+/*
     setKcs: Kcs = {
     posX: this.setKcsService.kcsSets.posX,
     posY: this.setKcsService.kcsSets.posY,
   };
-
+*/
 
   scene = null;
   camera = null;
@@ -55,7 +57,7 @@ export class MeshComponent implements OnInit {
     public palletsService: PalletsService,
     public boxService: AddBoxService,
     public setWorkspaceService: SetWorkspaceService,
-    public setKcsService: SetKcsService,
+    //public setKcsService: SetKcsService,
     public addPickingPlaceService: AddPickingPlaceService,
     public elRef: ElementRef,
   ) {
@@ -82,8 +84,14 @@ ngAfterViewInit(){
   this.animate();
 
 }
-
-
+/*
+deletePallet(id: string) {
+  this.pallets.splice(
+    this.pallets.findIndex((pallet) => pallet.id === id),
+    1
+  );
+}
+*/
 
 configCamera() {
   this.camera.position.z=300
@@ -267,25 +275,27 @@ animate() {
 }
 
 
-
-
-
-
 setKcsFunc() {
-  this.setKcs = this.setKcsService.setKcs();
+  //this.setKcs = this.setKcsService.setKcs();
 }
 
-
 addBoxOfPalletFunc() {
-  //this.boxesOfPallet = this.boxService.addBox();
+  this.boxesOfPallet = this.boxService.addBox();
 }
 
 addBoxOfPpFunc() {
-  //this.boxesOfPp = this.boxService.addBox();
+  this.boxesOfPp = this.boxService.addBox();
+}
+
+addPickingPlaceFunc() {
+  this.pickingPlaces = this.addPickingPlaceService.addPickingPlace();
+  console.log("add picking place clicked in workspace")
 }
 
 
-
+addPallet() {
+  this.pallets = this.palletsService.addPallet();
+}
 
 
 

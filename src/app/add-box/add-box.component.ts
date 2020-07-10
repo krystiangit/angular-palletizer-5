@@ -63,13 +63,16 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
   public palletsNames = [];
   public ppNames = [];
   public readOnly: boolean;
-  public materials = null
+
+
   //selectedParent = this.parentsNames[2];
   public box: Box = {
     name: 'Box1',
     id: '1',
     membership: 'membership',
     source: 'source',
+    layer: 0,
+    isTexture: false,
     width: 400,
     length: 600,
     height: 130,
@@ -206,6 +209,7 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
         this.box.length = this.addBoxervice.boxesOfPickingPlace[index].length;
         this.box.height = this.addBoxervice.boxesOfPickingPlace[index].height;
         this.box.color = this.addBoxervice.boxesOfPickingPlace[index].color;
+        this.box.isTexture = this.addBoxervice.boxesOfPickingPlace[index].isTexture;
         console.log(
           'colors of boxes: ' +
             this.addBoxervice.boxesOfPickingPlace[index].color
@@ -230,15 +234,18 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
         index++
       ) {
         _ppNames[index] = this.addPickingPlaceService.pickingPlaces[index].name;
+
       }
     }
 
     this.ppNames = _ppNames;
 
     if (this.palletService.pallets != null) {
+
       for (let index = 0; index < this.palletService.pallets.length; index++) {
         _palletsNames[index] = this.palletService.pallets[index].name;
         //console.log("_palletsnames" + this.palletService.pallets[index].name)
+        console.log("iteracja pallet")
       }
     }
 
@@ -311,7 +318,7 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
 */
 
   addBox3D() {
-    //this.scene.dispose();
+    //removing box before adding new box
     while (this.scene.children.length > 0) {
       this.scene.remove(this.scene.children[0]);
     }
@@ -319,7 +326,7 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
       color: this.box.color,
     });
 
-    this.materials = [
+    const materials = [
       new THREE.MeshLambertMaterial({
           map: new THREE.TextureLoader().load('../../assets/Fabric_09_1K_Opacity.png') //right
       }),
@@ -341,6 +348,31 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
 ];
 
 
+    let tempGeometry = new THREE.BoxBufferGeometry(
+      this.box.width,
+      this.box.height,
+      this.box.length,
+      10,
+      10,
+      10
+    );
+    let tempBox3D = null
+    if (this.box.isTexture===true){
+      tempBox3D = new THREE.Mesh(tempGeometry, materials);
+    }
+    else
+
+    //let tempBox3D = new THREE.Mesh( geometry, this.materials );
+    tempBox3D = new THREE.Mesh(tempGeometry, material);
+    this.scene.add(tempBox3D);
+    tempBox3D.position.x = this.box.posX;
+    tempBox3D.position.y = this.box.posZ + this.box.height/2;
+    tempBox3D.position.z = -this.box.posY;
+    tempBox3D.rotation.y = (Math.PI / 180) * this.box.orientation;
+    var helper = new THREE.BoxHelper(tempBox3D, 0x000000)
+    this.scene.add(helper);
+
+
 /*     description
 RoundedBoxGeometry( width , height , depth , radius , radiusSegments )
 width = Float           //size of box in x axis, default 1
@@ -358,33 +390,6 @@ myScene.add(myBox);
 */
 
 //var RoundedBoxGeometry = require('three-rounded-box')(THREE);
-
-
-    let tempGeometry = new THREE.BoxBufferGeometry(
-      this.box.width,
-      this.box.height,
-      this.box.length,
-      10,
-      10,
-      10
-    );
-
-
-
-
-    let tempBox3D = new THREE.Mesh(tempGeometry, this.materials);
-    //let tempBox3D = new THREE.Mesh( geometry, this.materials );
-    //let tempBox3D = new THREE.Mesh(tempGeometry, material);
-    this.scene.add(tempBox3D);
-
-
-
-    tempBox3D.position.x = this.box.posX;
-    tempBox3D.position.y = this.box.posZ + this.box.height/2;
-    tempBox3D.position.z = -this.box.posY;
-    tempBox3D.rotation.y = (Math.PI / 180) * this.box.orientation;
-    var helper = new THREE.BoxHelper(tempBox3D, 0x000000)
-    this.scene.add(helper);
 
   }
 

@@ -5,7 +5,6 @@ import {
   OnDestroy,
   ViewChild,
 } from '@angular/core';
-import { WorkspaceComponent } from './workspace/workspace.component';
 import { AddBoxService } from './services/add-box.service';
 import { MeshComponent } from './mesh/mesh.component';
 
@@ -16,7 +15,6 @@ import { MeshComponent } from './mesh/mesh.component';
 })
 export class AppComponent implements OnDestroy {
   title = 'angular-palletizer2';
-  @ViewChild(WorkspaceComponent) childWorkspaceComponent: WorkspaceComponent;
   @ViewChild(MeshComponent) childMeshComponent: MeshComponent;
 
   parentsValue = true;
@@ -39,7 +37,7 @@ export class AppComponent implements OnDestroy {
   }
 
   public addPalletButton(event: MouseEvent): void {
-    this.childWorkspaceComponent.addPallet();
+    this.childMeshComponent.addPallet();
     this.childMeshComponent.addPallet3D();
   }
   /*
@@ -50,29 +48,29 @@ export class AppComponent implements OnDestroy {
   }
 */
   public addBoxOfPallet() {
-    this.childWorkspaceComponent.addBoxOfPalletFunc();
+    this.childMeshComponent.addBoxOfPalletFunc();
     this.childMeshComponent.addBoxOfPallet3D();
     //console.log('add box of Pallet clicked on parent func');
   }
 
   public addBoxOfPp() {
-    this.childWorkspaceComponent.addBoxOfPpFunc();
+    this.childMeshComponent.addBoxOfPpFunc();
     this.childMeshComponent.addBoxOfPp3D();
     //console.log('add box of PP clicked on parent func');
   }
 
   public saveSettingsWorkspaceButton(event: MouseEvent): void {
-    this.childWorkspaceComponent.setWorkspaceFunc();
+    this.childMeshComponent.setWorkspaceFunc();
     this.childMeshComponent.setWorkspaceFunc();
     console.log('save settings workspace clicked');
   }
 
   public saveSettingsKcsButton(event: MouseEvent): void {
-    this.childWorkspaceComponent.setKcsFunc();
-    console.log('save settings Kcs clicked');
+    //this.childMeshComponent.setKcsFunc();
+    //console.log('save settings Kcs clicked');
   }
   public addPickingPlaceButton(event: MouseEvent): void {
-    this.childWorkspaceComponent.addPickingPlaceFunc();
+    this.childMeshComponent.addPickingPlaceFunc();
     this.childMeshComponent.addPp3D();
     console.log('add picking place clicked');
   }

@@ -3,6 +3,8 @@ export class Box{
   id: string;
   membership: string;
   source:string;
+  layer:number;
+  isTexture:boolean;
   width: number;
   length:number;
   height: number;

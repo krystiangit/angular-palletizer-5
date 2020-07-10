@@ -17,10 +17,8 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { AddPalletComponent } from './add-pallet/add-pallet.component';
-import { DemoMaterialModule } from "./left-navbar/material-module";
+import { DemoMaterialModule } from "../app/material-module";
 import { SetWorkspaceComponent } from "./set-workspace/set-workspace.component";
-import { WorkspaceComponent } from "./workspace/workspace.component";
-import { SetKcsComponent } from './set-kcs/set-kcs.component';
 import { AddBoxComponent } from './add-box/add-box.component';
 import { AddPickingPlaceComponent } from './add-picking-place/add-picking-place.component';
 import { MeshComponent } from './mesh/mesh.component';
@@ -37,8 +35,6 @@ import { MeshComponent } from './mesh/mesh.component';
 
     AddPalletComponent,
     SetWorkspaceComponent,
-    WorkspaceComponent,
-    SetKcsComponent,
     AddBoxComponent,
     AddPickingPlaceComponent,
     MeshComponent,

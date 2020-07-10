@@ -130,8 +130,14 @@
             <div>
               <div class="previev" #preview>
               </div>
-              <div>
+              <div class="refreshButton">
                 <button class="mat-raised-button" (click)="refresh()">refresh</button>
+              </div>
+              <div>
+
+                  <mat-checkbox class="example-margin" [(ngModel)]="box.isTexture" color="primary" [ngModelOptions]="{standalone: true}" >texture ?</mat-checkbox>
+
+
               </div>
             </div>
 
