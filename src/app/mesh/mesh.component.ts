@@ -11,6 +11,7 @@ import { PalletsService } from '../services/pallets.service';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 import { GLTFLoader, GLTF, GLTFParser, GLTFReference } from 'three/examples/jsm/loaders/GLTFLoader';
 import * as THREE from 'three';
+
 import { Pallet } from '../models/pallet.model';
 
 //declare const THREE: any;
@@ -177,18 +178,34 @@ addBoxOfPallet3D(){
 addBoxOfPp3D(){
   this.boxesofPp3D = this.boxService.addBox3D()
   this.boxOfPpPos3D = this.boxService.addPosition3D()
+  console.log("boxes of pp from mesh length: " + this.boxesOfPp.length)
   for (let index = 0; index < this.boxesofPp3D.length; index++) {
-    this.scene.add(this.boxesofPp3D[index]);
+    var object = this.boxesofPp3D[index]
+
+    object.name = this.boxesOfPp[index].name;
+    this.scene.add(object);
     this.boxesofPp3D[index].position.x=this.boxOfPpPos3D[index].posX;
     this.boxesofPp3D[index].position.y=this.boxOfPpPos3D[index].posZ;
     this.boxesofPp3D[index].position.z=-this.boxOfPpPos3D[index].posY;
     this.boxesofPp3D[index].rotation.y = (Math.PI/180)*this.boxOfPpPos3D[index].orientation;
     var helper = new THREE.BoxHelper(this.boxesofPp3D[index], 0x000000)
+    helper.name=this.boxesOfPp[index].name + "helper"
     this.scene.add(helper);
+    //console.log("scene children" + this.scene.getObjectByName('nazwa').id)
+    //console.log("length of scene table" + this.scene.children.length)
     //console.log("boxes of pp pos x: " + this.boxOfPpPos3D[index].posX)
     //console.log("boxes of pp pos y: " + this.boxOfPpPos3D[index].posZ)
     //console.log("boxes of pp pos z: " + this.boxOfPpPos3D[index].posY)
+    //console.log("this.scene.length" + this.scene.children.length)
+
   }
+  for (let index = 0; index < this.scene.children.length; index++) {
+    console.log("names of boxes: " + this.scene.children[index].name);
+
+  }
+
+  //console.log("this.scene.length" + this.scene.children.length)
+
   /*
   for (let index = 0; index < this.boxesofPp3D.length; index++) {
     this.scene.add(this.boxesofPp3D[index]);
@@ -200,7 +217,14 @@ addBoxOfPp3D(){
 
 }
 
+deleteObject(){
 
+  this.scene.remove(this.scene.getObjectByName(this.boxesOfPp[0].name))
+  this.scene.remove(this.scene.getObjectByName(this.boxesOfPp[0].name+ "helper"))
+  this.boxService.delete();
+
+
+}
 
 
 

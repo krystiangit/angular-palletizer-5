@@ -364,7 +364,9 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
 
     //let tempBox3D = new THREE.Mesh( geometry, this.materials );
     tempBox3D = new THREE.Mesh(tempGeometry, material);
+    tempBox3D.name = "nazwa"
     this.scene.add(tempBox3D);
+
     tempBox3D.position.x = this.box.posX;
     tempBox3D.position.y = this.box.posZ + this.box.height/2;
     tempBox3D.position.z = -this.box.posY;
@@ -391,6 +393,12 @@ myScene.add(myBox);
 
 //var RoundedBoxGeometry = require('three-rounded-box')(THREE);
 
+  }
+
+
+  deleteObject(){
+    console.log("removing")
+this.scene.remove(this.scene.getObjectByName("nazwa"))
   }
 
   refresh() {

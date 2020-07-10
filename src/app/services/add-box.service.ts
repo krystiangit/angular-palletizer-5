@@ -94,11 +94,14 @@ export class AddBoxService {
       temp.name = 'BoxOfPp' + (this.boxesOfPickingPlace.length + 1);
       temp.id = (this.boxesOfPickingPlace.length + 1).toString();
       this.boxesOfPickingPlace.push(temp);
+
       return this.boxesOfPickingPlace;
     }
+
   }
 
   addBox3D() {
+    console.log("boxes of pp from service length: " + this.boxesOfPickingPlace.length)
     const material = new THREE.MeshPhongMaterial({
       color: this.boxSets.color,
     });
@@ -149,6 +152,7 @@ export class AddBoxService {
     }
     if (this.boxSets.membership.search('Picking') == 0) {
       this.boxesOfPp3D.push(tempBox3D);
+
       return this.boxesOfPp3D;
     }
   }
@@ -215,5 +219,35 @@ export class AddBoxService {
       return this.posOfPp3D;
     }
   }
+
+delete(){
+
+
+   this.deleteElement(0);
+   this.deleteElement3D(0);
+   console.log("length of Pos3D: " + this.posOfPp3D.length)
+
 }
 
+
+
+  deleteElement(id: number) {
+    this.boxesOfPickingPlace.splice(
+      this.boxesOfPickingPlace.findIndex((element) => element.id === id.toString()),
+      1
+    );
+  }
+  deleteElement3D(id: number) {
+    this.boxesOfPp3D.splice(
+      this.boxesOfPp3D.findIndex((element) => element.id === id.toString()),
+      1
+    );
+}
+deletePos3D(id: number) {
+  this.posOfPp3D.splice(
+    this.posOfPp3D.findIndex((element) => element.id === id.toString()),
+    1
+  );
+}
+
+}
