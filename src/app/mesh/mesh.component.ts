@@ -11,8 +11,9 @@ import { PalletsService } from '../services/pallets.service';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 import { GLTFLoader, GLTF, GLTFParser, GLTFReference } from 'three/examples/jsm/loaders/GLTFLoader';
 import * as THREE from 'three';
-
+import * as dat from 'dat.gui';
 import { Pallet } from '../models/pallet.model';
+import { FontLoader } from 'three';
 
 //declare const THREE: any;
 @Component({
@@ -22,6 +23,7 @@ import { Pallet } from '../models/pallet.model';
 })
 export class MeshComponent implements OnInit {
   @ViewChild('meshId') private meshIdRef: ElementRef;
+  @ViewChild('guiContainerId') private guiContainerRef: ElementRef;
 
   boxesOfPallet: Box[] = [];
   boxesOfPp: Box[] = [];
@@ -52,6 +54,11 @@ export class MeshComponent implements OnInit {
 
 
   loader = new GLTFLoader();
+
+  gui = new dat.GUI();
+
+
+
   //gui.add(text, 'explode');
 
   constructor(
@@ -70,6 +77,78 @@ export class MeshComponent implements OnInit {
 
   }
 
+
+  guiFunc(){
+
+    const params = {
+      envMap: 'HDR',
+      roughness: 0.0,
+      metalness: 0.0,
+      exposure: 1.0,
+      debug: false
+    };
+   const text = {
+      message: 'dat.gui',
+      speed: 0.8,
+      displayOutline: false,
+    };
+
+    //const gui = new dat.GUI();
+    //this.gui.destroy()
+/*
+    const guiContainer =
+    this.gui.add( params, 'envMap', [ 'LDR', 'HDR', 'RGBM16' ] );
+    this.gui.add( params, 'roughness', 0, 1, 0.01 );
+    this.gui.add( params, 'metalness', 0, 1, 0.01 );
+    this.gui.add( params, 'exposure', 0, 2, 0.01 );
+    this.gui.add( params, 'debug', false );
+    this.gui.domElement.id = 'gui';
+    */
+    //this.gui.nativeElement.id = 'gui';
+
+
+    var menu = this.gui.addFolder('folder');
+    var menuPp3D = this.gui.addFolder('Boxes of Picking Place')
+
+    menu.add(text, 'message');
+    menu.add(text, 'speed', -5, 5);
+    menu.add(text, 'displayOutline');
+
+    this.guiContainerRef.nativeElement.append(this.gui.domElement);
+    this.gui.open();
+    menu.open();
+  }
+
+  updateDisplay(gui) {
+    console.log("start updating")
+    /*
+    for (let index = 0; index < gui.__controllers.length; index++) {
+      gui.__controllers[index].remove();
+    console.log("iteracja 1")
+
+    }*/
+
+    if (this.boxesOfPp.length>0){
+      for (let index = gui.__controllers.length; index < this.boxesofPp3D.length; index++) {
+        this.gui.add(this.boxesOfPp[index], 'name').listen()
+
+      }
+    }
+/*
+for (let index = 0; index < gui.__controllers.length; index++) {
+  gui.__controllers[index].updateDisplay();
+console.log("iteracja 1")
+
+}
+for (let index1 = 0; index1 < gui.__folders.length; index1++) {
+  this.updateDisplay(gui.__folders[index1]);
+  console.log("iteracja 2")
+}
+*/
+  }
+
+
+
   ngOnInit(): void {
   }
 
@@ -83,7 +162,7 @@ ngAfterViewInit(){
   this.renderer.render(this.scene, this.camera)
   this.configFloor()
   this.animate();
-
+  this.guiFunc();
 }
 /*
 deletePallet(id: string) {
@@ -118,6 +197,7 @@ configControls() {
 
 
 addPallet3D(){
+
   const address = '../../assets/euroPalletTexture.glb'
   this.pallets3D = this.palletsService.addPallet3D()
   this.palletPos3D = this.palletsService.addPosition3D()
@@ -214,7 +294,9 @@ addBoxOfPp3D(){
     this.boxesofPp3D[index].position.z=-this.boxOfPpPos3D[index].posY;
   }*/
 
-
+  //console.log("starting gui")
+  //this.guiFunc();
+  this.updateDisplay(this.gui)
 }
 
 deleteObject(){
@@ -222,7 +304,7 @@ deleteObject(){
   this.scene.remove(this.scene.getObjectByName(this.boxesOfPp[0].name))
   this.scene.remove(this.scene.getObjectByName(this.boxesOfPp[0].name+ "helper"))
   this.boxService.delete();
-
+  this.gui.__controllers[this.gui.__controllers.length-1].remove();
 
 }
 
