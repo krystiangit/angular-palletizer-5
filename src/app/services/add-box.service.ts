@@ -23,6 +23,7 @@ export class AddBoxService {
   boxesOfPp3D = [];
   posOfPallet3D: Position3D[] = [];
   posOfPp3D: Position3D[] = [];
+  helpers = [];
 
 
 
@@ -146,6 +147,21 @@ export class AddBoxService {
       tempBox3D = new THREE.Mesh(tempGeometry, material);
 
 
+
+      tempBox3D.position.x=this.boxSets.posX +
+      this.boxSets.posXParent +
+      this.addPosX -
+      this.centerPosX;
+      tempBox3D.position.y=(this.boxSets.posZ +
+        this.boxSets.posZParent +
+        this.boxSets.height / 2 +
+        this.centerPosZ);
+      tempBox3D.position.z=-(this.boxSets.posY +
+      this.boxSets.posYParent +
+      this.addPosY -
+      this.centerPosY);
+      tempBox3D.rotation.y = this.boxSets.orientation;
+
       if (this.boxSets.membership.search('Pallet') == 0) {
       this.boxesOfPallet3D.push(tempBox3D);
       return this.boxesOfPallet3D;
@@ -156,6 +172,13 @@ export class AddBoxService {
       return this.boxesOfPp3D;
     }
   }
+
+addHelper3D(){
+  var tempHelper = null
+  tempHelper = new THREE.BoxHelper(this.boxesOfPp3D[this.boxesOfPp3D.length-1], 0x000000)
+  this.helpers.push(tempHelper);
+  return this.helpers
+}
 
   addPosition3D() {
     if (this.boxSets.membership.search('Pallet') == 0) {
@@ -223,8 +246,9 @@ export class AddBoxService {
 delete(){
 
 
-   this.deleteElement(0);
-   this.deleteElement3D(0);
+   this.deleteElement(this.boxesOfPickingPlace.length-1);
+   this.deleteElement3D(this.boxesOfPickingPlace.length-1);
+   this.deletePos3D(this.boxesOfPickingPlace.length-1)
    console.log("length of Pos3D: " + this.posOfPp3D.length)
 
 }

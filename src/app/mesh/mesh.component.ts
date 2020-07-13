@@ -48,6 +48,7 @@ export class MeshComponent implements OnInit {
   boxOfPalletPos3D = null;
   boxesofPp3D = null;
   boxOfPpPos3D = null;
+  helpers = null;
   pps3D = null;
   ppPos3D = null;
   workspace:Workspace;
@@ -120,7 +121,7 @@ export class MeshComponent implements OnInit {
   }
 
   updateDisplay(gui) {
-    console.log("start updating")
+    //console.log("start updating")
     /*
     for (let index = 0; index < gui.__controllers.length; index++) {
       gui.__controllers[index].remove();
@@ -129,7 +130,7 @@ export class MeshComponent implements OnInit {
     }*/
 
     if (this.boxesOfPp.length>0){
-      for (let index = gui.__controllers.length; index < this.boxesofPp3D.length; index++) {
+      for (let index = gui.__controllers.length; index < this.boxesOfPp.length; index++) {
         this.gui.add(this.boxesOfPp[index], 'name').listen()
 
       }
@@ -256,21 +257,30 @@ addBoxOfPallet3D(){
 }
 
 addBoxOfPp3D(){
-  this.boxesofPp3D = this.boxService.addBox3D()
-  this.boxOfPpPos3D = this.boxService.addPosition3D()
+  this.boxesofPp3D = this.boxService.addBox3D();
+  this.boxOfPpPos3D = this.boxService.addPosition3D();
+  this.helpers = this.boxService.addHelper3D();
+  console.log("helper: " + this.boxService.addHelper3D())
   console.log("boxes of pp from mesh length: " + this.boxesOfPp.length)
   for (let index = 0; index < this.boxesofPp3D.length; index++) {
     var object = this.boxesofPp3D[index]
 
     object.name = this.boxesOfPp[index].name;
-    this.scene.add(object);
+    /*
     this.boxesofPp3D[index].position.x=this.boxOfPpPos3D[index].posX;
     this.boxesofPp3D[index].position.y=this.boxOfPpPos3D[index].posZ;
     this.boxesofPp3D[index].position.z=-this.boxOfPpPos3D[index].posY;
     this.boxesofPp3D[index].rotation.y = (Math.PI/180)*this.boxOfPpPos3D[index].orientation;
-    var helper = new THREE.BoxHelper(this.boxesofPp3D[index], 0x000000)
-    helper.name=this.boxesOfPp[index].name + "helper"
-    this.scene.add(helper);
+    */
+    this.scene.add(object);
+
+    //var helper = new THREE.BoxHelper(this.boxesofPp3D[index], 0x000000)
+    var objectHelper = this.helpers[index]
+    objectHelper.name=this.boxesOfPp[index].name + "helper"
+
+    //console.log("name of added helper: " + this.boxesOfPp[index].name + "helper")
+    this.scene.add(objectHelper);
+
     //console.log("scene children" + this.scene.getObjectByName('nazwa').id)
     //console.log("length of scene table" + this.scene.children.length)
     //console.log("boxes of pp pos x: " + this.boxOfPpPos3D[index].posX)
@@ -280,9 +290,11 @@ addBoxOfPp3D(){
 
   }
   for (let index = 0; index < this.scene.children.length; index++) {
-    console.log("names of boxes: " + this.scene.children[index].name);
+    console.log("names of boxes from scene: " + this.scene.children[index].name);
 
   }
+
+
 
   //console.log("this.scene.length" + this.scene.children.length)
 
@@ -301,11 +313,19 @@ addBoxOfPp3D(){
 
 deleteObject(){
 
-  this.scene.remove(this.scene.getObjectByName(this.boxesOfPp[0].name))
-  this.scene.remove(this.scene.getObjectByName(this.boxesOfPp[0].name+ "helper"))
-  this.boxService.delete();
-  this.gui.__controllers[this.gui.__controllers.length-1].remove();
 
+console.log("boxes of pp length before delete: " + this.boxesOfPp.length)
+console.log("item to delete boxofpp: " + this.boxesOfPp[this.boxesOfPp.length-1].name)
+console.log("item to delete boxofPP3Dhelper: " + this.scene.getObjectByName(this.boxesofPp3D[this.boxesofPp3D.length-1].name+ "helper").name)
+  this.scene.remove(this.scene.getObjectByName(this.boxesofPp3D[this.boxesofPp3D.length-1].name))
+  this.scene.remove(this.scene.getObjectByName(this.boxesofPp3D[this.boxesofPp3D.length-1].name+ "helper"))
+  this.boxService.delete();
+  console.log("boxes of pp length after delete: " + this.boxesOfPp.length)
+  this.gui.__controllers[this.gui.__controllers.length-1].remove();
+  for (let index = 0; index < this.boxesOfPp.length; index++) {
+    console.log("boxes after delete: " + this.boxesofPp3D[index].name)
+
+  }
 }
 
 
