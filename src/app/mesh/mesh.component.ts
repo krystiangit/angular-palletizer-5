@@ -257,14 +257,12 @@ addBoxOfPallet3D(){
 }
 
 addBoxOfPp3D(){
+  //this.boxOfPpPos3D = this.boxService.addPosition3D();
   this.boxesofPp3D = this.boxService.addBox3D();
-  this.boxOfPpPos3D = this.boxService.addPosition3D();
   this.helpers = this.boxService.addHelper3D();
-  console.log("helper: " + this.boxService.addHelper3D())
-  console.log("boxes of pp from mesh length: " + this.boxesOfPp.length)
   for (let index = 0; index < this.boxesofPp3D.length; index++) {
+    console.log("boxes of PP names" + this.boxesofPp3D[index].name)
     var object = this.boxesofPp3D[index]
-
     object.name = this.boxesOfPp[index].name;
     /*
     this.boxesofPp3D[index].position.x=this.boxOfPpPos3D[index].posX;
@@ -276,7 +274,7 @@ addBoxOfPp3D(){
 
     //var helper = new THREE.BoxHelper(this.boxesofPp3D[index], 0x000000)
     var objectHelper = this.helpers[index]
-    objectHelper.name=this.boxesOfPp[index].name + "helper"
+
 
     //console.log("name of added helper: " + this.boxesOfPp[index].name + "helper")
     this.scene.add(objectHelper);
@@ -311,21 +309,37 @@ addBoxOfPp3D(){
   this.updateDisplay(this.gui)
 }
 
+
+check(){
+  console.log("check starts")
+  for (let index = 0; index < this.boxesOfPp.length; index++) {
+    console.log("boxes of pp names: " + this.boxesOfPp[index].name)
+  }
+  for (let index = 0; index < this.boxesofPp3D.length; index++) {
+    console.log("boxes of pp3d names: " + this.boxesofPp3D[index].name)
+  }
+  for (let index = 0; index < this.helpers.length; index++) {
+    console.log("helpers names: " + this.helpers[index].name)
+  }
+  console.log("check ends")
+}
+
 deleteObject(){
 
 
 console.log("boxes of pp length before delete: " + this.boxesOfPp.length)
 console.log("item to delete boxofpp: " + this.boxesOfPp[this.boxesOfPp.length-1].name)
-console.log("item to delete boxofPP3Dhelper: " + this.scene.getObjectByName(this.boxesofPp3D[this.boxesofPp3D.length-1].name+ "helper").name)
+//console.log("item to delete boxofPP3Dhelper: " + this.scene.getObjectByName(this.boxesofPp3D[this.boxesofPp3D.length-1].name+ "helper").name)
   this.scene.remove(this.scene.getObjectByName(this.boxesofPp3D[this.boxesofPp3D.length-1].name))
   this.scene.remove(this.scene.getObjectByName(this.boxesofPp3D[this.boxesofPp3D.length-1].name+ "helper"))
   this.boxService.delete();
   console.log("boxes of pp length after delete: " + this.boxesOfPp.length)
   this.gui.__controllers[this.gui.__controllers.length-1].remove();
+  /*
   for (let index = 0; index < this.boxesOfPp.length; index++) {
     console.log("boxes after delete: " + this.boxesofPp3D[index].name)
 
-  }
+  }*/
 }
 
 

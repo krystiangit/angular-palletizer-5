@@ -27,6 +27,7 @@ export class AddBoxService {
 
 
 
+
   addBox() {
     //place box in center of Picking place or in left bottom corner of Pallet
 
@@ -176,13 +177,12 @@ export class AddBoxService {
 addHelper3D(){
   var tempHelper = null
   tempHelper = new THREE.BoxHelper(this.boxesOfPp3D[this.boxesOfPp3D.length-1], 0x000000)
+  tempHelper.name=this.boxesOfPickingPlace[this.boxesOfPp3D.length-1].name + "helper"
   this.helpers.push(tempHelper);
   return this.helpers
 }
-
   addPosition3D() {
     if (this.boxSets.membership.search('Pallet') == 0) {
-
       let tempPosition3D = new Position3D();
       tempPosition3D.posX =
         this.boxSets.posX +
@@ -245,16 +245,13 @@ addHelper3D(){
 
 delete(){
 
-
    this.deleteElement(this.boxesOfPickingPlace.length-1);
-   this.deleteElement3D(this.boxesOfPickingPlace.length-1);
-   this.deletePos3D(this.boxesOfPickingPlace.length-1)
+   this.deleteElement3D(this.boxesOfPp3D.length-1);
+   this.deletePos3D(this.posOfPp3D.length-1)
+   this.deletehelpers(this.helpers.length-1)
    console.log("length of Pos3D: " + this.posOfPp3D.length)
 
 }
-
-
-
   deleteElement(id: number) {
     this.boxesOfPickingPlace.splice(
       this.boxesOfPickingPlace.findIndex((element) => element.id === id.toString()),
@@ -270,6 +267,12 @@ delete(){
 deletePos3D(id: number) {
   this.posOfPp3D.splice(
     this.posOfPp3D.findIndex((element) => element.id === id.toString()),
+    1
+  );
+}
+deletehelpers(id: number) {
+  this.helpers.splice(
+    this.helpers.findIndex((element) => element.id === id.toString()),
     1
   );
 }
