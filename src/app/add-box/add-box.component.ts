@@ -73,6 +73,7 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
     source: 'source',
     layer: 0,
     isTexture: false,
+    visible:true,
     width: 400,
     length: 600,
     height: 130,

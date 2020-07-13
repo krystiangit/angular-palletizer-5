@@ -84,6 +84,7 @@ export class AddBoxService {
     temp.source = this.boxSets.source;
     temp.layer = this.boxSets.layer;
     temp.isTexture = this.boxSets.isTexture;
+    temp.visible = this.boxSets.visible;
     temp.color = this.boxSets.color
 
     //checking if box belongs to parent or Picking place
@@ -203,6 +204,8 @@ addHelper3D(){
     return this.helpersOfPallet
     }
 }
+
+
 
 /*
   addPosition3D() {

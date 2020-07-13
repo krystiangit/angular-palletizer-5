@@ -5,6 +5,7 @@ export class Box{
   source:string;
   layer:number;
   isTexture:boolean;
+  visible:boolean;
   width: number;
   length:number;
   height: number;

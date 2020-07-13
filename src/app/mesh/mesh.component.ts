@@ -126,11 +126,21 @@ export class MeshComponent implements OnInit {
       gui.__controllers[index].remove();
     console.log("iteracja 1")
     }*/
+
+/*
     if (this.boxesOfPallet.length>0){
       for (let index = gui.__controllers.length; index < this.boxesOfPallet.length; index++) {
-        this.gui.add(this.boxesOfPallet[index], 'name')//.listen()
+        this.gui.add(this.boxesOfPallet[index], 'visible').listen()
       }
     }
+*/
+if (this.boxesOfPallet.length>0){
+  for (let index = gui.__controllers.length; index < this.boxesOfPallet.length; index++) {
+    this.gui.add(this.scene.getObjectByName(this.boxesofPallet3D[index].name), 'visible').name(this.boxesofPallet3D[index].name)
+
+  }
+}
+
 /*
 for (let index = 0; index < gui.__controllers.length; index++) {
   gui.__controllers[index].updateDisplay();
@@ -322,6 +332,12 @@ check(){
     console.log("helpers names: " + this.helpersOfPp[index].name)
   }
   console.log("check ends")
+}
+
+
+
+hide(){
+  this.scene.getObjectByName(this.boxesofPp3D[this.boxesofPp3D.length-1].name).visible=false
 }
 
 deleteBoxOfPp(){
