@@ -23,7 +23,8 @@ export class AddBoxService {
   boxesOfPp3D = [];
   posOfPallet3D: Position3D[] = [];
   posOfPp3D: Position3D[] = [];
-  helpers = [];
+  helpersOfPp = [];
+  helpersOfPallet = [];
 
 
 
@@ -103,7 +104,6 @@ export class AddBoxService {
   }
 
   addBox3D() {
-    console.log("boxes of pp from service length: " + this.boxesOfPickingPlace.length)
     const material = new THREE.MeshPhongMaterial({
       color: this.boxSets.color,
     });
@@ -128,8 +128,6 @@ export class AddBoxService {
         map: new THREE.TextureLoader().load('../../assets/Fabric_09_1K_Opacity.png') //back
       })
   ];
-
-
       let tempGeometry = new THREE.BoxBufferGeometry(
         this.boxSets.width,
         this.boxSets.height,
@@ -138,8 +136,6 @@ export class AddBoxService {
       );
 
       //let tempBox3D = new THREE.Mesh(tempGeometry, material);
-
-
       let tempBox3D = null
       if (this.boxSets.isTexture===true){
         tempBox3D = new THREE.Mesh(tempGeometry, materials);
@@ -147,8 +143,23 @@ export class AddBoxService {
       else
       tempBox3D = new THREE.Mesh(tempGeometry, material);
 
+      if (this.boxSets.membership.search('Pallet') == 0) {
+        tempBox3D.position.x=this.boxSets.posX +
+        this.boxSets.posXParent +
+        this.addPosX -
+        this.centerPosX;
+        tempBox3D.position.y=this.boxSets.posZ +
+        this.boxSets.posZParent +
+        this.boxSets.height / 2 +
+        this.centerPosZ;
+        tempBox3D.position.z=-(this.boxSets.posY +
+        this.boxSets.posYParent +
+        this.addPosY -
+        this.centerPosY);
+        tempBox3D.rotation.y=this.boxSets.orientation*(Math.PI/180);
+      }
 
-
+      if (this.boxSets.membership.search('Picking') == 0) {
       tempBox3D.position.x=this.boxSets.posX +
       this.boxSets.posXParent +
       this.addPosX -
@@ -161,7 +172,9 @@ export class AddBoxService {
       this.boxSets.posYParent +
       this.addPosY -
       this.centerPosY);
-      tempBox3D.rotation.y = this.boxSets.orientation;
+      tempBox3D.rotation.y = this.boxSets.orientation*(Math.PI/180);
+      }
+
 
       if (this.boxSets.membership.search('Pallet') == 0) {
       this.boxesOfPallet3D.push(tempBox3D);
@@ -169,18 +182,29 @@ export class AddBoxService {
     }
     if (this.boxSets.membership.search('Picking') == 0) {
       this.boxesOfPp3D.push(tempBox3D);
-
       return this.boxesOfPp3D;
     }
   }
 
 addHelper3D(){
-  var tempHelper = null
+
+  if (this.boxSets.membership.search('Picking') == 0) {
+    var tempHelper = null
   tempHelper = new THREE.BoxHelper(this.boxesOfPp3D[this.boxesOfPp3D.length-1], 0x000000)
   tempHelper.name=this.boxesOfPickingPlace[this.boxesOfPp3D.length-1].name + "helper"
-  this.helpers.push(tempHelper);
-  return this.helpers
+  this.helpersOfPp.push(tempHelper);
+  return this.helpersOfPp
+  }
+  if (this.boxSets.membership.search('Pallet') == 0) {
+    var tempHelper = null
+    tempHelper = new THREE.BoxHelper(this.boxesOfPallet3D[this.boxesOfPallet3D.length-1], 0x000000)
+    tempHelper.name=this.boxesOfPallet[this.boxesOfPallet3D.length-1].name + "helper"
+    this.helpersOfPallet.push(tempHelper);
+    return this.helpersOfPallet
+    }
 }
+
+/*
   addPosition3D() {
     if (this.boxSets.membership.search('Pallet') == 0) {
       let tempPosition3D = new Position3D();
@@ -242,39 +266,26 @@ addHelper3D(){
       return this.posOfPp3D;
     }
   }
-
-delete(){
-
-   this.deleteElement(this.boxesOfPickingPlace.length-1);
-   this.deleteElement3D(this.boxesOfPp3D.length-1);
-   this.deletePos3D(this.posOfPp3D.length-1)
-   this.deletehelpers(this.helpers.length-1)
-   console.log("length of Pos3D: " + this.posOfPp3D.length)
-
+*/
+deleteBoxOfPp(){
+   this.deleteElement((this.boxesOfPickingPlace.length-1), this.boxesOfPickingPlace);
+   this.deleteElement((this.boxesOfPp3D.length-1), this.boxesOfPp3D);
+   this.deleteElement(this.posOfPp3D.length-1, this.posOfPp3D)
+   this.deleteElement(this.helpersOfPp.length-1, this.helpersOfPp)
 }
-  deleteElement(id: number) {
-    this.boxesOfPickingPlace.splice(
-      this.boxesOfPickingPlace.findIndex((element) => element.id === id.toString()),
+
+deleteBoxOfPallet(){
+  this.deleteElement((this.boxesOfPallet.length-1), this.boxesOfPallet);
+  this.deleteElement((this.boxesOfPallet3D.length-1), this.boxesOfPallet3D);
+  this.deleteElement(this.posOfPallet3D.length-1, this.posOfPallet3D)
+  this.deleteElement(this.helpersOfPallet.length-1, this.helpersOfPallet)
+}
+
+  deleteElement(id: number, array:any) {
+    array.splice(
+      array.findIndex((element) => element.id === id.toString()),
       1
     );
   }
-  deleteElement3D(id: number) {
-    this.boxesOfPp3D.splice(
-      this.boxesOfPp3D.findIndex((element) => element.id === id.toString()),
-      1
-    );
-}
-deletePos3D(id: number) {
-  this.posOfPp3D.splice(
-    this.posOfPp3D.findIndex((element) => element.id === id.toString()),
-    1
-  );
-}
-deletehelpers(id: number) {
-  this.helpers.splice(
-    this.helpers.findIndex((element) => element.id === id.toString()),
-    1
-  );
-}
 
 }
