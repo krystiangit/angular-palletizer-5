@@ -35,8 +35,15 @@ top:0;
 
 #gui-container {
   position: absolute;
+  display: flex;
+  flex-direction: column;
   top: 100px;
   right: 100px ;
   z-index: 4;
-  opacity: 0.7
+  opacity: 0.6
+}
+#gui-buttons{
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
 }

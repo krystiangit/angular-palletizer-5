@@ -25,7 +25,6 @@
       <mat-sidenav #snav>
         <mat-nav-list>
           <a mat-list-item (click)="appChildSetWorkspace.openDialog()">Set Workspace</a>
-
           <a mat-list-item (click)="appChildAddPallet.openDialog()">Add Pallet</a>
           <a mat-list-item (click)="appChildAddPickingPlace.openDialog()">Add Picking place</a>
           <a mat-list-item (click)="appChildAddBox.openDialog('define')">Define element</a>
@@ -38,7 +37,6 @@
         <app-add-pallet #appChildAddPallet (addPalletButton)="addPalletButton($event)"></app-add-pallet>
         <app-add-box #appChildAddBox></app-add-box>
         <app-set-workspace #appChildSetWorkspace (saveSettingsButton)="saveSettingsWorkspaceButton($event)"></app-set-workspace>
-
         <app-add-picking-place #appChildAddPickingPlace (addPickingPlaceButton)="addPickingPlaceButton($event)"></app-add-picking-place>
 
         <app-mesh #appMesh></app-mesh>
