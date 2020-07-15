@@ -396,12 +396,12 @@ myScene.add(myBox);
 
   }
 
-
+/*
   deleteObject(){
     console.log("removing")
 this.scene.remove(this.scene.getObjectByName("nazwa"))
   }
-
+*/
   refresh() {
     this.controls = new OrbitControls(
       this.camera,
@@ -415,8 +415,10 @@ this.scene.remove(this.scene.getObjectByName("nazwa"))
     this.configLight();
     this.renderer.render(this.scene, this.camera);
     this.animate();
+    return "aaa"
   }
   tabChange($event) {
+    //setTimeout(() => {}, 1000);
     this.refresh();
   }
 
@@ -459,21 +461,4 @@ this.scene.remove(this.scene.getObjectByName("nazwa"))
     this._overlayRef.dispose();
   }
 
-  /*
-  palletControl = new FormControl('', Validators.required);
-  selectFormControl = new FormControl('', Validators.required);
-  predefinedPallets: PredefinedPallet[] = [
-    { name: 'Pallet1' },
-    { name: 'Pallet1' },
-    { name: 'Pallet1' },
-    { name: 'Pallet1' },
-    { name: 'Pallet1' },
-  ];
-*/
-
-  /*
-console(){
-  console.log(this.pallet.width);
-}
-*/
 }

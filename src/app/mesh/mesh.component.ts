@@ -341,14 +341,13 @@ hide(){
 }
 
 deleteBoxOfPp(){
-
-console.log("boxes of pp length before delete: " + this.boxesOfPp.length)
-console.log("item to delete boxofpp: " + this.boxesOfPp[this.boxesOfPp.length-1].name)
+//console.log("boxes of pp length before delete: " + this.boxesOfPp.length)
+//console.log("item to delete boxofpp: " + this.boxesOfPp[this.boxesOfPp.length-1].name)
 //console.log("item to delete boxofPP3Dhelper: " + this.scene.getObjectByName(this.boxesofPp3D[this.boxesofPp3D.length-1].name+ "helper").name)
   this.scene.remove(this.scene.getObjectByName(this.boxesofPp3D[this.boxesofPp3D.length-1].name))
   this.scene.remove(this.scene.getObjectByName(this.boxesofPp3D[this.boxesofPp3D.length-1].name+ "helper"))
   this.boxService.deleteBoxOfPp();
-  console.log("boxes of pp length after delete: " + this.boxesOfPp.length)
+  //console.log("boxes of pp length after delete: " + this.boxesOfPp.length)
   //this.gui.__controllers[this.gui.__controllers.length-1].remove();
   /*
   for (let index = 0; index < this.boxesOfPp.length; index++) {
@@ -381,7 +380,6 @@ configLight(){
     const color1 = 0xFFFFFF;
     const intensity1 = 1.0;
     const light1 = new THREE.DirectionalLight(color1, intensity1);
-
     light1.position.set(-1, 1, 1);
     this.scene.add(light1);
     const color2 = 0xFFFFFF;
@@ -405,8 +403,6 @@ configFloor(){
     new THREE.MeshLambertMaterial({
         map: new THREE.TextureLoader().load('../../assets/Asphalt_01_1K_Base_Color.png') //right
     })
-
-
   var geometry = new THREE.PlaneGeometry( this.workspace.width, this.workspace.height, 1, 1 );
 	//var material = new THREE.MeshBasicMaterial( { color: 0x0000ff } );
 	var floor = new THREE.Mesh( geometry, material );
@@ -417,7 +413,6 @@ configFloor(){
 }
 
 setWorkspaceFunc() {
-
   this.workspace = this.setWorkspaceService.setWorkspace();
   this.createGrid()
   this.configFloor();
@@ -428,16 +423,9 @@ animate() {
   this.controls.update();
   if(this.renderer!=null){
     this.renderer.render(this.scene, this.camera);
-
   }
   else
   console.log("renderer is not defined for animate")
-
-}
-
-
-setKcsFunc() {
-  //this.setKcs = this.setKcsService.setKcs();
 }
 
 addBoxOfPalletFunc() {
@@ -457,10 +445,14 @@ addPallet() {
   this.pallets = this.palletsService.addPallet();
 }
 
+}
 
 
-
-
+/*
+setKcsFunc() {
+  //this.setKcs = this.setKcsService.setKcs();
+}
+*/
 
 
 /*
@@ -500,7 +492,7 @@ generateMesh() {
 */
 
 
-  }
+
 
 
 
