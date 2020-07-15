@@ -34,10 +34,10 @@
       </mat-sidenav>
 
       <mat-sidenav-content>
-        <app-add-pallet #appChildAddPallet (addPalletButton)="addPalletButton($event)"></app-add-pallet>
+        <app-add-pallet #appChildAddPallet></app-add-pallet>
         <app-add-box #appChildAddBox></app-add-box>
-        <app-set-workspace #appChildSetWorkspace (saveSettingsButton)="saveSettingsWorkspaceButton($event)"></app-set-workspace>
-        <app-add-picking-place #appChildAddPickingPlace (addPickingPlaceButton)="addPickingPlaceButton($event)"></app-add-picking-place>
+        <app-set-workspace #appChildSetWorkspace></app-set-workspace>
+        <app-add-picking-place #appChildAddPickingPlace></app-add-picking-place>
 
         <app-mesh #appMesh></app-mesh>
       </mat-sidenav-content>

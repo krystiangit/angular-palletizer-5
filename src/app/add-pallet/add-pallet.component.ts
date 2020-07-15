@@ -1,18 +1,19 @@
-import { Component,
+import {
+  Component,
   ViewChild,
   TemplateRef,
   AfterViewInit,
   ViewContainerRef,
   OnDestroy,
   Output,
-  EventEmitter
-
-   } from "@angular/core";
-import {FormControl, Validators} from '@angular/forms';
-import {Overlay, OverlayRef} from '@angular/cdk/overlay';
-import {TemplatePortal} from '@angular/cdk/portal';
-import {PalletsService} from '../services/pallets.service'
+  EventEmitter,
+} from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
+import { PalletsService } from '../services/pallets.service';
 import { Pallet } from '../models/pallet.model';
+import { AppComponent } from '../app.component';
 
 interface PredefinedPallets {
   name: string;
@@ -31,7 +32,9 @@ export class AddPalletComponent implements AfterViewInit, OnDestroy {
   constructor(
     private _overlay: Overlay,
     private _viewContainerRef: ViewContainerRef,
-    public palletsService: PalletsService) {
+    public palletsService: PalletsService,
+    public appComponent: AppComponent
+  ) {
     this.palletsService.palletSets = this.pallet;
   }
 
@@ -46,12 +49,11 @@ export class AddPalletComponent implements AfterViewInit, OnDestroy {
     posX: 1000,
     posY: 1000,
     posZ: 0,
-    orientation:0
+    orientation: 0,
   };
 
   ngAfterViewInit() {
-console.log(this.pallet)
-
+    console.log(this.pallet);
 
     this._portal = new TemplatePortal(
       this._dialogTemplate,
@@ -81,14 +83,15 @@ console.log(this.pallet)
   palletControl = new FormControl('', Validators.required);
   selectFormControl = new FormControl('', Validators.required);
   predefinedPallets: PredefinedPallets[] = [
-    { name: 'Pallet1' },
+    { name: 'Euro 800x1200x144' },
     { name: 'Pallet1' },
     { name: 'Pallet1' },
     { name: 'Pallet1' },
     { name: 'Pallet1' },
   ];
-
-  @Output() addPalletButton: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
+  addPallet() {
+    this.appComponent.addPallet();
+  }
 
   /*
 console(){

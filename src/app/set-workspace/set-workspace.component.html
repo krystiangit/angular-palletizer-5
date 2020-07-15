@@ -27,7 +27,7 @@
               <mat-label>Height [m]</mat-label>
               <input matInput placeholder="100" [(ngModel)]="workspace.height" value="workspace.height" name="inputWorkspaceHeight">
             </mat-form-field>
-            <button class="mat-raised-button" (click)="saveSettingsButton.emit($event)">Save Settings</button>
+            <button class="mat-raised-button" (click)="saveSettings()">Save Settings</button>
           </form>
         </div>
 

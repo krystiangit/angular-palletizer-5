@@ -36,7 +36,7 @@ export class AppComponent implements OnDestroy {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
-  public addPalletButton(event: MouseEvent): void {
+  public addPallet(){
     this.childMeshComponent.addPallet();
     this.childMeshComponent.addPallet3D();
   }
@@ -50,7 +50,7 @@ export class AppComponent implements OnDestroy {
   public addBoxOfPallet() {
     this.childMeshComponent.addBoxOfPalletFunc();
     this.childMeshComponent.addBoxOfPallet3D();
-    //console.log('add box of Pallet clicked on parent func');
+    console.log('add box of Pallet clicked on parent func');
   }
 
   public addBoxOfPp() {
@@ -59,17 +59,17 @@ export class AppComponent implements OnDestroy {
     //console.log('add box of PP clicked on parent func');
   }
 
-  public saveSettingsWorkspaceButton(event: MouseEvent): void {
+  public saveSettingsWorkspace(){
     this.childMeshComponent.setWorkspaceFunc();
     this.childMeshComponent.setWorkspaceFunc();
     console.log('save settings workspace clicked');
   }
 
-  public saveSettingsKcsButton(event: MouseEvent): void {
+  public saveSettingsKcs(){
     //this.childMeshComponent.setKcsFunc();
     //console.log('save settings Kcs clicked');
   }
-  public addPickingPlaceButton(event: MouseEvent): void {
+  public addPickingPlace(){
     this.childMeshComponent.addPickingPlaceFunc();
     this.childMeshComponent.addPp3D();
     console.log('add picking place clicked');

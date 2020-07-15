@@ -12,7 +12,7 @@ import {Overlay, OverlayRef} from '@angular/cdk/overlay';
 import {TemplatePortal} from '@angular/cdk/portal';
 import { PickingPlace } from '../models/pickingPlace.model';
 import { AddPickingPlaceService } from '../services/add-picking-place.service';
-
+import { AppComponent } from '../app.component'
 
 @Component({
   selector: 'app-add-picking-place',
@@ -40,14 +40,11 @@ export class AddPickingPlaceComponent implements AfterViewInit, OnDestroy {
 
   constructor(private _overlay: Overlay,
      private _viewContainerRef: ViewContainerRef,
-     public addPickingPlaceService: AddPickingPlaceService
+     public addPickingPlaceService: AddPickingPlaceService,
+     public appComponent: AppComponent
      ) {
       this.addPickingPlaceService.pickingPlaceSets= this.pickingPlace;
      }
-
-
-
-  @Output() addPickingPlaceButton: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
   ngAfterViewInit() {
     this._portal = new TemplatePortal(this._dialogTemplate, this._viewContainerRef);
@@ -69,7 +66,9 @@ export class AddPickingPlaceComponent implements AfterViewInit, OnDestroy {
 
   ngOnInit (){}
 
-
+  addPickingPlace(){
+    this.appComponent.addPickingPlace();
+  }
 
 
 }

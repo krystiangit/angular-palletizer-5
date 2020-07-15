@@ -12,7 +12,7 @@ import {Overlay, OverlayRef} from '@angular/cdk/overlay';
 import {TemplatePortal} from '@angular/cdk/portal';
 import {Workspace} from '../models/workspace.model';
 import  {SetWorkspaceService} from '../services/set-workspace.service'
-
+import { AppComponent } from '../app.component'
 
 
 
@@ -40,12 +40,13 @@ export class SetWorkspaceComponent implements AfterViewInit, OnDestroy {
 
   constructor(private _overlay: Overlay,
      private _viewContainerRef: ViewContainerRef,
-     setWorkspaceService: SetWorkspaceService
+     setWorkspaceService: SetWorkspaceService,
+     public appComponent: AppComponent
      ) {
        setWorkspaceService.workspaceSets = this.workspace;
      }
 
-  @Output() saveSettingsButton: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
+
 
   ngAfterViewInit() {
     this._portal = new TemplatePortal(this._dialogTemplate, this._viewContainerRef);
@@ -67,7 +68,9 @@ export class SetWorkspaceComponent implements AfterViewInit, OnDestroy {
 
   ngOnInit (){}
 
-
+  saveSettings(){
+    this.appComponent.saveSettingsWorkspace();
+  }
 
 
 }
