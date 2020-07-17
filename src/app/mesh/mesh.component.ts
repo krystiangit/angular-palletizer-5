@@ -56,7 +56,7 @@ export class MeshComponent implements OnInit {
   workspace:Workspace;
 
 
-  loader = new GLTFLoader();
+
 
   gui = new dat.GUI();
 
@@ -81,80 +81,11 @@ export class MeshComponent implements OnInit {
     console.log(SampleJson);
   }
 
-
-  guiFunc(){
-
-    const params = {
-      envMap: 'HDR',
-      roughness: 0.0,
-      metalness: 0.0,
-      exposure: 1.0,
-      debug: false
-    };
-   const text = {
-      message: 'dat.gui',
-      speed: 0.8,
-      displayOutline: false,
-    };
-
-    //const gui = new dat.GUI();
-    //this.gui.destroy()
-/*
-    const guiContainer =
-    this.gui.add( params, 'envMap', [ 'LDR', 'HDR', 'RGBM16' ] );
-    this.gui.add( params, 'roughness', 0, 1, 0.01 );
-    this.gui.add( params, 'metalness', 0, 1, 0.01 );
-    this.gui.add( params, 'exposure', 0, 2, 0.01 );
-    this.gui.add( params, 'debug', false );
-    this.gui.domElement.id = 'gui';
-    */
-    //this.gui.nativeElement.id = 'gui';
-
-
-    //var menu = this.gui.addFolder('folder');
-    //var menuPp3D = this.gui.addFolder('Boxes of Picking Place')
-    //menu.add(text, 'message');
-    //menu.add(text, 'speed', -5, 5);
-    //menu.add(text, 'displayOutline');
-    this.guiContainerRef.nativeElement.append(this.gui.domElement);
-    this.gui.open();
-    //menu.open();
+  saveToJson(){
+    this.boxService.saveToJson();
   }
 
-  updateDisplay(gui) {
-    //console.log("start updating")
-    /*
-    for (let index = 0; index < gui.__controllers.length; index++) {
-      gui.__controllers[index].remove();
-    console.log("iteracja 1")
-    }*/
 
-/*
-    if (this.boxesOfPallet.length>0){
-      for (let index = gui.__controllers.length; index < this.boxesOfPallet.length; index++) {
-        this.gui.add(this.boxesOfPallet[index], 'visible').listen()
-      }
-    }
-*/
-if (this.boxesOfPallet.length>0){
-  for (let index = gui.__controllers.length; index < this.boxesOfPallet.length; index++) {
-    this.gui.add(this.scene.getObjectByName(this.boxesofPallet3D[index].name), 'visible').name(this.boxesofPallet3D[index].name)
-
-  }
-}
-
-/*
-for (let index = 0; index < gui.__controllers.length; index++) {
-  gui.__controllers[index].updateDisplay();
-console.log("iteracja 1")
-
-}
-for (let index1 = 0; index1 < gui.__folders.length; index1++) {
-  this.updateDisplay(gui.__folders[index1]);
-  console.log("iteracja 2")
-}
-*/
-  }
 
 
 
@@ -169,7 +100,7 @@ ngAfterViewInit(){
   this.createGrid();
   this.configLight();
   this.renderer.render(this.scene, this.camera)
-  this.configFloor()
+  //this.configFloor()
   this.animate();
   this.guiFunc();
 }
@@ -190,7 +121,7 @@ configCamera() {
 
 configRenderer() {
   this.renderer.setPixelRatio(window.devicePixelRatio);
-  this.renderer.setClearColor(new THREE.Color("hsl(0, 0%, 0%)"));
+  this.renderer.setClearColor(new THREE.Color("hsl(232, 13%, 54%)"));
   this.renderer.setSize(this.windowWidth, this.windowheight);
   this.renderer.domElement.style.display = "block";
   this.renderer.domElement.style.margin = "auto";
@@ -218,8 +149,8 @@ addPallet3D(){
   this.pallets3D[index].position.z=-this.palletPos3D[index].posY;
 
 */
-
-  this.loader.load(
+  var loader = new GLTFLoader();
+  loader.load(
   address,
   ( gltf ) => {
   // called when the resource is loaded
@@ -279,6 +210,7 @@ console.log("iteracja")
        var objectHelper = this.helpersOfPp[index]
        this.scene.add(objectHelper);
       }
+      this.updateDisplay(this.gui)
 }
 
 
@@ -484,6 +416,84 @@ addPickingPlaceFunc() {
 addPallet() {
   this.pallets = this.palletsService.addPallet();
 }
+
+
+
+guiFunc(){
+
+  const params = {
+    envMap: 'HDR',
+    roughness: 0.0,
+    metalness: 0.0,
+    exposure: 1.0,
+    debug: false
+  };
+ const text = {
+    message: 'dat.gui',
+    speed: 0.8,
+    displayOutline: false,
+  };
+
+  //const gui = new dat.GUI();
+  //this.gui.destroy()
+/*
+  const guiContainer =
+  this.gui.add( params, 'envMap', [ 'LDR', 'HDR', 'RGBM16' ] );
+  this.gui.add( params, 'roughness', 0, 1, 0.01 );
+  this.gui.add( params, 'metalness', 0, 1, 0.01 );
+  this.gui.add( params, 'exposure', 0, 2, 0.01 );
+  this.gui.add( params, 'debug', false );
+  this.gui.domElement.id = 'gui';
+  */
+  //this.gui.nativeElement.id = 'gui';
+
+
+  //var menu = this.gui.addFolder('folder');
+  //var menuPp3D = this.gui.addFolder('Boxes of Picking Place')
+  //menu.add(text, 'message');
+  //menu.add(text, 'speed', -5, 5);
+  //menu.add(text, 'displayOutline');
+  this.guiContainerRef.nativeElement.append(this.gui.domElement);
+  this.gui.open();
+  //menu.open();
+}
+
+updateDisplay(gui) {
+  //console.log("start updating")
+  /*
+  for (let index = 0; index < gui.__controllers.length; index++) {
+    gui.__controllers[index].remove();
+  console.log("iteracja 1")
+  }*/
+
+/*
+  if (this.boxesOfPallet.length>0){
+    for (let index = gui.__controllers.length; index < this.boxesOfPallet.length; index++) {
+      this.gui.add(this.boxesOfPallet[index], 'visible').listen()
+    }
+  }
+*/
+if (this.boxesOfPallet.length>0){
+for (let index = gui.__controllers.length; index < this.boxesOfPallet.length; index++) {
+  this.gui.add(this.scene.getObjectByName(this.boxesofPallet3D[index].name), 'visible').name(this.boxesofPallet3D[index].name)
+
+}
+}
+
+/*
+for (let index = 0; index < gui.__controllers.length; index++) {
+gui.__controllers[index].updateDisplay();
+console.log("iteracja 1")
+
+}
+for (let index1 = 0; index1 < gui.__folders.length; index1++) {
+this.updateDisplay(gui.__folders[index1]);
+console.log("iteracja 2")
+}
+*/
+}
+
+
 
 }
 
