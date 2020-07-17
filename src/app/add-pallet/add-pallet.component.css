@@ -99,3 +99,10 @@
 .refreshButton{
   padding: 5px;
 }
+
+.predefinedOrCustom{
+  padding: 10px;
+}
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}

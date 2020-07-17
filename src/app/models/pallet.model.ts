@@ -1,6 +1,7 @@
 export class Pallet{
   name: string = "Pallet1";
   id: string;
+  isTexture:boolean;
   width: number;
   length:number;
   height: number;
@@ -8,6 +9,7 @@ export class Pallet{
   posY: number;
   posZ:number;
   orientation:number;
+  color:number;
 
 }
 

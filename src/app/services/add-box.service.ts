@@ -238,9 +238,6 @@ console.log("box PosY" + temp.posZ)
         this.addPosY -
         this.centerPosY);
         tempBox3D.rotation.y=this.boxSets.orientation*(Math.PI/180);
-
-console.log("Box 3DPosY: " + tempBox3D.position.y)
-
       }
 
       if (this.boxSets.membership.search('Picking') == 0) {

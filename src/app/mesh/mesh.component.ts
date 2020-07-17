@@ -60,7 +60,8 @@ export class MeshComponent implements OnInit {
   boxOfPalletPos3D = null;
   boxesofPp3D = null;
   boxOfPpPos3D = null;
-  helpersOfPp = null;
+  helpersBoxOfPp = null;
+  helpersBoxOfPallet = null;
   helpersOfPallet = null;
   pps3D = null;
   ppPos3D = null;
@@ -147,15 +148,15 @@ deletePallet(id: string) {
   addPallet3D() {
     const address = '../../assets/euroPalletTexture.glb';
     this.pallets3D = this.palletsService.addPallet3D();
-    this.palletPos3D = this.palletsService.addPosition3D();
-    for (let index = 0; index < this.pallets3D.length; index++) {
-      /*
-  this.scene.add(this.pallets3D[index]);
-  this.pallets3D[index].position.x=this.palletPos3D[index].posX;
-  this.pallets3D[index].position.y=this.palletPos3D[index].posZ+this.palletsService.pallets[index].height/2;
-  this.pallets3D[index].position.z=-this.palletPos3D[index].posY;
+    this.helpersOfPallet = this.palletsService.addHelper3D();
 
-*/
+    for (let index = 0; index < this.pallets3D.length; index++) {
+
+  this.scene.add(this.pallets3D[index]);
+  var objectHelper = this.helpersOfPallet[index];
+  this.scene.add(objectHelper);
+
+/*
       var loader = new GLTFLoader();
       loader.load(
         address,
@@ -178,6 +179,10 @@ deletePallet(id: string) {
           console.error('An error happened', error);
         }
       );
+*/
+
+
+
     }
   }
 
@@ -185,16 +190,16 @@ deletePallet(id: string) {
     this.boxService.loadProject();
     this.boxesOfPallet = this.boxService.boxesOfPallet;
     this.boxesofPallet3D = this.boxService.boxesOfPallet3D;
-    this.helpersOfPallet = this.boxService.helpersOfPallet;
+    this.helpersBoxOfPallet = this.boxService.helpersOfPallet;
     this.boxesOfPp = this.boxService.boxesOfPickingPlace;
     this.boxesofPp3D = this.boxService.boxesOfPp3D;
-    this.helpersOfPp = this.boxService.helpersOfPp;
+    this.helpersBoxOfPp = this.boxService.helpersOfPp;
 
     for (let index = 0; index < this.boxesofPallet3D.length; index++) {
       var object = this.boxesofPallet3D[index];
       object.name = this.boxesOfPallet[index].name;
       this.scene.add(object);
-      var objectHelper = this.helpersOfPallet[index];
+      var objectHelper = this.helpersBoxOfPallet[index];
       this.scene.add(objectHelper);
     }
 
@@ -202,7 +207,7 @@ deletePallet(id: string) {
       var object = this.boxesofPp3D[index];
       object.name = this.boxesOfPp[index].name;
       this.scene.add(object);
-      var objectHelper = this.helpersOfPp[index];
+      var objectHelper = this.helpersBoxOfPp[index];
       this.scene.add(objectHelper);
     }
     this.updateDisplay(this.gui);
@@ -210,13 +215,13 @@ deletePallet(id: string) {
 
   addBoxOfPallet3D() {
     this.boxesofPallet3D = this.boxService.addBox3D();
-    this.helpersOfPallet = this.boxService.addHelper3D();
+    this.helpersBoxOfPallet = this.boxService.addHelper3D();
     for (let index = 0; index < this.boxesofPallet3D.length; index++) {
       //this.scene.add(this.boxesofPallet3D[index]);
       var object = this.boxesofPallet3D[index];
       object.name = this.boxesOfPallet[index].name;
       this.scene.add(object);
-      var objectHelper = this.helpersOfPallet[index];
+      var objectHelper = this.helpersBoxOfPallet[index];
       this.scene.add(objectHelper);
     }
     this.updateDisplay(this.gui);
@@ -224,13 +229,13 @@ deletePallet(id: string) {
 
   addBoxOfPp3D() {
     this.boxesofPp3D = this.boxService.addBox3D();
-    this.helpersOfPp = this.boxService.addHelper3D();
+    this.helpersBoxOfPp = this.boxService.addHelper3D();
     for (let index = 0; index < this.boxesofPp3D.length; index++) {
       console.log('boxes of PP names' + this.boxesofPp3D[index].name);
       var object = this.boxesofPp3D[index];
       object.name = this.boxesOfPp[index].name;
       this.scene.add(object);
-      var objectHelper = this.helpersOfPp[index];
+      var objectHelper = this.helpersBoxOfPp[index];
       this.scene.add(objectHelper);
     }
   }
@@ -243,11 +248,11 @@ deletePallet(id: string) {
     for (let index = 0; index < this.boxesofPallet3D.length; index++) {
       console.log('boxes of pp3d names: ' + this.boxesofPallet3D[index].name);
     }
-    for (let index = 0; index < this.helpersOfPallet.length; index++) {
-      console.log('helpers names: ' + this.helpersOfPallet[index].name);
+    for (let index = 0; index < this.helpersBoxOfPallet.length; index++) {
+      console.log('helpers names: ' + this.helpersBoxOfPallet[index].name);
     }
-    for (let index = 0; index < this.helpersOfPp.length; index++) {
-      console.log('helpers names: ' + this.helpersOfPp[index].name);
+    for (let index = 0; index < this.helpersBoxOfPp.length; index++) {
+      console.log('helpers names: ' + this.helpersBoxOfPp[index].name);
     }
     console.log('check ends');
   }

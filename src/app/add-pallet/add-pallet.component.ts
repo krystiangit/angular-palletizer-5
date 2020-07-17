@@ -20,6 +20,10 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 interface PredefinedPallets {
   name: string;
 }
+interface Color {
+  name: string;
+  value: number;
+}
 
 @Component({
   selector: 'app-add-pallet',
@@ -52,11 +56,22 @@ export class AddPalletComponent implements AfterViewInit, OnDestroy {
 
   }
 
+  public colors: Color[] = [
+    { name: 'red', value: 0xff0000 },
+    { name: 'light green', value: 0x00ff00 },
+    { name: 'dark green', value: 0x206600 },
+    { name: 'yellow', value: 0xffff00 },
+    { name: 'orange', value: 0xff6600 },
+    { name: 'light blue', value: 0x00a2ff },
+    { name: 'dark blue', value: 0x0400ff },
+  ];
+
   //public pallets: Pallet[] = []
 
   public pallet: Pallet = {
     name: 'Pallet1',
     id: '1',
+    isTexture: true,
     width: 800,
     length: 1200,
     height: 144,
@@ -64,8 +79,8 @@ export class AddPalletComponent implements AfterViewInit, OnDestroy {
     posY: 1000,
     posZ: 0,
     orientation: 0,
+    color:0xffff00
   };
-
 
   scene = null;
   camera = null;
@@ -131,11 +146,8 @@ export class AddPalletComponent implements AfterViewInit, OnDestroy {
       this.scene.remove(this.scene.children[0]);
     }
     const material = new THREE.MeshPhongMaterial({
-      color: 0xffff00,
+      color: this.pallet.color,
     });
-
-
-
 
     let tempGeometry = new THREE.BoxBufferGeometry(
       this.pallet.width,
@@ -147,7 +159,6 @@ export class AddPalletComponent implements AfterViewInit, OnDestroy {
     );
     let tempPallet3D = null
     tempPallet3D = new THREE.Mesh(tempGeometry, material);
-
 
     //let tempBox3D = new THREE.Mesh( geometry, this.materials );
     tempPallet3D = new THREE.Mesh(tempGeometry, material);
@@ -196,6 +207,7 @@ myScene.add(myBox);
     this.configLight();
     this.renderer.render(this.scene, this.camera);
     this.animate();
+    console.log("this.pallet.isTexture" + this.pallet.isTexture + "typeOf" + typeof(this.pallet.isTexture))
     return "aaa"
   }
   tabChange($event) {
