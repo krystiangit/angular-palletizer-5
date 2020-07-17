@@ -14,6 +14,7 @@ import * as THREE from 'three';
 import * as dat from 'dat.gui';
 import { Pallet } from '../models/pallet.model';
 
+
 import SampleJson from '../../assets/SampleJson.json';
 //declare const THREE: any;
 @Component({
@@ -249,6 +250,9 @@ loadProject(){
   this.boxesOfPallet = this.boxService.boxesOfPallet
   this.boxesofPallet3D = this.boxService.boxesOfPallet3D;
   this.helpersOfPallet = this.boxService.helpersOfPallet;
+  this.boxesOfPp = this.boxService.boxesOfPickingPlace;
+  this.boxesofPp3D = this.boxService.boxesOfPp3D;
+  this.helpersOfPp = this.boxService.helpersOfPp;
 console.log("this.boxesofPallet3D from mesh:" + this.boxesofPallet3D)
 console.log("boxes of pallet 3D json:" + JSON.stringify(this.boxesofPallet3D))
 /*
@@ -264,10 +268,17 @@ console.log("iteracja")
    object.name = this.boxesOfPallet[index].name;
    this.scene.add(object)
    var objectHelper = this.helpersOfPallet[index]
-
    this.scene.add(objectHelper);
-
   }
+
+  for (let index = 0; index < this.boxesofPp3D.length; index++) {
+    console.log("iteracja")
+       var object = this.boxesofPp3D[index];
+       object.name = this.boxesOfPp[index].name;
+       this.scene.add(object)
+       var objectHelper = this.helpersOfPp[index]
+       this.scene.add(objectHelper);
+      }
 }
 
 

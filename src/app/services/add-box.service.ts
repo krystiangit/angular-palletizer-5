@@ -3,7 +3,8 @@ import { Box } from '../models/box.model';
 import { Position3D } from '../models/position3D';
 import * as THREE from 'three';
 //import { PickingPlace } from '../models/pickingPlace.model';
-import BoxesJson from '../../assets/boxes-of-pallet.json';
+import BoxesOfPalletJson from '../../assets/boxes-of-pallet.json';
+import BoxesOfPpJson  from '../../assets/boxes-of-pp.json'
 //import BoxesJson3D from '../../assets/boxes-of-pallet3D.json';
 //import  *  as  data  from  '../../assets/boxes-of-pallet.json';
 import { saveAs } from 'file-saver';
@@ -38,16 +39,13 @@ constructor(private httpClient: HttpClient){
   helpersOfPallet = [];
 
 saveToJson(){
-
-    console.log('Reading local json files');
-    //console.log(BoxesJson);
-    let BoxesJson1 = JSON.stringify(this.boxesOfPallet);
-
-    //BoxesJson1 = '../../assets/boxes-of-pallet.json'
-//saving on disk
-    const blob1 = new Blob([BoxesJson1], {type : 'application/json'});
+    let _boxesOfPalletJson = JSON.stringify(this.boxesOfPallet);
+    const blob1 = new Blob([_boxesOfPalletJson], {type : 'application/json'});
     saveAs(blob1, 'boxes-of-pallet.json');
 
+    let _boxesOfPpJson = JSON.stringify(this.boxesOfPickingPlace);
+    const blob2 = new Blob([_boxesOfPpJson], {type : 'application/json'})
+    saveAs(blob2, 'boxes-of-pp.json')
 
     this.httpClient.get('assets/boxes-of-pallet.json').subscribe(data =>{
       console.log("data: " + data);
@@ -56,15 +54,11 @@ saveToJson(){
 }
 
 loadProject(){
-  console.log("parse json")
-  let boxes = JSON.parse(JSON.stringify(BoxesJson));
-  //let boxes3D = JSON.parse(JSON.stringify(BoxesJson3D));
-  console.log("this.boxesOfPallet = boxes")
-  this.boxesOfPallet = boxes;
-  //this.boxesOfPallet3D = boxes3D;
-  console.log("this.boxesOfPallet: " + this.boxesOfPallet)
+  let _boxesOfPallet = JSON.parse(JSON.stringify(BoxesOfPalletJson));
+  this.boxesOfPallet = _boxesOfPallet;
 
-
+  let _boxesOfPp = JSON.parse(JSON.stringify(BoxesOfPpJson));
+  this.boxesOfPickingPlace = _boxesOfPp;
 
   const material = new THREE.MeshPhongMaterial({
     color: this.boxSets.color,
@@ -72,19 +66,15 @@ loadProject(){
 
     let tempBox3D = null
     var tempHelper = null
+
 for (let index = 0; index < this.boxesOfPallet.length; index++) {
-
-
   let tempGeometry = new THREE.BoxBufferGeometry(
     this.boxesOfPallet[index].width,
     this.boxesOfPallet[index].height,
     this.boxesOfPallet[index].length,
     10,10,10
     );
-
       tempBox3D = new THREE.Mesh(tempGeometry, material);
-
-
       tempBox3D.position.x=this.boxesOfPallet[index].posX;
         tempBox3D.position.y=(this.boxesOfPallet[index].posZ);
         tempBox3D.position.z=-(this.boxesOfPallet[index].posY);
@@ -93,10 +83,27 @@ for (let index = 0; index < this.boxesOfPallet.length; index++) {
         tempHelper = new THREE.BoxHelper(this.boxesOfPallet3D[index], 0x000000)
         tempHelper.name=this.boxesOfPallet[index].name + "helper"
         this.helpersOfPallet.push(tempHelper);
-      }
+    }
 
-      console.log("this.boxesOfPallet3D from service: " + this.boxesOfPallet3D)
-      return this.boxesOfPallet3D;
+    for (let index = 0; index < this.boxesOfPickingPlace.length; index++) {
+      let tempGeometry = new THREE.BoxBufferGeometry(
+        this.boxesOfPickingPlace[index].width,
+        this.boxesOfPickingPlace[index].height,
+        this.boxesOfPickingPlace[index].length,
+        10,10,10
+        );
+          tempBox3D = new THREE.Mesh(tempGeometry, material);
+          tempBox3D.position.x=this.boxesOfPickingPlace[index].posX;
+            tempBox3D.position.y=(this.boxesOfPickingPlace[index].posZ);
+            tempBox3D.position.z=-(this.boxesOfPickingPlace[index].posY);
+            tempBox3D.rotation.y=this.boxesOfPickingPlace[index].orientation*(Math.PI/180);
+            this.boxesOfPp3D.push(tempBox3D);
+            tempHelper = new THREE.BoxHelper(this.boxesOfPp3D[index], 0x000000)
+            tempHelper.name=this.boxesOfPickingPlace[index].name + "helper"
+            this.helpersOfPp.push(tempHelper);
+        }
+
+
 }
 
 ngOnInit(){
