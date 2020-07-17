@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, ɵSWITCH_CHANG
 import { SetWorkspaceService } from '../services/set-workspace.service';
 import { Workspace } from '../models/workspace.model';
 //import { SetKcsService } from '../services/set-kcs.service';
-import { Kcs } from '../models/kcs.model';
+//import { Kcs } from '../models/kcs.model';
 import { AddBoxService } from '../services/add-box.service';
 import { Box } from '../models/box.model';
 import { PickingPlace } from '../models/pickingPlace.model';
@@ -13,8 +13,8 @@ import { GLTFLoader, GLTF, GLTFParser, GLTFReference } from 'three/examples/jsm/
 import * as THREE from 'three';
 import * as dat from 'dat.gui';
 import { Pallet } from '../models/pallet.model';
-import { FontLoader } from 'three';
 
+import SampleJson from '../../assets/SampleJson.json';
 //declare const THREE: any;
 @Component({
   selector: 'app-mesh',
@@ -76,7 +76,8 @@ export class MeshComponent implements OnInit {
     this.renderer = new THREE.WebGLRenderer({antialias:true});
     this.renderer.outputEncoding = THREE.sRGBEncoding;
     this.workspace = setWorkspaceService.workspaceSets
-
+    console.log('Reading local json files');
+    console.log(SampleJson);
   }
 
 
@@ -243,12 +244,40 @@ addPallet3D(){
 
   }
 
+loadProject(){
+  this.boxService.loadProject()
+  this.boxesOfPallet = this.boxService.boxesOfPallet
+  this.boxesofPallet3D = this.boxService.boxesOfPallet3D;
+  this.helpersOfPallet = this.boxService.helpersOfPallet;
+console.log("this.boxesofPallet3D from mesh:" + this.boxesofPallet3D)
+console.log("boxes of pallet 3D json:" + JSON.stringify(this.boxesofPallet3D))
+/*
+  var object = this.boxesofPallet3D[0];
+  object.name = this.boxesOfPallet[0].name
+  this.scene.add(object)
+  console.log("abject added" + object)
+  */
+
+  for (let index = 0; index < this.boxesofPallet3D.length; index++) {
+console.log("iteracja")
+   var object = this.boxesofPallet3D[index];
+   object.name = this.boxesOfPallet[index].name;
+   this.scene.add(object)
+   var objectHelper = this.helpersOfPallet[index]
+
+   this.scene.add(objectHelper);
+
+  }
+}
+
+
 addBoxOfPallet3D(){
   this.boxesofPallet3D = this.boxService.addBox3D()
   this.helpersOfPallet = this.boxService.addHelper3D();
+  //console.log("add box3d json: " + JSON.stringify(this.boxesofPallet3D[0]))
   //this.boxOfPalletPos3D = this.boxService.addPosition3D()
   for (let index = 0; index < this.boxesofPallet3D.length; index++) {
-    this.scene.add(this.boxesofPallet3D[index]);
+    //this.scene.add(this.boxesofPallet3D[index]);
    var object = this.boxesofPallet3D[index];
    object.name = this.boxesOfPallet[index].name;
    this.scene.add(object)

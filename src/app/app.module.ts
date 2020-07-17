@@ -12,7 +12,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
-
+import { HttpClientModule }    from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
@@ -58,7 +58,7 @@ import { MeshComponent } from './mesh/mesh.component';
     MatIconModule,
     MatListModule,
     DemoMaterialModule,
-
+    HttpClientModule,
 
 
     ReactiveFormsModule

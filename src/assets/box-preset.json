@@ -1,0 +1,24 @@
+
+{
+    "name": "Box1",
+    "id": "1",
+    "membership": "membership",
+    "source": "source",
+    "layer": 0,
+    "isTexture": false,
+    "visible":true,
+    "width": 400,
+    "length": 600,
+    "height": 130,
+    "posX": 0,
+    "posY": 0,
+    "posZ": 0,
+    "posXParent": 0,
+    "posYParent": 0,
+    "posZParent": 0,
+    "widthParent": 0,
+    "lengthParent": 0,
+    "heightParent": 0,
+    "orientation": 0,
+    "color": "0xff0000"
+  }

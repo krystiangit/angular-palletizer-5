@@ -19,8 +19,7 @@ import { PalletsService } from '../services/pallets.service';
 import { AppComponent } from '../app.component';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { MatTabChangeEvent } from '@angular/material/tabs';
-
+import BoxJson from '../../assets/box-preset.json';
 
 interface Color {
   name: string;
@@ -45,6 +44,7 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
     public addPickingPlaceService: AddPickingPlaceService,
     public palletService: PalletsService,
     public appComponent: AppComponent,
+
   ) {
     this.addBoxervice.boxSets = this.box;
     (this.scene = new THREE.Scene()),
@@ -56,7 +56,18 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
       ));
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.renderer.outputEncoding = THREE.sRGBEncoding;
-    console.log('previewRef' + this.previewRef);
+    //console.log('previewRef' + this.previewRef);
+//playing with json
+    console.log('Reading local json files');
+    console.log(BoxJson);
+    let body = JSON.stringify(BoxJson);
+    let body1 = JSON.parse(body);
+    console.log("stringyfy: " + body)
+    console.log("body1: " + body1)
+    console.log("body1,name: " + body1.name)
+    const box1:Box = body1;
+    console.log("box1.name: " + typeof(box1.color.toFixed))
+    var uri = "data:application/json;charset=UTF-8," + encodeURIComponent(body);
   }
   public mode: string;
   public parentsNames = [];
@@ -66,6 +77,7 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
 
 
   //selectedParent = this.parentsNames[2];
+
   public box: Box = {
     name: 'Box1',
     id: '1',
@@ -105,6 +117,9 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
   renderer = null;
   windowWidth = 290;
   windowheight = 290;
+
+
+
 
   configCamera() {
     this.camera.position.z = 300;

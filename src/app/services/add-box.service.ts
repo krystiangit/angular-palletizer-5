@@ -3,9 +3,20 @@ import { Box } from '../models/box.model';
 import { Position3D } from '../models/position3D';
 import * as THREE from 'three';
 //import { PickingPlace } from '../models/pickingPlace.model';
-
+import BoxesJson from '../../assets/boxes-of-pallet.json';
+//import BoxesJson3D from '../../assets/boxes-of-pallet3D.json';
+//import  *  as  data  from  '../../assets/boxes-of-pallet.json';
+import { saveAs } from 'file-saver';
+import { HttpClient } from "@angular/common/http";
 @Injectable({ providedIn: 'root' })
 export class AddBoxService {
+
+constructor(private httpClient: HttpClient){
+
+}
+
+  products: any = [];
+
   public boxesOfPallet: Box[] = [];
   public boxesOfPickingPlace: Box[] = [];
   public boxSets: Box;
@@ -26,8 +37,70 @@ export class AddBoxService {
   helpersOfPp = [];
   helpersOfPallet = [];
 
+saveToJson(){
+
+    console.log('Reading local json files');
+    //console.log(BoxesJson);
+    let BoxesJson1 = JSON.stringify(this.boxesOfPallet);
+
+    //BoxesJson1 = '../../assets/boxes-of-pallet.json'
+//saving on disk
+    const blob1 = new Blob([BoxesJson1], {type : 'application/json'});
+    saveAs(blob1, 'boxes-of-pallet.json');
 
 
+    this.httpClient.get('assets/boxes-of-pallet.json').subscribe(data =>{
+      console.log("data: " + data);
+      this.products = data;
+    })
+}
+
+loadProject(){
+  console.log("parse json")
+  let boxes = JSON.parse(JSON.stringify(BoxesJson));
+  //let boxes3D = JSON.parse(JSON.stringify(BoxesJson3D));
+  console.log("this.boxesOfPallet = boxes")
+  this.boxesOfPallet = boxes;
+  //this.boxesOfPallet3D = boxes3D;
+  console.log("this.boxesOfPallet: " + this.boxesOfPallet)
+
+
+
+  const material = new THREE.MeshPhongMaterial({
+    color: this.boxSets.color,
+  });
+
+    let tempBox3D = null
+    var tempHelper = null
+for (let index = 0; index < this.boxesOfPallet.length; index++) {
+
+
+  let tempGeometry = new THREE.BoxBufferGeometry(
+    this.boxesOfPallet[index].width,
+    this.boxesOfPallet[index].height,
+    this.boxesOfPallet[index].length,
+    10,10,10
+    );
+
+      tempBox3D = new THREE.Mesh(tempGeometry, material);
+
+
+      tempBox3D.position.x=this.boxesOfPallet[index].posX;
+        tempBox3D.position.y=(this.boxesOfPallet[index].posZ);
+        tempBox3D.position.z=-(this.boxesOfPallet[index].posY);
+        tempBox3D.rotation.y=this.boxesOfPallet[index].orientation*(Math.PI/180);
+        this.boxesOfPallet3D.push(tempBox3D);
+        tempHelper = new THREE.BoxHelper(this.boxesOfPallet3D[index], 0x000000)
+        tempHelper.name=this.boxesOfPallet[index].name + "helper"
+        this.helpersOfPallet.push(tempHelper);
+      }
+
+      console.log("this.boxesOfPallet3D from service: " + this.boxesOfPallet3D)
+      return this.boxesOfPallet3D;
+}
+
+ngOnInit(){
+  }
 
   addBox() {
     //place box in center of Picking place or in left bottom corner of Pallet
@@ -78,7 +151,7 @@ export class AddBoxService {
     temp.height = this.boxSets.height;
     temp.posX = this.boxSets.posX + this.boxSets.posXParent + this.addPosX - this.centerPosX;
     temp.posY = this.boxSets.posY + this.boxSets.posYParent + this.addPosY - this.centerPosY;
-    temp.posZ = this.boxSets.posZ + this.boxSets.posZParent;
+    temp.posZ = this.boxSets.posZ + this.boxSets.posZParent + this.boxSets.height / 2 + this.centerPosZ;;
     temp.orientation = this.boxSets.orientation;
     temp.membership = this.boxSets.membership;
     temp.source = this.boxSets.source;
@@ -86,7 +159,7 @@ export class AddBoxService {
     temp.isTexture = this.boxSets.isTexture;
     temp.visible = this.boxSets.visible;
     temp.color = this.boxSets.color
-
+console.log("box PosY" + temp.posZ)
     //checking if box belongs to parent or Picking place
     if (this.boxSets.membership.search('Pallet') == 0) {
       temp.name = 'BoxOfPallet' + (this.boxesOfPallet.length + 1);
@@ -158,6 +231,9 @@ export class AddBoxService {
         this.addPosY -
         this.centerPosY);
         tempBox3D.rotation.y=this.boxSets.orientation*(Math.PI/180);
+
+console.log("Box 3DPosY: " + tempBox3D.position.y)
+
       }
 
       if (this.boxSets.membership.search('Picking') == 0) {

@@ -93,6 +93,8 @@ export class AddPalletComponent implements AfterViewInit, OnDestroy {
     this.appComponent.addPallet();
   }
 
+
+
   /*
 console(){
   console.log(this.pallet.width);
