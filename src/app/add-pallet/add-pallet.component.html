@@ -14,11 +14,13 @@
     </div>
 
 
-    <mat-tab-group color="accent" class="tabs-container">
+    <mat-tab-group color="accent" class="tabs-container"(selectedTabChange)="tabChange($event)">
 
       <mat-tab label="Dimension" class="tab">
         <div class="tab-box mat-elevation-z4">
           <form class="form">
+            <div class="box">
+              <div class="dimension">
             <mat-form-field class="form-full-width">
               <mat-label>Width [mm]</mat-label>
               <input type="number" matInput placeholder="100" [(ngModel)]="pallet.width" value="pallet.width" name="inputWidth">
@@ -41,6 +43,28 @@
               </mat-select>
               <mat-hint>{{palletControl.value?.name}}</mat-hint>
             </mat-form-field>
+          </div>
+          <div class="separator"></div>
+            <div>
+              <div class="previev" #preview>
+              </div>
+              <div class="refreshButton">
+                <!--
+<button class="mat-raised-button" (click)="refresh()">refresh</button>
+                -->
+
+
+              </div>
+              <div>
+<!--
+<mat-checkbox class="example-margin" [(ngModel)]="box.isTexture" color="primary" [ngModelOptions]="{standalone: true}" >texture ?</mat-checkbox>
+-->
+
+
+
+              </div>
+            </div>
+          </div>
           </form>
 
         </div>

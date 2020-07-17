@@ -57,24 +57,12 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.renderer.outputEncoding = THREE.sRGBEncoding;
     //console.log('previewRef' + this.previewRef);
-//playing with json
-    console.log('Reading local json files');
-    console.log(BoxJson);
-    let body = JSON.stringify(BoxJson);
-    let body1 = JSON.parse(body);
-    console.log("stringyfy: " + body)
-    console.log("body1: " + body1)
-    console.log("body1,name: " + body1.name)
-    const box1:Box = body1;
-    console.log("box1.name: " + typeof(box1.color.toFixed))
-    var uri = "data:application/json;charset=UTF-8," + encodeURIComponent(body);
   }
   public mode: string;
   public parentsNames = [];
   public palletsNames = [];
   public ppNames = [];
   public readOnly: boolean;
-
 
   //selectedParent = this.parentsNames[2];
 
@@ -117,9 +105,6 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
   renderer = null;
   windowWidth = 290;
   windowheight = 290;
-
-
-
 
   configCamera() {
     this.camera.position.z = 300;
