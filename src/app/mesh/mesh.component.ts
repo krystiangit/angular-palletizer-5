@@ -143,6 +143,18 @@ deletePallet(id: string) {
     this.controls.update();
   }
 
+  addPp3D() {
+    this.pps3D = this.addPickingPlaceService.addPp3D();
+    this.ppPos3D = this.addPickingPlaceService.addPosition3D();
+    for (let index = 0; index < this.pps3D.length; index++) {
+      this.scene.add(this.pps3D[index]);
+      this.pps3D[index].position.x = this.ppPos3D[index].posX;
+      this.pps3D[index].position.y = this.ppPos3D[index].posZ;
+      this.pps3D[index].position.z = -this.ppPos3D[index].posY;
+    }
+  }
+
+
   addPallet3D() {
     const address = '../../assets/euroPalletTexture.glb';
     this.pallets3D = this.palletsService.addPallet3D();
@@ -328,16 +340,7 @@ loadProjectBoxes(){
     this.gui.__controllers[this.gui.__controllers.length - 1].remove();
   }
 
-  addPp3D() {
-    this.pps3D = this.addPickingPlaceService.addPp3D();
-    this.ppPos3D = this.addPickingPlaceService.addPosition3D();
-    for (let index = 0; index < this.pps3D.length; index++) {
-      this.scene.add(this.pps3D[index]);
-      this.pps3D[index].position.x = this.ppPos3D[index].posX;
-      this.pps3D[index].position.y = this.ppPos3D[index].posZ;
-      this.pps3D[index].position.z = -this.ppPos3D[index].posY;
-    }
-  }
+
 
   configLight() {
     {

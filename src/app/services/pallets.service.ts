@@ -42,7 +42,6 @@ this.color = this.palletSets.color
 
 
 
-
     temp.color = this.palletSets.color;
     this.pallets.push(temp);
     console.log("from service pallets" +this.pallets)

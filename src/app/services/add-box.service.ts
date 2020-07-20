@@ -158,7 +158,8 @@ ngOnInit(){
     temp.height = this.boxSets.height;
     temp.posX = this.boxSets.posX + this.boxSets.posXParent + this.addPosX - this.centerPosX;
     temp.posY = this.boxSets.posY + this.boxSets.posYParent + this.addPosY - this.centerPosY;
-    temp.posZ = this.boxSets.posZ + this.boxSets.posZParent + this.boxSets.height / 2 + this.centerPosZ;;
+
+    temp.posZ = this.boxSets.posZ + this.boxSets.posZParent + this.boxSets.height / 2 + this.centerPosZ;
     temp.orientation = this.boxSets.orientation;
     temp.membership = this.boxSets.membership;
     temp.source = this.boxSets.source;
@@ -167,6 +168,12 @@ ngOnInit(){
     temp.visible = this.boxSets.visible;
     temp.color = this.boxSets.color
 console.log("box PosY" + temp.posZ)
+
+        console.log("1" + this.boxSets.posZ);
+        console.log("2" + this.boxSets.posZParent);
+        console.log("3" + (this.boxSets.height / 2 ));
+        console.log("4" + this.centerPosZ);
+
     //checking if box belongs to parent or Picking place
     if (this.boxSets.membership.search('Pallet') == 0) {
       temp.name = 'BoxOfPallet' + (this.boxesOfPallet.length + 1);
@@ -229,15 +236,24 @@ console.log("box PosY" + temp.posZ)
         this.boxSets.posXParent +
         this.addPosX -
         this.centerPosX;
+
+
         tempBox3D.position.y=this.boxSets.posZ +
         this.boxSets.posZParent +
         this.boxSets.height / 2 +
         this.centerPosZ;
+
         tempBox3D.position.z=-(this.boxSets.posY +
         this.boxSets.posYParent +
         this.addPosY -
         this.centerPosY);
+
         tempBox3D.rotation.y=this.boxSets.orientation*(Math.PI/180);
+        console.log("PosZ3D: " + tempBox3D.position.y)
+        console.log("PosZ3D 1: " + this.boxSets.posZ)
+        console.log("PosZ3D 2: " + this.boxSets.posZParent)
+        console.log("PosZ3D 3: " + (this.boxSets.height / 2 ))
+        console.log("PosZ3D 4: " + this.centerPosZ)
       }
 
       if (this.boxSets.membership.search('Picking') == 0) {
@@ -245,10 +261,12 @@ console.log("box PosY" + temp.posZ)
       this.boxSets.posXParent +
       this.addPosX -
       this.centerPosX;
-      tempBox3D.position.y=(this.boxSets.posZ +
-        this.boxSets.posZParent +
-        this.boxSets.height / 2 +
-        this.centerPosZ);
+
+        tempBox3D.position.y=(this.boxSets.posZ +
+          this.boxSets.posZParent +
+          this.boxSets.height / 2 +
+          this.centerPosZ);
+
       tempBox3D.position.z=-(this.boxSets.posY +
       this.boxSets.posYParent +
       this.addPosY -

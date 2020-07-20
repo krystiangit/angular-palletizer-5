@@ -185,7 +185,7 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
       if (this.palletService.pallets[index].name === this.box.membership) {
         this.box.posXParent = this.palletService.pallets[index].posX;
         this.box.posYParent = this.palletService.pallets[index].posY;
-        this.box.posZParent = this.palletService.pallets[index].posZ;
+        this.box.posZParent = this.palletService.pallets[index].posZ - this.palletService.pallets[index].height/2;
         this.box.widthParent = this.palletService.pallets[index].width;
         this.box.lengthParent = this.palletService.pallets[index].length;
         this.box.heightParent = this.palletService.pallets[index].height;
