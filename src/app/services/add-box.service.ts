@@ -121,12 +121,51 @@ ngOnInit(){
 
 
     if (this.boxSets.membership.search('Pallet') == 0) {
+      if (this.boxSets.orientationParent==0){
+      this.centerPosX =
+        this.boxSets.widthParent / 2 - this.boxSets.width / 2;
+      this.centerPosY =
+        this.boxSets.lengthParent / 2 - this.boxSets.length / 2;
+        console.log("orientation is 0")
+      }
+      if (this.boxSets.orientationParent/(Math.PI / 180)==90){
+        this.centerPosX =
+          this.boxSets.lengthParent / 2 - this.boxSets.width / 2;
+        this.centerPosY =
+          this.boxSets.widthParent / 2 - this.boxSets.length / 2;
+          console.log("orientation is 90")
+        }
+        if (this.boxSets.orientationParent/(Math.PI / 180)==180){
+          this.centerPosX =
+        this.boxSets.widthParent / 2 - this.boxSets.width / 2;
+      this.centerPosY =
+        this.boxSets.lengthParent / 2 - this.boxSets.length / 2;
+            console.log("orientation is 90")
+          }
+          if (this.boxSets.orientationParent/(Math.PI / 180)==270){
+            this.centerPosX =
+          this.boxSets.lengthParent / 2 - this.boxSets.width / 2;
+        this.centerPosY =
+          this.boxSets.widthParent / 2 - this.boxSets.length / 2;
+              console.log("orientation is 90")
+            }
+        console.log("orientation is: " + this.boxSets.orientationParent)
+      this.centerPosZ = this.boxSets.heightParent;
+    }
+
+
+
+/*
+if (this.boxSets.membership.search('Pallet') == 0) {
       this.centerPosX =
         this.boxSets.widthParent / 2 - this.boxSets.width / 2;
       this.centerPosY =
         this.boxSets.lengthParent / 2 - this.boxSets.length / 2;
       this.centerPosZ = this.boxSets.heightParent;
     }
+    */
+
+
 
     //changing position of the box when orientation is different than 0deg
     var orientationFactorX =
@@ -177,6 +216,7 @@ ngOnInit(){
     temp.isTexture = this.boxSets.isTexture;
     temp.visible = this.boxSets.visible;
     temp.color = this.boxSets.color
+    temp.orientationParent = this.boxSets.orientationParent;
 console.log("box PosY" + temp.posZ)
 
         console.log("1" + this.boxSets.posZ);
