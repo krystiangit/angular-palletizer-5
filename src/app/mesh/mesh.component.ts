@@ -93,9 +93,7 @@ export class MeshComponent implements OnInit {
     console.log(SampleJson);
   }
 
-  saveToJson() {
-    this.boxService.saveToJson();
-  }
+
 
   ngOnInit(): void {}
 
@@ -186,32 +184,59 @@ deletePallet(id: string) {
     }
   }
 
-  loadProject() {
-    this.boxService.loadProject();
-    this.boxesOfPallet = this.boxService.boxesOfPallet;
-    this.boxesofPallet3D = this.boxService.boxesOfPallet3D;
-    this.helpersBoxOfPallet = this.boxService.helpersOfPallet;
-    this.boxesOfPp = this.boxService.boxesOfPickingPlace;
-    this.boxesofPp3D = this.boxService.boxesOfPp3D;
-    this.helpersBoxOfPp = this.boxService.helpersOfPp;
-
-    for (let index = 0; index < this.boxesofPallet3D.length; index++) {
-      var object = this.boxesofPallet3D[index];
-      object.name = this.boxesOfPallet[index].name;
-      this.scene.add(object);
-      var objectHelper = this.helpersBoxOfPallet[index];
-      this.scene.add(objectHelper);
-    }
-
-    for (let index = 0; index < this.boxesofPp3D.length; index++) {
-      var object = this.boxesofPp3D[index];
-      object.name = this.boxesOfPp[index].name;
-      this.scene.add(object);
-      var objectHelper = this.helpersBoxOfPp[index];
-      this.scene.add(objectHelper);
-    }
-    this.updateDisplay(this.gui);
+  saveToJson() {
+    this.boxService.saveToJson();
+    this.palletsService.saveToJson();
   }
+
+  loadProject() {
+this.loadProjectBoxes();
+this.loadProjectPallets();
+  }
+
+loadProjectPallets(){
+  this.palletsService.loadProject();
+  this.pallets = this.palletsService.pallets;
+  this.pallets3D = this.palletsService.pallets3D;
+  this.helpersOfPallet = this.palletsService.helpersOfPallet;
+
+  for (let index = 0; index < this.pallets3D.length; index++) {
+    var object = this.pallets3D[index];
+    object.name = this.pallets[index].name;
+    this.scene.add(object);
+    var objectHelper = this.helpersOfPallet[index];
+    this.scene.add(objectHelper);
+
+  }
+}
+
+loadProjectBoxes(){
+
+  this.boxService.loadProject();
+  this.boxesOfPallet = this.boxService.boxesOfPallet;
+  this.boxesofPallet3D = this.boxService.boxesOfPallet3D;
+  this.helpersBoxOfPallet = this.boxService.helpersOfPallet;
+  this.boxesOfPp = this.boxService.boxesOfPickingPlace;
+  this.boxesofPp3D = this.boxService.boxesOfPp3D;
+  this.helpersBoxOfPp = this.boxService.helpersOfPp;
+
+  for (let index = 0; index < this.boxesofPallet3D.length; index++) {
+    var object = this.boxesofPallet3D[index];
+    object.name = this.boxesOfPallet[index].name;
+    this.scene.add(object);
+    var objectHelper = this.helpersBoxOfPallet[index];
+    this.scene.add(objectHelper);
+  }
+
+  for (let index = 0; index < this.boxesofPp3D.length; index++) {
+    var object = this.boxesofPp3D[index];
+    object.name = this.boxesOfPp[index].name;
+    this.scene.add(object);
+    var objectHelper = this.helpersBoxOfPp[index];
+    this.scene.add(objectHelper);
+  }
+  this.updateDisplay(this.gui);
+}
 
   addBoxOfPallet3D() {
     this.boxesofPallet3D = this.boxService.addBox3D();
