@@ -59,11 +59,11 @@ loadProject(){
 
   let _boxesOfPp = JSON.parse(JSON.stringify(BoxesOfPpJson));
   this.boxesOfPickingPlace = _boxesOfPp;
-
+/*
   const material = new THREE.MeshPhongMaterial({
     color: this.boxSets.color,
   });
-
+*/
     let tempBox3D = null
     var tempHelper = null
 
@@ -74,6 +74,9 @@ for (let index = 0; index < this.boxesOfPallet.length; index++) {
     this.boxesOfPallet[index].length,
     10,10,10
     );
+    const material = new THREE.MeshPhongMaterial({
+      color: this.boxesOfPallet[index].color,
+    });
       tempBox3D = new THREE.Mesh(tempGeometry, material);
       tempBox3D.position.x=this.boxesOfPallet[index].posX;
         tempBox3D.position.y=(this.boxesOfPallet[index].posZ);
@@ -92,6 +95,9 @@ for (let index = 0; index < this.boxesOfPallet.length; index++) {
         this.boxesOfPickingPlace[index].length,
         10,10,10
         );
+        const material = new THREE.MeshPhongMaterial({
+          color: this.boxesOfPickingPlace[index].color,
+        });
           tempBox3D = new THREE.Mesh(tempGeometry, material);
           tempBox3D.position.x=this.boxesOfPickingPlace[index].posX;
             tempBox3D.position.y=(this.boxesOfPickingPlace[index].posZ);
@@ -118,54 +124,33 @@ ngOnInit(){
       this.centerPosZ = this.boxSets.heightParent;
     }
 //changing position according to pallet orientation
-
-
     if (this.boxSets.membership.search('Pallet') == 0) {
       if (this.boxSets.orientationParent==0){
       this.centerPosX =
         this.boxSets.widthParent / 2 - this.boxSets.width / 2;
       this.centerPosY =
         this.boxSets.lengthParent / 2 - this.boxSets.length / 2;
-        console.log("orientation is 0")
       }
       if (this.boxSets.orientationParent/(Math.PI / 180)==90){
         this.centerPosX =
           this.boxSets.lengthParent / 2 - this.boxSets.width / 2;
         this.centerPosY =
           this.boxSets.widthParent / 2 - this.boxSets.length / 2;
-          console.log("orientation is 90")
         }
         if (this.boxSets.orientationParent/(Math.PI / 180)==180){
           this.centerPosX =
         this.boxSets.widthParent / 2 - this.boxSets.width / 2;
       this.centerPosY =
         this.boxSets.lengthParent / 2 - this.boxSets.length / 2;
-            console.log("orientation is 90")
           }
           if (this.boxSets.orientationParent/(Math.PI / 180)==270){
             this.centerPosX =
           this.boxSets.lengthParent / 2 - this.boxSets.width / 2;
         this.centerPosY =
           this.boxSets.widthParent / 2 - this.boxSets.length / 2;
-              console.log("orientation is 90")
             }
-        console.log("orientation is: " + this.boxSets.orientationParent)
       this.centerPosZ = this.boxSets.heightParent;
     }
-
-
-
-/*
-if (this.boxSets.membership.search('Pallet') == 0) {
-      this.centerPosX =
-        this.boxSets.widthParent / 2 - this.boxSets.width / 2;
-      this.centerPosY =
-        this.boxSets.lengthParent / 2 - this.boxSets.length / 2;
-      this.centerPosZ = this.boxSets.heightParent;
-    }
-    */
-
-
 
     //changing position of the box when orientation is different than 0deg
     var orientationFactorX =
@@ -193,11 +178,6 @@ if (this.boxSets.membership.search('Pallet') == 0) {
         this.addPosY = -orientationFactorX;
       }
     }
-
-
-
-
-
 
 
 
