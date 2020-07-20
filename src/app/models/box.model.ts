@@ -18,6 +18,7 @@ export class Box{
   widthParent:number;
   lengthParent:number;
   heightParent:number;
+  orientationParent:number;
   orientation:number;
   color:number;
 

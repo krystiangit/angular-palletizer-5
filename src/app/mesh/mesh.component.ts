@@ -93,8 +93,6 @@ export class MeshComponent implements OnInit {
     console.log(SampleJson);
   }
 
-
-
   ngOnInit(): void {}
 
   ngAfterViewInit() {
@@ -145,15 +143,11 @@ deletePallet(id: string) {
 
   addPp3D() {
     this.pps3D = this.addPickingPlaceService.addPp3D();
-    this.ppPos3D = this.addPickingPlaceService.addPosition3D();
+    //this.ppPos3D = this.addPickingPlaceService.addPosition3D();
     for (let index = 0; index < this.pps3D.length; index++) {
       this.scene.add(this.pps3D[index]);
-      this.pps3D[index].position.x = this.ppPos3D[index].posX;
-      this.pps3D[index].position.y = this.ppPos3D[index].posZ;
-      this.pps3D[index].position.z = -this.ppPos3D[index].posY;
     }
   }
-
 
   addPallet3D() {
     const address = '../../assets/euroPalletTexture.glb';
@@ -161,12 +155,11 @@ deletePallet(id: string) {
     this.helpersOfPallet = this.palletsService.addHelper3D();
 
     for (let index = 0; index < this.pallets3D.length; index++) {
+      this.scene.add(this.pallets3D[index]);
+      var objectHelper = this.helpersOfPallet[index];
+      this.scene.add(objectHelper);
 
-  this.scene.add(this.pallets3D[index]);
-  var objectHelper = this.helpersOfPallet[index];
-  this.scene.add(objectHelper);
-
-/*
+      /*
       var loader = new GLTFLoader();
       loader.load(
         address,
@@ -190,65 +183,75 @@ deletePallet(id: string) {
         }
       );
 */
-
-
-
     }
   }
 
   saveToJson() {
     this.boxService.saveToJson();
     this.palletsService.saveToJson();
+    this.addPickingPlaceService.saveToJson();
   }
 
   loadProject() {
-this.loadProjectBoxes();
-this.loadProjectPallets();
+    this.loadProjectBoxes();
+    this.loadProjectPallets();
+    this.loadProjectPps();
   }
 
-loadProjectPallets(){
-  this.palletsService.loadProject();
-  this.pallets = this.palletsService.pallets;
-  this.pallets3D = this.palletsService.pallets3D;
-  this.helpersOfPallet = this.palletsService.helpersOfPallet;
+  loadProjectPps() {
+    this.addPickingPlaceService.loadProject();
+    this.pickingPlaces = this.addPickingPlaceService.pickingPlaces;
+    this.pps3D = this.addPickingPlaceService.pps3D;
 
-  for (let index = 0; index < this.pallets3D.length; index++) {
-    var object = this.pallets3D[index];
-    object.name = this.pallets[index].name;
-    this.scene.add(object);
-    var objectHelper = this.helpersOfPallet[index];
-    this.scene.add(objectHelper);
+    for (let index = 0; index < this.pps3D.length; index++) {
+      var object = this.pps3D[index];
+      object.name = this.pickingPlaces[index].name;
+      this.scene.add(object);
 
-  }
-}
-
-loadProjectBoxes(){
-
-  this.boxService.loadProject();
-  this.boxesOfPallet = this.boxService.boxesOfPallet;
-  this.boxesofPallet3D = this.boxService.boxesOfPallet3D;
-  this.helpersBoxOfPallet = this.boxService.helpersOfPallet;
-  this.boxesOfPp = this.boxService.boxesOfPickingPlace;
-  this.boxesofPp3D = this.boxService.boxesOfPp3D;
-  this.helpersBoxOfPp = this.boxService.helpersOfPp;
-
-  for (let index = 0; index < this.boxesofPallet3D.length; index++) {
-    var object = this.boxesofPallet3D[index];
-    object.name = this.boxesOfPallet[index].name;
-    this.scene.add(object);
-    var objectHelper = this.helpersBoxOfPallet[index];
-    this.scene.add(objectHelper);
+    }
   }
 
-  for (let index = 0; index < this.boxesofPp3D.length; index++) {
-    var object = this.boxesofPp3D[index];
-    object.name = this.boxesOfPp[index].name;
-    this.scene.add(object);
-    var objectHelper = this.helpersBoxOfPp[index];
-    this.scene.add(objectHelper);
+  loadProjectPallets() {
+    this.palletsService.loadProject();
+    this.pallets = this.palletsService.pallets;
+    this.pallets3D = this.palletsService.pallets3D;
+    this.helpersOfPallet = this.palletsService.helpersOfPallet;
+
+    for (let index = 0; index < this.pallets3D.length; index++) {
+      var object = this.pallets3D[index];
+      object.name = this.pallets[index].name;
+      this.scene.add(object);
+      var objectHelper = this.helpersOfPallet[index];
+      this.scene.add(objectHelper);
+    }
   }
-  this.updateDisplay(this.gui);
-}
+
+  loadProjectBoxes() {
+    this.boxService.loadProject();
+    this.boxesOfPallet = this.boxService.boxesOfPallet;
+    this.boxesofPallet3D = this.boxService.boxesOfPallet3D;
+    this.helpersBoxOfPallet = this.boxService.helpersOfPallet;
+    this.boxesOfPp = this.boxService.boxesOfPickingPlace;
+    this.boxesofPp3D = this.boxService.boxesOfPp3D;
+    this.helpersBoxOfPp = this.boxService.helpersOfPp;
+
+    for (let index = 0; index < this.boxesofPallet3D.length; index++) {
+      var object = this.boxesofPallet3D[index];
+      object.name = this.boxesOfPallet[index].name;
+      this.scene.add(object);
+      var objectHelper = this.helpersBoxOfPallet[index];
+      this.scene.add(objectHelper);
+    }
+
+    for (let index = 0; index < this.boxesofPp3D.length; index++) {
+      var object = this.boxesofPp3D[index];
+      object.name = this.boxesOfPp[index].name;
+      this.scene.add(object);
+      var objectHelper = this.helpersBoxOfPp[index];
+      this.scene.add(objectHelper);
+    }
+    this.updateDisplay(this.gui);
+  }
 
   addBoxOfPallet3D() {
     this.boxesofPallet3D = this.boxService.addBox3D();
@@ -293,7 +296,7 @@ loadProjectBoxes(){
     }
     console.log('check ends');
   }
-/*
+  /*
   hide() {
     this.scene.getObjectByName(
       this.boxesofPp3D[this.boxesofPp3D.length - 1].name
@@ -339,8 +342,6 @@ loadProjectBoxes(){
     //console.log("boxes of pp length after delete: " + this.boxesOfPallet.length)
     this.gui.__controllers[this.gui.__controllers.length - 1].remove();
   }
-
-
 
   configLight() {
     {

@@ -99,7 +99,7 @@ for (let index = 0; index < this.pallets.length; index++) {
     tempPallet3D.position.x=this.pallets[index].posX;
     tempPallet3D.position.y=(this.pallets[index].posZ);
     tempPallet3D.position.z=-(this.pallets[index].posY);
-    tempPallet3D.rotation.y=this.pallets[index].orientation*(Math.PI/180);
+    tempPallet3D.rotation.y=this.pallets[index].orientation;
         this.pallets3D.push(tempPallet3D);
         tempHelper = new THREE.BoxHelper(this.pallets3D[index], 0x000000)
         tempHelper.name=this.pallets[index].name + "helper"

@@ -86,6 +86,7 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
     widthParent: 0,
     lengthParent: 0,
     heightParent: 0,
+    orientationParent: 0,
     orientation: 0,
     color: 0xff0000,
   };

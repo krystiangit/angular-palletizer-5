@@ -117,6 +117,9 @@ ngOnInit(){
       this.centerPosY = 0; //(this.boxSets.length/this.scale)/2;
       this.centerPosZ = this.boxSets.heightParent;
     }
+//changing position according to pallet orientation
+
+
     if (this.boxSets.membership.search('Pallet') == 0) {
       this.centerPosX =
         this.boxSets.widthParent / 2 - this.boxSets.width / 2;
@@ -151,6 +154,13 @@ ngOnInit(){
         this.addPosY = -orientationFactorX;
       }
     }
+
+
+
+
+
+
+
 
     let temp = new Box();
     temp.width = this.boxSets.width;
