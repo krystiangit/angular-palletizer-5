@@ -78,6 +78,9 @@ saveToJson(){
 }
 
 loadProject(){
+
+  this.pallets  = []
+  this.pallets3D = []
   let _pallets = JSON.parse(JSON.stringify(palletsJson));
   this.pallets = _pallets;
 

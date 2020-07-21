@@ -118,7 +118,24 @@ deletePallet(id: string) {
   );
 }
 */
-
+initialConfig(){
+  this.controls = new OrbitControls(
+      this.camera,
+      this.meshIdRef.nativeElement
+    );
+    this.configCamera();
+    this.configRenderer();
+    this.configControls();
+    this.createGrid();
+    this.configLight();
+    this.renderer.render(this.scene, this.camera);
+    //this.configFloor()
+    this.animate();
+    this.guiFunc();
+    this.loadProjectBoxes();
+    this.loadProjectPallets();
+    this.loadProjectPps();
+}
   configCamera() {
     this.camera.position.z = 1000;
     this.camera.position.y = 1200;
@@ -193,6 +210,32 @@ deletePallet(id: string) {
   }
 
   loadProject() {
+    this.pickingPlaces= []
+    this.pallets= []
+    this.pallets3D= []
+    this.helpersOfPallet= []
+    this.boxesOfPallet = []
+    this.boxesofPallet3D = []
+    this.helpersBoxOfPallet = []
+    this.boxesOfPp = []
+    this.boxesofPp3D = []
+    this.helpersBoxOfPp = []
+    while (this.scene.children.length > 0) {
+      this.scene.remove(this.scene.children[0]);
+    }
+    this.controls = new OrbitControls(
+      this.camera,
+      this.meshIdRef.nativeElement
+    );
+    this.configCamera();
+    this.configRenderer();
+    this.configControls();
+    this.createGrid();
+    this.configLight();
+    this.renderer.render(this.scene, this.camera);
+    //this.configFloor()
+    this.animate();
+    this.guiFunc();
     this.loadProjectBoxes();
     this.loadProjectPallets();
     this.loadProjectPps();

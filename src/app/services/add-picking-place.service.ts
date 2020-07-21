@@ -75,6 +75,10 @@ export class AddPickingPlaceService {
 }
 
 loadProject(){
+
+this.pickingPlaces = []
+this.pps3D=[]
+
   let _pps = JSON.parse(JSON.stringify(ppsJson));
   this.pickingPlaces = _pps;
 

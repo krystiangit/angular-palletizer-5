@@ -4,6 +4,7 @@ import {
   Component,
   OnDestroy,
   ViewChild,
+  HostListener
 } from '@angular/core';
 import { AddBoxService } from './services/add-box.service';
 import { MeshComponent } from './mesh/mesh.component';
@@ -14,7 +15,18 @@ import { MeshComponent } from './mesh/mesh.component';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnDestroy {
-  title = 'angular-palletizer2';
+
+  @HostListener("window:beforeunload", ["$event"]) unloadHandler(event: Event) {
+
+    event.preventDefault();
+  // Chrome requires returnValue to be set.
+  event.returnValue = true;
+    console.log("Processing beforeunload...");
+
+
+
+}
+  title = 'angular-palletizer5';
   @ViewChild(MeshComponent) childMeshComponent: MeshComponent;
 
   parentsValue = true;

@@ -54,6 +54,11 @@ saveToJson(){
 }
 
 loadProject(){
+  this.boxesOfPallet=[]
+  this.boxesOfPickingPlace=[]
+  this.boxesOfPallet3D=[]
+  this.boxesOfPp3D=[]
+
   let _boxesOfPallet = JSON.parse(JSON.stringify(BoxesOfPalletJson));
   this.boxesOfPallet = _boxesOfPallet;
 
