@@ -7,6 +7,8 @@ import BoxesOfPalletJson from '../../assets/boxes-of-pallet.json';
 import BoxesOfPpJson  from '../../assets/boxes-of-pp.json'
 //import BoxesJson3D from '../../assets/boxes-of-pallet3D.json';
 //import  *  as  data  from  '../../assets/boxes-of-pallet.json';
+
+//const writeJsonFile = require('write-json-file');
 import { saveAs } from 'file-saver';
 import { HttpClient } from "@angular/common/http";
 @Injectable({ providedIn: 'root' })
@@ -46,6 +48,12 @@ saveToJson(){
     let _boxesOfPpJson = JSON.stringify(this.boxesOfPickingPlace);
     const blob2 = new Blob([_boxesOfPpJson], {type : 'application/json'})
     saveAs(blob2, 'boxes-of-pp.json')
+/*
+    const writeJsonFile1 = new writeJsonFile();
+    (async () => {
+      await  writeJsonFile1('assets/testboxes.json', this.boxesOfPallet);
+  })();*/
+//this.httpClient.post('assets/testboxes.json',)
 
     this.httpClient.get('assets/boxes-of-pallet.json').subscribe(data =>{
       console.log("data: " + data);

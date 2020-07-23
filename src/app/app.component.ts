@@ -26,7 +26,7 @@ export class AppComponent implements OnDestroy {
 
 
 }
-  title = 'angular-palletizer5';
+  title = 'palletizer';
   @ViewChild(MeshComponent) childMeshComponent: MeshComponent;
 
   parentsValue = true;
