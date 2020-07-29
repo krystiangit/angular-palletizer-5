@@ -11,7 +11,17 @@ import BoxesOfPpJson  from '../../assets/boxes-of-pp.json'
 //const writeJsonFile = require('write-json-file');
 import { saveAs } from 'file-saver';
 import { HttpClient } from "@angular/common/http";
+import { Observable } from 'rxjs';
+
+export interface Cat {
+  name: string
+}
+
 @Injectable({ providedIn: 'root' })
+
+
+
+
 export class AddBoxService {
 
 constructor(private httpClient: HttpClient){
@@ -40,7 +50,85 @@ constructor(private httpClient: HttpClient){
   helpersOfPp = [];
   helpersOfPallet = [];
 
+public testBoxes:Box[] = []
+
+test:any = []
+test1:any = []
+fetchData(url:string): Promise<any> {
+  return this.httpClient
+  .get(url).toPromise()
+  //.get('http://localhost:4600/api/boxes-of-pallet').toPromise()
+  .then((response)=>{
+    return response;
+  })
+  .catch((error)=>{
+    console.log(error)
+  })
+}
+
+
+
+getBoxes(){
+  /*
+//this.httpClient.get('http://localhost:4600/api')
+console.log(this.httpClient.get('http://localhost:4600/api'))
+  this.httpClient.get('http://localhost:4600/api').toPromise().then(data=> {console.log(data); })
+  //this.httpClient.get('http://localhost:4600/api').toPromise().then(data=> {console.log(data); this.test = data; console.log(JSON.stringify(this.test))})
+  //this.httpClient.get('http://localhost:4600/api').subscribe(boxes => { this.test = boxes; console.log("any: " + this.test )})
+
+  //console.log("get boxes: " + this.httpClient.get<Box[]>('http://localhost:4600/api/boxes'))
+  //this.testBoxes = this.httpClient.get('http://localhost:4600/api/boxes')
+
+*/
+  console.log('reaches');
+  this.fetchData('http://localhost:4600/api/boxes-of-pallet').then(data => {
+    this.test = data;
+    console.log("test: ...")
+    console.log(JSON.stringify(this.test));
+  });
+  this.fetchData('http://localhost:4600/api/boxes-of-pp').then(data => {
+    this.test1 = data;
+    console.log("test: ...")
+    console.log(JSON.stringify(this.test1));
+  });
+
+}
+
+  getAllCats(): Observable<Box[]> {
+    console.log(this.httpClient.get<Box[]>('http://localhost:4600/api/boxes'))
+    return this.httpClient.get<Box[]>('http://localhost:4600/api/boxes')
+  }
+
+  getCat(name: string): Observable<Cat> {
+    return this.httpClient.get<Cat>('http://localhost:8000/api/cats/' + name)
+  }
+
+  insertCat(cat: Cat): Observable<Cat> {
+    return this.httpClient.post<Cat>('http://localhost:8000/api/cats/', cat)
+  }
+
+  updateCat(cat: Cat): Observable<void> {
+    return this.httpClient.put<void>(
+      'http://localhost:8000/api/cats/' + cat.name,
+      cat
+    )
+  }
+
+  deleteCat(name: string) {
+    return this.httpClient.delete('http://localhost:8000/api/cats/' + name)
+  }
+
+
+
+
+
+
+
 saveToJson(){
+
+
+  //this.getAllCats();
+
     let _boxesOfPalletJson = JSON.stringify(this.boxesOfPallet);
     const blob1 = new Blob([_boxesOfPalletJson], {type : 'application/json'});
     saveAs(blob1, 'boxes-of-pallet.json');
@@ -56,21 +144,31 @@ saveToJson(){
 //this.httpClient.post('assets/testboxes.json',)
 
     this.httpClient.get('assets/boxes-of-pallet.json').subscribe(data =>{
-      console.log("data: " + data);
+      //console.log("data: " + data);
       this.products = data;
     })
 }
 
 loadProject(){
+
+  this.getBoxes();
   this.boxesOfPallet=[]
   this.boxesOfPickingPlace=[]
   this.boxesOfPallet3D=[]
   this.boxesOfPp3D=[]
 
-  let _boxesOfPallet = JSON.parse(JSON.stringify(BoxesOfPalletJson));
-  this.boxesOfPallet = _boxesOfPallet;
 
-  let _boxesOfPp = JSON.parse(JSON.stringify(BoxesOfPpJson));
+//console.log("first")
+//console.log(JSON.parse(JSON.stringify(BoxesOfPalletJson)))
+console.log("second")
+console.log(JSON.parse(JSON.stringify(this.test)))
+  //let _boxesOfPallet = JSON.parse(JSON.stringify(BoxesOfPalletJson));
+  let _boxesOfPallet = JSON.parse(JSON.stringify(this.test));
+  this.boxesOfPallet = _boxesOfPallet;
+console.log("boxes of pp")
+console.log(this.test1)
+  //let _boxesOfPp = JSON.parse(JSON.stringify(BoxesOfPpJson));
+  let _boxesOfPp = JSON.parse(JSON.stringify(this.test1));
   this.boxesOfPickingPlace = _boxesOfPp;
 /*
   const material = new THREE.MeshPhongMaterial({

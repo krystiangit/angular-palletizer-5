@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule, } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import { HttpClientModule }    from '@angular/common/http';
+import { RouterModule, Router } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
@@ -23,7 +24,18 @@ import { AddBoxComponent } from './add-box/add-box.component';
 import { AddPickingPlaceComponent } from './add-picking-place/add-picking-place.component';
 import { MeshComponent } from './mesh/mesh.component';
 
-
+const Routes = [
+  {
+path:'',
+//redirectTo: 'api',
+redirectTo: '',
+pathMatch: 'full'
+  },
+  {
+    //path: 'api', component: AppComponent
+    path: 'api', component: AppComponent
+  }
+]
 
 
 
@@ -38,10 +50,6 @@ import { MeshComponent } from './mesh/mesh.component';
     AddBoxComponent,
     AddPickingPlaceComponent,
     MeshComponent,
-
-
-
-
 
   ],
   imports: [
@@ -59,9 +67,8 @@ import { MeshComponent } from './mesh/mesh.component';
     MatListModule,
     DemoMaterialModule,
     HttpClientModule,
-
-
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forRoot(Routes)
 
 
   ],

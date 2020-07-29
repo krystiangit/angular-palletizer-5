@@ -203,6 +203,20 @@ initialConfig(){
     }
   }
 
+/*
+
+  onGet() {
+    this.boxService.getBoxes().subscribe(
+        data => {
+          console.log(data);
+          this.funds = data;
+        }
+    );
+  }
+}
+
+*/
+
   saveToJson() {
     this.boxService.saveToJson();
     this.palletsService.saveToJson();
