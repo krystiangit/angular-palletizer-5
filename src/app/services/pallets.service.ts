@@ -124,12 +124,10 @@ loadProject(){
 
   this.pallets  = []
   this.pallets3D = []
-  this.getPallets();
+  //this.getPallets();
   //let _pallets = JSON.parse(JSON.stringify(palletsJson));
   //this.pallets = _pallets;
   this.pallets = JSON.parse(JSON.stringify(this.test));
-  console.log("pallets JSON:...")
-  console.log(JSON.stringify(this.test))
   const material = new THREE.MeshPhongMaterial({
     color: this.palletSets.color,
   });

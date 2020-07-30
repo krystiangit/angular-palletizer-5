@@ -82,7 +82,7 @@ console.log(this.httpClient.get('http://localhost:4600/api'))
   //this.testBoxes = this.httpClient.get('http://localhost:4600/api/boxes')
 
 */
-  console.log('reaches');
+  //console.log('reaches');
   this.fetchData('http://localhost:4600/api/boxes-of-pallet').then(data => {
     this.test = data;
     console.log("test: ...")
@@ -95,7 +95,7 @@ console.log(this.httpClient.get('http://localhost:4600/api'))
   });
 
 }
-
+/*
   getAllCats(): Observable<Box[]> {
     console.log(this.httpClient.get<Box[]>('http://localhost:4600/api/boxes'))
     return this.httpClient.get<Box[]>('http://localhost:4600/api/boxes')
@@ -119,7 +119,7 @@ console.log(this.httpClient.get('http://localhost:4600/api'))
   deleteCat(name: string) {
     return this.httpClient.delete('http://localhost:8000/api/cats/' + name)
   }
-
+*/
 
 postBoxes(){
 
@@ -139,14 +139,8 @@ const url1='http://httpbin.org/post'
   //this.httpClient.post('http://localhost:4600/api/boxes-of-pallet', this.test )
 }
 
-
-
-
 saveToJson(){
-
-
   //this.getAllCats();
-
     let _boxesOfPalletJson = JSON.stringify(this.boxesOfPallet);
     const blob1 = new Blob([_boxesOfPalletJson], {type : 'application/json'});
     saveAs(blob1, 'boxes-of-pallet.json');
@@ -160,43 +154,37 @@ saveToJson(){
       await  writeJsonFile1('assets/testboxes.json', this.boxesOfPallet);
   })();*/
 //this.httpClient.post('assets/testboxes.json',)
-
+/*
     this.httpClient.get('assets/boxes-of-pallet.json').subscribe(data =>{
       //console.log("data: " + data);
       this.products = data;
     })
+    */
 }
 
 loadProject(){
-
-
   this.boxesOfPallet=[]
   this.boxesOfPickingPlace=[]
   this.boxesOfPallet3D=[]
   this.boxesOfPp3D=[]
-  this.getBoxes();
-
-
+  //this.getBoxes();
 //console.log("first")
 //console.log(JSON.parse(JSON.stringify(BoxesOfPalletJson)))
 console.log("second")
 console.log(JSON.parse(JSON.stringify(this.test)))
   //let _boxesOfPallet = JSON.parse(JSON.stringify(BoxesOfPalletJson));
-
-
-  this.boxesOfPallet = JSON.parse(JSON.stringify(this.test));
+this.boxesOfPallet = JSON.parse(JSON.stringify(this.test));
 console.log("boxes of pp")
 console.log(this.test1)
   //let _boxesOfPp = JSON.parse(JSON.stringify(BoxesOfPpJson));
-
-  this.boxesOfPickingPlace = JSON.parse(JSON.stringify(this.test1));
+this.boxesOfPickingPlace = JSON.parse(JSON.stringify(this.test1));
 /*
   const material = new THREE.MeshPhongMaterial({
     color: this.boxSets.color,
   });
 */
-    let tempBox3D = null
-    var tempHelper = null
+let tempBox3D = null
+var tempHelper = null
 
 for (let index = 0; index < this.boxesOfPallet.length; index++) {
   let tempGeometry = new THREE.BoxBufferGeometry(

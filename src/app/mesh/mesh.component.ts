@@ -124,6 +124,12 @@ post(){
   this.addPickingPlaceService.postPps();
 }
 
+httpGet(){
+  this.boxService.getBoxes();
+  this.palletsService.getPallets();
+  this.addPickingPlaceService.getPps();
+}
+
 initialConfig(){
   this.controls = new OrbitControls(
       this.camera,

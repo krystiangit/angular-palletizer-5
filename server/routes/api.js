@@ -35,9 +35,9 @@ router.get('/picking-places',(req, res)=>{
 
 router.post('/boxes-of-pallet', (req, res)=>{
   //console.log(req.body);
-  boxesOfPalletJson = req.body
+  boxesOfPalletJson = JSON.stringify(req.body)
   console.log(boxesOfPalletJson)
-  res.send({post: 'boxes of pallet'})
+  res.send(boxesOfPalletJson)
   res.status(200)
 
 })

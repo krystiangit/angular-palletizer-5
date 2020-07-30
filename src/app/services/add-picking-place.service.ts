@@ -117,7 +117,7 @@ loadProject(){
 
 this.pickingPlaces = []
 this.pps3D=[]
-this.getPps();
+//this.getPps();
 
   //let _pps = JSON.parse(JSON.stringify(ppsJson));
   //this.pickingPlaces = _pps;
