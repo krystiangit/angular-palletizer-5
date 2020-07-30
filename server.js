@@ -4,19 +4,19 @@ const app = express();
 const boxJson = require('./src/assets/boxes-of-pallet.json')
 
 var fs = require ('fs');
-var boxesOfPallet = JSON.parse(fs.readFileSync('boxes-of-pallet.json'))
+
 //console.log(boxesOfPallet);
 
-boxesOfPallet1 = {
+/*
+
+fs.writeFileSync('boxes-of-pallet1.json', JSON.stringify({
   aa:1,
   bb:2
-}
-
-fs.writeFileSync('boxes-of-pallet1.json', JSON.stringify(boxesOfPallet), _finished)
+}), _finished)
 function _finished(err){
   console.log('writing finished')
 }
-
+*/
 /*
 const cors = require('cors')
 
@@ -37,7 +37,7 @@ app.use(express.static(path.join(__dirname, 'dist/angular-palletizer2')))
 //app.use(express.static(path.join(__dirname, '/src')))
 console.log(__dirname)
 app.use('/api', api)
-
+app.use(express.json())
 //catch all other routes requests and return it to the index
 
 

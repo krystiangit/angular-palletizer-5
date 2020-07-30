@@ -12,7 +12,7 @@ import BoxesOfPpJson  from '../../assets/boxes-of-pp.json'
 import { saveAs } from 'file-saver';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
-
+import { HttpHeaders } from '@angular/common/http';
 export interface Cat {
   name: string
 }
@@ -54,6 +54,7 @@ public testBoxes:Box[] = []
 
 test:any = []
 test1:any = []
+
 fetchData(url:string): Promise<any> {
   return this.httpClient
   .get(url).toPromise()
@@ -65,6 +66,7 @@ fetchData(url:string): Promise<any> {
     console.log(error)
   })
 }
+
 
 
 
@@ -88,7 +90,7 @@ console.log(this.httpClient.get('http://localhost:4600/api'))
   });
   this.fetchData('http://localhost:4600/api/boxes-of-pp').then(data => {
     this.test1 = data;
-    console.log("test: ...")
+    console.log("test1: ...")
     console.log(JSON.stringify(this.test1));
   });
 
@@ -119,7 +121,23 @@ console.log(this.httpClient.get('http://localhost:4600/api'))
   }
 
 
+postBoxes(){
 
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json'
+    //'Authorization': 'my-auth-token'
+  }),
+
+};
+const urlBoxesOfPallet='http://localhost:4600/api/boxes-of-pallet'
+const urlBoxesOfPp = 'http://localhost:4600/api/boxes-of-pp'
+const url1='http://httpbin.org/post'
+
+  this.httpClient.post(urlBoxesOfPallet,JSON.stringify(this.test), httpOptions ).toPromise().then(data=> console.log(data))
+  this.httpClient.post(urlBoxesOfPp,JSON.stringify(this.test1), httpOptions ).toPromise().then(data=> console.log(data))
+  //this.httpClient.post('http://localhost:4600/api/boxes-of-pallet', this.test )
+}
 
 
 
@@ -151,11 +169,12 @@ saveToJson(){
 
 loadProject(){
 
-  this.getBoxes();
+
   this.boxesOfPallet=[]
   this.boxesOfPickingPlace=[]
   this.boxesOfPallet3D=[]
   this.boxesOfPp3D=[]
+  this.getBoxes();
 
 
 //console.log("first")
@@ -163,13 +182,14 @@ loadProject(){
 console.log("second")
 console.log(JSON.parse(JSON.stringify(this.test)))
   //let _boxesOfPallet = JSON.parse(JSON.stringify(BoxesOfPalletJson));
-  let _boxesOfPallet = JSON.parse(JSON.stringify(this.test));
-  this.boxesOfPallet = _boxesOfPallet;
+
+
+  this.boxesOfPallet = JSON.parse(JSON.stringify(this.test));
 console.log("boxes of pp")
 console.log(this.test1)
   //let _boxesOfPp = JSON.parse(JSON.stringify(BoxesOfPpJson));
-  let _boxesOfPp = JSON.parse(JSON.stringify(this.test1));
-  this.boxesOfPickingPlace = _boxesOfPp;
+
+  this.boxesOfPickingPlace = JSON.parse(JSON.stringify(this.test1));
 /*
   const material = new THREE.MeshPhongMaterial({
     color: this.boxSets.color,
