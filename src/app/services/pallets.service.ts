@@ -90,7 +90,7 @@ postPallets(){
     }),
   };
   const urlPallets='http://localhost:4600/api/pallets'
-    this.httpClient.post(urlPallets,JSON.stringify(this.test), httpOptions ).toPromise().then(data=> console.log(data))
+    this.httpClient.post(urlPallets,JSON.stringify(this.pallets), httpOptions ).toPromise().then(data=> console.log(data))
 
   }
 

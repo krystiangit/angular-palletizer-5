@@ -85,6 +85,7 @@ console.log(this.httpClient.get('http://localhost:4600/api'))
   //console.log('reaches');
   this.fetchData('http://localhost:4600/api/boxes-of-pallet').then(data => {
     this.test = data;
+    this.boxesOfPallet = data;
     console.log("test: ...")
     console.log(JSON.stringify(this.test));
   });
@@ -134,8 +135,8 @@ const urlBoxesOfPallet='http://localhost:4600/api/boxes-of-pallet'
 const urlBoxesOfPp = 'http://localhost:4600/api/boxes-of-pp'
 const url1='http://httpbin.org/post'
 
-  this.httpClient.post(urlBoxesOfPallet,JSON.stringify(this.test), httpOptions ).toPromise().then(data=> console.log(data))
-  this.httpClient.post(urlBoxesOfPp,JSON.stringify(this.test1), httpOptions ).toPromise().then(data=> console.log(data))
+  this.httpClient.post(urlBoxesOfPallet,JSON.stringify(this.boxesOfPallet), httpOptions ).toPromise().then(data=> console.log(data))
+  this.httpClient.post(urlBoxesOfPp,JSON.stringify(this.boxesOfPickingPlace), httpOptions ).toPromise().then(data=> console.log(data))
   //this.httpClient.post('http://localhost:4600/api/boxes-of-pallet', this.test )
 }
 

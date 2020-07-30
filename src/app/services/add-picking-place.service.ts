@@ -86,7 +86,7 @@ postPps(){
     }),
   };
   const urlPps='http://localhost:4600/api/picking-places'
-    this.httpClient.post(urlPps,JSON.stringify(this.test), httpOptions ).toPromise().then(data=> console.log(data))
+    this.httpClient.post(urlPps,JSON.stringify(this.pickingPlaces), httpOptions ).toPromise().then(data=> console.log(data))
 
   }
 
