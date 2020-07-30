@@ -262,19 +262,19 @@ ngOnInit(){
       this.centerPosY =
         this.boxSets.lengthParent / 2 - this.boxSets.length / 2;
       }
-      if (this.boxSets.orientationParent/(Math.PI / 180)==90){
+      if (this.boxSets.orientationParent==90){
         this.centerPosX =
           this.boxSets.lengthParent / 2 - this.boxSets.width / 2;
         this.centerPosY =
           this.boxSets.widthParent / 2 - this.boxSets.length / 2;
         }
-        if (this.boxSets.orientationParent/(Math.PI / 180)==180){
+        if (this.boxSets.orientationParent==180){
           this.centerPosX =
         this.boxSets.widthParent / 2 - this.boxSets.width / 2;
       this.centerPosY =
         this.boxSets.lengthParent / 2 - this.boxSets.length / 2;
           }
-          if (this.boxSets.orientationParent/(Math.PI / 180)==270){
+          if (this.boxSets.orientationParent==270){
             this.centerPosX =
           this.boxSets.lengthParent / 2 - this.boxSets.width / 2;
         this.centerPosY =

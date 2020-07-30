@@ -118,6 +118,12 @@ deletePallet(id: string) {
   );
 }
 */
+post(){
+  this.boxService.postBoxes();
+  this.palletsService.postPallets();
+  this.addPickingPlaceService.postPps();
+}
+
 initialConfig(){
   this.controls = new OrbitControls(
       this.camera,

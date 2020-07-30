@@ -4,14 +4,19 @@ import { Position3D }  from '../models/position3D'
 import * as THREE from 'three'
 import { saveAs } from 'file-saver';
 import ppsJson from '../../assets/picking-places.json'
+import { HttpClient } from "@angular/common/http";
+import { Observable } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AddPickingPlaceService {
 
-  constructor() { }
-
+  constructor(private httpClient: HttpClient){
+  }
+test:any = [];
   public pickingPlaces: PickingPlace[] = [];
   public pickingPlaceSets: PickingPlace;
   geometries:THREE.BoxGeometry[]
@@ -74,14 +79,49 @@ export class AddPickingPlaceService {
     saveAs(blob1, 'picking-places.json');
 }
 
+postPps(){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json'
+    }),
+  };
+  const urlPps='http://localhost:4600/api/picking-places'
+    this.httpClient.post(urlPps,JSON.stringify(this.test), httpOptions ).toPromise().then(data=> console.log(data))
+
+  }
+
+fetchData(url:string): Promise<any> {
+  return this.httpClient
+  .get(url).toPromise()
+  .then((response)=>{
+    return response;
+  })
+  .catch((error)=>{
+    console.log(error)
+  })
+}
+
+getPps(){
+
+  console.log('reaches');
+  this.fetchData('http://localhost:4600/api/picking-places').then(data => {
+    this.test = data;
+    console.log("test: ...")
+    console.log(JSON.stringify(this.test));
+  });
+}
+
+
+
 loadProject(){
 
 this.pickingPlaces = []
 this.pps3D=[]
+this.getPps();
 
-  let _pps = JSON.parse(JSON.stringify(ppsJson));
-  this.pickingPlaces = _pps;
-
+  //let _pps = JSON.parse(JSON.stringify(ppsJson));
+  //this.pickingPlaces = _pps;
+  this.pickingPlaces = JSON.parse(JSON.stringify(this.test));
 
 
     let tempPp3D = null

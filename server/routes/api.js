@@ -52,6 +52,7 @@ router.post('/boxes-of-pp', (req, res)=>{
 
 router.post('/pallets', (req, res)=>{
   console.log(req.body);
+  palletsJson = req.body;
   res.send({post: 'pallets'})
   res.status(200)
 
@@ -59,6 +60,7 @@ router.post('/pallets', (req, res)=>{
 
 router.post('/picking-places', (req, res)=>{
   console.log(req.body);
+  pickingPlacesJson = req.body;
   res.send({post: 'picking places'})
   res.status(200)
 

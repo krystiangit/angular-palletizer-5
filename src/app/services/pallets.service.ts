@@ -6,6 +6,9 @@ import { Position3D }  from '../models/position3D'
 import * as THREE from 'three'
 import { saveAs } from 'file-saver';
 import palletsJson from '../../assets/pallets.json'
+import { HttpClient } from "@angular/common/http";
+import { Observable } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({providedIn: 'root'})
 export class PalletsService implements AfterViewInit{
@@ -20,12 +23,15 @@ this.color = this.palletSets.color
 
   public pallets: Pallet[] = [];
 
+  constructor(private httpClient: HttpClient){
 
+  }
   geometries:THREE.BoxGeometry[]
 
   pallets3D = [];
   public positions3D :Position3D[] = []
   helpersOfPallet = [];
+  test:any = []
 
   addPallet(){
     let temp = new Pallet();
@@ -77,13 +83,51 @@ saveToJson(){
     saveAs(blob1, 'pallets.json');
 }
 
+postPallets(){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json'
+    }),
+  };
+  const urlPallets='http://localhost:4600/api/pallets'
+    this.httpClient.post(urlPallets,JSON.stringify(this.test), httpOptions ).toPromise().then(data=> console.log(data))
+
+  }
+
+
+
+fetchData(url:string): Promise<any> {
+  return this.httpClient
+  .get(url).toPromise()
+  .then((response)=>{
+    return response;
+  })
+  .catch((error)=>{
+    console.log(error)
+  })
+}
+
+getPallets(){
+
+  console.log('reaches');
+  this.fetchData('http://localhost:4600/api/pallets').then(data => {
+    this.test = data;
+    console.log("test: ...")
+    console.log(JSON.stringify(this.test));
+  });
+}
+
+
+
+
 loadProject(){
 
   this.pallets  = []
   this.pallets3D = []
-  let _pallets = JSON.parse(JSON.stringify(palletsJson));
-  this.pallets = _pallets;
-
+  this.getPallets();
+  //let _pallets = JSON.parse(JSON.stringify(palletsJson));
+  //this.pallets = _pallets;
+  this.pallets = JSON.parse(JSON.stringify(this.test));
   const material = new THREE.MeshPhongMaterial({
     color: this.palletSets.color,
   });
