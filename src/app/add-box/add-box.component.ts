@@ -191,7 +191,7 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
         this.box.widthParent = this.palletService.pallets[index].width;
         this.box.lengthParent = this.palletService.pallets[index].length;
         this.box.heightParent = this.palletService.pallets[index].height;
-        this.box.orientationParent = this.palletService.pallets[index].orientation/(Math.PI / 180);
+        this.box.orientationParent = this.palletService.pallets[index].orientation;
         //console.log("parent is Pallet")
       }
       //console.log("parent is: " + this.box.membership)

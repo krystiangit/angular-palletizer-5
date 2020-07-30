@@ -19,8 +19,8 @@
     "height": 144,
     "posX": 1000,
     "posY": -1000,
-    "posZ": 72,
-    "orientation": 1.5707963267948966,
+    "posZ": 372,
+    "orientation": "90",
     "color": 16776960
   }
 ]
