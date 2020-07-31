@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path')
 const app = express();
+const logger = require ('./middleware/logger.js')
+const api = require('./server/routes/api');
 //const boxJson = require('./src/assets/boxes-of-pallet.json')
 
 
@@ -31,7 +33,7 @@ app.use(cors(corsOptions))
 
 */
 //getting api routes
-const api = require('./server/routes/api');
+
 console.log("aaa:...")
 const aaa = require('./server/routes/api').aaa
 
@@ -40,10 +42,7 @@ const { finished } = require('stream');
 //using middleware
 //set static folder
 
-const logger = (req,res,next) => {
-  console.log(`${req.protocol}://${req.get('host')}${req.originalUrl}`)
-  next();
-}
+
 
 
 app.use(logger)

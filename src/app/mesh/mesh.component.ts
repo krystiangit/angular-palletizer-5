@@ -129,7 +129,7 @@ deletePallet(id: string) {
 spinner=false
   httpGet() {
     this.spinner=true
-    this.addPickingPlaceService.getPps();
+
     this.boxService.getBoxes().then(() => {
       this.palletsService.getPallets().then(() => {
         this.addPickingPlaceService.getPps().then(() => {

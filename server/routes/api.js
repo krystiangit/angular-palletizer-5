@@ -7,10 +7,11 @@ const router = express.Router();
 
 var fs = require ('fs');
 
-var boxesOfPalletJson = fs.readFileSync('boxes-of-pallet.json')
-var boxesOfPpJson = fs.readFileSync('boxes-of-pp.json')
-var palletsJson = fs.readFileSync('pallets.json')
-var pickingPlacesJson = fs.readFileSync('picking-places.json')
+
+var boxesOfPalletJson = fs.readFileSync('./json/boxes-of-pallet.json')
+var boxesOfPpJson = fs.readFileSync('./json/boxes-of-pp.json')
+var palletsJson = fs.readFileSync('./json/pallets.json')
+var pickingPlacesJson = fs.readFileSync('./json/picking-places.json')
 router.use(express.json())
 
 router.get('/boxes-of-pallet',(req, res)=>{
@@ -82,6 +83,12 @@ router.post('/picking-places', (req, res)=>{
   res.status(200)
 
 })
+
+router.post('/node-func', (req, res)=>{
+  console.log("node-func");
+
+})
+
 
 router.post("/", (req, res) =>{
 });
