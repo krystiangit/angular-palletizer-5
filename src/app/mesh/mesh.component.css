@@ -38,8 +38,8 @@ top:0;
   position: absolute;
   display: flex;
   flex-direction: column;
-  top: 100px;
-  right: 100px ;
+  top: 20px;
+  right: 10px ;
   z-index: 4;
   opacity: 0.6
 }

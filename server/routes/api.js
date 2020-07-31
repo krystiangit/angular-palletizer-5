@@ -86,6 +86,10 @@ router.post('/picking-places', (req, res)=>{
 router.post("/", (req, res) =>{
 });
 
+function aaa(){
+  return {aa:1, bb:2}
+}
 
 module.exports = router;
+//module.exports = aaa()
 //res.send({boxes:boxJson})
