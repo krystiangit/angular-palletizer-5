@@ -101,7 +101,12 @@ fetchData(url:string): Promise<any> {
   })
 }
 
-getPps(){
+getPps():Promise<any>{
+
+  return new Promise((resolve) => {
+    //
+    // Your function implementation
+    //
 
   console.log('reaches');
   this.fetchData('http://localhost:4600/api/picking-places').then(data => {
@@ -109,6 +114,9 @@ getPps(){
     console.log("test: ...")
     console.log(JSON.stringify(this.test));
   });
+     // Resolve the promise at the end
+     resolve();
+    });
 }
 
 

@@ -48,3 +48,9 @@ top:0;
   flex-direction: column;
   margin-top: 20px;
 }
+.spinner{
+  z-index: 4;
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+}

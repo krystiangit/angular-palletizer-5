@@ -55,11 +55,14 @@ public testBoxes:Box[] = []
 test:any = []
 test1:any = []
 
+
+
 fetchData(url:string): Promise<any> {
   return this.httpClient
   .get(url).toPromise()
   //.get('http://localhost:4600/api/boxes-of-pallet').toPromise()
   .then((response)=>{
+
     return response;
   })
   .catch((error)=>{
@@ -68,9 +71,32 @@ fetchData(url:string): Promise<any> {
 }
 
 
+getBoxes(): Promise<any>{
+  return new Promise((resolve) => {
+    //
+    // Your function implementation
+    //
+    // Resolve the promise at the end
 
 
-getBoxes(){
+    this.fetchData('http://localhost:4600/api/boxes-of-pallet').then(data => {
+    this.test = data;
+    this.boxesOfPallet = data;
+    console.log("test: ...")
+    console.log(JSON.stringify(this.test));
+
+  });
+  this.fetchData('http://localhost:4600/api/boxes-of-pp').then(data => {
+    this.test1 = data;
+    console.log("test1: ...")
+    console.log(JSON.stringify(this.test1));
+    //this.loadProject();
+  });
+  resolve();
+});
+
+
+
   /*
 //this.httpClient.get('http://localhost:4600/api')
 console.log(this.httpClient.get('http://localhost:4600/api'))
@@ -83,17 +109,8 @@ console.log(this.httpClient.get('http://localhost:4600/api'))
 
 */
   //console.log('reaches');
-  this.fetchData('http://localhost:4600/api/boxes-of-pallet').then(data => {
-    this.test = data;
-    this.boxesOfPallet = data;
-    console.log("test: ...")
-    console.log(JSON.stringify(this.test));
-  });
-  this.fetchData('http://localhost:4600/api/boxes-of-pp').then(data => {
-    this.test1 = data;
-    console.log("test1: ...")
-    console.log(JSON.stringify(this.test1));
-  });
+
+
 
 }
 /*

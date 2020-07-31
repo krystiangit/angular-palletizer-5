@@ -37,6 +37,9 @@ export class MeshComponent implements OnInit {
   @ViewChild('meshId') private meshIdRef: ElementRef;
   @ViewChild('guiContainerId') private guiContainerRef: ElementRef;
 
+
+
+
   boxesOfPallet: Box[] = [];
   boxesOfPp: Box[] = [];
   pickingPlaces: PickingPlace[] = [];
@@ -118,20 +121,26 @@ deletePallet(id: string) {
   );
 }
 */
-post(){
-  this.boxService.postBoxes();
-  this.palletsService.postPallets();
-  this.addPickingPlaceService.postPps();
-}
+  post() {
+    this.boxService.postBoxes();
+    this.palletsService.postPallets();
+    this.addPickingPlaceService.postPps();
+  }
+spinner=false
+  httpGet() {
+    this.spinner=true
+    this.addPickingPlaceService.getPps();
+    this.boxService.getBoxes().then(() => {
+      this.palletsService.getPallets().then(() => {
+        this.addPickingPlaceService.getPps().then(() => {
+          setTimeout(() => this.loadProject(),2000);
+        });
+      });
+    });
+  }
 
-httpGet(){
-  this.boxService.getBoxes();
-  this.palletsService.getPallets();
-  this.addPickingPlaceService.getPps();
-}
-
-initialConfig(){
-  this.controls = new OrbitControls(
+  initialConfig() {
+    this.controls = new OrbitControls(
       this.camera,
       this.meshIdRef.nativeElement
     );
@@ -147,7 +156,7 @@ initialConfig(){
     this.loadProjectBoxes();
     this.loadProjectPallets();
     this.loadProjectPps();
-}
+  }
   configCamera() {
     this.camera.position.z = 1000;
     this.camera.position.y = 1200;
@@ -215,7 +224,7 @@ initialConfig(){
     }
   }
 
-/*
+  /*
 
   onGet() {
     this.boxService.getBoxes().subscribe(
@@ -236,16 +245,17 @@ initialConfig(){
   }
 
   loadProject() {
-    this.pickingPlaces= []
-    this.pallets= []
-    this.pallets3D= []
-    this.helpersOfPallet= []
-    this.boxesOfPallet = []
-    this.boxesofPallet3D = []
-    this.helpersBoxOfPallet = []
-    this.boxesOfPp = []
-    this.boxesofPp3D = []
-    this.helpersBoxOfPp = []
+    this.spinner=false
+    this.pickingPlaces = [];
+    this.pallets = [];
+    this.pallets3D = [];
+    this.helpersOfPallet = [];
+    this.boxesOfPallet = [];
+    this.boxesofPallet3D = [];
+    this.helpersBoxOfPallet = [];
+    this.boxesOfPp = [];
+    this.boxesofPp3D = [];
+    this.helpersBoxOfPp = [];
     while (this.scene.children.length > 0) {
       this.scene.remove(this.scene.children[0]);
     }
@@ -276,7 +286,6 @@ initialConfig(){
       var object = this.pps3D[index];
       object.name = this.pickingPlaces[index].name;
       this.scene.add(object);
-
     }
   }
 

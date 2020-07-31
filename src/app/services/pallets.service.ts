@@ -107,14 +107,17 @@ fetchData(url:string): Promise<any> {
   })
 }
 
-getPallets(){
-
-  console.log('reaches');
+getPallets():Promise<any>{
+  return new Promise((resolve) => {
+    console.log('reaches');
   this.fetchData('http://localhost:4600/api/pallets').then(data => {
     this.test = data;
     console.log("test: ...")
     console.log(JSON.stringify(this.test));
   });
+    resolve();
+});
+
 }
 
 
