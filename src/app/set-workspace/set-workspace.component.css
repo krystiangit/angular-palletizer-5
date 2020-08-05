@@ -3,8 +3,7 @@
 .drag-box {
   width: 500px;
   height:500px;
-  top:10vh;
-  left:10vw;
+
   padding: 10px;
   box-sizing: border-box;
   border: solid 1px #ccc;

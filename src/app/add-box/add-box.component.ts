@@ -437,10 +437,6 @@ this.scene.remove(this.scene.getObjectByName("nazwa"))
   }
 
 
-
-
-
-
   ngOnInit() {}
 
   ngAfterViewInit() {

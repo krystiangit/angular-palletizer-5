@@ -24,12 +24,12 @@
       <!--[hasBackdrop]="false"  put in parameters of sidenav container to get off backdrop-->
       <mat-sidenav #snav>
         <mat-nav-list>
-          <a mat-list-item (click)="appChildSetWorkspace.openDialog()">Set Workspace</a>
+         <!--  <a mat-list-item (click)="appChildSetWorkspace.openDialog()">Set Workspace</a> -->
           <a mat-list-item (click)="appChildAddPallet.openDialog()">Add Pallet</a>
           <a mat-list-item (click)="appChildAddPickingPlace.openDialog()">Add Picking place</a>
           <a mat-list-item (click)="appChildAddBox.openDialog('define')">Define element</a>
-          <a mat-list-item (click)="appChildAddBox.openDialog('add')">Add Box</a>
-          <a mat-list-item (click)="appMesh.addPallet()">Add test</a>
+          <a mat-list-item (click)="appChildAddBox.openDialog('add')">Add Element</a>
+          <!-- <a mat-list-item (click)="appMesh.addPallet()">Add test</a> -->
         </mat-nav-list>
       </mat-sidenav>
 
