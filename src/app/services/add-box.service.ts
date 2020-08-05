@@ -158,9 +158,9 @@ runNodeFunc(){
       //'Authorization': 'my-auth-token'
     }),
   };
-  const urlBoxesOfPallet= 'http://localhost:4600/api/node-func';
+  const url= 'http://localhost:4600/api/node-func';
   this.httpClient
-  .post(urlBoxesOfPallet, JSON.stringify(this.boxesOfPickingPlace), httpOptions)
+  .post(url, {message:"run node function"}, httpOptions)
   .toPromise()
   .then((data) => console.log(data));
 }
