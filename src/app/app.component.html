@@ -13,6 +13,11 @@
           <button mat-menu-item>Settings</button>
           <button mat-menu-item>Help</button>
           <button mat-menu-item >About</button>
+          <button mat-menu-item (click)=childMeshComponent.deleteBoxOfPp()>delete last box from Picking place</button>
+          <button mat-menu-item (click)=childMeshComponent.deleteBoxOfPallet()>delete last box from pallet</button>
+          <button mat-menu-item (click)=childMeshComponent.saveToJson()>save to JSON</button>
+          <button mat-menu-item (click)=childMeshComponent.httpGet()>http get</button>
+          <button mat-menu-item (click)=childMeshComponent.post()>post</button>
         </mat-menu>
         <button mat-icon-button [matMenuTriggerFor]="appMenu">
           <mat-icon>more_vert</mat-icon>
