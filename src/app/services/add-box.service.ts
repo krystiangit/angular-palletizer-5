@@ -70,6 +70,8 @@ export class AddBoxService {
       //
       // Resolve the promise at the end
 
+
+      /* to dziala na PG
       this.fetchData('http://localhost:4600/api/boxes-of-pallet').then(
         (data) => {
           this.test = data;
@@ -79,11 +81,109 @@ export class AddBoxService {
         }
       );
       this.fetchData('http://localhost:4600/api/boxes-of-pp').then((data) => {
+
         this.test1 = data;
         console.log('test1: ...');
         console.log(JSON.stringify(this.test1));
         //this.loadProject();
       });
+*/
+
+// to dziala na panelu edge
+
+
+this.fetchData('http://127.0.0.1:32769/api/boxes-of-pallet').then((data) => {
+
+  this.test = data;
+  this.boxesOfPallet = data;
+  console.log('test: ...');
+  console.log(JSON.stringify(this.test));
+      });
+this.fetchData('http://127.0.0.1:32769/api/boxes-of-pp').then((data) => {
+
+        this.test1 = data;
+        console.log('test5: ...');
+        console.log(JSON.stringify(this.test1));
+        //this.loadProject();
+      });
+
+//////////////////////////test do usuniecia////////////////////////////
+/*
+this.fetchData('http://127.0.0.1/api/boxes-of-pp').then((data) => {
+
+        this.test1 = data;
+        console.log('test2: ...');
+        console.log(JSON.stringify(this.test1));
+        //this.loadProject();
+      });
+
+      this.fetchData('https://127.0.0.1/api/boxes-of-pp').then((data) => {
+
+        this.test1 = data;
+        console.log('test3: ...');
+        console.log(JSON.stringify(this.test1));
+        //this.loadProject();
+      });
+
+      this.fetchData('https://localhost/api/boxes-of-pp').then((data) => {
+
+        this.test1 = data;
+        console.log('test4: ...');
+        console.log(JSON.stringify(this.test1));
+        //this.loadProject();
+      });
+
+      this.fetchData('http://127.0.0.1:32769/api/boxes-of-pp').then((data) => {
+
+        this.test1 = data;
+        console.log('test5: ...');
+        console.log(JSON.stringify(this.test1));
+        //this.loadProject();
+      });
+
+      this.fetchData('https://127.0.0.1:32769/api/boxes-of-pp').then((data) => {
+
+        this.test1 = data;
+        console.log('test6: ...');
+        console.log(JSON.stringify(this.test1));
+        //this.loadProject();
+      });
+
+      this.fetchData('https://localhost:32769/api/boxes-of-pp').then((data) => {
+
+        this.test1 = data;
+        console.log('test7: ...');
+        console.log(JSON.stringify(this.test1));
+        //this.loadProject();
+      });
+
+
+      this.fetchData('http://127.0.0.1:32770/api/boxes-of-pp').then((data) => {
+
+        this.test1 = data;
+        console.log('test5: ...');
+        console.log(JSON.stringify(this.test1));
+        //this.loadProject();
+      });
+
+      this.fetchData('https://127.0.0.1:32770/api/boxes-of-pp').then((data) => {
+
+        this.test1 = data;
+        console.log('test6: ...');
+        console.log(JSON.stringify(this.test1));
+        //this.loadProject();
+      });
+
+      this.fetchData('https://localhost:32770/api/boxes-of-pp').then((data) => {
+
+        this.test1 = data;
+        console.log('test7: ...');
+        console.log(JSON.stringify(this.test1));
+        //this.loadProject();
+      });
+*/
+/////////////////////////////////////////////////////////////////////////////////
+
       resolve();
     });
 
@@ -133,8 +233,8 @@ console.log(this.httpClient.get('http://localhost:4600/api'))
         //'Authorization': 'my-auth-token'
       }),
     };
-    const urlBoxesOfPallet = 'http://localhost:4600/api/boxes-of-pallet';
-    const urlBoxesOfPp = 'http://localhost:4600/api/boxes-of-pp';
+    const urlBoxesOfPallet = 'http://127.0.0.1:32769/api/boxes-of-pallet';
+    const urlBoxesOfPp = 'http://127.0.0.1:32769/api/boxes-of-pp';
     const url1 = 'http://httpbin.org/post';
 
     this.httpClient
@@ -158,7 +258,7 @@ runNodeFunc(){
       //'Authorization': 'my-auth-token'
     }),
   };
-  const url= 'http://localhost:4600/api/node-func';
+  const url= 'http://127.0.0.1:32769/api/node-func';
   this.httpClient
   .post(url, {message:"run node function"}, httpOptions)
   .toPromise()

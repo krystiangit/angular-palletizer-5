@@ -89,7 +89,7 @@ postPallets(){
       'Content-Type':  'application/json'
     }),
   };
-  const urlPallets='http://localhost:4600/api/pallets'
+  const urlPallets='http://127.0.0.1:32769/api/pallets'
     this.httpClient.post(urlPallets,JSON.stringify(this.pallets), httpOptions ).toPromise().then(data=> console.log(data))
 
   }
@@ -110,7 +110,7 @@ fetchData(url:string): Promise<any> {
 getPallets():Promise<any>{
   return new Promise((resolve) => {
     console.log('reaches');
-  this.fetchData('http://localhost:4600/api/pallets').then(data => {
+  this.fetchData('http://127.0.0.1:32769/api/pallets').then(data => {
     this.test = data;
     console.log("test: ...")
     console.log(JSON.stringify(this.test));
