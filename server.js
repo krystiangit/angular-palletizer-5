@@ -1,10 +1,14 @@
+
+
 const express = require('express');
 const path = require('path')
 const app = express();
 const logger = require ('./middleware/logger.js')
+//const conn = require ('./middleware/connection.js')
 const api = require('./server/routes/api');
 //const boxJson = require('./src/assets/boxes-of-pallet.json')
-
+const cors = require('cors');
+app.use(cors());
 
 var fs = require ('fs');
 
@@ -48,12 +52,13 @@ const { finished } = require('stream');
 app.use(logger)
 app.use(express.static(path.join(__dirname, 'dist/angular-palletizer2')))
 //app.use(express.static(path.join(__dirname, '/src')))
+console.log("dirname: ")
 console.log(__dirname)
 app.use('/api', api)
 app.use(express.json())
 //catch all other routes requests and return it to the index
 
-
+//app.use(conn)
 
 app.get('*', (req, res)=>{
   res.sendFile(path.join(__dirname, '/dist/angular-palletizer2/index.html'))
