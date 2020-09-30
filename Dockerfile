@@ -3,7 +3,7 @@
 FROM node:12.7-alpine AS step1
 WORKDIR /usr/src/app
 COPY . .
-RUN  npm install --production @angular/cli && npm install && npm run build
+RUN  npm install --production @angular/cli && npm install && npm run build --prod
 # This _only_ builds a runtime node_modules tree.
 # We won't need the package.json to actually run the application.
 # If you needed developer-oriented tools to do this install they'd

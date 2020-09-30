@@ -1,3 +1,9 @@
+# my comments
+to build type:
+docker build -t angularpalletizer .
+to run container type:
+docker run -it -p  32769:4600 --name ang-node-ui angularpalletizer
+
 # AngularPalletizer2
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.7.
