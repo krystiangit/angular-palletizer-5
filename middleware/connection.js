@@ -1,6 +1,5 @@
-// npm install nodes7
-
 var nodes7 = require('nodes7');  // This is the package name, if the repository is cloned you may need to require 'nodeS7' with uppercase S
+const { nextTick } = require('process');
 var conn = new nodes7;
 var doneReading = false;
 var doneWriting = false;
@@ -45,5 +44,8 @@ function valuesWritten(anythingBad) {
 	if (anythingBad) { console.log("SOMETHING WENT WRONG WRITING VALUES!!!!"); }
 	console.log("Done writing.");
 	doneWriting = true;
-	if (doneReading) { process.exit(); }
+  if (doneReading) { process.exit(); }
+
 }
+
+
