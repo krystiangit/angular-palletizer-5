@@ -215,7 +215,7 @@ myScene.add(myBox);
     this.refresh();
   }
   ngAfterViewInit() {
-    console.log(this.pallet);
+    //console.log(this.pallet);
 
     this._portal = new TemplatePortal(
       this._dialogTemplate,

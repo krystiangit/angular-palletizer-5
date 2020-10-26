@@ -301,12 +301,12 @@ runNodeFunc(){
     //this.getBoxes();
     //console.log("first")
     //console.log(JSON.parse(JSON.stringify(BoxesOfPalletJson)))
-    console.log('second');
-    console.log(JSON.parse(JSON.stringify(this.test)));
+    //console.log('second');
+    //console.log(JSON.parse(JSON.stringify(this.test)));
     //let _boxesOfPallet = JSON.parse(JSON.stringify(BoxesOfPalletJson));
     this.boxesOfPallet = JSON.parse(JSON.stringify(this.test));
-    console.log('boxes of pp');
-    console.log(this.test1);
+    //console.log('boxes of pp');
+    //console.log(this.test1);
     //let _boxesOfPp = JSON.parse(JSON.stringify(BoxesOfPpJson));
     this.boxesOfPickingPlace = JSON.parse(JSON.stringify(this.test1));
     /*

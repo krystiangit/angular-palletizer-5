@@ -92,8 +92,8 @@ export class MeshComponent implements OnInit {
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.renderer.outputEncoding = THREE.sRGBEncoding;
     this.workspace = setWorkspaceService.workspaceSets;
-    console.log('Reading local json files');
-    console.log(SampleJson);
+    //console.log('Reading local json files');
+    //console.log(SampleJson);
   }
 
   ngOnInit(): void {}

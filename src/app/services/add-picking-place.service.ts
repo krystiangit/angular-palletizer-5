@@ -109,12 +109,12 @@ getPps():Promise<any>{
     // Your function implementation
     //
 
-  console.log('reaches');
+  //console.log('reaches');
   //this.fetchData('http://127.0.0.1:32769/api/picking-places').then(data => {
   this.fetchData('/api/picking-places').then(data => {
     this.test = data;
-    console.log("test: ...")
-    console.log(JSON.stringify(this.test));
+    //console.log("test: ...")
+    //console.log(JSON.stringify(this.test));
   });
      // Resolve the promise at the end
      resolve();
