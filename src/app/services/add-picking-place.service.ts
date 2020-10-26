@@ -85,7 +85,8 @@ postPps(){
       'Content-Type':  'application/json'
     }),
   };
-  const urlPps='http://127.0.0.1:32769/api/picking-places'
+  //const urlPps='http://127.0.0.1:32769/api/picking-places'
+  const urlPps='/api/picking-places'
     this.httpClient.post(urlPps,JSON.stringify(this.pickingPlaces), httpOptions ).toPromise().then(data=> console.log(data))
 
   }
@@ -109,7 +110,8 @@ getPps():Promise<any>{
     //
 
   console.log('reaches');
-  this.fetchData('http://127.0.0.1:32769/api/picking-places').then(data => {
+  //this.fetchData('http://127.0.0.1:32769/api/picking-places').then(data => {
+  this.fetchData('/api/picking-places').then(data => {
     this.test = data;
     console.log("test: ...")
     console.log(JSON.stringify(this.test));

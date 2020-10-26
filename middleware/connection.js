@@ -15,6 +15,11 @@ var variables = {// TEST1: 'MR4', 		// Memory real at MD4
 		  //TEST8: 'DB1,LREAL4'		// Single 8-byte real value
 };
 
+const startConnection = function(){
+
+
+
+
 conn.initiateConnection({port: 102, host: '192.168.0.1', rack: 0, slot: 1}, connected); // slot 2 for 300/400, slot 1 for 1200/1500
 //conn.initiateConnection({port: 102, host: '192.168.0.2', localTSAP: 0x0100, remoteTSAP: 0x0200, timeout: 8000}, connected); // local and remote TSAP can also be directly specified instead.  The timeout option specifies the TCP timeout.
 
@@ -22,7 +27,7 @@ function connected(err) {
 	if (typeof(err) !== "undefined") {
 		// We have an error.  Maybe the PLC is not reachable.
 		console.log(err);
-		process.exit();
+		//process.exit();
 	}
 	conn.setTranslationCB(function(tag) {return variables[tag];}); 	// This sets the "translation" to allow us to work with object names
 	//conn.addItems(['TEST1', 'TEST4']);
@@ -37,15 +42,17 @@ function valuesReady(anythingBad, values) {
 	if (anythingBad) { console.log("SOMETHING WENT WRONG READING VALUES!!!!"); }
 	console.log(values);
 	doneReading = true;
-	if (doneWriting) { process.exit(); }
+	//if (doneWriting) { process.exit(); }
 }
 
 function valuesWritten(anythingBad) {
 	if (anythingBad) { console.log("SOMETHING WENT WRONG WRITING VALUES!!!!"); }
 	console.log("Done writing.");
 	doneWriting = true;
-  if (doneReading) { process.exit(); }
+  //if (doneReading) { process.exit(); }
 
 }
+return 'bleble'
+}
 
-
+module.exports = startConnection

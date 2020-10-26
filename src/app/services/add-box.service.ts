@@ -13,6 +13,7 @@ import { saveAs } from 'file-saver';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
+
 export interface Cat {
   name: string;
 }
@@ -91,19 +92,20 @@ export class AddBoxService {
 
 // to dziala na panelu edge
 
-
-this.fetchData('http://127.0.0.1:32769/api/boxes-of-pallet').then((data) => {
+//this.fetchData('http://127.0.0.1:32769/api/boxes-of-pallet').then((data) => {
+this.fetchData('/api/boxes-of-pallet').then((data) => {
 
   this.test = data;
   this.boxesOfPallet = data;
-  console.log('test: ...');
-  console.log(JSON.stringify(this.test));
+  //console.log('test: ...');
+  //console.log(JSON.stringify(this.test));
       });
-this.fetchData('http://127.0.0.1:32769/api/boxes-of-pp').then((data) => {
+      //this.fetchData('http://127.0.0.1:32769/api/boxes-of-pp').then((data) => {
+this.fetchData('/api/boxes-of-pp').then((data) => {
 
         this.test1 = data;
-        console.log('test5: ...');
-        console.log(JSON.stringify(this.test1));
+        //console.log('test5: ...');
+        //console.log(JSON.stringify(this.test1));
         //this.loadProject();
       });
 
@@ -233,8 +235,10 @@ console.log(this.httpClient.get('http://localhost:4600/api'))
         //'Authorization': 'my-auth-token'
       }),
     };
-    const urlBoxesOfPallet = 'http://127.0.0.1:32769/api/boxes-of-pallet';
-    const urlBoxesOfPp = 'http://127.0.0.1:32769/api/boxes-of-pp';
+    const urlBoxesOfPallet = '/api/boxes-of-pallet';
+    const urlBoxesOfPp = '/api/boxes-of-pp';
+    //const urlBoxesOfPallet = 'http://127.0.0.1:32769/api/boxes-of-pallet';
+    //const urlBoxesOfPp = 'http://127.0.0.1:32769/api/boxes-of-pp';
     const url1 = 'http://httpbin.org/post';
 
     this.httpClient
@@ -258,7 +262,8 @@ runNodeFunc(){
       //'Authorization': 'my-auth-token'
     }),
   };
-  const url= 'http://127.0.0.1:32769/api/node-func';
+  //const url= 'http://127.0.0.1:32769/api/node-func';
+  const url= '/api/node-func';
   this.httpClient
   .post(url, {message:"run node function"}, httpOptions)
   .toPromise()

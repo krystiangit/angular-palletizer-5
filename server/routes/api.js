@@ -14,6 +14,8 @@ var palletsJson = fs.readFileSync('./json/pallets.json')
 var pickingPlacesJson = fs.readFileSync('./json/picking-places.json')
 router.use(express.json())
 
+
+// sending files with saved positions to angular
 router.get('/boxes-of-pallet',(req, res)=>{
   res.send(boxesOfPalletJson)
   res.status(200)
@@ -34,6 +36,8 @@ router.get('/picking-places',(req, res)=>{
   res.status(200)
 })
 
+
+//reseiving positions from angular and saving to json files
 router.post('/boxes-of-pallet', (req, res)=>{
   //console.log(req.body);
   boxesOfPalletJson = JSON.stringify(req.body)
@@ -41,11 +45,9 @@ router.post('/boxes-of-pallet', (req, res)=>{
   function _finished(err){
     console.log('writing boxes of pallet finished')
   }
-
   //console.log(boxesOfPalletJson)
   res.send({post: 'boxes of pallet'})
   res.status(200)
-
 })
 
 router.post('/boxes-of-pp', (req, res)=>{
@@ -57,7 +59,6 @@ router.post('/boxes-of-pp', (req, res)=>{
   }
   res.send({post: 'boxes of pp'})
   res.status(200)
-
 })
 
 router.post('/pallets', (req, res)=>{
@@ -69,7 +70,6 @@ router.post('/pallets', (req, res)=>{
   }
   res.send({post: 'pallets'})
   res.status(200)
-
 })
 
 router.post('/picking-places', (req, res)=>{
@@ -81,8 +81,9 @@ router.post('/picking-places', (req, res)=>{
   }
   res.send({post: 'picking places'})
   res.status(200)
-
 })
+
+
 
 router.post('/node-func', (req, res)=>{
   console.log("node-func");
@@ -91,13 +92,11 @@ router.post('/node-func', (req, res)=>{
 
 })
 
-
+/*
 router.post("/", (req, res) =>{
 });
+*/
 
-function aaa(){
-  return {aa:1, bb:2}
-}
 
 module.exports = router;
 //module.exports = aaa()

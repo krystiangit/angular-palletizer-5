@@ -9,8 +9,8 @@ const cors = require('cors');
 app.use(cors());
 
 var fs = require ('fs');
-
-
+const conn1 = connect()
+//console.log(conn1)
 
 console.log("aaa:...")
 const aaa = require('./server/routes/api').aaa
@@ -38,7 +38,7 @@ app.get('*', (req, res)=>{
 
 
 
-const port = process.env.port || 4600
+const port = process.env.port || 32769
 app.listen(port, (req, res)=>{
   console.log('server is running on port:' + port);
 })
