@@ -16,6 +16,10 @@ import { PickingPlace } from '../models/pickingPlace.model';
 import { AddPickingPlaceService } from '../services/add-picking-place.service';
 import { PalletsService } from '../services/pallets.service';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+
+
 import {
   GLTFLoader,
   GLTF,
@@ -75,6 +79,7 @@ export class MeshComponent implements OnInit {
   //gui.add(text, 'explode');
 
   constructor(
+    private httpClient: HttpClient,
     public palletsService: PalletsService,
     public boxService: AddBoxService,
     public setWorkspaceService: SetWorkspaceService,
@@ -125,6 +130,25 @@ deletePallet(id: string) {
     this.boxService.postBoxes();
     this.palletsService.postPallets();
     this.addPickingPlaceService.postPps();
+  }
+
+  sendToPLC(){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        //'Content-Type': 'application/json',
+        //'Authorization': 'my-auth-token'
+      }),
+    };
+    const url = '/api/send-to-plc';
+
+    this.httpClient
+      .post(url, 'sending data to PLC', httpOptions)
+      .toPromise()
+      .then((data) => {
+
+        //console.log(data)
+      }).catch((error)=>{console.log(error)});
+
   }
 spinner=false
   httpGet() {

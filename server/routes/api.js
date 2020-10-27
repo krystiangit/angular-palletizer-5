@@ -6,7 +6,7 @@ const router = express.Router();
 //const pallets = require ('../../src/assets/pallets.json')
 
 var fs = require ('fs');
-
+const connect = require ('../../middleware/connection.js')
 
 var boxesOfPalletJson = fs.readFileSync('./json/boxes-of-pallet.json')
 var boxesOfPpJson = fs.readFileSync('./json/boxes-of-pp.json')
@@ -88,6 +88,14 @@ router.post('/picking-places', (req, res)=>{
 router.post('/node-func', (req, res)=>{
   console.log("node-func");
   res.send({post: 'node func'})
+  res.status(200)
+
+})
+
+router.post('/send-to-plc', (req, res)=>{
+  console.log("send-to-plc");
+  connect()
+  res.send({post: 'send-to-plc'})
   res.status(200)
 
 })

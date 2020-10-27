@@ -9,7 +9,7 @@ const cors = require('cors');
 app.use(cors());
 
 var fs = require ('fs');
-const conn1 = connect()
+//const conn1 = connect()
 //console.log(conn1)
 
 console.log("aaa:...")
