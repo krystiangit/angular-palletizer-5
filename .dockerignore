@@ -8,4 +8,4 @@ Dockerfile
 README.md
 env.*
 /devops/*
-node_modules
+node_modules/material-design-icons/

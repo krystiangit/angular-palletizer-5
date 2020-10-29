@@ -1,10 +1,10 @@
 
 
 .drag-box {
-  /*width: 500px;
+  width: 500px;
   height:600px;
 
-  padding: 10px;*/
+  padding: 10px;
   box-sizing: border-box;
   border: solid 1px #ccc;
   color:  rgba(0, 0, 0, 0.87);
@@ -46,6 +46,7 @@
 
 .tab-box {
   display: flex;
+
   align-items: center;
   justify-content: center;
   margin: 8px 8px 8px 8px;
@@ -69,7 +70,6 @@
 .form-full-width {
   width: 100%;
 }
-
 .dimension{
   display: flex;
   flex-direction: column;
@@ -77,6 +77,7 @@
   width: 150px;
   height: 100%;
 }
+
 .preview{
   display: flex;
   flex-direction: column;
@@ -97,11 +98,4 @@
 }
 .refreshButton{
   padding: 5px;
-}
-
-.predefinedOrCustom{
-  padding: 10px;
-}
-.mat-radio-button ~ .mat-radio-button {
-  margin-left: 16px;
 }

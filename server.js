@@ -33,12 +33,14 @@ app.use(express.json())
 
 
 app.get('*', (req, res)=>{
-  res.sendFile(path.join(__dirname, '/dist/angular-palletizer2/index.html'))
+  //res.sendFile(path.join(__dirname, '/dist/angular-palletizer2/index.html'))
+
+  res.send('something went wrong')
 })
 
 
 
-const port = process.env.port || 32769
+const port = process.env.port || 4600
 app.listen(port, (req, res)=>{
   console.log('server is running on port:' + port);
 })

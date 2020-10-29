@@ -6,12 +6,13 @@ COPY . .
 RUN  npm install --production @angular/cli && npm install  && npm run build --prod
 COPY package*.json ./
 #RUN npm install --production
-RUN npm install nodes7
+#RUN npm install nodes7
 
 FROM node:12.7-alpine AS step2
 WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install --production && npm install  nodes7
+#&& npm install material-design-icons --save
 #RUN npm install nodes7
 
 FROM node:12.7-alpine AS step3

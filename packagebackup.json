@@ -23,6 +23,7 @@
     "@angular/platform-browser": "^9.1.12",
     "@angular/platform-browser-dynamic": "^9.1.12",
     "@angular/router": "^9.1.12",
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dat.gui": "^0.7.7",
     "express": "^4.17.1",
@@ -33,8 +34,10 @@
     "node": "^14.13.0",
     "nodes7": "^0.3.12",
     "npm": "^6.14.8",
+    "rxjs": "~6.5.4",
     "three": "^0.118.3",
     "three-orbitcontrols": "^2.110.3",
+    "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
@@ -56,17 +59,5 @@
     "ts-node": "~8.3.0",
     "tslint": "^6.1.3",
     "typescript": "~3.8.3"
-  },
-  "description": "to build type: docker build -t angularpalletizer . to run container type: docker run -it -p  32769:4600 --name ang-node-ui angularpalletizer",
-  "main": "karma.conf.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/krystiangit/angular-palletizer3.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/krystiangit/angular-palletizer3/issues"
-  },
-  "homepage": "https://github.com/krystiangit/angular-palletizer3#readme"
+  }
 }
