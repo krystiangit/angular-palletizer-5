@@ -1,8 +1,8 @@
 var nodes7 = require('nodes7');  // This is the package name, if the repository is cloned you may need to require 'nodeS7' with uppercase S
 const { nextTick } = require('process');
 var conn = new nodes7;
-var doneReading = false;
-var doneWriting = false;
+var doneReading
+var doneWriting
 
 var variables = {// TEST1: 'MR4', 		// Memory real at MD4
 		  TEST2: 'M32.2', 		// Bit at M32.2
@@ -17,7 +17,7 @@ var variables = {// TEST1: 'MR4', 		// Memory real at MD4
 
 const startConnection = function(){
 
-
+  doneReading, doneWriting = false;
 
 
 conn.initiateConnection({port: 102, host: '192.168.1.5', rack: 0, slot: 1}, connected); // slot 2 for 300/400, slot 1 for 1200/1500
@@ -39,21 +39,17 @@ function connected(err) {
 	conn.readAllItems(valuesReady);
 }
 
-function valuesReady(anythingBad, values) {
-	if (anythingBad) { console.log("SOMETHING WENT WRONG READING VALUES!!!!"); }
-	console.log(values);
-	doneReading = true;
-	//if (doneWriting) { process.exit(); }
-}
-
 function valuesWritten(anythingBad) {
 	if (anythingBad) { console.log("SOMETHING WENT WRONG WRITING VALUES!!!!"); }
 	console.log("Done writing.");
-	doneWriting = true;
+  doneWriting = true;
+  conn.dropConnection((data)=>console.log(data))
   //if (doneReading) { process.exit(); }
 
 }
 return 'bleble'
 }
+
+
 
 module.exports = startConnection
