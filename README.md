@@ -7,6 +7,9 @@ docker run -it -p  32769:4600 --name ang-node-ui angularpalletizer
 entering into container:
 docker exec -it ang-node-ui /bin/sh
 
+node inspect server.js
+chrome://inspect/#devices
+
 # AngularPalletizer2
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.7.
