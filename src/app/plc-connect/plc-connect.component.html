@@ -1,0 +1,54 @@
+<ng-template>
+  <div
+    id="add-pallet"
+    class="drag-box"
+    cdkDrag
+    cdkDragRootElement=".cdk-overlay-pane"
+  >
+    <h3 class="pallet-header">Send to PLC</h3>
+
+    <mat-tab-group color="accent" class="tabs-container">
+      <mat-tab class="tab" label="Connection Settings">
+        <div class="tab-box mat-elevation-z4">
+          <form class="form">
+            <mat-form-field class="form-full-width">
+              <mat-label>IP address</mat-label>
+              <input type="string"
+                matInput
+                placeholder="100"
+                [(ngModel)]="connection.ip"
+                value="connection.ip"
+                name="connectionIP"
+              />
+            </mat-form-field>
+            <mat-form-field class="form-full-width">
+              <mat-label>Rack</mat-label>
+              <input type="number"
+                matInput
+                placeholder="100"
+                [(ngModel)]="connection.rack"
+                value="connection.rack"
+                name="connectionRack"
+              />
+            </mat-form-field>
+            <mat-form-field class="form-full-width">
+              <mat-label>Slot</mat-label>
+              <input type="number"
+                matInput
+                placeholder="100"
+                [(ngModel)]="connection.slot"
+                value="connection.slot"
+                name="connectionSlot"
+              />
+            </mat-form-field>
+          </form>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+    <div>
+      <button class="mat-raised-button" (click)="sendToPLC()">Send</button>
+    </div>
+  </div>
+</ng-template>
+
+

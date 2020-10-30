@@ -23,6 +23,7 @@ import { SetWorkspaceComponent } from "./set-workspace/set-workspace.component";
 import { AddBoxComponent } from './add-box/add-box.component';
 import { AddPickingPlaceComponent } from './add-picking-place/add-picking-place.component';
 import { MeshComponent } from './mesh/mesh.component';
+import { PlcConnectComponent } from './plc-connect/plc-connect.component';
 
 const Routes = [
   {
@@ -50,6 +51,7 @@ pathMatch: 'full'
     AddBoxComponent,
     AddPickingPlaceComponent,
     MeshComponent,
+    PlcConnectComponent,
 
   ],
   imports: [

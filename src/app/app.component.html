@@ -19,6 +19,7 @@
           <button mat-menu-item (click)=childMeshComponent.httpGet()>http get</button>
           <button mat-menu-item (click)=childMeshComponent.post()>post</button>
           <button mat-menu-item (click)=childMeshComponent.sendToPLC()>send to plc</button>
+          <button mat-menu-item (click)="appChildPlcConnect.openDialog()">connection</button>
         </mat-menu>
         <button mat-icon-button [matMenuTriggerFor]="appMenu">
           <mat-icon>more_vert</mat-icon>
@@ -44,6 +45,7 @@
         <app-add-box #appChildAddBox></app-add-box>
         <app-set-workspace #appChildSetWorkspace></app-set-workspace>
         <app-add-picking-place #appChildAddPickingPlace></app-add-picking-place>
+        <app-plc-connect #appChildPlcConnect></app-plc-connect>
 
         <app-mesh #appMesh></app-mesh>
       </mat-sidenav-content>

@@ -41,9 +41,6 @@ export class MeshComponent implements OnInit {
   @ViewChild('meshId') private meshIdRef: ElementRef;
   @ViewChild('guiContainerId') private guiContainerRef: ElementRef;
 
-
-
-
   boxesOfPallet: Box[] = [];
   boxesOfPp: Box[] = [];
   pickingPlaces: PickingPlace[] = [];
