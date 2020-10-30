@@ -246,12 +246,12 @@ console.log(this.httpClient.get('http://localhost:4600/api'))
       .toPromise()
       .then((data) => {
         this.runNodeFunc();
-        console.log(data)
+        //console.log(data)
       });
     this.httpClient
       .post(urlBoxesOfPp, JSON.stringify(this.boxesOfPickingPlace), httpOptions)
       .toPromise()
-      .then((data) => console.log(data));
+      .then((data) => console.log(data) );
     //this.httpClient.post('http://localhost:4600/api/boxes-of-pallet', this.test )
   }
 
@@ -454,12 +454,12 @@ runNodeFunc(){
     temp.visible = this.boxSets.visible;
     temp.color = this.boxSets.color;
     temp.orientationParent = this.boxSets.orientationParent;
-    console.log('box PosY' + temp.posZ);
+    //console.log('box PosY' + temp.posZ);
 
-    console.log('1' + this.boxSets.posZ);
-    console.log('2' + this.boxSets.posZParent);
-    console.log('3' + this.boxSets.height / 2);
-    console.log('4' + this.centerPosZ);
+    //console.log('1' + this.boxSets.posZ);
+    //console.log('2' + this.boxSets.posZParent);
+    //console.log('3' + this.boxSets.height / 2);
+    //console.log('4' + this.centerPosZ);
 
     //checking if box belongs to parent or Picking place
     if (this.boxSets.membership.search('Pallet') == 0) {
@@ -548,11 +548,11 @@ runNodeFunc(){
       );
 
       tempBox3D.rotation.y = this.boxSets.orientation * (Math.PI / 180);
-      console.log('PosZ3D: ' + tempBox3D.position.y);
-      console.log('PosZ3D 1: ' + this.boxSets.posZ);
-      console.log('PosZ3D 2: ' + this.boxSets.posZParent);
-      console.log('PosZ3D 3: ' + this.boxSets.height / 2);
-      console.log('PosZ3D 4: ' + this.centerPosZ);
+      //console.log('PosZ3D: ' + tempBox3D.position.y);
+      //console.log('PosZ3D 1: ' + this.boxSets.posZ);
+      //console.log('PosZ3D 2: ' + this.boxSets.posZParent);
+      //console.log('PosZ3D 3: ' + this.boxSets.height / 2);
+      //console.log('PosZ3D 4: ' + this.centerPosZ);
     }
 
     if (this.boxSets.membership.search('Picking') == 0) {

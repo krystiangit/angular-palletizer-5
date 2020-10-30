@@ -214,10 +214,10 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
         this.box.height = this.addBoxervice.boxesOfPickingPlace[index].height;
         this.box.color = this.addBoxervice.boxesOfPickingPlace[index].color;
         this.box.isTexture = this.addBoxervice.boxesOfPickingPlace[index].isTexture;
-        console.log(
+        /*console.log(
           'colors of boxes: ' +
             this.addBoxervice.boxesOfPickingPlace[index].color
-        );
+        );*/
         //console.log("finded")
       }
 
@@ -249,7 +249,7 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
       for (let index = 0; index < this.palletService.pallets.length; index++) {
         _palletsNames[index] = this.palletService.pallets[index].name;
         //console.log("_palletsnames" + this.palletService.pallets[index].name)
-        console.log("iteracja pallet")
+        //console.log("iteracja pallet")
       }
     }
 
@@ -267,9 +267,9 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
     }
     */
     //this.parentsNames = _ppNames;
-    console.log('pallet names: ' + this.palletsNames);
-    console.log('ppnames: ' + this.ppNames);
-    console.log('all names: ' + this.parentsNames);
+    //console.log('pallet names: ' + this.palletsNames);
+    //console.log('ppnames: ' + this.ppNames);
+    //console.log('all names: ' + this.parentsNames);
     //console.log("pallets: " + this.palletService.pallets)
     //console.log("picking places: " + this.addPickingPlaceService.pickingPlaces)
     /*

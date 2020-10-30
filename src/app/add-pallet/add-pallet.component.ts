@@ -207,7 +207,7 @@ myScene.add(myBox);
     this.configLight();
     this.renderer.render(this.scene, this.camera);
     this.animate();
-    console.log("this.pallet.isTexture" + this.pallet.isTexture + "typeOf" + typeof(this.pallet.isTexture))
+    //console.log("this.pallet.isTexture" + this.pallet.isTexture + "typeOf" + typeof(this.pallet.isTexture))
     return "aaa"
   }
   tabChange($event) {

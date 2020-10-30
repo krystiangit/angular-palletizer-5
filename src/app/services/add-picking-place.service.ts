@@ -37,7 +37,7 @@ test:any = [];
     //this.workspace.width= this.workspaceSets.width;
     //this.workspace.height= this.workspaceSets.height;
     this.pickingPlaces.push(temp);
-    console.log("picking places" + this.pickingPlaces)
+    //e.log("picking places" + this.pickingPlaces)
     return this.pickingPlaces
 
 

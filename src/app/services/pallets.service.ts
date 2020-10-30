@@ -50,9 +50,9 @@ this.color = this.palletSets.color
 
     temp.color = this.palletSets.color;
     this.pallets.push(temp);
-    console.log("from service pallets" +this.pallets)
-    console.log("from service palletSets" +this.palletSets)
-    console.log("from service temp" + temp)
+    //console.log("from service pallets" +this.pallets)
+    //console.log("from service palletSets" +this.palletSets)
+    //console.log("from service temp" + temp)
     return this.pallets;
   }
 

@@ -21,7 +21,7 @@ export class AppComponent implements OnDestroy {
     event.preventDefault();
   // Chrome requires returnValue to be set.
   event.returnValue = true;
-    console.log("Processing beforeunload...");
+    //console.log("Processing beforeunload...");
 
 
 
@@ -62,7 +62,7 @@ export class AppComponent implements OnDestroy {
   public addBoxOfPallet() {
     this.childMeshComponent.addBoxOfPalletFunc();
     this.childMeshComponent.addBoxOfPallet3D();
-    console.log('add box of Pallet clicked on parent func');
+    //console.log('add box of Pallet clicked on parent func');
   }
 
   public addBoxOfPp() {
@@ -74,7 +74,7 @@ export class AppComponent implements OnDestroy {
   public saveSettingsWorkspace(){
     this.childMeshComponent.setWorkspaceFunc();
     this.childMeshComponent.setWorkspaceFunc();
-    console.log('save settings workspace clicked');
+    //console.log('save settings workspace clicked');
   }
 
   public saveSettingsKcs(){
@@ -84,7 +84,7 @@ export class AppComponent implements OnDestroy {
   public addPickingPlace(){
     this.childMeshComponent.addPickingPlaceFunc();
     this.childMeshComponent.addPp3D();
-    console.log('add picking place clicked');
+    //console.log('add picking place clicked');
   }
   /*
 add(){

@@ -489,7 +489,7 @@ spinner=false
     floor.material.side = THREE.DoubleSide;
     floor.rotation.x = (Math.PI / 180) * 90;
     this.scene.add(floor);
-    console.log(this.workspace.width);
+    //console.log(this.workspace.width);
   }
 
   setWorkspaceFunc() {
