@@ -1,8 +1,11 @@
 # my comments
 to build type:
-
+docker build -t angularpalletizer .
 to run container type:
 docker run -it -p  32769:4600 --name ang-node-ui angularpalletizer
+
+entering into container:
+docker exec -it ang-node-ui /bin/sh
 
 # AngularPalletizer2
 

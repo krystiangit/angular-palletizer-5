@@ -381,7 +381,7 @@ spinner=false
       this.scene.add(objectHelper);
     }
   }
-
+/*
   check() {
     console.log('check starts');
     for (let index = 0; index < this.boxesOfPallet.length; index++) {
@@ -397,7 +397,7 @@ spinner=false
       console.log('helpers names: ' + this.helpersBoxOfPp[index].name);
     }
     console.log('check ends');
-  }
+  }*/
   /*
   hide() {
     this.scene.getObjectByName(

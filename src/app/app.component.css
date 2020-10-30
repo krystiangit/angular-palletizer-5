@@ -20,7 +20,7 @@
   height: 100%;
   width:200px;
 }
-
+/*
 #workspace{
   display: block;
   box-sizing: border-box;
@@ -29,9 +29,10 @@
   height: 100%;
   width: 100%;
   left: 200px;
+  padding: 0;
 
 }
-
+*/
 .example-container {
   display: flex;
   flex-direction: column;

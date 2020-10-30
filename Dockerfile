@@ -19,6 +19,7 @@ FROM node:12.7-alpine AS step3
 WORKDIR /root/
 COPY --from=step1 /usr/src/app/dist/angular-palletizer2 ./dist/angular-palletizer2
 COPY --from=step2 /usr/src/app/node_modules ./node_modules/
+ADD DELETE ./node_modules/material-design-icons
 COPY server.js .
 COPY server/routes/api.js server/routes/api.js
 COPY middleware/logger.js middleware/logger.js
