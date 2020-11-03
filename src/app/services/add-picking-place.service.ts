@@ -154,7 +154,17 @@ for (let index = 0; index < this.pickingPlaces.length; index++) {
 }
 
 
+deletePickingPlace() {
+  this.deleteElement(this.pickingPlaces.length - 1, this.pickingPlaces);
+  this.deleteElement(this.pps3D.length - 1, this.pps3D);
+}
 
+deleteElement(id: number, array: any) {
+  array.splice(
+    array.findIndex((element) => element.id === id.toString()),
+    1
+  );
+}
 
 
 

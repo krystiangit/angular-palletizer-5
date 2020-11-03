@@ -134,7 +134,6 @@ export class MeshComponent implements OnInit {
 spinner=false
   httpGet() {
     this.spinner=true
-
     this.boxService.getBoxes().then(() => {
       this.palletsService.getPallets().then(() => {
         this.addPickingPlaceService.getPps().then(() => {
@@ -250,6 +249,7 @@ spinner=false
   }
 
   loadProject() {
+
     this.spinner=false
     this.pickingPlaces = [];
     this.pallets = [];
@@ -424,6 +424,34 @@ spinner=false
     this.boxService.deleteBoxOfPallet();
     //console.log("boxes of pp length after delete: " + this.boxesOfPallet.length)
     this.gui.__controllers[this.gui.__controllers.length - 1].remove();
+  }
+
+  deletePallet() {
+    this.scene.remove(
+      this.scene.getObjectByName(
+        this.pallets3D[this.pallets3D.length - 1].name
+      )
+    );
+    this.scene.remove(
+      this.scene.getObjectByName(
+        this.pallets3D[this.pallets3D.length - 1].name + 'helper'
+      )
+    );
+    this.palletsService.deletePallet();
+  }
+
+  deletePp() {
+    this.scene.remove(
+      this.scene.getObjectByName(
+        this.pps3D[this.pps3D.length - 1].name
+      )
+    );
+    this.scene.remove(
+      this.scene.getObjectByName(
+        this.pps3D[this.pps3D.length - 1].name + 'helper'
+      )
+    );
+    this.addPickingPlaceService.deletePickingPlace()
   }
 
   configLight() {

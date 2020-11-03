@@ -158,11 +158,24 @@ for (let index = 0; index < this.pallets.length; index++) {
         tempHelper.name=this.pallets[index].name + "helper"
         this.helpersOfPallet.push(tempHelper);
     }
-
-
-
-
 }
+
+
+
+
+deletePallet() {
+  this.deleteElement(this.pallets.length - 1, this.pallets);
+  this.deleteElement(this.pallets3D.length - 1, this.pallets3D);
+}
+
+deleteElement(id: number, array: any) {
+  array.splice(
+    array.findIndex((element) => element.id === id.toString()),
+    1
+  );
+}
+
+
 
 
 
