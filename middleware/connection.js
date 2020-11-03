@@ -11,8 +11,8 @@ var variables = {
 
 };
 
+//const startConnection = new Promise(connectionParams, ()=>{})
 const startConnection = function(connectionParams){
-
 doneReading, doneWriting = false;
 
 conn.initiateConnection({port: 102, host: connectionParams.ip, rack: connectionParams.rack, slot: connectionParams.slot}, connected); // slot 2 for 300/400, slot 1 for 1200/1500

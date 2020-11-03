@@ -48,7 +48,7 @@ export class PlcConnectComponent implements OnInit {
       .post(url, this.collectData(), httpOptions)
       .toPromise()
       .then((data) => {
-        //console.log(data)
+        console.log(data)
       }).catch((error)=>{console.log(error)});
 
   }

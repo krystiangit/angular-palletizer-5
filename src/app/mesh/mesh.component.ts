@@ -286,7 +286,6 @@ spinner=false
     this.addPickingPlaceService.loadProject();
     this.pickingPlaces = this.addPickingPlaceService.pickingPlaces;
     this.pps3D = this.addPickingPlaceService.pps3D;
-
     for (let index = 0; index < this.pps3D.length; index++) {
       var object = this.pps3D[index];
       object.name = this.pickingPlaces[index].name;
@@ -299,7 +298,6 @@ spinner=false
     this.pallets = this.palletsService.pallets;
     this.pallets3D = this.palletsService.pallets3D;
     this.helpersOfPallet = this.palletsService.helpersOfPallet;
-
     for (let index = 0; index < this.pallets3D.length; index++) {
       var object = this.pallets3D[index];
       object.name = this.pallets[index].name;
@@ -317,7 +315,6 @@ spinner=false
     this.boxesOfPp = this.boxService.boxesOfPickingPlace;
     this.boxesofPp3D = this.boxService.boxesOfPp3D;
     this.helpersBoxOfPp = this.boxService.helpersOfPp;
-
     for (let index = 0; index < this.boxesofPallet3D.length; index++) {
       var object = this.boxesofPallet3D[index];
       object.name = this.boxesOfPallet[index].name;
