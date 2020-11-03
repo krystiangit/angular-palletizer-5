@@ -12,8 +12,8 @@ var fs = require ('fs');
 //const conn1 = connect()
 //console.log(conn1)
 
-console.log("aaa:...")
-const aaa = require('./server/routes/api').aaa
+
+
 
 const { finished } = require('stream');
 

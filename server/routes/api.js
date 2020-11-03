@@ -1,9 +1,5 @@
 const express = require('express')
 const router = express.Router();
-//const boxJson = require('./src/assets/boxes-of-pallet.json')
-//const boxesOfPalletJson = require ('../../src/assets/boxes-of-pallet.json')
-//const boxesOfPpJson = require ('../../src/assets/boxes-of-pp.json')
-//const pallets = require ('../../src/assets/pallets.json')
 
 var fs = require ('fs');
 const connect = require ('../../middleware/connection.js')
@@ -13,7 +9,6 @@ var boxesOfPpJson = fs.readFileSync('./json/boxes-of-pp.json')
 var palletsJson = fs.readFileSync('./json/pallets.json')
 var pickingPlacesJson = fs.readFileSync('./json/picking-places.json')
 router.use(express.json())
-
 
 // sending files with saved positions to angular
 router.get('/boxes-of-pallet',(req, res)=>{
@@ -35,7 +30,6 @@ router.get('/picking-places',(req, res)=>{
   res.send(pickingPlacesJson)
   res.status(200)
 })
-
 
 //reseiving positions from angular and saving to json files
 router.post('/boxes-of-pallet', (req, res)=>{
@@ -83,8 +77,6 @@ router.post('/picking-places', (req, res)=>{
   res.status(200)
 })
 
-
-
 router.post('/node-func', (req, res)=>{
   console.log("node-func");
   res.send({post: 'node func'})
@@ -94,6 +86,7 @@ router.post('/node-func', (req, res)=>{
 
 router.post('/send-to-plc', (req, res)=>{
   console.log("send-to-plc");
+  console.log(req.body)
   connect()
   res.send({post: 'send-to-plc'})
   res.status(200)

@@ -42,9 +42,9 @@ export class PlcConnectComponent implements OnInit {
       }),
     };
     const url = '/api/send-to-plc';
-
+    console.log('start sending')
     this.httpClient
-      .post(url, 'sending data to PLC', httpOptions)
+      .post(url, this.connection, httpOptions)
       .toPromise()
       .then((data) => {
 
