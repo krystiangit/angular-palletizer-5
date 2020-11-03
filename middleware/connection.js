@@ -1,16 +1,15 @@
 var nodes7 = require("nodes7"); // This is the package name, if the repository is cloned you may need to require 'nodeS7' with uppercase S
-const { nextTick } = require("process");
 var conn = new nodes7();
 var doneReading;
 var doneWriting;
 
-var variables = {
-  TEST2: "M32.2", // Bit at M32.2
-  TEST3: "M100.0", // Bit at M20.0
-  TEST7: "DB1,INT12.2", // Two integer value array
-};
-
 const startConnection = (connectionParams) => {
+
+  var variables = {
+    TEST2: "M32.2", // Bit at M32.2
+    TEST3: "M100.0", // Bit at M20.0
+    TEST7: "DB1,INT12.2", // Two integer value array
+  };
   return new Promise((resolve, reject) => {
     //const startConnection = function(connectionParams){
     doneReading, (doneWriting = false);
@@ -18,9 +17,9 @@ const startConnection = (connectionParams) => {
     conn.initiateConnection(
       {
         port: 102,
-        host: connectionParams.ip,
-        rack: connectionParams.rack,
-        slot: connectionParams.slot,
+        host: connectionParams.connection.ip,
+        rack: connectionParams.connection.rack,
+        slot: connectionParams.connection.slot,
       },
       connected
     ); // slot 2 for 300/400, slot 1 for 1200/1500

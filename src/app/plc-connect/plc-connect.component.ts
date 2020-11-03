@@ -36,11 +36,11 @@ export class PlcConnectComponent implements OnInit {
     public addBoxervice: AddBoxService,
     public addPickingPlaceService: AddPickingPlaceService,
     public palletService: PalletsService,
-    public appComponent: AppComponent
+    public appComponent: AppComponent,
   ) {}
 
   public connection: Connection = { ip: '192.168.1.5', rack: 0, slot: 1 };
-
+  public spinner = false
   sendToPLC() {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -48,6 +48,7 @@ export class PlcConnectComponent implements OnInit {
         //'Authorization': 'my-auth-token'
       }),
     };
+    this.spinner = true
     const url = '/api/send-to-plc';
     //console.log('start sending')
     this.httpClient
@@ -56,6 +57,20 @@ export class PlcConnectComponent implements OnInit {
       .then((data) => {
         console.log('data: ');
         console.log(data)
+        this.spinner = false
+        if(JSON.parse(JSON.stringify(data)).error)
+        {
+
+
+          alert('Problem sending data to PLC')
+        }
+        else{
+          alert('Writing data to PLC finished! ')
+
+
+
+        }
+
       })
       .catch((error) => {
         console.log('error: ');

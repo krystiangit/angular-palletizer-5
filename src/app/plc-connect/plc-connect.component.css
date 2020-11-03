@@ -89,3 +89,10 @@
 .refreshButton{
   padding: 5px;
 }
+
+.spinner{
+  z-index: 1001;
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+}
