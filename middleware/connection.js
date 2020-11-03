@@ -11,11 +11,12 @@ var variables = {
 
 };
 
-const startConnection = function(){
+const startConnection = function(connectionParams){
 
 doneReading, doneWriting = false;
 
-conn.initiateConnection({port: 102, host: '192.168.1.5', rack: 0, slot: 1}, connected); // slot 2 for 300/400, slot 1 for 1200/1500
+conn.initiateConnection({port: 102, host: connectionParams.ip, rack: connectionParams.rack, slot: connectionParams.slot}, connected); // slot 2 for 300/400, slot 1 for 1200/1500
+//conn.initiateConnection({port: 102, host: '192.168.1.5', rack: 0, slot: 1}, connected); // slot 2 for 300/400, slot 1 for 1200/1500
 //conn.initiateConnection({port: 102, host: '192.168.0.2', localTSAP: 0x0100, remoteTSAP: 0x0200, timeout: 8000}, connected); // local and remote TSAP can also be directly specified instead.  The timeout option specifies the TCP timeout.
 
 function connected(err) {

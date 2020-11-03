@@ -35,6 +35,7 @@ export class PlcConnectComponent implements OnInit {
   public connection: Connection = { ip: '192.168.1.5', rack: 0, slot: 1 };
 
   sendToPLC(){
+
     const httpOptions = {
       headers: new HttpHeaders({
         //'Content-Type': 'application/json',
@@ -42,14 +43,27 @@ export class PlcConnectComponent implements OnInit {
       }),
     };
     const url = '/api/send-to-plc';
-    console.log('start sending')
+    //console.log('start sending')
     this.httpClient
-      .post(url, this.connection, httpOptions)
+      .post(url, this.collectData(), httpOptions)
       .toPromise()
       .then((data) => {
-
         //console.log(data)
       }).catch((error)=>{console.log(error)});
+
+  }
+
+  //getting data from boxes, pallets, picking places and connection info
+  collectData(){
+
+    return {
+      connection: this.connection,
+      boxesOfPallet: this.addBoxervice.boxesOfPallet,
+      boxesOfPp: this.addBoxervice.boxesOfPickingPlace,
+      pallets: this.palletService.pallets,
+      pickingPlaces: this.addPickingPlaceService.pickingPlaces
+    }
+
 
   }
 

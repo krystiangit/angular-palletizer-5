@@ -45,12 +45,6 @@ export class MeshComponent implements OnInit {
   boxesOfPp: Box[] = [];
   pickingPlaces: PickingPlace[] = [];
   pallets: Pallet[] = [];
-  /*
-    setKcs: Kcs = {
-    posX: this.setKcsService.kcsSets.posX,
-    posY: this.setKcsService.kcsSets.posY,
-  };
-*/
 
   scene = null;
   camera = null;
@@ -73,14 +67,11 @@ export class MeshComponent implements OnInit {
 
   gui = new dat.GUI();
 
-  //gui.add(text, 'explode');
-
   constructor(
     private httpClient: HttpClient,
     public palletsService: PalletsService,
     public boxService: AddBoxService,
     public setWorkspaceService: SetWorkspaceService,
-    //public setKcsService: SetKcsService,
     public addPickingPlaceService: AddPickingPlaceService,
     public elRef: ElementRef
   ) {
@@ -115,20 +106,13 @@ export class MeshComponent implements OnInit {
     this.animate();
     this.guiFunc();
   }
-  /*
-deletePallet(id: string) {
-  this.pallets.splice(
-    this.pallets.findIndex((pallet) => pallet.id === id),
-    1
-  );
-}
-*/
+
   post() {
     this.boxService.postBoxes();
     this.palletsService.postPallets();
     this.addPickingPlaceService.postPps();
   }
-
+/*
   sendToPLC(){
     const httpOptions = {
       headers: new HttpHeaders({
@@ -146,7 +130,7 @@ deletePallet(id: string) {
         //console.log(data)
       }).catch((error)=>{console.log(error)});
 
-  }
+  }*/
 spinner=false
   httpGet() {
     this.spinner=true

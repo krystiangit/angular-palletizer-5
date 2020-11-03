@@ -87,7 +87,7 @@ router.post('/node-func', (req, res)=>{
 router.post('/send-to-plc', (req, res)=>{
   console.log("send-to-plc");
   console.log(req.body)
-  connect()
+  connect(req.body.connection)
   res.send({post: 'send-to-plc'})
   res.status(200)
 
