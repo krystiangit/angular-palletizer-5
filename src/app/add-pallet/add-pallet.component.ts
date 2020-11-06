@@ -19,6 +19,9 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 interface PredefinedPallets {
   name: string;
+  width: number;
+  length: number;
+  height: number
 }
 interface Color {
   name: string;
@@ -53,7 +56,6 @@ export class AddPalletComponent implements AfterViewInit, OnDestroy {
       ));
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.renderer.outputEncoding = THREE.sRGBEncoding;
-
   }
 
   public colors: Color[] = [
@@ -79,7 +81,7 @@ export class AddPalletComponent implements AfterViewInit, OnDestroy {
     posY: 1000,
     posZ: 0,
     orientation: 0,
-    color:0xffff00
+    color: 0xffff00,
   };
 
   scene = null;
@@ -136,7 +138,6 @@ export class AddPalletComponent implements AfterViewInit, OnDestroy {
     this.controls.update();
     if (this.renderer != null) {
       this.renderer.render(this.scene, this.camera);
-
     } else console.log('renderer is not defined for animate');
   }
 
@@ -157,23 +158,22 @@ export class AddPalletComponent implements AfterViewInit, OnDestroy {
       10,
       10
     );
-    let tempPallet3D = null
+    let tempPallet3D = null;
     tempPallet3D = new THREE.Mesh(tempGeometry, material);
 
     //let tempBox3D = new THREE.Mesh( geometry, this.materials );
     tempPallet3D = new THREE.Mesh(tempGeometry, material);
-    tempPallet3D.name = "nazwa"
+    tempPallet3D.name = 'nazwa';
     this.scene.add(tempPallet3D);
 
     tempPallet3D.position.x = this.pallet.posX;
-    tempPallet3D.position.y = this.pallet.posZ + this.pallet.height/2;
+    tempPallet3D.position.y = this.pallet.posZ + this.pallet.height / 2;
     tempPallet3D.position.z = -this.pallet.posY;
     tempPallet3D.rotation.y = (Math.PI / 180) * this.pallet.orientation;
-    var helper = new THREE.BoxHelper(tempPallet3D, 0x000000)
+    var helper = new THREE.BoxHelper(tempPallet3D, 0x000000);
     this.scene.add(helper);
 
-
-/*     description
+    /*     description
 RoundedBoxGeometry( width , height , depth , radius , radiusSegments )
 width = Float           //size of box in x axis, default 1
 height = Float          //size of box in y axis, default 1
@@ -189,10 +189,8 @@ var myBox = new THREE.Mesh( new RoundedBoxGeometry( 10 , 10 , 10 , 2 , 5 ) );
 myScene.add(myBox);
 */
 
-//var RoundedBoxGeometry = require('three-rounded-box')(THREE);
-
+    //var RoundedBoxGeometry = require('three-rounded-box')(THREE);
   }
-
 
   refresh() {
     this.controls = new OrbitControls(
@@ -208,7 +206,7 @@ myScene.add(myBox);
     this.renderer.render(this.scene, this.camera);
     this.animate();
     //console.log("this.pallet.isTexture" + this.pallet.isTexture + "typeOf" + typeof(this.pallet.isTexture))
-    return "aaa"
+    return 'aaa';
   }
   tabChange($event) {
     //setTimeout(() => {}, 1000);
@@ -238,8 +236,9 @@ myScene.add(myBox);
 
   openDialog() {
     this._overlayRef.attach(this._portal);
-    setTimeout(() => {this.refresh()}, 100);
-
+    setTimeout(() => {
+      this.refresh();
+    }, 100);
   }
 
   ngOnInit() {}
@@ -247,18 +246,21 @@ myScene.add(myBox);
   palletControl = new FormControl('', Validators.required);
   selectFormControl = new FormControl('', Validators.required);
   predefinedPallets: PredefinedPallets[] = [
-    { name: 'Euro 800x1200x144' },
-    { name: 'Pallet1' },
-    { name: 'Pallet1' },
-    { name: 'Pallet1' },
-    { name: 'Pallet1' },
+    { name: 'EUR 800x1200x144', width: 800, length: 1200, height: 144 },
+    { name: 'EUR6 600x800x144', width: 600, length: 800, height: 144 },
+    { name: 'EUR2 1000x1200x144', width: 1000, length: 1200, height: 144 },
   ];
   addPallet() {
     this.appComponent.addPallet();
   }
 
-
-
+    writePredefined(event){
+      console.log("on change")
+      console.log(event.value)
+      this.pallet.width = event.value.width;
+      this.pallet.length = event.value.length;
+      this.pallet.height = event.value.height;
+    }
   /*
 console(){
   console.log(this.pallet.width);
