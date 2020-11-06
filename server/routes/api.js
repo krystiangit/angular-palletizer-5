@@ -6,6 +6,8 @@ const connect = require("../../middleware/connection.js");
 
 var boxesOfPalletJson = fs.readFileSync("./json/boxes-of-pallet.json");
 var boxesOfPpJson = fs.readFileSync("./json/boxes-of-pp.json");
+var traysOfPalletJson = fs.readFileSync("./json/trays-of-pallet.json")
+var traysOfPpJson = fs.readFileSync("./json/trays-of-pp.json")
 var palletsJson = fs.readFileSync("./json/pallets.json");
 var pickingPlacesJson = fs.readFileSync("./json/picking-places.json");
 router.use(express.json());
@@ -18,6 +20,16 @@ router.get("/boxes-of-pallet", (req, res) => {
 
 router.get("/boxes-of-pp", (req, res) => {
   res.send(boxesOfPpJson);
+  res.status(200);
+});
+
+router.get("/trays-of-pallet", (req, res) => {
+  res.send(traysOfPalletJson);
+  res.status(200);
+});
+
+router.get("/trays-of-pp", (req, res) => {
+  res.send(traysOfPpJson);
   res.status(200);
 });
 
@@ -35,7 +47,7 @@ router.get("/picking-places", (req, res) => {
 router.post("/boxes-of-pallet", (req, res) => {
   //console.log(req.body);
   boxesOfPalletJson = JSON.stringify(req.body);
-  fs.writeFileSync("boxes-of-pallet.json", boxesOfPalletJson, _finished());
+  fs.writeFileSync("./json/boxes-of-pallet.json", boxesOfPalletJson, _finished());
   function _finished(err) {
     console.log("writing boxes of pallet finished");
   }
@@ -47,7 +59,7 @@ router.post("/boxes-of-pallet", (req, res) => {
 router.post("/boxes-of-pp", (req, res) => {
   //console.log(req.body);
   boxesOfPpJson = JSON.stringify(req.body);
-  fs.writeFileSync("boxes-of-pp.json", boxesOfPpJson, _finished());
+  fs.writeFileSync("./json/boxes-of-pp.json", boxesOfPpJson, _finished());
   function _finished(err) {
     console.log("writing boxes of pp finished");
   }
@@ -55,10 +67,33 @@ router.post("/boxes-of-pp", (req, res) => {
   res.status(200);
 });
 
+router.post("/trays-of-pallet", (req, res) => {
+  //console.log(req.body);
+  traysOfPalletJson = JSON.stringify(req.body);
+  fs.writeFileSync("./json/trays-of-pallet.json", traysOfPalletJson, _finished());
+  function _finished(err) {
+    console.log("writing trays of pallet finished");
+  }
+  //console.log(boxesOfPalletJson)
+  res.send({ post: "trays of pallet" });
+  res.status(200);
+});
+
+router.post("/trays-of-pp", (req, res) => {
+  //console.log(req.body);
+  traysOfPpJson = JSON.stringify(req.body);
+  fs.writeFileSync("./json/trays-of-pp.json", traysOfPpJson, _finished());
+  function _finished(err) {
+    console.log("writing trays of pp finished");
+  }
+  res.send({ post: "trays of pp" });
+  res.status(200);
+});
+
 router.post("/pallets", (req, res) => {
   //console.log(req.body);
   palletsJson = JSON.stringify(req.body);
-  fs.writeFileSync("pallets.json", palletsJson, _finished());
+  fs.writeFileSync("./json/pallets.json", palletsJson, _finished());
   function _finished(err) {
     console.log("writing pallets finished");
   }
@@ -69,7 +104,7 @@ router.post("/pallets", (req, res) => {
 router.post("/picking-places", (req, res) => {
   //console.log(req.body);
   pickingPlacesJson = JSON.stringify(req.body);
-  fs.writeFileSync("picking-places.json", pickingPlacesJson, _finished());
+  fs.writeFileSync("./json/picking-places.json", pickingPlacesJson, _finished());
   function _finished(err) {
     console.log("writing picking places finished");
   }

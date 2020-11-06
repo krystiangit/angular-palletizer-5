@@ -37,7 +37,7 @@
           <a mat-list-item (click)="appChildAddPickingPlace.openDialog()">Add picking place</a>
           <a mat-list-item (click)="appChildAddBox.openDialog('define')">Define box</a>
          <!-- <a mat-list-item (click)="appChildAddBox.openDialog('add')">Add box</a> -->
-          <a mat-list-item (click)="appChildAddBox.openDialog('add')">Define tray</a>
+          <a mat-list-item (click)="appChildDefineTray.openDialog('define')">Define tray</a>
           <a mat-list-item (click)="appChildAddBox.openDialog('add')">Define layer</a>
           <a mat-list-item (click)="appChildAddBox.openDialog('add')">Add layer</a>
           <!-- <a mat-list-item (click)="appMesh.addPallet()">Add test</a> -->
@@ -49,6 +49,7 @@
         <app-add-box #appChildAddBox></app-add-box>
         <app-set-workspace #appChildSetWorkspace></app-set-workspace>
         <app-add-picking-place #appChildAddPickingPlace></app-add-picking-place>
+        <app-define-tray #appChildDefineTray></app-define-tray>
         <app-plc-connect #appChildPlcConnect></app-plc-connect>
 
         <app-mesh #appMesh></app-mesh>

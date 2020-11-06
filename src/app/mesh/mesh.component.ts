@@ -11,6 +11,7 @@ import { Workspace } from '../models/workspace.model';
 //import { SetKcsService } from '../services/set-kcs.service';
 //import { Kcs } from '../models/kcs.model';
 import { AddBoxService } from '../services/add-box.service';
+import { DefineTrayService } from '../services/define-tray.service';
 import { Box } from '../models/box.model';
 import { PickingPlace } from '../models/pickingPlace.model';
 import { AddPickingPlaceService } from '../services/add-picking-place.service';
@@ -18,7 +19,6 @@ import { PalletsService } from '../services/pallets.service';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { HttpHeaders } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
-
 
 import {
   GLTFLoader,
@@ -43,6 +43,8 @@ export class MeshComponent implements OnInit {
 
   boxesOfPallet: Box[] = [];
   boxesOfPp: Box[] = [];
+  traysOfPallet: Box[] = [];
+  traysOfPp: Box[] = [];
   pickingPlaces: PickingPlace[] = [];
   pallets: Pallet[] = [];
 
@@ -56,10 +58,16 @@ export class MeshComponent implements OnInit {
   palletPos3D = null;
   boxesofPallet3D = null;
   boxOfPalletPos3D = null;
+  traysOfPallet3D = null;
+  trayOfPalletPos3D = null;
   boxesofPp3D = null;
   boxOfPpPos3D = null;
+  traysOfPp3D = null;
+  traysOfPpPos3D = null;
   helpersBoxOfPp = null;
+  helpersTrayOfPp = null;
   helpersBoxOfPallet = null;
+  helpersTrayOfPallet = null;
   helpersOfPallet = null;
   pps3D = null;
   ppPos3D = null;
@@ -71,6 +79,7 @@ export class MeshComponent implements OnInit {
     private httpClient: HttpClient,
     public palletsService: PalletsService,
     public boxService: AddBoxService,
+    public defineTrayService: DefineTrayService,
     public setWorkspaceService: SetWorkspaceService,
     public addPickingPlaceService: AddPickingPlaceService,
     public elRef: ElementRef
@@ -109,10 +118,11 @@ export class MeshComponent implements OnInit {
 
   post() {
     this.boxService.postBoxes();
+    this.defineTrayService.postBoxes();
     this.palletsService.postPallets();
     this.addPickingPlaceService.postPps();
   }
-/*
+  /*
   sendToPLC(){
     const httpOptions = {
       headers: new HttpHeaders({
@@ -131,13 +141,15 @@ export class MeshComponent implements OnInit {
       }).catch((error)=>{console.log(error)});
 
   }*/
-spinner=false
+  spinner = false;
   httpGet() {
-    this.spinner=true
+    this.spinner = true;
     this.boxService.getBoxes().then(() => {
-      this.palletsService.getPallets().then(() => {
-        this.addPickingPlaceService.getPps().then(() => {
-          setTimeout(() => this.loadProject(),2000);
+      this.defineTrayService.getBoxes().then(() => {
+        this.palletsService.getPallets().then(() => {
+          this.addPickingPlaceService.getPps().then(() => {
+            setTimeout(() => this.loadProject(), 2000);
+          });
         });
       });
     });
@@ -249,8 +261,7 @@ spinner=false
   }
 
   loadProject() {
-
-    this.spinner=false
+    this.spinner = false;
     this.pickingPlaces = [];
     this.pallets = [];
     this.pallets3D = [];
@@ -261,6 +272,12 @@ spinner=false
     this.boxesOfPp = [];
     this.boxesofPp3D = [];
     this.helpersBoxOfPp = [];
+    this.traysOfPallet = [];
+    this.traysOfPallet3D = [];
+    this.helpersTrayOfPallet = [];
+    this.traysOfPp = [];
+    this.traysOfPp3D = [];
+    this.helpersTrayOfPp = [];
     while (this.scene.children.length > 0) {
       this.scene.remove(this.scene.children[0]);
     }
@@ -278,6 +295,7 @@ spinner=false
     this.animate();
     this.guiFunc();
     this.loadProjectBoxes();
+    this.loadProjectTrays();
     this.loadProjectPallets();
     this.loadProjectPps();
   }
@@ -333,6 +351,32 @@ spinner=false
     this.updateDisplay(this.gui);
   }
 
+  loadProjectTrays() {
+    this.defineTrayService.loadProject();
+    this.traysOfPallet = this.defineTrayService.boxesOfPallet;
+    this.traysOfPallet3D = this.defineTrayService.boxesOfPallet3D;
+    this.helpersTrayOfPallet = this.defineTrayService.helpersOfPallet;
+    this.traysOfPp = this.defineTrayService.boxesOfPickingPlace;
+    this.traysOfPp3D = this.defineTrayService.boxesOfPp3D;
+    this.helpersTrayOfPp = this.defineTrayService.helpersOfPp;
+    for (let index = 0; index < this.traysOfPallet3D.length; index++) {
+      var object = this.traysOfPallet3D[index];
+      object.name = this.traysOfPallet[index].name;
+      this.scene.add(object);
+      var objectHelper = this.helpersTrayOfPallet[index];
+      this.scene.add(objectHelper);
+    }
+
+    for (let index = 0; index < this.traysOfPp3D.length; index++) {
+      var object = this.traysOfPp3D[index];
+      object.name = this.traysOfPp[index].name;
+      this.scene.add(object);
+      var objectHelper = this.helpersTrayOfPp[index];
+      this.scene.add(objectHelper);
+    }
+    this.updateDisplay(this.gui);
+  }
+
   addBoxOfPallet3D() {
     this.boxesofPallet3D = this.boxService.addBox3D();
     this.helpersBoxOfPallet = this.boxService.addHelper3D();
@@ -351,7 +395,6 @@ spinner=false
     this.boxesofPp3D = this.boxService.addBox3D();
     this.helpersBoxOfPp = this.boxService.addHelper3D();
     for (let index = 0; index < this.boxesofPp3D.length; index++) {
-      console.log('boxes of PP names' + this.boxesofPp3D[index].name);
       var object = this.boxesofPp3D[index];
       object.name = this.boxesOfPp[index].name;
       this.scene.add(object);
@@ -359,7 +402,34 @@ spinner=false
       this.scene.add(objectHelper);
     }
   }
-/*
+
+  addTrayOfPallet3D() {
+    this.traysOfPallet3D = this.defineTrayService.addBox3D();
+    this.helpersTrayOfPallet = this.defineTrayService.addHelper3D();
+    for (let index = 0; index < this.traysOfPallet3D.length; index++) {
+      //this.scene.add(this.boxesofPallet3D[index]);
+      var object = this.traysOfPallet3D[index];
+      object.name = this.traysOfPallet[index].name;
+      this.scene.add(object);
+      var objectHelper = this.helpersTrayOfPallet[index];
+      this.scene.add(objectHelper);
+    }
+    this.updateDisplay(this.gui);
+  }
+
+  addTrayOfPp3D() {
+    this.traysOfPp3D = this.defineTrayService.addBox3D();
+
+    this.helpersTrayOfPp = this.defineTrayService.addHelper3D();
+    for (let index = 0; index < this.traysOfPp3D.length; index++) {
+      var object = this.traysOfPp3D[index];
+      object.name = this.traysOfPp[index].name;
+      this.scene.add(object);
+      var objectHelper = this.helpersTrayOfPp[index];
+      this.scene.add(objectHelper);
+    }
+  }
+  /*
   check() {
     console.log('check starts');
     for (let index = 0; index < this.boxesOfPallet.length; index++) {
@@ -425,9 +495,7 @@ spinner=false
 
   deletePallet() {
     this.scene.remove(
-      this.scene.getObjectByName(
-        this.pallets3D[this.pallets3D.length - 1].name
-      )
+      this.scene.getObjectByName(this.pallets3D[this.pallets3D.length - 1].name)
     );
     this.scene.remove(
       this.scene.getObjectByName(
@@ -439,16 +507,14 @@ spinner=false
 
   deletePp() {
     this.scene.remove(
-      this.scene.getObjectByName(
-        this.pps3D[this.pps3D.length - 1].name
-      )
+      this.scene.getObjectByName(this.pps3D[this.pps3D.length - 1].name)
     );
     this.scene.remove(
       this.scene.getObjectByName(
         this.pps3D[this.pps3D.length - 1].name + 'helper'
       )
     );
-    this.addPickingPlaceService.deletePickingPlace()
+    this.addPickingPlaceService.deletePickingPlace();
   }
 
   configLight() {
@@ -518,6 +584,14 @@ spinner=false
 
   addBoxOfPpFunc() {
     this.boxesOfPp = this.boxService.addBox();
+  }
+
+  addTrayOfPalletFunc() {
+    this.traysOfPallet = this.defineTrayService.addBox();
+  }
+
+  addTrayOfPpFunc() {
+    this.traysOfPp = this.defineTrayService.addBox();
   }
 
   addPickingPlaceFunc() {

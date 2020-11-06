@@ -6,7 +6,8 @@ import {
   ViewChild,
   HostListener
 } from '@angular/core';
-import { AddBoxService } from './services/add-box.service';
+//import { AddBoxService } from './services/add-box.service';
+//import {DefineTrayService} from './services/define-tray.service'
 import { MeshComponent } from './mesh/mesh.component';
 
 @Component({
@@ -37,7 +38,8 @@ export class AppComponent implements OnDestroy {
   constructor(
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
-    public addBoxSerive: AddBoxService
+    //public addBoxSerive: AddBoxService,
+    //public defineTrayService: DefineTrayService
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -68,6 +70,18 @@ export class AppComponent implements OnDestroy {
   public addBoxOfPp() {
     this.childMeshComponent.addBoxOfPpFunc();
     this.childMeshComponent.addBoxOfPp3D();
+    //console.log('add box of PP clicked on parent func');
+  }
+
+  public addTrayOfPallet() {
+    this.childMeshComponent.addTrayOfPalletFunc();
+    this.childMeshComponent.addTrayOfPallet3D();
+    //console.log('add box of Pallet clicked on parent func');
+  }
+
+  public addTrayOfPp() {
+    this.childMeshComponent.addTrayOfPpFunc();
+    this.childMeshComponent.addTrayOfPp3D();
     //console.log('add box of PP clicked on parent func');
   }
 
