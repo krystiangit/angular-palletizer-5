@@ -1,6 +1,8 @@
-
 <main>
-  <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+  <div
+    class="example-container"
+    [class.example-is-mobile]="mobileQuery.matches"
+  >
     <mat-toolbar class="toolbar sie-theme">
       <button mat-icon-button (click)="snav.toggle()">
         <mat-icon>menu</mat-icon>
@@ -13,14 +15,31 @@
           <button mat-menu-item>Settings</button>
           <button mat-menu-item>Help</button>
           <button mat-menu-item >About</button>-->
-          <button mat-menu-item (click)=childMeshComponent.deleteBoxOfPp()>delete last box from picking place</button>
-          <button mat-menu-item (click)=childMeshComponent.deleteBoxOfPallet()>delete last box from pallet</button>
-          <button mat-menu-item (click)=childMeshComponent.deletePallet()>delete last pallet</button>
-          <button mat-menu-item (click)=childMeshComponent.deletePp()>delete last picking place</button>
+          <button mat-menu-item (click)="childMeshComponent.deleteBoxOfPp()">
+            delete last box from picking place
+          </button>
+          <button
+            mat-menu-item
+            (click)="childMeshComponent.deleteBoxOfPallet()"
+          >
+            delete last box from pallet
+          </button>
+          <button mat-menu-item (click)="childMeshComponent.deletePallet()">
+            delete last pallet
+          </button>
+          <button mat-menu-item (click)="childMeshComponent.deletePp()">
+            delete last picking place
+          </button>
           <!--<button mat-menu-item (click)=childMeshComponent.saveToJson()>save to JSON</button>-->
-          <button mat-menu-item (click)=childMeshComponent.httpGet()>Load project</button>
-          <button mat-menu-item (click)=childMeshComponent.post()>Save project</button>
-          <button mat-menu-item (click)="appChildPlcConnect.openDialog()">Send to PLC</button>
+          <button mat-menu-item (click)="childMeshComponent.httpGet()">
+            Load project
+          </button>
+          <button mat-menu-item (click)="childMeshComponent.post()">
+            Save project
+          </button>
+          <button mat-menu-item (click)="appChildPlcConnect.openDialog()">
+            Send to PLC
+          </button>
         </mat-menu>
         <button mat-icon-button [matMenuTriggerFor]="appMenu">
           <mat-icon>more_vert</mat-icon>
@@ -28,18 +47,36 @@
       </div>
     </mat-toolbar>
 
-    <mat-sidenav-container class="sidenav-container" mode="over" [hasBackdrop]="false">
+    <mat-sidenav-container
+      class="sidenav-container"
+      mode="over"
+      [hasBackdrop]="false"
+    >
       <!--[hasBackdrop]="false"  put in parameters of sidenav container to get off backdrop-->
       <mat-sidenav #snav>
         <mat-nav-list>
-         <!--  <a mat-list-item (click)="appChildSetWorkspace.openDialog()">Set Workspace</a> -->
-          <a mat-list-item (click)="appChildAddPallet.openDialog()">Add pallet</a>
-          <a mat-list-item (click)="appChildAddPickingPlace.openDialog()">Add picking place</a>
-          <a mat-list-item (click)="appChildAddBox.openDialog('define')">Define box</a>
-         <!-- <a mat-list-item (click)="appChildAddBox.openDialog('add')">Add box</a> -->
-          <a mat-list-item (click)="appChildDefineTray.openDialog('define')">Define tray</a>
-          <a mat-list-item (click)="appChildAddBox.openDialog('add')">Define layer</a>
-          <a mat-list-item (click)="appChildAddBox.openDialog('add')">Add layer</a>
+          <!--  <a mat-list-item (click)="appChildSetWorkspace.openDialog()">Set Workspace</a> -->
+          <a mat-list-item (click)="appChildAddPallet.openDialog()"
+            >Add pallet</a
+          >
+          <a mat-list-item (click)="appChildAddPickingPlace.openDialog()"
+            >Add picking place</a
+          >
+          <a mat-list-item (click)="appChildAddBox.openDialog('define')"
+            >Define box</a
+          >
+          <a mat-list-item (click)="appChildAddBox.openDialog('add')"
+            >Add box</a
+          >
+          <a mat-list-item (click)="appChildDefineTray.openDialog('define')"
+            >Define tray</a
+          >
+          <a mat-list-item (click)="appChildAddBox.openDialog('add')"
+            >Define layer</a
+          >
+          <a mat-list-item (click)="appChildAddBox.openDialog('add')"
+            >Add layer</a
+          >
           <!-- <a mat-list-item (click)="appMesh.addPallet()">Add test</a> -->
         </mat-nav-list>
       </mat-sidenav>
@@ -60,6 +97,5 @@
   <!-- Copyright 2019 Google LLC. All Rights Reserved.
       Use of this source code is governed by an MIT-style license that
       can be found in the LICENSE file at http://angular.io/license -->
-      <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </main>
-

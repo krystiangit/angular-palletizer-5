@@ -21,7 +21,7 @@ interface PredefinedPallets {
   name: string;
   width: number;
   length: number;
-  height: number
+  height: number;
 }
 interface Color {
   name: string;
@@ -254,13 +254,13 @@ myScene.add(myBox);
     this.appComponent.addPallet();
   }
 
-    writePredefined(event){
-      console.log("on change")
-      console.log(event.value)
-      this.pallet.width = event.value.width;
-      this.pallet.length = event.value.length;
-      this.pallet.height = event.value.height;
-    }
+  writePredefined(event) {
+    //console.log("on change")
+    //console.log(event.value)
+    this.pallet.width = event.value.width;
+    this.pallet.length = event.value.length;
+    this.pallet.height = event.value.height;
+  }
   /*
 console(){
   console.log(this.pallet.width);
