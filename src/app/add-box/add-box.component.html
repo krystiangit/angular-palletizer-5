@@ -14,7 +14,7 @@
           class="tab-box mat-elevation-z4"
 
         >
-        <mat-form-field *ngIf="this.mode === 'add'">
+        <mat-form-field *ngIf="this.mode === 'add' || this.mode ==='add-tray'">
           <mat-label>source</mat-label>
           <mat-select
             [(value)]="this.box.source"
@@ -27,7 +27,7 @@
             }}</mat-option>
           </mat-select>
         </mat-form-field>
-          <mat-form-field *ngIf="this.mode === 'add'">
+          <mat-form-field *ngIf="this.mode === 'add'|| this.mode ==='add-tray'">
             <mat-label>choose parent</mat-label>
             <mat-select
               [(value)]="this.box.membership"
@@ -39,7 +39,7 @@
               }}</mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field *ngIf="this.mode === 'define'">
+          <mat-form-field *ngIf="this.mode === 'define' || this.mode ==='define-tray'">
             <mat-label>defined in</mat-label>
             <mat-select
               [(value)]="this.box.membership"

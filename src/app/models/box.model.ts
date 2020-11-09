@@ -21,5 +21,5 @@ export class Box{
   orientationParent:number;
   orientation:number;
   color:number;
-
+  type: string
 }

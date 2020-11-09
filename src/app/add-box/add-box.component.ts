@@ -43,8 +43,7 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
     public addBoxervice: AddBoxService,
     public addPickingPlaceService: AddPickingPlaceService,
     public palletService: PalletsService,
-    public appComponent: AppComponent,
-
+    public appComponent: AppComponent
   ) {
     this.addBoxervice.boxSets = this.box;
     (this.scene = new THREE.Scene()),
@@ -73,7 +72,7 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
     source: 'source',
     layer: 0,
     isTexture: false,
-    visible:true,
+    visible: true,
     width: 400,
     length: 600,
     height: 130,
@@ -89,6 +88,7 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
     orientationParent: 0,
     orientation: 0,
     color: 0xff0000,
+    type: 'undefined',
   };
   public colors: Color[] = [
     { name: 'red', value: 0xff0000 },
@@ -154,7 +154,6 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
     this.controls.update();
     if (this.renderer != null) {
       this.renderer.render(this.scene, this.camera);
-
     } else console.log('renderer is not defined for animate');
   }
 
@@ -187,11 +186,15 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
       if (this.palletService.pallets[index].name === this.box.membership) {
         this.box.posXParent = this.palletService.pallets[index].posX;
         this.box.posYParent = this.palletService.pallets[index].posY;
-        this.box.posZParent = this.palletService.pallets[index].posZ - this.palletService.pallets[index].height/2;
+        this.box.posZParent =
+          this.palletService.pallets[index].posZ -
+          this.palletService.pallets[index].height / 2;
         this.box.widthParent = this.palletService.pallets[index].width;
         this.box.lengthParent = this.palletService.pallets[index].length;
         this.box.heightParent = this.palletService.pallets[index].height;
-        this.box.orientationParent = this.palletService.pallets[index].orientation;
+        this.box.orientationParent = this.palletService.pallets[
+          index
+        ].orientation;
         //console.log("parent is Pallet")
       }
       //console.log("parent is: " + this.box.membership)
@@ -213,7 +216,9 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
         this.box.length = this.addBoxervice.boxesOfPickingPlace[index].length;
         this.box.height = this.addBoxervice.boxesOfPickingPlace[index].height;
         this.box.color = this.addBoxervice.boxesOfPickingPlace[index].color;
-        this.box.isTexture = this.addBoxervice.boxesOfPickingPlace[index].isTexture;
+        this.box.isTexture = this.addBoxervice.boxesOfPickingPlace[
+          index
+        ].isTexture;
         /*console.log(
           'colors of boxes: ' +
             this.addBoxervice.boxesOfPickingPlace[index].color
@@ -238,54 +243,20 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
         index++
       ) {
         _ppNames[index] = this.addPickingPlaceService.pickingPlaces[index].name;
-
       }
     }
 
     this.ppNames = _ppNames;
 
     if (this.palletService.pallets != null) {
-
       for (let index = 0; index < this.palletService.pallets.length; index++) {
         _palletsNames[index] = this.palletService.pallets[index].name;
         //console.log("_palletsnames" + this.palletService.pallets[index].name)
         //console.log("iteracja pallet")
       }
     }
-
     this.palletsNames = _palletsNames;
-    /*
-    var tempLength = this.addPickingPlaceService.pickingPlaces.length;
-    for (
-      let index = tempLength;
-      index < tempLength + _palletsNames.length;
-      index++
-    ) {
-      _ppNames[index] = this.palletService.pallets[index - this.addPickingPlaceService.pickingPlaces.length].name;
-      console.log('index=' +( index - this.addPickingPlaceService.pickingPlaces.length));
-      //console.log(this.palletService.pallets[index - _ppNames.length].name)
-    }
-    */
-    //this.parentsNames = _ppNames;
-    //console.log('pallet names: ' + this.palletsNames);
-    //console.log('ppnames: ' + this.ppNames);
-    //console.log('all names: ' + this.parentsNames);
-    //console.log("pallets: " + this.palletService.pallets)
-    //console.log("picking places: " + this.addPickingPlaceService.pickingPlaces)
-    /*
-    for (let index = 0; index < this.addPickingPlaceService.pickingPlaces.length; index++) {
-      console.log("picking places for: " + this.addPickingPlaceService.pickingPlaces[index].name)
-      console.log("pallets for: " + this.palletService.pallets[index].name)
-    }
-    */
   }
-  //calling takeParentPos when tab is changed to tab Position
-
-  /*tabChange($event){
-    console.log($event.index)
-    if($event.index ==1)
-    this.takeParentPos();
-}*/
 
   parentChange($event) {
     //console.log("selection change" + $event)
@@ -315,12 +286,6 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
     } else alert('Plase choose a Parent in membership tab');
   }
 
-  /*
-  @Output() addBoxButton: EventEmitter<MouseEvent> = new EventEmitter<
-    MouseEvent
-  >();
-*/
-
   addBox3D() {
     //removing box before adding new box
     while (this.scene.children.length > 0) {
@@ -332,25 +297,34 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
 
     const materials = [
       new THREE.MeshLambertMaterial({
-          map: new THREE.TextureLoader().load('../../assets/Fabric_09_1K_Opacity.png') //right
+        map: new THREE.TextureLoader().load(
+          '../../assets/Fabric_09_1K_Opacity.png'
+        ), //right
       }),
       new THREE.MeshLambertMaterial({
-        map: new THREE.TextureLoader().load('../../assets/Fabric_09_1K_Opacity.png') //left
+        map: new THREE.TextureLoader().load(
+          '../../assets/Fabric_09_1K_Opacity.png'
+        ), //left
       }),
       new THREE.MeshLambertMaterial({
-        map: new THREE.TextureLoader().load('../../assets/cargill.jpg') //top
+        map: new THREE.TextureLoader().load('../../assets/cargill.jpg'), //top
       }),
       new THREE.MeshLambertMaterial({
-        map: new THREE.TextureLoader().load('../../assets/Fabric_09_1K_Opacity.png') //bottom
+        map: new THREE.TextureLoader().load(
+          '../../assets/Fabric_09_1K_Opacity.png'
+        ), //bottom
       }),
       new THREE.MeshLambertMaterial({
-        map: new THREE.TextureLoader().load('../../assets/Fabric_09_1K_Opacity.png') //front
+        map: new THREE.TextureLoader().load(
+          '../../assets/Fabric_09_1K_Opacity.png'
+        ), //front
       }),
       new THREE.MeshLambertMaterial({
-        map: new THREE.TextureLoader().load('../../assets/Fabric_09_1K_Opacity.png') //back
-      })
-];
-
+        map: new THREE.TextureLoader().load(
+          '../../assets/Fabric_09_1K_Opacity.png'
+        ), //back
+      }),
+    ];
 
     let tempGeometry = new THREE.BoxBufferGeometry(
       this.box.width,
@@ -360,26 +334,24 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
       10,
       10
     );
-    let tempBox3D = null
-    if (this.box.isTexture===true){
+    let tempBox3D = null;
+    if (this.box.isTexture === true) {
       tempBox3D = new THREE.Mesh(tempGeometry, materials);
     }
-    else
 
     //let tempBox3D = new THREE.Mesh( geometry, this.materials );
-    tempBox3D = new THREE.Mesh(tempGeometry, material);
-    tempBox3D.name = "nazwa"
+    else tempBox3D = new THREE.Mesh(tempGeometry, material);
+    tempBox3D.name = 'nazwa';
     this.scene.add(tempBox3D);
 
     tempBox3D.position.x = this.box.posX;
-    tempBox3D.position.y = this.box.posZ + this.box.height/2;
+    tempBox3D.position.y = this.box.posZ + this.box.height / 2;
     tempBox3D.position.z = -this.box.posY;
     tempBox3D.rotation.y = (Math.PI / 180) * this.box.orientation;
-    var helper = new THREE.BoxHelper(tempBox3D, 0x000000)
+    var helper = new THREE.BoxHelper(tempBox3D, 0x000000);
     this.scene.add(helper);
 
-
-/*     description
+    /*     description
 RoundedBoxGeometry( width , height , depth , radius , radiusSegments )
 width = Float           //size of box in x axis, default 1
 height = Float          //size of box in y axis, default 1
@@ -395,16 +367,9 @@ var myBox = new THREE.Mesh( new RoundedBoxGeometry( 10 , 10 , 10 , 2 , 5 ) );
 myScene.add(myBox);
 */
 
-//var RoundedBoxGeometry = require('three-rounded-box')(THREE);
-
+    //var RoundedBoxGeometry = require('three-rounded-box')(THREE);
   }
 
-/*
-  deleteObject(){
-    console.log("removing")
-this.scene.remove(this.scene.getObjectByName("nazwa"))
-  }
-*/
   refresh() {
     this.controls = new OrbitControls(
       this.camera,
@@ -418,7 +383,7 @@ this.scene.remove(this.scene.getObjectByName("nazwa"))
     this.configLight();
     this.renderer.render(this.scene, this.camera);
     this.animate();
-    return "aaa"
+    return 'aaa';
   }
   tabChange($event) {
     //setTimeout(() => {}, 1000);
@@ -428,14 +393,23 @@ this.scene.remove(this.scene.getObjectByName("nazwa"))
   openDialog(_mode: string) {
     this.readNames();
     this.mode = _mode;
-    if (_mode === 'add') {
+    if (_mode === 'add' || _mode ==='add-tray') {
       this.readOnly = true;
-    } else this.readOnly = false;
-    console.log('readOnly: ' + this.readOnly);
+    } else if (_mode === 'define' || _mode ==='define-tray') {
+      this.readOnly = false;
+    }
 
+    if (_mode === 'define-tray' || _mode ==='add-tray'){
+      this.box.type= 'tray'
+    }
+    else if (_mode === 'add' || _mode ==='define'){
+      this.box.type = 'box'
+    }
+    console.log('_mode '+ _mode)
+    console.log('mode '+ this.mode)
+    console.log('type ' + this.box.type)
     this._overlayRef.attach(this._portal);
   }
-
 
   ngOnInit() {}
 
@@ -459,5 +433,4 @@ this.scene.remove(this.scene.getObjectByName("nazwa"))
   ngOnDestroy() {
     this._overlayRef.dispose();
   }
-
 }

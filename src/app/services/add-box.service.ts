@@ -2,21 +2,9 @@ import { Injectable } from '@angular/core';
 import { Box } from '../models/box.model';
 import { Position3D } from '../models/position3D';
 import * as THREE from 'three';
-//import { PickingPlace } from '../models/pickingPlace.model';
-import BoxesOfPalletJson from '../../assets/boxes-of-pallet.json';
-import BoxesOfPpJson from '../../assets/boxes-of-pp.json';
-//import BoxesJson3D from '../../assets/boxes-of-pallet3D.json';
-//import  *  as  data  from  '../../assets/boxes-of-pallet.json';
-
-//const writeJsonFile = require('write-json-file');
 import { saveAs } from 'file-saver';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
-
-export interface Cat {
-  name: string;
-}
 
 @Injectable({ providedIn: 'root' })
 export class AddBoxService {
@@ -454,6 +442,10 @@ runNodeFunc(){
     temp.visible = this.boxSets.visible;
     temp.color = this.boxSets.color;
     temp.orientationParent = this.boxSets.orientationParent;
+
+
+
+    temp.type = this.boxSets.type;
     //console.log('box PosY' + temp.posZ);
 
     //console.log('1' + this.boxSets.posZ);
