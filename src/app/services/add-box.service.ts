@@ -59,7 +59,6 @@ export class AddBoxService {
       //
       // Resolve the promise at the end
 
-
       /* to dziala na PG
       this.fetchData('http://localhost:4600/api/boxes-of-pallet').then(
         (data) => {
@@ -78,27 +77,25 @@ export class AddBoxService {
       });
 */
 
-// to dziala na panelu edge
+      // to dziala na panelu edge
 
-//this.fetchData('http://127.0.0.1:32769/api/boxes-of-pallet').then((data) => {
-this.fetchData('/api/boxes-of-pallet').then((data) => {
-
-  this.test = data;
-  this.boxesOfPallet = data;
-  //console.log('test: ...');
-  //console.log(JSON.stringify(this.test));
+      //this.fetchData('http://127.0.0.1:32769/api/boxes-of-pallet').then((data) => {
+      this.fetchData('/api/boxes-of-pallet').then((data) => {
+        this.test = data;
+        this.boxesOfPallet = data;
+        //console.log('test: ...');
+        //console.log(JSON.stringify(this.test));
       });
       //this.fetchData('http://127.0.0.1:32769/api/boxes-of-pp').then((data) => {
-this.fetchData('/api/boxes-of-pp').then((data) => {
-
+      this.fetchData('/api/boxes-of-pp').then((data) => {
         this.test1 = data;
         //console.log('test5: ...');
         //console.log(JSON.stringify(this.test1));
         //this.loadProject();
       });
 
-//////////////////////////test do usuniecia////////////////////////////
-/*
+      //////////////////////////test do usuniecia////////////////////////////
+      /*
 this.fetchData('http://127.0.0.1/api/boxes-of-pp').then((data) => {
 
         this.test1 = data;
@@ -172,7 +169,7 @@ this.fetchData('http://127.0.0.1/api/boxes-of-pp').then((data) => {
         //this.loadProject();
       });
 */
-/////////////////////////////////////////////////////////////////////////////////
+      /////////////////////////////////////////////////////////////////////////////////
 
       resolve();
     });
@@ -239,24 +236,24 @@ console.log(this.httpClient.get('http://localhost:4600/api'))
     this.httpClient
       .post(urlBoxesOfPp, JSON.stringify(this.boxesOfPickingPlace), httpOptions)
       .toPromise()
-      .then((data) => console.log(data) );
+      .then((data) => console.log(data));
     //this.httpClient.post('http://localhost:4600/api/boxes-of-pallet', this.test )
   }
 
-runNodeFunc(){
-  const httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      //'Authorization': 'my-auth-token'
-    }),
-  };
-  //const url= 'http://127.0.0.1:32769/api/node-func';
-  const url= '/api/node-func';
-  this.httpClient
-  .post(url, {message:"run node function"}, httpOptions)
-  .toPromise()
-  .then((data) => console.log(data));
-}
+  runNodeFunc() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        //'Authorization': 'my-auth-token'
+      }),
+    };
+    //const url= 'http://127.0.0.1:32769/api/node-func';
+    const url = '/api/node-func';
+    this.httpClient
+      .post(url, { message: 'run node function' }, httpOptions)
+      .toPromise()
+      .then((data) => console.log(data));
+  }
 
   saveToJson() {
     //this.getAllCats();
@@ -429,11 +426,63 @@ runNodeFunc(){
       this.addPosY -
       this.centerPosY;
 
-    temp.posZ =
-      this.boxSets.posZ +
-      this.boxSets.posZParent +
-      this.boxSets.height / 2 +
-      this.centerPosZ;
+    //checking box is tray or box and add offset to new layer
+    //if (this.boxSets.type === 'box')
+
+    if (this.boxSets.type === 'box') {
+      var lastTrayIndex = 0;
+      if (this.boxesOfPallet.length > 0) {
+        for (let index = 0; index <= this.boxesOfPallet.length - 1; index++) {
+          if (
+            this.boxesOfPallet[index].type === 'tray' &&
+            this.boxesOfPallet[index].membership === this.boxSets.membership
+          ) {
+            lastTrayIndex = index;
+          }
+        }
+        temp.posZ =
+          this.boxSets.posZ +
+          this.boxesOfPallet[lastTrayIndex].posZ +
+          this.boxesOfPallet[lastTrayIndex].height / 2 +
+          this.boxSets.height / 2;
+      }else if (this.boxesOfPallet.length === 0) {
+        temp.posZ =
+          this.boxSets.posZ +
+          this.boxSets.posZParent +
+          this.boxSets.height / 2 +
+          this.centerPosZ;
+      }
+    } else if (this.boxSets.type === 'tray') {
+      var lastBoxIndex = 0;
+      if (this.boxesOfPallet.length > 0) {
+        for (let index = 0; index <= this.boxesOfPallet.length - 1; index++) {
+          if (
+            this.boxesOfPallet[index].type === 'box' &&
+            this.boxesOfPallet[index].membership === this.boxSets.membership
+          ) {
+            lastBoxIndex = index;
+          }
+        }
+        temp.posZ =
+          this.boxSets.posZ +
+          this.boxesOfPallet[lastBoxIndex].posZ +
+          this.boxesOfPallet[lastBoxIndex].height / 2 +
+          this.boxSets.height / 2;
+      } else if (this.boxesOfPallet.length === 0) {
+        temp.posZ =
+          this.boxSets.posZ +
+          this.boxSets.posZParent +
+          this.boxSets.height / 2 +
+          this.centerPosZ;
+      }
+    }
+
+    // temp.posZ =
+    //   this.boxSets.posZ +
+    //   this.boxSets.posZParent +
+    //   this.boxSets.height / 2 +
+    //   this.centerPosZ;
+    //this.centerPosZ + this.boxSets.layerOffsetZ;
     temp.orientation = this.boxSets.orientation;
     temp.membership = this.boxSets.membership;
     temp.source = this.boxSets.source;
@@ -442,18 +491,15 @@ runNodeFunc(){
     temp.visible = this.boxSets.visible;
     temp.color = this.boxSets.color;
     temp.orientationParent = this.boxSets.orientationParent;
-
-
-
+    temp.posXParent = this.boxSets.posXParent;
+    temp.posYParent = this.boxSets.posYParent;
+    temp.posZParent = this.boxSets.posZParent;
+    temp.widthParent = this.boxSets.widthParent;
+    temp.lengthParent = this.boxSets.lengthParent;
+    temp.heightParent = this.boxSets.heightParent;
     temp.type = this.boxSets.type;
-    //console.log('box PosY' + temp.posZ);
 
-    //console.log('1' + this.boxSets.posZ);
-    //console.log('2' + this.boxSets.posZParent);
-    //console.log('3' + this.boxSets.height / 2);
-    //console.log('4' + this.centerPosZ);
-
-    //checking if box belongs to parent or Picking place
+    //checking if box belongs to parent or Picking place and return box of pp or box of pallet
     if (this.boxSets.membership.search('Pallet') == 0) {
       temp.name = 'BoxOfPallet' + (this.boxesOfPallet.length + 1);
       temp.id = (this.boxesOfPallet.length + 1).toString();
@@ -464,7 +510,6 @@ runNodeFunc(){
       temp.name = 'BoxOfPp' + (this.boxesOfPickingPlace.length + 1);
       temp.id = (this.boxesOfPickingPlace.length + 1).toString();
       this.boxesOfPickingPlace.push(temp);
-
       return this.boxesOfPickingPlace;
     }
   }
@@ -526,12 +571,14 @@ runNodeFunc(){
         this.addPosX -
         this.centerPosX;
 
-      tempBox3D.position.y =
+      tempBox3D.position.y = this.boxesOfPallet[
+        this.boxesOfPallet.length - 1
+      ].posZ; /*
         this.boxSets.posZ +
         this.boxSets.posZParent +
         this.boxSets.height / 2 +
-        this.centerPosZ;
-
+        this.centerPosZ;*/
+      //this.centerPosZ + this.boxSets.layerOffsetZ;
       tempBox3D.position.z = -(
         this.boxSets.posY +
         this.boxSets.posYParent +

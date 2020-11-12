@@ -21,5 +21,6 @@ export class Box{
   orientationParent:number;
   orientation:number;
   color:number;
-  type: string
+  type: string;
+  layerOffsetZ: number;
 }

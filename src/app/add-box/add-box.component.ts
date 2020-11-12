@@ -89,6 +89,7 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
     orientation: 0,
     color: 0xff0000,
     type: 'undefined',
+    layerOffsetZ: 0,
   };
   public colors: Color[] = [
     { name: 'red', value: 0xff0000 },
@@ -157,7 +158,9 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
     } else console.log('renderer is not defined for animate');
   }
 
+  //taking position of place where box will be added
   takeParentPos() {
+    //taking position of picking place when defining a new box or tray
     for (
       let index = 0;
       index < this.addPickingPlaceService.pickingPlaces.length;
@@ -182,6 +185,9 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
         this.box.orientationParent = 0;
       }
     }
+    //taking position of pallet
+
+
     for (let index = 0; index < this.palletService.pallets.length; index++) {
       if (this.palletService.pallets[index].name === this.box.membership) {
         this.box.posXParent = this.palletService.pallets[index].posX;
@@ -195,13 +201,11 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
         this.box.orientationParent = this.palletService.pallets[
           index
         ].orientation;
-        //console.log("parent is Pallet")
       }
-      //console.log("parent is: " + this.box.membership)
-      //console.log(this.addPickingPlaceService.pickingPlaces[index].posX)
     }
   }
 
+  //taking dimension of box in picking place
   takeParentDim() {
     for (
       let index = 0;
@@ -230,6 +234,54 @@ export class AddBoxComponent implements AfterViewInit, OnDestroy {
       //console.log("addbox service membership: " + this.box.membership)
     }
     //console.log("parent is picking place")
+  }
+
+  takeLayerOffset() {
+    if (this.box.type === 'box') {
+      var lastTrayIndex = 0;
+      console.log('type is box');
+      if (this.addBoxervice.boxesOfPallet3D.length > 0) {
+        console.log('length: ' + this.addBoxervice.boxesOfPallet.length);
+        for (
+          let index = 0;
+          index <= this.addBoxervice.boxesOfPallet.length - 1;
+          index++
+        ) {
+          console.log("box of pallet: ")
+          console.log(this.addBoxervice.boxesOfPallet[index])
+          console.log(
+            'tray number: ' + this.addBoxervice.boxesOfPallet[index].id
+          );
+
+          if (this.addBoxervice.boxesOfPallet[index].type === 'tray') {
+            lastTrayIndex = index;
+          }
+          //console.log('index: ' + index)
+          //console.log('tray index: ' + lastTrayIndex)
+        }
+        console.log(
+          'z position of last tray: ' +
+            this.addBoxervice.boxesOfPallet[lastTrayIndex].posZ
+        );
+        console.log(
+          'name of last tray: ' +
+            this.addBoxervice.boxesOfPallet[lastTrayIndex].name
+        );
+        console.log("posZparent: " + this.addBoxervice.boxesOfPallet[lastTrayIndex].posZParent)
+        console.log("tray height: " + this.addBoxervice.boxesOfPallet[lastTrayIndex].height)
+        this.box.layerOffsetZ =
+          this.addBoxervice.boxesOfPallet[lastTrayIndex].posZParent +
+          this.addBoxervice.boxesOfPallet[lastTrayIndex].heightParent +
+          this.addBoxervice.boxesOfPallet[lastTrayIndex].height;
+
+        console.log(
+          'calculated z position of box including layer offset: ' +
+            this.box.layerOffsetZ
+        );
+      }
+    } else if (this.box.type === 'tray') {
+      console.log('type is tray');
+    }
   }
 
   readNames() {
@@ -393,21 +445,22 @@ myScene.add(myBox);
   openDialog(_mode: string) {
     this.readNames();
     this.mode = _mode;
-    if (_mode === 'add' || _mode ==='add-tray') {
+    if (_mode === 'add' || _mode === 'add-tray') {
       this.readOnly = true;
-    } else if (_mode === 'define' || _mode ==='define-tray') {
+    } else if (_mode === 'define' || _mode === 'define-tray') {
       this.readOnly = false;
     }
 
-    if (_mode === 'define-tray' || _mode ==='add-tray'){
-      this.box.type= 'tray'
+    if (_mode === 'define-tray' || _mode === 'add-tray') {
+      this.box.type = 'tray';
+    } else if (_mode === 'add' || _mode === 'define') {
+      this.box.type = 'box';
     }
-    else if (_mode === 'add' || _mode ==='define'){
-      this.box.type = 'box'
-    }
-    console.log('_mode '+ _mode)
-    console.log('mode '+ this.mode)
-    console.log('type ' + this.box.type)
+    //this.takeParentPos();
+    //this.takeLayerOffset();
+    //console.log('_mode '+ _mode)
+    //console.log('mode '+ this.mode)
+    //console.log('type ' + this.box.type)
     this._overlayRef.attach(this._portal);
   }
 
